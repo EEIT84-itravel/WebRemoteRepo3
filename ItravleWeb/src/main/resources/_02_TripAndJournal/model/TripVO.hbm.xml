@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="_02_TripAndJournal.model.TripVO" table="trip">
+		<id name="tripId" column="trip_id">
+			<generator class="identity" />
+		</id>
+
+		<property name="post" column="post" insert="false" />
+		<property name="modifyTime" column="modify_time" insert="false" />
+		<property name="memberId" column="member_id" />
+		<property name="tripName" column="trip_name" />
+		<property name="tripStartDate" column="trip_start_date" />
+		<property name="tripEndDate" column="trip_end_date" />
+		<property name="startTime" column="start_time" />
+		<property name="totalBudget" column="total_budget" />
+		<property name="regionId" column="region_id" />
+		<property name="watchNum" column="watch_num" />
+		<property name="transFormId" column="trans_form_id" />
+		<property name="tripIntro" column="trip_intro" />
+
+	</class>
+</hibernate-mapping>
