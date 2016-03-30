@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="_01_Sight.model.*"%>
+<%@ page import="java.util.*"%>
+<%
+	SightService service = new SightService();
+	List<SightVO> list = service.select();
+	pageContext.setAttribute("list", list);
+%>
+<!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -18,15 +26,18 @@ div {
 </style>
 </head>
 <body>
+	<c:forEach var="region" items="${list}">
+		<option value="${region.sightId}"></option>
 	<div>
 		<img alt="" src="">
 		<p>
-			<a href="/ItravleWeb/_01_Sight/SightInformation.jsp">名稱:</a>
+			<a href="/ItravleWeb/_01_Sight/SightInformation.jsp">名稱:${region.sightName}</a>
 		</p>
 		<p>類型:</p>
 		<p>縣市:</p>
 		<p>人瀏覽,人收藏</p>
 	</div>
+	</c:forEach>
 	<div>
 		<p>
 			<a href="/ItravleWeb/_01_Sight/SightInformation.jsp">名稱:</a>
