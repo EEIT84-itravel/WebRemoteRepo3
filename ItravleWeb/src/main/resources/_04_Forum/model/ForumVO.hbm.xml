@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 03:41:15 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="_04_Forum.model.ForumVO" table="forum">
+		<id name="forumId" type="java.lang.Integer">
+			<column name="forum_id" />
+			<generator class="identity" />
+		</id>
+		<property name="forumTypeId" type="java.lang.String">
+			<column name="forum_type_id" />
+		</property>
+		<property name="forumTopic" type="java.lang.String">
+			<column name="forum_topic" />
+		</property>
+		<property name="memberId" type="java.lang.Integer">
+			<column name="member_id" />
+		</property>
+		<property name="forumTime" type="java.sql.Timestamp" insert="false" >
+			<column name="forum_time"/>
+		</property>
+		<property name="forumContent" type="java.lang.String">
+			<column name="forum_content" />
+		</property>
+		<property name="visitorNum" type="java.lang.Integer">
+			<column name="visitor_num" />
+		</property>
+		<property name="replyNum" type="java.lang.Integer">
+			<column name="reply_num" />
+		</property>
+	</class>
+</hibernate-mapping>
