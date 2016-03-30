@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 03:40:14 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="_02_TripAndJournal.model.LabelTripAndJournalVO"
+		table="label_tripAndJournal">
+		<id name="labelDetailId" type="java.lang.Integer">
+			<column name="label_detail_id" />
+			<generator class="identity"></generator>
+		</id>
+		<property name="referenceType" type="java.lang.String">
+			<column name="reference_type" />
+		</property>
+		<property name="referenceNo" type="java.lang.Integer">
+			<column name="reference_no" />
+		</property>
+		<property name="labelId" type="java.lang.String">
+			<column name="label_id" />
+		</property>
+	</class>
+</hibernate-mapping>
