@@ -101,12 +101,46 @@
 		</div><!-- end div right -->
 		</form>
 	
-	
+	<!--測試用
+	<c:if test="${not empty tripVO}">
+		<table>
+			<thead>
+				<tr>
+					<th>tripId</th>
+					<th>memberId</th>
+					<th>tripName</th>
+					<th>tripStartDate</th>
+					<th>tripEndDate</th>
+					<th>startTime</th>
+					<th>regionId</th>
+					<th>transFormId</th>
+					<th>tripIntro</th>
+				</tr>
+			</thead>
+			<tbody>
+					<tr>
+						<td>${tripVO.tripId}</td>
+						<td>${tripVO.memberId}</td>
+						<td>${tripVO.tripName}</td>
+						<td>${tripVO.tripStartDate}</td>
+						<td>${tripVO.tripEndDate}</td>
+						<td>${tripVO.startTime}</td>
+						<td>${tripVO.regionId}</td>
+						<td>${tripVO.transFormId}</td>
+						<td>${tripVO.tripIntro}</td>
+					</tr>
+			</tbody>
+		</table>
+	</c:if>
+-->
 	
 	
 	</article>	
 	<footer>
 		<!-- import共同的 -->
 	</footer>
+
+
+
 </body>
 </html>
