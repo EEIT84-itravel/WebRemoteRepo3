@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/25 ?U?? 08:38:02 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="_05_Member.model.FriendVO" table="friend">
+		<id name="friendNo" type="java.lang.Integer">
+			<column name="friend_no" />
+			<generator class="identity" />
+		</id>
+		<property name="friendId" type="java.lang.Integer">
+			<column name="friend_id" />
+		</property>
+		<property name="memberId" type="java.lang.Integer">
+			<column name="member_id" />
+		</property>
+	</class>
+</hibernate-mapping>

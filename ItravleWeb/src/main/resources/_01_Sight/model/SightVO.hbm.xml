@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 02:40:07 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="_01_Sight.model.SightVO" table="sight">
+        <id name="sightId" type="java.lang.Integer">
+            <column name="sight_id" />
+            <generator class="identity" />
+        </id>
+        <property name="sightName" type="java.lang.String">
+            <column name="sight_name" />
+        </property>
+        <property name="regionId" type="java.lang.String">
+            <column name="region_id" />
+        </property>
+        <property name="countyId" type="java.lang.String">
+            <column name="county_id" />
+        </property>
+        <property name="sightTypeId" type="java.lang.String">
+            <column name="sight_type_id" />
+        </property>
+        <property name="ticket" type="java.lang.String">
+            <column name="ticket" />
+        </property>
+        <property name="openTime" type="java.sql.Time">
+            <column name="open_time" />
+        </property>
+        <property name="closeIime" type="java.sql.Time">
+            <column name="close_time" />
+        </property>
+        <property name="spendHour" type="java.sql.Time">
+            <column name="spend_hour" />
+        </property>
+        <property name="playPeriod" type="java.lang.String">
+            <column name="play_period" />
+        </property>
+        <property name="score" type="java.lang.Float">
+            <column name="score" />
+        </property>
+        <property name="longitude" type="java.lang.Float">
+            <column name="longitude" />
+        </property>
+        <property name="latitude" type="java.lang.Float">
+            <column name="latitude" />
+        </property>
+        <property name="watchNum" type="java.lang.Integer">
+            <column name="watch_num" />
+        </property>
+        <property name="collectNum" type="java.lang.Integer">
+            <column name="collect_num" />
+        </property>
+        <property name="phone" type="java.lang.String">
+            <column name="phone" />
+        </property>
+        <property name="addr" type="java.lang.String">
+            <column name="addr" />
+        </property>
+        <property name="trans" type="java.lang.String">
+            <column name="trans" />
+        </property>
+        <property name="creator" type="java.lang.Integer">
+            <column name="creator" />
+        </property>
+        <property name="createTime" type="java.sql.Timestamp" insert="false">
+            <column name="create_time" />
+        </property>
+        <property name="modifier" type="java.lang.Integer">
+            <column name="modifier" />
+        </property>
+        <property name="modifyTime" type="java.sql.Timestamp">
+            <column name="modify_time" />
+        </property>
+        <property name="del" type="boolean">
+            <column name="del" />
+        </property>
+    </class>
+</hibernate-mapping>

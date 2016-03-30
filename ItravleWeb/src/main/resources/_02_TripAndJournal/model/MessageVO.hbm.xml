@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 04:15:46 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="_02_TripAndJournal.model.MessageVO" table="message">
+        <id name="messageId" type="java.lang.Integer">
+            <column name="message_id" />
+            <generator class="identity" />
+        </id>
+        <property name="memberId" type="java.lang.Integer">
+            <column name="member_id" />
+        </property>
+        <property name="messageType" type="java.lang.String">
+            <column name="message_type" />
+        </property>
+        <property name="content" type="java.lang.String">
+            <column name="content" />
+        </property>
+        <property name="referenceNo" type="java.lang.Integer">
+            <column name="reference_no" />
+        </property>
+        <property name="updateTime" type="java.sql.Date">
+            <column name="update_time" />
+        </property>
+    </class>
+</hibernate-mapping>
