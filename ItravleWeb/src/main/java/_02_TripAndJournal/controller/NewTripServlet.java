@@ -13,17 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.Session;
-
 import _02_TripAndJournal.model.TripService;
 import _02_TripAndJournal.model.TripVO;
-import _02_TripAndJournal.model.dao.TripDAOHibernate;
 import _05_Member.model.MemberVO;
 
 @WebServlet("/_02_TripAndJournal/member/NewTrip.controller")
 public class NewTripServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private TripService ts;
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -102,15 +98,14 @@ public class NewTripServlet extends HttpServlet {
 		}
 
 		// 呼叫Model
-		// ts = new TripService();
-		TripDAOHibernate dao = new TripDAOHibernate();
+		TripService ts = new TripService();
 		TripVO tripVO = new TripVO();
 		// 由session接收會員資料
 		// HttpSession session = request.getSession();
 		// MemberVO memberVO = (MemberVO) session.getAttribute("user");
 		// int memberId = memberVO.getMemberId();
 		// tripVO.setMemberId(memberId);
-		tripVO.setMemberId(1);//寫死memberId
+		tripVO.setMemberId(1);// 寫死memberId
 		tripVO.setTripName(tripName);
 		tripVO.setTripStartDate(tripStartDate);
 		tripVO.setTripEndDate(tripEndDate);
@@ -119,7 +114,7 @@ public class NewTripServlet extends HttpServlet {
 		tripVO.setTransFormId(transFormId);
 		tripVO.setTripIntro(tripIntro);
 		tripVO.setWatchNum(1);
-		TripVO result = dao.insert(tripVO);
+		TripVO result = ts.insert(tripVO);
 		if (result == null) {
 			error.put("tripName", "insert fail");
 			request.getRequestDispatcher(
