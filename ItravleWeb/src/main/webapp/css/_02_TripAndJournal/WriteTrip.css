@@ -43,9 +43,16 @@ h4{
 	float: right;
 
 }
+#tripBut{
+	align-content: right;
+}
 div .sight {
 	height: 30px;
 	width: 95%;	
 	border: 1px solid #ff80c0;
 	margin: auto;
 }
+#sightsTabs ul li a{
+	font-size:16px;
+}
+

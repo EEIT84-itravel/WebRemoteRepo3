@@ -92,6 +92,24 @@ public class SightDAOHibernate {
 
 		return sightVOs;
 	}
+	
+	private static final String SELECT_BY_TYPE = "from SightVO where sightTypeId=:sightTypeId order by score desc";
+	public List<SightVO> selectByType(String sightType){
+		List<SightVO> sightVOs = null;
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(SELECT_BY_TYPE);
+			query.setParameter("sightTypeId", sightType);
+			sightVOs = query.list();
+			session.getTransaction().commit();
+		} catch (HibernateException e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}		
+		return sightVOs;
+	}
 
 	public SightVO update(SightVO sightVO) {
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
