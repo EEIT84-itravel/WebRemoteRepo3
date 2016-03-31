@@ -9,8 +9,13 @@ public class SightService {
 	
 	public List<SightVO> select(){
 		List<SightVO> result = null;
-		result = dao.selectAll();
-		
+		result = dao.selectAll();		
+		return result;
+	}
+	
+	public List<SightVO> selectByType(String sightType) {
+		List<SightVO> result = null;
+		result = dao.selectByType(sightType);		
 		return result;
 	}
 }
