@@ -3,6 +3,7 @@ package _02_TripAndJournal.model.dao;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 import _00_Misc.HibernateUtil_H4_Ver1;
@@ -56,6 +57,28 @@ public class TripDAOHibernate {
 			throw e;
 		}
 		return tripVO;
+	}
+	
+	// select datediff
+	private final String SELECT_DATE_DIFF = "SELECT DateDiff(Day,trip_start_date,trip_end_date)+1 FROM trip where trip_id = ?";
+
+	public int selectDateDiff(Integer tripId) {
+		int result;
+		List<Integer> list = null;
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+			SQLQuery query = session.createSQLQuery(SELECT_DATE_DIFF);
+			query.setParameter(0, tripId);
+			list = query.list();
+			result = list.get(0);
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
 	}
 
 	// insert

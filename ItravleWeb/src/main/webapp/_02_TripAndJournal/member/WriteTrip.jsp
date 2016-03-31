@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="_00_Misc.model.*"%>
 <%@ page import="_01_Sight.model.*"%>
+<%@ page import="_02_TripAndJournal.model.*"%>
+
 <%@ page import="java.util.*"%>
 <!-- 以下的要再改成jQuery 的ajax   不要在jsp出現java code -->
 
@@ -14,6 +16,11 @@
 	SightService sightService = new SightService();
 	List<SightVO> sightVO = sightService.select();
 	pageContext.setAttribute("sightVO", sightVO);	
+	
+	TripService tripService = new TripService();
+	TripVO tripVO=(TripVO)request.getAttribute("tripVO");	
+	int dateDiff = tripService.selectDateDiff(tripVO.getTripId());
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -32,17 +39,16 @@
 	$(function() {
 		//讓右邊景點可以被拖曳
 		$(".sight").draggable({
-			helper: "clone"
+			helper: "clone"		//只拖動複製的圖片，原始圖片保持不動
 		});
 		//讓左邊行程可被放下
 		$("#trip").droppable({
-			appendTo: "#day1",  //要黏到的目標
-				//只拖動複製的圖片，原始圖片保持不動
+			appendTo: "#day1",  //要黏到的目標				
 			accept: ".sight",	//只能接受sight class的物件
 			activeClass: "ui-state-highlight",	//凸顯此區域是可以被放置的
 			drop : function(event, ui) {
-				$( this ).find( ".placeholder" ).remove();
-				$( "<li></li>" ).text( ui.draggable.text() ).appendTo( this );
+				$(this).find(".placeholder").remove();
+				$("<li></li>").text( ui.draggable.text() ).appendTo(this);
 				ui.helper.draggable({
 					disabled:true
 				})
@@ -72,26 +78,28 @@
 						<h4>行程名稱：${tripVO.tripName}</h4>
 					</td>
 					<td id="topButton">						
-						<input type="submit" value="預算一覽" name="budget">
-						<input type="submit" value="下載旅遊書" name="download travel book">
-						<input type="submit" value="旅伴" name="partner">
-						<input type="submit" value="儲存" name="store">
-						<input type="submit" value="發布" name="publish">
+						<input type="button" value="預算一覽" name="budget">
+						<input type="button" value="下載旅遊書" name="download travel book">
+						<input type="button" value="旅伴" name="partner">
+						<input type="button" value="儲存" name="store">
+						<input type="button" value="發布" name="publish">
 					</td>
 				</tr>
 			</table>		
 			<div id="days">
 				<p>行程開始日期：<br>${tripVO.tripStartDate}</p>
+				<p>本行程共<%=dateDiff%>天</p>
 				<p>行程開始時間：<br>${tripVO.startTime}</p>				
-				<p>第一天</p>
-				<p>第二天</p>
-				<p>第三天</p>
+				<p>第一天：</p>
+				<p>第二天：</p>
+				<p>第三天：</p>
 			</div> <!-- end div 選天數 -->
 			<div id="trip">
 				<div id="tripBut">
 					<span>主要交通方式：${tripVO.transFormId}</span>
 					<span><input type="button" value="google map" name="google map"></span>
 					<span><input type="button" value="顯示預算" name="show budget"></span>
+					<span><input type="button" value="顯示筆記" name="show notes"></span>
 					<span><input type="button" value="智慧調整" name="intelligent adjust"></span>
 				</div>
 						
