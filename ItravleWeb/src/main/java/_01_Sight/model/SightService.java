@@ -12,4 +12,6 @@ public class SightService {
 		result = dao.selectAll();
 		return result;
 	}
+	
+	
 }
