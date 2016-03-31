@@ -12,9 +12,9 @@ import _02_TripAndJournal.model.TripVO;
 public class TripDAOHibernate {
 
 	public static void main(String[] args) {
-		 TripDAOHibernate dao = new TripDAOHibernate();//Select
-		 TripVO bean = dao.select(5);
-		 System.out.println(bean);
+		TripDAOHibernate dao = new TripDAOHibernate();// Select
+		TripVO bean = dao.select(5);
+		System.out.println(bean);
 
 		// TripDAOHibernate dao = new TripDAOHibernate();
 		// TripVO bean = new TripVO();
@@ -44,10 +44,32 @@ public class TripDAOHibernate {
 		// }
 	}
 
+	// selectFromMemberID
+	private String SELECT_FROM_MEMBERID = "from TripVO where memberId=:memberId";
+
+	public List<TripVO> selectFromMember(Integer memberId) {
+		List<TripVO> result = null;
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(SELECT_FROM_MEMBERID);
+			query.setParameter("memberId", memberId);
+			result = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+
+		return result;
+	}
+
 	// select
 	public TripVO select(Integer tripId) {
 		TripVO tripVO = null;
-		Session session = HibernateUtil_H4_Ver1.getSessionFactory().getCurrentSession();
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
 		try {
 			session.beginTransaction();
 			tripVO = (TripVO) session.get(TripVO.class, tripId);
@@ -83,7 +105,8 @@ public class TripDAOHibernate {
 
 	// insert
 	public TripVO insert(TripVO tripVO) {
-		Session session = HibernateUtil_H4_Ver1.getSessionFactory().getCurrentSession();
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
 		try {
 			session.beginTransaction();
 			session.save(tripVO);
@@ -97,7 +120,8 @@ public class TripDAOHibernate {
 
 	// update
 	public TripVO update(TripVO tripVO) {
-		Session session = HibernateUtil_H4_Ver1.getSessionFactory().getCurrentSession();
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
 		try {
 			session.beginTransaction();
 			session.update(tripVO);
@@ -112,7 +136,8 @@ public class TripDAOHibernate {
 	// delete
 	public boolean delete(Integer tripId) {
 		boolean b = false;
-		Session session = HibernateUtil_H4_Ver1.getSessionFactory().getCurrentSession();
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
 		TripVO tripVO;
 		try {
 			session.beginTransaction();
@@ -130,7 +155,8 @@ public class TripDAOHibernate {
 	// select all
 	public List<TripVO> select() {
 		List<TripVO> list = null;
-		Session session = HibernateUtil_H4_Ver1.getSessionFactory().getCurrentSession();
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
 		try {
 			session.beginTransaction();
 			Query query = session.createQuery("from TripVO");

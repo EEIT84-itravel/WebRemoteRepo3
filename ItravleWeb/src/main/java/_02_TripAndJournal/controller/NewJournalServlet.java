@@ -98,7 +98,7 @@ public class NewJournalServlet extends HttpServlet {
 		if (result == null) {
 			error.put("journalName", "insert fail");
 			request.getRequestDispatcher(
-					"/_02_TripAndJournal/member/NewJournalVO.jsp").forward(
+					"/_02_TripAndJournal/member/NewJournal.jsp").forward(
 					request, response);
 		} else {
 			request.setAttribute("journalVO", result);

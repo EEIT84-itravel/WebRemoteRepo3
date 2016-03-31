@@ -20,14 +20,21 @@
 	TripService tripService = new TripService();
 	TripVO tripVO=(TripVO)request.getAttribute("tripVO");	
 	int dateDiff = tripService.selectDateDiff(tripVO.getTripId());
-	
+
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ITravel-排行程</title>
-
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/css/_02_TripAndJournal/WriteTrip.css"/>" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
+<script type="text/javascript"
+	src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
+<script type="text/javascript"
+	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_02_TripAndJournal/WriteTrip.css"/>"/>
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
@@ -63,7 +70,7 @@
 </script>
 </head>
 <body>
-	<header> 
+	<header>
 		<!-- import共同的 -->
 	</header>
 	<nav>
@@ -143,8 +150,8 @@
 			
 		</div><!-- end div right -->
 		</form>
-	
-	<!--測試用
+
+		<!--測試用
 	<c:if test="${not empty tripVO}">
 		<table>
 			<thead>
@@ -176,9 +183,9 @@
 		</table>
 	</c:if>
 -->
-	
-	
-	</article>	
+
+
+	</article>
 	<footer>
 		<!-- import共同的 -->
 	</footer>
