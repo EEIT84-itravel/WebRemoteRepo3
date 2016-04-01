@@ -1,5 +1,6 @@
 package _01_Sight.controller;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,14 +22,28 @@ import _01_Sight.model.SightPicVO;
 @WebServlet(urlPatterns = { "/_01_Sight/ShowSightMainPic.controller" }, initParams = { @WebInitParam(name = "defaultFile", value = "/img/x.png") })
 public class ShowSightMainPic extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private File defaultPhoto;
+	// private File defaultPhoto;
+	private byte[] defaultPhoto;
 
 	@Override
 	public void init() throws ServletException {
+		FileInputStream fis = null;
 		String defaultFile = this.getInitParameter("defaultFile");
 		ServletContext application = this.getServletContext();
 		String path = application.getRealPath(defaultFile);
-		defaultPhoto = new File(path);
+		File file = new File(path);
+		ByteArrayOutputStream bos = null;
+		try {
+			fis = new FileInputStream(file);
+			bos = new ByteArrayOutputStream();
+			byte[] buf = new byte[1024];
+			for (int readNum; (readNum = fis.read(buf)) != -1;) {
+				bos.write(buf, 0, readNum);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		defaultPhoto = bos.toByteArray();
 	}
 
 	protected void doGet(HttpServletRequest request,
@@ -54,7 +69,7 @@ public class ShowSightMainPic extends HttpServlet {
 		if (sightPicVO != null) {
 			bytes = sightPicVO.getPic();
 		} else {
-			// bytes = new FileInputStream(defaultPhoto);
+			bytes = defaultPhoto;
 		}
 		OutputStream out = response.getOutputStream();
 		if (bytes != null && bytes.length > 0) {
