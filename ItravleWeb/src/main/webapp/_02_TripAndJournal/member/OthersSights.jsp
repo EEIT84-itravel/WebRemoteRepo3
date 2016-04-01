@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="_00_Misc.model.*"%>
 <%@ page import="_01_Sight.model.*"%>
@@ -19,11 +19,13 @@
 <title>OthersSights</title>
 </head>
 <body>
-OthersSights.jsp
+	OthersSights.jsp
 	<c:forEach var="sightVO" items="${sightVO}">
 		<table class="sight">
 			<tr>
-				<td>照片</td>
+				<td><img
+					src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
+					width="80" height="60"></td>
 				<td>${sightVO.sightName}</td>
 				<td>${sightVO.score}分</td>
 				<td>評論</td>
