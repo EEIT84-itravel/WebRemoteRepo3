@@ -19,7 +19,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ITravel-排行程</title>
+
+<title>ITravel-排行程</title> 
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/css/_02_TripAndJournal/WriteTrip.css"/>" />
 <link rel="stylesheet" type="text/css"
@@ -146,14 +147,9 @@
 						<c:forEach var="sightVO" items="${sightVO}">
 							<table class="sight">
 								<tr>
-									<td>
-										<%
-											SightVO sVO = (SightVO) pageContext.getAttribute("sightVO");
-												int sightId = sVO.getSightId();
-												SightPicService sps = new SightPicService();
-												sps.showMainPic(sightId);
-										%> 照片
-									</td>
+									<td><img
+										src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
+										width="80" height="60"></td>
 									<td>${sightVO.sightName}</td>
 									<td>${sightVO.score}分</td>
 									<td>評論</td>

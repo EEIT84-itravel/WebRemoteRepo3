@@ -34,7 +34,7 @@ public class SightPicVO implements Serializable {
 	public void setSightId(Integer sightId) {
 		this.sightId = sightId;
 	}
-
+	
 	public boolean getMainPic() {
 		return mainPic;
 	}
