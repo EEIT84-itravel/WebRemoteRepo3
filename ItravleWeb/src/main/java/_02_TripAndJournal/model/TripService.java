@@ -16,6 +16,15 @@ public class TripService {
 		return result;
 	}
 
+	public int selectDateDiff(Integer tripId) {
+		int result = 0;
+		if (tripId > 0) {
+			tripDAOHibernate = new TripDAOHibernate();
+			result = tripDAOHibernate.selectDateDiff(tripId);
+		}
+		return result;
+	}
+
 	public List<TripVO> selectFromMember(Integer memberId) {
 		List<TripVO> result = null;
 		if (memberId >= 0) {
