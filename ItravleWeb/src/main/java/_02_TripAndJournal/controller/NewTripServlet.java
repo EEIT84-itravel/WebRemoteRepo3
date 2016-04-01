@@ -121,10 +121,11 @@ public class NewTripServlet extends HttpServlet {
 					"/_02_TripAndJournal/member/NewTrip.jsp").forward(request,
 					response);
 		} else {
-			request.setAttribute("tripVO", result);
+			HttpSession session = request.getSession();
+			session.setAttribute("tripVO", result);
 		}
-		request.getRequestDispatcher("/_02_TripAndJournal/member/WriteTrip.jsp")
-				.forward(request, response);
+		String path = request.getContextPath();
+		response.sendRedirect(path + "/_02_TripAndJournal/member/WriteTrip.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request,
