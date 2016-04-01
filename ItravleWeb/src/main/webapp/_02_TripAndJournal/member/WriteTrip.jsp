@@ -151,8 +151,8 @@
 											SightVO sVO = (SightVO) pageContext.getAttribute("sightVO");
 												int sightId = sVO.getSightId();
 												SightPicService sps = new SightPicService();
-												SightPicVO spVO = sps.selectBySightId(sightId);												
-										%> <%=spVO%> 照片
+												sps.showMainPic(sightId);
+										%> 照片
 									</td>
 									<td>${sightVO.sightName}</td>
 									<td>${sightVO.score}分</td>
