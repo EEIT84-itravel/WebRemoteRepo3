@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="_00_Misc.model.*"%>
 <%@ page import="_01_Sight.model.*"%>
 <%@ page import="_02_TripAndJournal.model.*"%>
-
 <%@ page import="java.util.*"%>
 <!-- 以下的要再改成jQuery 的ajax   不要在jsp出現java code -->
 
@@ -27,14 +25,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ITravel-排行程</title>
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/css/_02_TripAndJournal/WriteTrip.css"/>" />
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
-<script type="text/javascript"
-	src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
-<script type="text/javascript"
-	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_02_TripAndJournal/WriteTrip.css"/>"/>
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
@@ -49,24 +40,25 @@
 			helper: "clone"		//只拖動複製的圖片，原始圖片保持不動
 		});
 		//讓左邊行程可被放下
-		$("#trip").droppable({
+		$(".day").droppable({
 			appendTo: "#day1",  //要黏到的目標				
 			accept: ".sight",	//只能接受sight class的物件
 			activeClass: "ui-state-highlight",	//凸顯此區域是可以被放置的
 			drop : function(event, ui) {
-				$(this).find(".placeholder").remove();
-				$("<li></li>").text( ui.draggable.text() ).appendTo(this);
+				$(this).find(".placeholder").remove();	//移除Add your items here
+				$("<table></table>").html( ui.draggable.html() ).appendTo(this);  //把拖曳到的物件以html格式寫到<table>
 				ui.helper.draggable({
 					disabled:true
 				})
 			}		
-		});
+		}).sortable({
+		      revert: true		      
+	    });
 		// 建立右邊景點的分頁
 		$("#sightsTabs").tabs({
 			heightStyle: "auto"	
 		});
-	});
-	
+	});	
 </script>
 </head>
 <body>
@@ -108,17 +100,20 @@
 					<span><input type="button" value="顯示預算" name="show budget"></span>
 					<span><input type="button" value="顯示筆記" name="show notes"></span>
 					<span><input type="button" value="智慧調整" name="intelligent adjust"></span>
-				</div>
+				</div>	<!-- end div tripBut -->
 						
-				<div id="day1">第一天
-				<ol>
-      				<li class="placeholder">Add your items here</li>
-   				</ol>
-   				</div>
-			</div><!-- end div 行程 -->
-		</div> <!-- end div left -->
-		</form>
-		<form action="/WriteTrip" method="get">
+				<div class="day">第一天
+      				<table class="placeholder"><tr><td>Add your items here</td></tr></table>
+   				</div>	<!-- end div day -->
+   				<div class="day">第二天
+      				<table class="placeholder"><tr><td>Add your items here</td></tr></table>
+   				</div>	<!-- end div day -->
+   				<div class="day">第三天
+      				<table class="placeholder"><tr><td>Add your items here</td></tr></table>
+   				</div>	<!-- end div day -->
+			</div>	<!-- end div 行程 -->
+		</div>	<!-- end div left -->
+		</form>		
 		<div id="right">
 			<div id="blank"></div>			
 			<select>
@@ -136,20 +131,34 @@
 			    <li><a href="<c:url value="/_02_TripAndJournal/member/OthersSights.jsp" />">其他</a></li>
   			</ul>	
   			<div id="tabs-1">		
-			<div>排序：評分最高/最多人收藏</div>
-			
+			<div>排序：評分最高/最多人收藏</div>			
 				<c:forEach var="sightVO" items="${sightVO}">
 				<table class="sight">
 				<tr>	
-					<td>照片</td><td>${sightVO.sightName}</td><td>${sightVO.score}分</td><td>評論</td><td>最愛</td>
-				</tr>
+					<td>照片</td>
+					<td>${sightVO.sightName}</td>
+					<td>建議旅行時段:${sightVO.playPeriod}</td>
+					<td>${sightVO.score}分</td>
+					<td>評論</td>
+					<td>最愛</td>
+				</tr>				
 				</table>
+				<form action="<c:url value="/WriteTrip" />" method="post">
+					<!-- 下面的隱藏欄位都會送到後端 -->					
+					<input type="hidden" name="tripId" value="${tripVO.tripId}"><P/>
+					<input type="hidden" name="tripOrder" value=1><P/>  <!-- 先寫死 -->
+					<input type="hidden" name="stayTime" value="${sightVO.spendHour}"><P/>
+					<input type="hidden" name="whichDay" value=1><P/>  <!-- 先寫死 -->	
+					<input type="hidden" name="referenceType" value=1><P/>
+					<input type="hidden" name="referenceNo" value="${sightVO.sightId}"><p/>									
+					<input type="submit" value="加入本次行程">
+				</form>
 				</c:forEach>
 			</div>	<!-- end div tabs-1 -->
-			</div>	<!-- end div sightsTabs -->												
+			</div>	<!-- end div sightsTabs -->										
 			
 		</div><!-- end div right -->
-		</form>
+		
 
 		<!--測試用
 	<c:if test="${not empty tripVO}">
