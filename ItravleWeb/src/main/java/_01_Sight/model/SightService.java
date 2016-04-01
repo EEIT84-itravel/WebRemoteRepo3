@@ -1,7 +1,6 @@
 package _01_Sight.model;
 
 import java.util.List;
-
 import _01_Sight.model.dao.SightDAOHibernate;
 
 public class SightService {
