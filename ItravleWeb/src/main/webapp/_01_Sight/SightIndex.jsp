@@ -1,3 +1,4 @@
+<%@page import="_00_Misc.model.CodeService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -6,7 +7,9 @@
 <%
 	SightService sightService = new SightService();
 	List<SightVO> sightVO = sightService.select();
+	List<SightVO> watchNum = sightService.selectByWatchNum();
 	pageContext.setAttribute("sightVO", sightVO);
+	pageContext.setAttribute("watchNum", watchNum);
 %>
 <!DOCTYPE html >
 <html>
@@ -34,10 +37,29 @@ div {
 	<h5>首頁>看景點</h5>
 	<input type="button" value="進階搜尋">
 	<br>
+	<h5>熱門景點</h5>
+	<c:forEach var="watchNum" items="${watchNum}" begin="0" end="3">
+		<div id="tbl">
+			<p>No:${watchNum.sightId}</p>
+			<img alt=""
+				src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${watchNum.sightId}" />"
+				width="240" height="180">
+			<p>
+				<a href="/ItravleWeb/_01_Sight/SightInformation.jsp">名稱:${watchNum.sightName}</a>
+			</p>
+			<p>類型:${watchNum.sightTypeId}</p>
+			<p>縣市:</p>
+			<p>${watchNum.watchNum}人瀏覽,${watchNum.collectNum}人收藏</p>
+		</div>
+	</c:forEach>
+	<br>
+
 	<c:forEach var="sightVO" items="${sightVO}">
 		<div id="tbl">
 			<p>No:${sightVO.sightId}</p>
-			<img alt="" src="">
+			<img alt=""
+				src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
+				width="240" height="180">
 			<p>
 				<a href="/ItravleWeb/_01_Sight/SightInformation.jsp">名稱:${sightVO.sightName}</a>
 			</p>

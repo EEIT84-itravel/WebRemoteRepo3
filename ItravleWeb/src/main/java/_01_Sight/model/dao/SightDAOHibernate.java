@@ -19,44 +19,62 @@ public class SightDAOHibernate {
 		System.out.println("findByPrimaryKey測試: " + sightVO);
 
 		// sightVO.setDel(true);
-//		sightVO.setDel(false);
-//		java.util.Date now = new Date();
-//		long nowLong = now.getTime();
-//		java.sql.Timestamp sqlDate = new Timestamp(nowLong);
-//		sightVO.setModifyTime(sqlDate);
-//		SightVO sightVOupdate = dao.update(sightVO);
-//		System.out.println("update測試: " + sightVOupdate);
+		// sightVO.setDel(false);
+		// java.util.Date now = new Date();
+		// long nowLong = now.getTime();
+		// java.sql.Timestamp sqlDate = new Timestamp(nowLong);
+		// sightVO.setModifyTime(sqlDate);
+		// SightVO sightVOupdate = dao.update(sightVO);
+		// System.out.println("update測試: " + sightVOupdate);
 
-//		SightVO sightVO2 = new SightVO();
-//		sightVO2.setSightName("testsight");
-//		sightVO2.setRegionId("region01");
-//		sightVO2.setCountyId("county01");
-//		sightVO2.setSightTypeId("sight_type01");		
-//		java.sql.Time open= java.sql.Time.valueOf("09:00:00");
-//		sightVO2.setOpenTime(open);
-//		java.sql.Time close = java.sql.Time.valueOf("21:00:00");
-//		sightVO2.setCloseIime(close);
-//		java.sql.Time spend = java.sql.Time.valueOf("03:00:00");
-//		sightVO2.setSpendHour(spend);
-//		sightVO2.setPlayPeriod("sight_time05");
-//		sightVO2.setScore(0F);
-//		sightVO2.setLongitude(121.56455F);
-//		sightVO2.setLatitude(25.033602F);
-//		java.util.Date now2 = new Date();
-//		long nowLong2 = now2.getTime();
-//		java.sql.Timestamp sqlDate2 = new Timestamp(nowLong2);
-//		sightVO2.setCreateTime(sqlDate2);
-//		sightVO2.setCreator(1);
-//		sightVO2.setModifyTime(sqlDate2);
-//		sightVO2.setModifier(2);
-//		SightVO sightVOinsert = dao.insert(sightVO2);
-//		System.out.println("insert測試: " + sightVOinsert);
-		
-//		boolean sightVOdelete = dao.delete(12); 
-//		System.out.println("delete測試: " + sightVOdelete);
+		// SightVO sightVO2 = new SightVO();
+		// sightVO2.setSightName("testsight");
+		// sightVO2.setRegionId("region01");
+		// sightVO2.setCountyId("county01");
+		// sightVO2.setSightTypeId("sight_type01");
+		// java.sql.Time open= java.sql.Time.valueOf("09:00:00");
+		// sightVO2.setOpenTime(open);
+		// java.sql.Time close = java.sql.Time.valueOf("21:00:00");
+		// sightVO2.setCloseIime(close);
+		// java.sql.Time spend = java.sql.Time.valueOf("03:00:00");
+		// sightVO2.setSpendHour(spend);
+		// sightVO2.setPlayPeriod("sight_time05");
+		// sightVO2.setScore(0F);
+		// sightVO2.setLongitude(121.56455F);
+		// sightVO2.setLatitude(25.033602F);
+		// java.util.Date now2 = new Date();
+		// long nowLong2 = now2.getTime();
+		// java.sql.Timestamp sqlDate2 = new Timestamp(nowLong2);
+		// sightVO2.setCreateTime(sqlDate2);
+		// sightVO2.setCreator(1);
+		// sightVO2.setModifyTime(sqlDate2);
+		// sightVO2.setModifier(2);
+		// SightVO sightVOinsert = dao.insert(sightVO2);
+		// System.out.println("insert測試: " + sightVOinsert);
+
+		// boolean sightVOdelete = dao.delete(12);
+		// System.out.println("delete測試: " + sightVOdelete);
 
 		List<SightVO> sightVOs = dao.selectAll();
 		System.out.println("selectAll測試: " + sightVOs);
+	}
+
+	private static final String GET_ALL_WATCHNUM = "from SightVO order by watchNum desc";//新增(按瀏覽人次排列)
+	public List<SightVO> selectByWatchNum() {
+		List<SightVO> sightVOs = null;
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(GET_ALL_WATCHNUM);
+			sightVOs = query.list();
+			session.getTransaction().commit();
+		} catch (HibernateException e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
+
+		return sightVOs;
 	}
 
 	public SightVO findByPrimaryKey(Integer sightId) {
@@ -92,9 +110,10 @@ public class SightDAOHibernate {
 
 		return sightVOs;
 	}
-	
+
 	private static final String SELECT_BY_TYPE = "from SightVO where sightTypeId=:sightTypeId order by score desc";
-	public List<SightVO> selectByType(String sightType){
+
+	public List<SightVO> selectByType(String sightType) {
 		List<SightVO> sightVOs = null;
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
 				.getCurrentSession();
@@ -107,7 +126,7 @@ public class SightDAOHibernate {
 		} catch (HibernateException e) {
 			session.getTransaction().rollback();
 			e.printStackTrace();
-		}		
+		}
 		return sightVOs;
 	}
 
@@ -139,20 +158,21 @@ public class SightDAOHibernate {
 
 		return sightVO;
 	}
-	
+
 	public boolean delete(Integer sightId) {
-		Session session = HibernateUtil_H4_Ver1.getSessionFactory().getCurrentSession();		
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
 		try {
 			session.beginTransaction();
 			SightVO sightVO = new SightVO();
 			sightVO.setSightId(sightId);
-			session.delete(sightVO);			
-			session.getTransaction().commit();	
+			session.delete(sightVO);
+			session.getTransaction().commit();
 			return true;
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			e.printStackTrace();
-		}		
+		}
 		return false;
 	}
 
