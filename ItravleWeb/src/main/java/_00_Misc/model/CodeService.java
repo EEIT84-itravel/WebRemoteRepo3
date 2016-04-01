@@ -20,5 +20,9 @@ public class CodeService {
 			}
 		}		
 		return result;
-	}	
+	}
+	
+	public List<CodeVO> getAll(){
+		return dao.select();
+	}
 }

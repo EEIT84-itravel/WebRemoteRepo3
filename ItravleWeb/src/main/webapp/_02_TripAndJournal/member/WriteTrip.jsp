@@ -15,10 +15,11 @@
 	List<SightVO> sightVO = sightService.select();
 	pageContext.setAttribute("sightVO", sightVO);	
 	
-	 TripService tripService = new TripService();
+	TripService tripService = new TripService();
 	TripVO tripVO=(TripVO)session.getAttribute("tripVO");	
 	int dateDiff = tripService.selectDateDiff(tripVO.getTripId());
 %>
+<jsp:useBean id="codeSvc" scope="page" class="_00_Misc.model.CodeService" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +48,7 @@
 				$("<table></table>").html( ui.draggable.html() ).appendTo(this);  //把拖曳到的物件以html格式寫到<table>
 				ui.helper.draggable({
 					disabled : true
-				})
+				})				
 			}		
 		}).sortable({
 		      revert: true		      
@@ -137,22 +138,30 @@
 							 width="80" height="60">
 					</td>
 					<td>${sightVO.sightName}</td>
-					<td>建議旅行時段:${sightVO.playPeriod}</td>
+					<td>建議旅行時段:
+						<c:forEach var="codeVO" items="${codeSvc.all}">
+                             <c:if test="${codeVO.codeId==sightVO.playPeriod}">
+								${codeVO.codeName}
+                             </c:if>
+						</c:forEach>
+					</td>
 					<td>${sightVO.score}分</td>
 					<td>評論</td>
-					<td>最愛</td>
+					<td>最愛</td>					
 				</tr>
 				</table>
-				<form action="<c:url value="/WriteTrip" />" method="post">
+				<form action="<c:url value="/_02_TripAndJournal/member/WriteTrip.controller" />" method="post">
 					<!-- 下面的隱藏欄位都會送到後端 -->					
 					<input type="hidden" name="tripId" value="${tripVO.tripId}"><P/>
 					<input type="hidden" name="tripOrder" value=1><P/>  <!-- 先寫死 -->
 					<input type="hidden" name="stayTime" value="${sightVO.spendHour}"><P/>
 					<input type="hidden" name="whichDay" value=1><P/>  <!-- 先寫死 -->	
-					<input type="hidden" name="referenceType" value=1><P/>
-					<input type="hidden" name="referenceNo" value="${sightVO.sightId}"><p/>									
+					<input type="hidden" name="referenceType" value="type_id01"><P/>
+					<input type="hidden" name="sightId" value="${sightVO.sightId}"><p/>					
+					<input type="hidden" name="notes" value="test notes"><p/>  <!-- 先寫死 -->						
+					<input type="hidden" name="sightBudget" value=100.0><p/>  <!-- 先寫死 -->						
 					<input type="submit" value="加入本次行程">
-				</form>
+					</form>
 				</c:forEach>
 			</div>	<!-- end div tabs-1 -->
 			</div>	<!-- end div sightsTabs -->										
