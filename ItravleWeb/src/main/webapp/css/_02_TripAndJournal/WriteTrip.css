@@ -13,14 +13,13 @@ h4{
 	text-align: right;
 }
 #left {
-	width:70%;	
+	width:65%;	
 	background-color:silver;
 	float: left;
 	height: 100%;
 }
-
 #right {
-	width:29%;	
+	width:34%;	
 	background-color:silver;
 	float: right;
 	height: auto;
@@ -48,7 +47,7 @@ h4{
 }
 div .sight {
 	height: 30px;
-	width: 95%;	
+	width: 100%;	
 	border: 1px solid #ff80c0;
 	margin: auto;
 }

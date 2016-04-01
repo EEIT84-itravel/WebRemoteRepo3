@@ -10,13 +10,16 @@
 <%@ page import="java.util.*"%>
 <%
 	CodeService service = new CodeService();
-	List<CodeVO> list = service.select("region");
-	pageContext.setAttribute("list", list);
+	List<CodeVO> region = service.select("region");
+	pageContext.setAttribute("region", region);
+
+	List<CodeVO> transForm = service.select("trans_form");
+	pageContext.setAttribute("transForm", transForm);
 %>
 <title>ITravel-建立新行程</title>
 </head>
 <body>
-<h3>建立新的行程</h3>
+	<h3>建立新的行程</h3>
 	<form
 		action="<c:url value="/_02_TripAndJournal/member/NewTrip.controller" />"
 		method="post">
@@ -47,18 +50,18 @@
 			<tr>
 				<td>地區:</td>
 				<td><select name="regionId">
-						<c:forEach var="region1" items="${list}">
-							<option value="${region1.codeId}">${region1.codeName}</option>
+						<c:forEach var="region" items="${region}">
+							<option value="${region.codeId}">${region.codeName}</option>
 						</c:forEach>
 				</select></td>
 				<td><span class="error">${error.regionId}</span></td>
 			</tr>
 			<tr>
 				<td>交通工具:</td>
-				<td><select size="1" name="transFormId">
-						<option value="trans_form01">大眾運輸</option>
-						<option value="trans_form02">開車</option>
-						<option value="trans_form03">步行</option>
+				<td><select name="transFormId">
+						<c:forEach var="transForm" items="${transForm}">
+							<option value="${transForm.codeId}">${transForm.codeName}</option>
+						</c:forEach>
 				</select></td>
 				<td><span class="error">${error.transFormId}</span></td>
 			</tr>

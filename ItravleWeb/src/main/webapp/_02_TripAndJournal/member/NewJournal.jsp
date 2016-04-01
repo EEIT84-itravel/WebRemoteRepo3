@@ -10,13 +10,13 @@
 <%@ page import="java.util.*"%>
 <%
 	CodeService service = new CodeService();
-	List<CodeVO> list = service.select("region");
-	pageContext.setAttribute("list", list);
+	List<CodeVO> region = service.select("region");
+	pageContext.setAttribute("region", region);
 %>
 <title>ITravel-建立新遊記</title>
 </head>
 <body>
-<h3>建立新的遊記</h3>
+	<h3>建立新的遊記</h3>
 	<form
 		action="<c:url value="/_02_TripAndJournal/member/NewJournal.controller" />"
 		method="post">
@@ -42,7 +42,7 @@
 			<tr>
 				<td>地區:</td>
 				<td><select name="regionId">
-						<c:forEach var="region" items="${list}">
+						<c:forEach var="region" items="${region}">
 							<option value="${region.codeId}">${region.codeName}</option>
 						</c:forEach>
 				</select></td>
