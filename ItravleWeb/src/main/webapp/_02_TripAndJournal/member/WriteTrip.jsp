@@ -17,9 +17,9 @@
 	List<SightVO> sightVO = sightService.select();
 	pageContext.setAttribute("sightVO", sightVO);	
 	
-	TripService tripService = new TripService();
+	/* TripService tripService = new TripService();
 	TripVO tripVO=(TripVO)request.getAttribute("tripVO");	
-	int dateDiff = tripService.selectDateDiff(tripVO.getTripId());
+	int dateDiff = tripService.selectDateDiff(tripVO.getTripId()); */
 %>
 <!DOCTYPE html>
 <html>
@@ -98,7 +98,7 @@
 					<p>
 						行程開始日期：<br>${tripVO.tripStartDate}</p>
 					<p>
-						本行程共<%=dateDiff%>天
+						<%-- 本行程共<%=dateDiff%>天 --%>
 					</p>
 					<p>
 						行程開始時間：<br>${tripVO.startTime}</p>
@@ -122,71 +122,6 @@
 							<li class="placeholder">Add your items here</li>
 						</ol>
 					</div>
-				</div>
-				<!-- end div 行程 -->
-			</div>
-			<!-- end div left -->
-		</form>
-		<form action="/WriteTrip" method="get">
-			<div id="right">
-				<div id="blank"></div>
-				<select>
-					<c:forEach var="region" items="${region}">
-						<option value="${region.codeId}">${region.codeName}</option>
-					</c:forEach>
-				</select>
-				<div id="sightsTabs">
-					<ul>
-						<li><a href="#tabs-1">我的收藏</a></li>
-						<li><a
-							href="<c:url value="/_02_TripAndJournal/member/RecreationSights.jsp" />">娛樂</a></li>
-						<li><a
-							href="<c:url value="/_02_TripAndJournal/member/ShoppingSights.jsp" />">購物</a></li>
-						<li><a
-							href="<c:url value="/_02_TripAndJournal/member/FoodSights.jsp" />">美食</a></li>
-						<li><a
-							href="<c:url value="/_02_TripAndJournal/member/HotelSights.jsp" />">住宿</a></li>
-						<li><a
-							href="<c:url value="/_02_TripAndJournal/member/OthersSights.jsp" />">其他</a></li>
-					</ul>
-					<div id="tabs-1">
-						<div>排序：評分最高/最多人收藏</div>
-
-						<c:forEach var="sightVO" items="${sightVO}">
-							<table class="sight">
-								<tr>
-									<td>照片</td>
-									<td>${sightVO.sightName}</td>
-									<td>${sightVO.score}分</td>
-									<td>評論</td>
-									<td>最愛</td>
-								</tr>
-							</table>
-						</c:forEach>
-						<div id="days">
-							<p>
-								行程開始日期：<br>${tripVO.tripStartDate}</p>
-							<p>
-								行程開始時間：<br>${tripVO.startTime}</p>
-							<p>第一天</p>
-							<p>第二天</p>
-							<p>第三天</p>
-						</div>
-						<!-- end div 選天數 -->
-						<div id="trip">
-							<div id="tripBut">
-								<span>主要交通方式：${tripVO.transFormId}</span> <span><input
-									type="button" value="google map" name="google map"></span> <span><input
-									type="button" value="顯示預算" name="show budget"></span> <span><input
-									type="button" value="智慧調整" name="intelligent adjust"></span>
-							</div>
-
-							<div id="day1">
-								第一天
-								<ol>
-									<li class="placeholder">Add your items here</li>
-								</ol>
-							</div>
 						</div>
 						<!-- end div 行程 -->
 					</div>
