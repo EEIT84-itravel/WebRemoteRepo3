@@ -15,17 +15,15 @@
 	List<SightVO> sightVO = sightService.select();
 	pageContext.setAttribute("sightVO", sightVO);	
 	
-	TripService tripService = new TripService();
-	TripVO tripVO=(TripVO)request.getAttribute("tripVO");	
+	 TripService tripService = new TripService();
+	TripVO tripVO=(TripVO)session.getAttribute("tripVO");	
 	int dateDiff = tripService.selectDateDiff(tripVO.getTripId());
-
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ITravel-排行程</title>
-
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_02_TripAndJournal/WriteTrip.css"/>"/>
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
@@ -37,7 +35,7 @@
 	$(function() {
 		//讓右邊景點可以被拖曳
 		$(".sight").draggable({
-			helper: "clone"		//只拖動複製的圖片，原始圖片保持不動
+			helper : "clone" //只拖動複製的圖片，原始圖片保持不動
 		});
 		//讓左邊行程可被放下
 		$(".day").droppable({
@@ -48,7 +46,7 @@
 				$(this).find(".placeholder").remove();	//移除Add your items here
 				$("<table></table>").html( ui.draggable.html() ).appendTo(this);  //把拖曳到的物件以html格式寫到<table>
 				ui.helper.draggable({
-					disabled:true
+					disabled : true
 				})
 			}		
 		}).sortable({
@@ -58,7 +56,7 @@
 		$("#sightsTabs").tabs({
 			heightStyle: "auto"	
 		});
-	});	
+	});
 </script>
 </head>
 <body>
@@ -135,13 +133,15 @@
 				<c:forEach var="sightVO" items="${sightVO}">
 				<table class="sight">
 				<tr>	
-					<td>照片</td>
+					<td><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
+							 width="80" height="60">
+					</td>
 					<td>${sightVO.sightName}</td>
 					<td>建議旅行時段:${sightVO.playPeriod}</td>
 					<td>${sightVO.score}分</td>
 					<td>評論</td>
 					<td>最愛</td>
-				</tr>				
+				</tr>
 				</table>
 				<form action="<c:url value="/WriteTrip" />" method="post">
 					<!-- 下面的隱藏欄位都會送到後端 -->					
@@ -159,6 +159,7 @@
 			
 		</div><!-- end div right -->
 		
+
 
 		<!--測試用
 	<c:if test="${not empty tripVO}">
