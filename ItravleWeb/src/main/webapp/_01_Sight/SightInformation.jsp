@@ -13,6 +13,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>景點資訊</title>
+<!-- jQuery ui -->
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
+<!-- jQuery -->
+<script type="text/javascript"
+	src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
+<!-- jQuery ui -->
+<script type="text/javascript"
+	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#tabs").tabs({
+			event : "mouseover"
+		});
+	});
+</script>
 </head>
 <body>
 	<h1>景點資訊</h1>
@@ -25,8 +41,21 @@
 			<option value="${region.codeId}">${region.codeName}</option>
 		</c:forEach>
 	</select>
-	<input type="button" value="相關行程">
-	<input type="button" value="相關遊記">
-	<input type="button" value="留言">
+	<div id="tabs">
+		<ul>
+			<li><a href="#tabs-1">相關行程</a></li>
+			<li><a href="#tabs-2">相關遊記</a></li>
+			<li><a href="#tabs-3">留言</a></li>
+		</ul>
+		<div id="tabs-1">
+			<p>台北小清新之旅</p>
+		</div>
+		<div id="tabs-2">
+			<p>我的遊記</p>
+		</div>
+		<div id="tabs-3">
+			<p>門票是不是漲價了</p>
+		</div>
+	</div>
 </body>
 </html>
