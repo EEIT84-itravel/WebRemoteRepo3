@@ -10,12 +10,19 @@ public class SightPicService {
 	public static void main(String[] args) {
 	}
 
-	public SightPicVO selectBySightId(Integer sightId) {
+	public List<SightPicVO> selectBySightId(Integer sightId) {
+		return dao.selectBySightId(sightId);
+	}
+
+	public SightPicVO selectMainPic(Integer sightId) {
 		SightPicVO sightPicVO = null;
 		List<SightPicVO> sightPicVOs = dao.selectBySightId(sightId);
-		if (!sightPicVOs.isEmpty()) {
-			sightPicVO = sightPicVOs.get(0);
+		for (SightPicVO temp : sightPicVOs) {
+			if (temp.getMainPic()) {
+				sightPicVO = temp;
+			}
 		}
 		return sightPicVO;
 	}
+
 }
