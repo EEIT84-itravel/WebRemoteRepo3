@@ -10,13 +10,46 @@
 <%@ page import="java.util.*"%>
 <%
 	CodeService service = new CodeService();
-	List<CodeVO> list = service.select("region");
-	pageContext.setAttribute("list", list);
+	List<CodeVO> region = service.select("region");
+	pageContext.setAttribute("region", region);
+
+	List<CodeVO> transForm = service.select("trans_form");
+	pageContext.setAttribute("transForm", transForm);
 %>
 <title>ITravel-建立新行程</title>
+<!-- jQuery ui -->
+<link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
+<!-- jQuery -->
+<script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
+<!-- jQuery ui -->
+<script type="text/javascript" src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		//起始日期用jQuery UI
+		$('input[name="tripStartDate"]').datepicker({
+			appendText : "格式：YYYY-MM-DD",
+			dateFormat : "yy-mm-dd",			
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,			
+		}).attr("readonly", "readonly");
+		//結束日期用jQuery UI
+		$('input[name="tripEndDate"]').datepicker({
+			appendText : "格式：YYYY-MM-DD",
+			dateFormat : "yy-mm-dd",			
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+		}).attr("readonly", "readonly");
+		//選時間的要再加上其他自己寫的jQuery UI plugin
+		
+	});
+	
+</script>
 </head>
 <body>
-<h3>建立新的行程</h3>
+	<h3>建立新的行程</h3>
 	<form
 		action="<c:url value="/_02_TripAndJournal/member/NewTrip.controller" />"
 		method="post">
@@ -29,13 +62,13 @@
 			</tr>
 			<tr>
 				<td>旅行開始日期:</td>
-				<td><input type="date" id="tripStartDate" name="tripStartDate"
+				<td><input type="text" id="tripStartDate" name="tripStartDate"
 					value="${param.tripStartDate}"></td>
 				<td><span class="error">${error.tripStartDate}</span></td>
 			</tr>
 			<tr>
 				<td>旅行結束日期:</td>
-				<td><input type="date" id="tripEndDate" name="tripEndDate"
+				<td><input type="text" id="tripEndDate" name="tripEndDate"
 					value="${param.tripEndDate}"></td>
 				<td><span class="error">${error.tripEndDate}</span></td>
 			</tr>
@@ -47,18 +80,18 @@
 			<tr>
 				<td>地區:</td>
 				<td><select name="regionId">
-						<c:forEach var="region1" items="${list}">
-							<option value="${region1.codeId}">${region1.codeName}</option>
+						<c:forEach var="region" items="${region}">
+							<option value="${region.codeId}">${region.codeName}</option>
 						</c:forEach>
 				</select></td>
 				<td><span class="error">${error.regionId}</span></td>
 			</tr>
 			<tr>
 				<td>交通工具:</td>
-				<td><select size="1" name="transFormId">
-						<option value="trans_form01">大眾運輸</option>
-						<option value="trans_form02">開車</option>
-						<option value="trans_form03">步行</option>
+				<td><select name="transFormId">
+						<c:forEach var="transForm" items="${transForm}">
+							<option value="${transForm.codeId}">${transForm.codeName}</option>
+						</c:forEach>
 				</select></td>
 				<td><span class="error">${error.transFormId}</span></td>
 			</tr>

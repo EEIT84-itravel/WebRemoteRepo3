@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import _02_TripAndJournal.model.JournalService;
 import _02_TripAndJournal.model.JournalVO;
@@ -98,14 +99,15 @@ public class NewJournalServlet extends HttpServlet {
 		if (result == null) {
 			error.put("journalName", "insert fail");
 			request.getRequestDispatcher(
-					"/_02_TripAndJournal/member/NewJournalVO.jsp").forward(
+					"/_02_TripAndJournal/member/NewJournal.jsp").forward(
 					request, response);
 		} else {
-			request.setAttribute("journalVO", result);
+			HttpSession session = request.getSession();
+			session.setAttribute("journalVO", result);
 		}
-		request.getRequestDispatcher(
-				"/_02_TripAndJournal/member/WriteJournal.jsp").forward(
-				request, response);
+		String path = request.getContextPath();
+		response.sendRedirect(path
+				+ "/_02_TripAndJournal/member/WriteJournal.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request,

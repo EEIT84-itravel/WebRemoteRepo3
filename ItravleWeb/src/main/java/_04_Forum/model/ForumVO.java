@@ -19,7 +19,9 @@ public class ForumVO implements Serializable {
 	// 瀏覽人次(visitor_num)
 	private Integer visitorNum;
 	// 回復數(reply_num)
-	private Integer replyNum;	
+
+	private Integer replyNum;
+
 
 	public Integer getForumId() {
 		return forumId;
