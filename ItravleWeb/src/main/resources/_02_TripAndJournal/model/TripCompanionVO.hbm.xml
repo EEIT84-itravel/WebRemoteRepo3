@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 01:29:58 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="_02_TripAndJournal.model.TripCompanionVO" table="trip_companion">
+        <id name="companionId" column="companion_id" >
+            <generator class="identity" />
+        </id>
+        <property name="tripId" column="trip_id" />
+        <property name="memberId" column="member_id" />
+    </class>
+</hibernate-mapping>

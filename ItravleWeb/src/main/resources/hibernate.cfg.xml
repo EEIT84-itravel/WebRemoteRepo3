@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+
+	<session-factory>
+
+		<property name="hibernate.connection.datasource">java:comp/env/jdbc/TestDB</property>
+
+		<!--SQL方言,以下使用SQLServer -->
+		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+
+		<!--是否要顯示實際操作資料庫時的SQL -->
+		<property name="hibernate.show_sql">true</property>
+
+		<!-- Disable the second-level cache -->
+		<property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+
+		<!--交易管理類型, 以下使用JDBC Transaction -->
+		<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+
+		<!-- Enable Hibernate's automatic session context management -->
+		<property name="hibernate.current_session_context_class">thread</property>
+
+
+		<!--Java物件與資料庫表格的映射檔 -->
+		<mapping resource="_00_Misc/model/CodeVO.hbm.xml" />
+		<mapping resource="_01_Sight/model/SightVO.hbm.xml" />
+		<mapping resource="_01_Sight/model/SightPicVO.hbm.xml" />
+		<mapping resource="_02_TripAndJournal/model/MessageVO.hbm.xml" />
+		<mapping resource="_02_TripAndJournal/model/ReportVO.hbm.xml" />
+		<mapping resource="_02_TripAndJournal/model/LabelTripAndJournalVO.hbm.xml" />
+		<mapping resource="_02_TripAndJournal/model/TransVO.hbm.xml" />
+		<mapping resource="_02_TripAndJournal/model/JournalDetailVO.hbm.xml" />
+		<mapping resource="_02_TripAndJournal/model/JournalPhotoVO.hbm.xml" />
+		<mapping resource="_02_TripAndJournal/model/JournalVO.hbm.xml" />
+		<mapping resource="_02_TripAndJournal/model/TripVO.hbm.xml" />
+		<mapping resource="_02_TripAndJournal/model/TripDetailVO.hbm.xml" />
+		<mapping resource="_02_TripAndJournal/model/TripCompanionVO.hbm.xml" />
+		<mapping resource="_03_Event/model/EventVO.hbm.xml" />
+		<mapping resource="_04_Forum/model/ForumVO.hbm.xml" />
+		<mapping resource="_05_Member/model/MemberVO.hbm.xml" />
+		<mapping resource="_05_Member/model/CollectionVO.hbm.xml" />
+		<mapping resource="_05_Member/model/FriendVO.hbm.xml" />
+		<mapping resource="_05_Member/model/TrackVO.hbm.xml" />
+
+	</session-factory>
+
+</hibernate-configuration>
