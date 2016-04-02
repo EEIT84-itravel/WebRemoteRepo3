@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 08:45:07 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="_01_Sight.model.SightPicVO" table="sight_pic">
+        <id name="sightPicId" type="java.lang.Integer">
+            <column name="sight_pic_id" />
+            <generator class="identity" />
+        </id>
+        <property name="sightId" type="java.lang.Integer">
+            <column name="sight_id" />
+        </property>
+        <property name="mainPic" type="boolean">
+            <column name="main_pic" />
+        </property>
+        <property name="pic" >
+            <column name="pic" />
+        </property>
+    </class>
+</hibernate-mapping>

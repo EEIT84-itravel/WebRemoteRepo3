@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 08:40:15 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="_02_TripAndJournal.model.ReportVO" table="report">
+        <id name="reportId" type="java.lang.Integer">
+            <column name="report_id" />
+            <generator class="identity" />
+        </id>
+        <property name="referenceType" type="java.lang.String">
+            <column name="reference_type" />
+        </property>
+        <property name="referenceNo" type="java.lang.Integer">
+            <column name="reference_no" />
+        </property>
+        <property name="reporter" type="java.lang.Integer">
+            <column name="reporter" />
+        </property>
+        <property name="reportType" type="java.lang.String">
+            <column name="report_type" />
+        </property>
+        <property name="content" type="java.lang.String">
+            <column name="content" />
+        </property>
+        <property name="reportTime" type="java.sql.Date">
+            <column name="report_time" />
+        </property>
+        <property name="prosecutor" type="java.lang.Integer">
+            <column name="prosecutor" />
+        </property>
+        <property name="processStatusId" type="java.lang.String">
+            <column name="process_status_id" />
+        </property>
+    </class>
+</hibernate-mapping>

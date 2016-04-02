@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 01:20:07 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="_02_TripAndJournal.model.TripDetailVO" table="trip_detail">
+		<id name="tdetailId" column="tdetail_id">
+			<generator class="identity" />
+		</id>
+
+		<property name="tripId" column="trip_id" />
+		<property name="tripOrder" column="trip_order" />
+		<property name="stayTime" column="stay_time" />
+		<property name="whichDay" column="which_day" />
+		<property name="referenceType" column="reference_type" />
+		<property name="referenceNo" column="reference_no" />
+		<property name="notes" column="notes" />
+		<property name="sightBudget" column="sight_budget" />
+	</class>
+</hibernate-mapping>
