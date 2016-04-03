@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/18 ?U?? 08:05:02 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="_02_TripAndJournal.model.JournalDetailVO" table="journal_detail">
+    
+        <id name="journalDetailId" column="journal_detail_id" >
+            <generator class="identity" />
+        </id>        
+        <property name="sightId" column="sight_id" />
+        <property name="journalId" column="journal_id" />
+        <property name="sightOrder" column="sight_order" />     
+        <property name="sightJournal" column="sight_journal" />
+     
+    </class>
+</hibernate-mapping>

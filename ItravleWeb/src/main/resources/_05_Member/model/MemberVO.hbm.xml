@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/25 ?U?? 08:15:58 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="_05_Member.model.MemberVO" table="member">
+        <id name="memberId" type="java.lang.Integer">
+            <column name="member_id" />
+            <generator class="identity" />
+        </id>
+        <property name="memberAccount" type="java.lang.String">
+            <column name="member_account" />
+        </property>
+        <property name="lastName" type="java.lang.String">
+            <column name="last_name" />
+        </property>
+        <property name="firstName" type="java.lang.String">
+            <column name="first_name" />
+        </property>
+        <property name="nickname" type="java.lang.String">
+            <column name="nickname" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="email" />
+        </property>
+        <property name="birth" type="java.sql.Date">
+            <column name="birth" />
+        </property>
+        <property name="photo" >
+                <column name="photo" />
+        </property>
+        <property name="cellphone" type="java.lang.String">
+            <column name="cellphone" />
+        </property>
+        <property name="admin" type="java.lang.Boolean">
+            <column name="admin" />
+        </property>
+        <property name="del" type="java.lang.Boolean">
+            <column name="del" />
+        </property>
+        <property name="modifier" type="java.lang.Integer">
+            <column name="modifier" />
+        </property>
+        <property name="modiftyTime" type="java.sql.Timestamp">
+            <column name="modifty_time" />
+        </property>
+    </class>
+</hibernate-mapping>
