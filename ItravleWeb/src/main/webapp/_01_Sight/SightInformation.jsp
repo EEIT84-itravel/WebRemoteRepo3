@@ -59,6 +59,8 @@
 	</div>
 
 	<div id="tabs">
+	
+
 		<ul>
 			<li><a href="#tabs-1">相關行程</a></li>
 			<li><a href="#tabs-2">相關遊記</a></li>
@@ -67,6 +69,7 @@
 		<div id="tabs-1">
 			<p>台北小清新之旅</p>
 		</div>
+		<div></div>
 		<div id="tabs-2">
 			<p>我的遊記</p>
 		</div>

@@ -25,4 +25,5 @@ public class CodeService {
 	public List<CodeVO> getAll(){
 		return dao.select();
 	}
+
 }

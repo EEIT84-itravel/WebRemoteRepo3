@@ -19,7 +19,6 @@ public class SightPicDAOHibernate {
 
 	public static void main(String[] args) {
 		SightPicDAOHibernate dao = new SightPicDAOHibernate();
-
 		// 測試findByPrimaryKey1
 		SightPicVO select = dao.findByPrimaryKey1(1);
 		System.out.println("findByPrimaryKey1測試" + select);

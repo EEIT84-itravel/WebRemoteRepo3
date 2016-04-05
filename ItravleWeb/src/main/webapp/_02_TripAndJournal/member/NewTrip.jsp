@@ -99,14 +99,12 @@
 				<td>行程簡介:</td>
 				<td><textarea name="tripIntro" rows="4" cols="50">${param.tripIntro}</textarea></td>
 				<td><span class="error">${error.tripIntro}</span></td>
+			    
 			</tr>
 			<tr>
 				<td><input type="submit" value="開始排行程吧"></td>
 			</tr>
 		</table>
 	</form>
-
-
-
 </body>
 </html>
