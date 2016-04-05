@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import _04_Forum.model.ForumService;
 import _04_Forum.model.ForumVO;
@@ -28,17 +29,16 @@ public class ArticleServlet extends HttpServlet {
 		Map<String, String> error = new HashMap<String, String>();
 		request.setAttribute("error", error);
 		
-		if(forumTypeId==null || forumTypeId.trim().length()==0){
-			error.put("forumTypeId", "請選擇主題分類");
-		}
+        //驗證
 		if(forumTopic == null || forumTopic.trim().length() == 0){
 			error.put("forumTopic", "請輸入您的文章主題");
 		}
 		if(forumContent == null || forumContent.trim().length() == 0){
 			error.put("forumContent","請輸入文章內容");
 		}
-		if( error != null || !error.isEmpty()){
+		if( error != null && !error.isEmpty()){
 			request.getRequestDispatcher("/_04_Forum/member/Article.jsp").forward(request, response);
+			return;
 		}
 		//呼叫model
 		ForumService fs = new ForumService();
@@ -47,7 +47,8 @@ public class ArticleServlet extends HttpServlet {
 		// HttpSession session = request.getSession();
 		// MemberVO memberVO = (MemberVO) session.getAttribute("user");
 		// int memberId = memberVO.getMemberId();
-		// journalVO.setMemberId(memberId);
+		// forumVO.setMemberId(memberId);
+		forumVO.setMemberId(3);//暫時寫死會員id
 		forumVO.setForumTypeId(forumTypeId);
 		forumVO.setForumTopic(forumTopic);
 		forumVO.setForumContent(forumContent);
@@ -55,11 +56,14 @@ public class ArticleServlet extends HttpServlet {
 		ForumVO result = fs.insert(forumVO);
 		if(result == null){
 			error.put("forumTopic", "新增失敗");
-			request.getRequestDispatcher("/_04_Forum/member/Article.jsp");
+			request.getRequestDispatcher("/_04_Forum/member/Article.jsp").forward(request, response);
+			return;
 		}else{
-			request.setAttribute("forumVO", result);
+			HttpSession session = request.getSession();
+			session.setAttribute("forumVO", result);
 		}
-		request.getRequestDispatcher("/_04_Forum/ForumIndex.jsp");
+		String path = request.getContextPath();
+		response.sendRedirect(path+"/_04_Forum/ForumIndex.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

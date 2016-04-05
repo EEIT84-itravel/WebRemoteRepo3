@@ -7,13 +7,17 @@ import _04_Forum.model.dao.ForumDAOHibernate;
 
 public class ForumService {
 
-	private ForumDAOHibernate fDao;
+	private ForumDAOHibernate fDao = new ForumDAOHibernate();
 
-	public List<ForumVO> select() {
-		List<ForumVO> result = null;
-		result = fDao.select();
-		return result;
-	}
+	 public List<ForumVO> select() {
+	 List<ForumVO> result = null;
+	 result = fDao.select();
+	 return result;
+	 }
+	 
+	 public ForumVO selectOne(Integer forumId){
+		 return fDao.select(forumId);
+	 }
 //	public List<ForumVO> select(ForumVO vo) {
 //		List<ForumVO> result = null;
 //		if(vo!=null && vo.getForumId()!=0) {
@@ -39,9 +43,7 @@ public class ForumService {
 	public ForumVO update(ForumVO vo) {
 		ForumVO result = null;
 		if (vo != null) {
-			result = fDao.update(vo.getForumId(), vo.getForumTypeId(),
-					vo.getForumTopic(), vo.getMemberId(), vo.getForumTime(),
-					vo.getForumContent(), vo.getVisitorNum(), vo.getReplyNum());
+			result = fDao.update(vo);
 		}
 		return result;
 	}

@@ -8,6 +8,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import _00_Misc.HibernateUtil_H4_Ver1;
+import _02_TripAndJournal.model.JournalVO;
 import _04_Forum.model.ForumVO;
 
 public class ForumDAOHibernate {
@@ -56,38 +57,25 @@ public class ForumDAOHibernate {
 			return forumVO;
 		} catch (RuntimeException e) {
 			session.getTransaction().rollback();
-			return null;
-		} finally {
-			session.close();
 		}
+		return forumVO;
 	}
-
-	public ForumVO update(Integer forumId, String forumTypeId,
-			String forumTopic, Integer memberId, java.sql.Timestamp forumTime,
-			String forumContent, Integer visitorNum, Integer replyNum) {
+	
+	public ForumVO update(ForumVO forumVO) {
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
 				.getCurrentSession();
 		try {
 			session.beginTransaction();
-			ForumVO forumVO = (ForumVO) session.get(ForumVO.class, forumId);
-			if (forumVO != null) {
-				forumVO.setForumTypeId(forumTypeId);
-				forumVO.setForumTopic(forumTopic);
-				forumVO.setMemberId(memberId);
-				forumVO.setForumTime(forumTime);
-				forumVO.setForumContent(forumContent);
-				forumVO.setVisitorNum(visitorNum);
-				forumVO.setReplyNum(replyNum);
-			}
+			session.saveOrUpdate(forumVO);
 			session.getTransaction().commit();
-			return forumVO;
-		} catch (RuntimeException e) {
+		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
-			return null;
-		} finally {
-			session.close();
+			throw ex;
 		}
+		return forumVO;
 	}
+
+	
 
 	public ForumVO select(Integer forumId) {
 		ForumVO forumVO = null;
