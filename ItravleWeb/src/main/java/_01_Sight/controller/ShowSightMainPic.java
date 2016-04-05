@@ -19,7 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import _01_Sight.model.SightPicService;
 import _01_Sight.model.SightPicVO;
 
-@WebServlet(urlPatterns = { "/_01_Sight/ShowSightMainPic.controller" }, initParams = { @WebInitParam(name = "defaultFile", value = "/img/x.png") })
+@WebServlet(urlPatterns = { "/_01_Sight/ShowSightMainPic.controller" },
+initParams = { @WebInitParam(name = "defaultFile", value = "/img/x.png") })
 public class ShowSightMainPic extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	// private File defaultPhoto;
@@ -45,7 +46,6 @@ public class ShowSightMainPic extends HttpServlet {
 		}
 		defaultPhoto = bos.toByteArray();
 	}
-
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// 接收資料
@@ -79,7 +79,6 @@ public class ShowSightMainPic extends HttpServlet {
 			out.close();
 		}
 	}
-
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

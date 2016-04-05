@@ -1,35 +1,27 @@
 @CHARSET "UTF-8";
 
 #header {
-	border: 3px #0000ff solid;
+	
 	width: 1100px;
 	height: auto;
 	margin: auto;
 }
-
 #t1 {
 	display: inline-block;
 	float: left;
 	margin: 5px;
 	padding: 5px;
 }
-
 #t1 td {
 	padding: 8px;
 	background-color: #80ffff;
 }
-
-#tr1 a {
+.tr1 a {
 	text-align: center;
 	padding: 5px;
 	text-decoration: none;
 }
-
-#tr1 td:hover {
-	background-color: pink;
-}
-
-#d1 {
+.d1 {
 	float: left;
 	border: 3px #0000ff solid;
 	margin: 3px;
@@ -52,16 +44,18 @@
 	margin: 3px;
 	padding: 5px;
 }
+#inputData{
+	float: left;
+	display: inline-block;
+}
 
 #forum {
 	width: 1100px;
-	height: 1000px;
-	border: 2px solid red;
-}
 
-#article {
-	clear: both;
-	display: inline-block;
-	text-align: center;
-	margin: auto;
+	border: 2px solid red;
+		text-align: center;
+}
+#forumBody td{
+	border: px solid red;
+	height:50px;
 }
