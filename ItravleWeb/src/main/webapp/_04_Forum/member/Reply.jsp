@@ -8,32 +8,21 @@
 <title>I-Travel討論區回覆文章</title>
 </head>
 <body>
-	<form>
+	<form action="<c:url value="/_04_Forum/member/Reply.controller"/>" method="post">
 		<table>
 			<tr>
-				<td>回覆內容</td>
+				<td>回覆內容：</td>
+				<td><textarea rows="5" cols="40"></textarea></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="確定回覆"></td>
 			</tr>
 			<tr>
 				<td></td>
 			</tr>
-			<tr>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-			</tr>
-
-
 
 		</table>
-
-
 	</form>
-
-
-
-
-
 
 </body>
 </html>

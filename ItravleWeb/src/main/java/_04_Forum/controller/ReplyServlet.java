@@ -25,6 +25,7 @@ public class ReplyServlet extends HttpServlet {
 	
 	String messageType = request.getParameter("messageType");
 	String content =request.getParameter("content");
+	String reply = request.getParameter("reply");
     
 	// 轉換資料
 	Map<String, String> error = new HashMap<String, String>();
@@ -43,7 +44,18 @@ public class ReplyServlet extends HttpServlet {
 	ForumService fs = new ForumService();
 	ForumVO forumVO = new ForumVO();
 	
-	
+//	if("reply".equals(reply)){
+//		request.getRequestDispatcher("/_04_Forum/member/Reply.jsp").forward(request, response);
+//		return;
+//	}
+	if (error != null && !error.isEmpty()) {
+		request.getRequestDispatcher("/_04_Forum/LookArticle.jsp").forward(
+				request, response);
+		return;
+	} else {
+		request.getRequestDispatcher("/_04_Forum/member/Reply.jsp")
+				.forward(request, response);
+	}	
 	
 	}
 

@@ -10,8 +10,8 @@
 <title></title>
 </head>
 <body>
-<form action="<c:url value="/_04_Forum/member/Reply.controller" />">
-<input type="button" value="回覆文章" name="reply">
+<form action="<c:url value="/_04_Forum/member/Reply.controller"/>" method="post">
+<input type="submit" value="回覆文章" name="reply">
 	<table border="1">
 
 		<tr>
