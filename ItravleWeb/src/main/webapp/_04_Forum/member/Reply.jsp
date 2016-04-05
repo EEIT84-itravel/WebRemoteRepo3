@@ -8,7 +8,7 @@
 <title>I-Travel討論區回覆文章</title>
 </head>
 <body>
-	<form action="<c:url value="/_04_Forum/member/Reply.controller"/>" method="post">
+	<form action="<c:url value="/_04_Forum/member/ReplyArticle.controller"/>" method="post">
 		<table>
 			<tr>
 				<td>回覆內容：</td>

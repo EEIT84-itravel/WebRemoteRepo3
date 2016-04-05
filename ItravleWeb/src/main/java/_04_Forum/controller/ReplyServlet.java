@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import _04_Forum.model.ForumService;
-import _04_Forum.model.ForumVO;
+import _02_TripAndJournal.model.MessageService;
+import _02_TripAndJournal.model.MessageVO;
 
 
 @WebServlet("/_04_Forum/member/Reply.controller")
 public class ReplyServlet extends HttpServlet {
 
-       
+    //回覆文章前驗證是否登入
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	request.setCharacterEncoding("UTF-8");
@@ -41,8 +41,8 @@ public class ReplyServlet extends HttpServlet {
 	}
 	
 	//呼叫model
-	ForumService fs = new ForumService();
-	ForumVO forumVO = new ForumVO();
+	MessageService ms = new MessageService();
+	MessageVO messageVO = new MessageVO();
 	
 //	if("reply".equals(reply)){
 //		request.getRequestDispatcher("/_04_Forum/member/Reply.jsp").forward(request, response);
