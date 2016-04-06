@@ -14,8 +14,9 @@
 
 
 <h3>Welcome ${user.firstName}</h3>
-<h3><a href="<c:url value="/_05_Member/login.jsp" />">Login</a></h3>
-<h3><a href="<c:url value="/_05_Member/logout.jsp" />">Logout</a></h3>
+<h3><a href="<c:url value="/_05_Member/Login.jsp" />">Login</a></h3>
+<h3><a href="<c:url value="/_05_Member/Logout.jsp" />">Logout</a></h3>
+<h3><a href="<c:url value="/_05_Member/Registered.jsp" />">註冊</a></h3>
 
 
 

@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 		
 		if(error!=null && !error.isEmpty()) {
 			request.getRequestDispatcher(
-					"/_05_Member/login.jsp").forward(request, response);
+					"/_05_Member/Login.jsp").forward(request, response);
 			return;
 		}
 		
@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 		if(bean==null) {
 			error.put("password", "登入失敗，請再次輸入ID/PWD");
 			request.getRequestDispatcher(
-					"/_05_Member/login.jsp").forward(request, response);
+					"/_05_Member/Login.jsp").forward(request, response);
 		} else {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", bean);
