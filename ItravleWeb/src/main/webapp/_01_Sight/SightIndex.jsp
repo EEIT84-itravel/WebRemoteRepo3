@@ -49,6 +49,7 @@ div {
 </head>
 <body>
 	<h5>首頁>看景點</h5>
+	<!-- 	進階搜尋 -->
 	<div>
 		<input type="button" value="進階搜尋"> <br>
 		<form action="<c:url value="/_01_Sight/SightIndex.controller" />">
@@ -83,6 +84,7 @@ div {
 			<input type="submit" />
 		</form>
 	</div>
+	<!-- 	熱門景點 -->
 	<h5>熱門景點</h5>
 	<c:forEach var="watchNum" items="${watchNum}" begin="0" end="3">
 
@@ -102,7 +104,7 @@ div {
 
 	</c:forEach>
 	<br>
-
+	<!-- 全部景點 -->
 	<c:forEach var="sightVO" items="${sightVO}">
 		<div id="tbl">
 			<p>No:${sightVO.sightId}</p>

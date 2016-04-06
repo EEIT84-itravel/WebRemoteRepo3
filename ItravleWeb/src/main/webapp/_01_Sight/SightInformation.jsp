@@ -21,6 +21,8 @@
 <!-- jQuery ui -->
 <script type="text/javascript"
 	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
 <script type="text/javascript">
 	$(function() {
 		$("#tabs").tabs({
@@ -28,12 +30,26 @@
 		});
 	});
 </script>
+
+<style>
+html, body {
+	height: 60%;
+	width: 60%;
+	margin: 0;
+	padding: 0;
+	margin: 0;
+}
+
+#map {
+	height: 100%;
+}
+</style>
+
 </head>
 <body>
 	<h1>景點資訊</h1>
 
 	<div>
-
 		<p>地名:${sightVO.sightName}</p>
 		<p>
 			類型:
@@ -59,8 +75,6 @@
 	</div>
 
 	<div id="tabs">
-	
-
 		<ul>
 			<li><a href="#tabs-1">相關行程</a></li>
 			<li><a href="#tabs-2">相關遊記</a></li>
@@ -77,5 +91,29 @@
 			<p>門票是不是漲價了</p>
 		</div>
 	</div>
+	<br>
+	<br>
+	<!-- map -->
+	<div id="map"></div>
+	<script>
+      function initMap() {
+        var myLatLng = {lat:${sightVO.latitude}, lng:${sightVO.longitude}};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 16,
+          center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: '${sightVO.sightName}'
+        });
+      }
+    </script>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU9JCqlrRPTLXt7fvy9ERvO2EU1QPcO_0&callback=initMap">
+    </script>
+	<!-- map end -->
 </body>
 </html>
