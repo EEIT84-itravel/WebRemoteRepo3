@@ -3,6 +3,7 @@ package _04_Forum.controller;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -12,22 +13,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import _02_TripAndJournal.model.MessageService;
+import _02_TripAndJournal.model.MessageVO;
 import _04_Forum.model.ForumService;
 import _04_Forum.model.ForumVO;
 
 @WebServlet("/_04_Forum/ShowArticle.controller")
 public class ShowArticleServlet extends HttpServlet {
 	
-	
-
 //	@Override
 //	public void init() throws ServletException {
 //	
 //		String article = this.getInitParameter("forumId");
 //		ServletContext application = this.getServletContext();
-//		String path = application.getRealPath(article);
-//		
-//		
+//		String path = application.getRealPath(article);	
 //	}
 
 	protected void doGet(HttpServletRequest request,
@@ -48,26 +47,13 @@ public class ShowArticleServlet extends HttpServlet {
 		// 呼叫Model
 				ForumService fs = new ForumService();
 				ForumVO forumVO = fs.selectOne(forumId);
-				if(forumVO != null) {
+				MessageService ms = new MessageService();
+				List<MessageVO> messageVO = ms.getForumMessage(forumId);
+				if(forumVO != null ) {					
 					request.setAttribute("forumVO", forumVO);	
+					request.setAttribute("messageVO", messageVO);
 				    request.getRequestDispatcher("/_04_Forum/LookArticle.jsp").forward(request, response);
 				}
-				
-				
-//				byte[] bytes = null;
-//				if (sightPicVO != null) {
-//					bytes = sightPicVO.getPic();
-//				} else {
-//					bytes = defaultPhoto;
-//				}
-//				OutputStream out = response.getOutputStream();
-//				if (bytes != null && bytes.length > 0) {
-//					response.setContentType("image/jpg");
-//					out.write(bytes);
-//					out.flush();
-//					out.close();			
-//				}
-
 	}
 
 	protected void doPost(HttpServletRequest request,
