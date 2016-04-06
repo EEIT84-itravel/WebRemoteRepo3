@@ -20,7 +20,7 @@
         <property name="referenceNo" type="java.lang.Integer">
             <column name="reference_no" />
         </property>
-        <property name="updateTime" type="java.sql.Date">
+        <property name="updateTime" type="java.sql.Timestamp" insert="false">
             <column name="update_time" />
         </property>
     </class>
