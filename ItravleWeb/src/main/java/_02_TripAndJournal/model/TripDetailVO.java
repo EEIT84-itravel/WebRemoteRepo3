@@ -1,12 +1,10 @@
 package _02_TripAndJournal.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
-public class TripDetailVO implements Serializable{
+public class TripDetailVO implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private Integer tdetailId;
 	private Integer tripId;
 	private Integer tripOrder;

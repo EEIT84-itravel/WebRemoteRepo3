@@ -17,6 +17,36 @@
 	pageContext.setAttribute("transForm", transForm);
 %>
 <title>ITravel-建立新行程</title>
+<!-- jQuery ui -->
+<link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
+<!-- jQuery -->
+<script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
+<!-- jQuery ui -->
+<script type="text/javascript" src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		//起始日期用jQuery UI
+		$('input[name="tripStartDate"]').datepicker({
+			appendText : "格式：YYYY-MM-DD",
+			dateFormat : "yy-mm-dd",			
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,			
+		}).attr("readonly", "readonly");
+		//結束日期用jQuery UI
+		$('input[name="tripEndDate"]').datepicker({
+			appendText : "格式：YYYY-MM-DD",
+			dateFormat : "yy-mm-dd",			
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+		}).attr("readonly", "readonly");
+		//選時間的要再加上其他自己寫的jQuery UI plugin
+		
+	});
+	
+</script>
 </head>
 <body>
 	<h3>建立新的行程</h3>
@@ -32,13 +62,13 @@
 			</tr>
 			<tr>
 				<td>旅行開始日期:</td>
-				<td><input type="date" id="tripStartDate" name="tripStartDate"
+				<td><input type="text" id="tripStartDate" name="tripStartDate"
 					value="${param.tripStartDate}"></td>
 				<td><span class="error">${error.tripStartDate}</span></td>
 			</tr>
 			<tr>
 				<td>旅行結束日期:</td>
-				<td><input type="date" id="tripEndDate" name="tripEndDate"
+				<td><input type="text" id="tripEndDate" name="tripEndDate"
 					value="${param.tripEndDate}"></td>
 				<td><span class="error">${error.tripEndDate}</span></td>
 			</tr>
@@ -69,14 +99,12 @@
 				<td>行程簡介:</td>
 				<td><textarea name="tripIntro" rows="4" cols="50">${param.tripIntro}</textarea></td>
 				<td><span class="error">${error.tripIntro}</span></td>
+			    
 			</tr>
 			<tr>
 				<td><input type="submit" value="開始排行程吧"></td>
 			</tr>
 		</table>
 	</form>
-
-
-
 </body>
 </html>

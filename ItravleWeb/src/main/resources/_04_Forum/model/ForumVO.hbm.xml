@@ -23,10 +23,10 @@
 		<property name="forumContent" type="java.lang.String">
 			<column name="forum_content" />
 		</property>
-		<property name="visitorNum" type="java.lang.Integer">
+		<property name="visitorNum" type="java.lang.Integer" insert="false">
 			<column name="visitor_num" />
 		</property>
-		<property name="replyNum" type="java.lang.Integer">
+		<property name="replyNum" type="java.lang.Integer" insert="false">
 			<column name="reply_num" />
 		</property>
 	</class>
