@@ -6,6 +6,14 @@ public class FriendVO implements Serializable {
 	private Integer friendNo;//編號
 	private Integer memberId;//會員編號
 	private Integer friendId;//好友會員編號
+	private Boolean isfriend;//是好友或黑名單
+	
+	public Boolean getIsfriend() {
+		return isfriend;
+	}
+	public void setIsfriend(Boolean isfriend) {
+		this.isfriend = isfriend;
+	}
 	public Integer getFriendNo() {
 		return friendNo;
 	}
@@ -27,7 +35,7 @@ public class FriendVO implements Serializable {
 	@Override
 	public String toString() {
 		return "FriendVO [friendNo=" + friendNo + ", memberId=" + memberId
-				+ ", friendId=" + friendId + "]";
+				+ ", friendId=" + friendId + ", isfriend=" + isfriend + "]";
 	}
-	
+
 }
