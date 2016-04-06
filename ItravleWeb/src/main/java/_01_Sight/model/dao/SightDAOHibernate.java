@@ -9,6 +9,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import _00_Misc.HibernateUtil_H4_Ver1;
+import _01_Sight.model.SightPicVO;
 import _01_Sight.model.SightVO;
 
 public class SightDAOHibernate {
@@ -55,11 +56,37 @@ public class SightDAOHibernate {
 		// boolean sightVOdelete = dao.delete(12);
 		// System.out.println("delete測試: " + sightVOdelete);
 
-		List<SightVO> sightVOs = dao.selectAll();
-		System.out.println("selectAll測試: " + sightVOs);
+		// List<SightVO> sightVOs = dao.selectAll();
+		// System.out.println("selectAll測試: " + sightVOs);
 	}
 
-	private static final String GET_ALL_WATCHNUM = "from SightVO order by watchNum desc";//新增(按瀏覽人次排列)
+	// 進階搜尋測試
+	private static final String SEARCH = "from SightVO where region_id=:region_id and county_id=:county_id and sight_type_id=:sight_type_id and ticket=:ticket and play_period=:play_period";
+
+	public List<SightVO> search(SightVO sightVOp) {
+		List<SightVO> sightVO = null;
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(SEARCH);
+			query.setParameter("region_id", sightVOp.getRegionId());
+			query.setParameter("county_id", sightVOp.getCountyId());
+			query.setParameter("sight_type_id", sightVOp.getSightTypeId());
+			query.setParameter("ticket", sightVOp.getTicket());
+			query.setParameter("play_period", sightVOp.getPlayPeriod());
+			sightVO = query.list();
+			session.getTransaction().commit();
+		} catch (HibernateException e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
+		return sightVO;
+	}
+
+	// 景點按瀏覽人次排列(首頁)
+	private static final String GET_ALL_WATCHNUM = "from SightVO order by watchNum desc";
+
 	public List<SightVO> selectByWatchNum() {
 		List<SightVO> sightVOs = null;
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
@@ -77,6 +104,7 @@ public class SightDAOHibernate {
 		return sightVOs;
 	}
 
+	// 景點資訊超連結
 	public SightVO findByPrimaryKey(Integer sightId) {
 		SightVO sightVO = null;
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
@@ -92,6 +120,7 @@ public class SightDAOHibernate {
 		return sightVO;
 	}
 
+	// 全部景點(首頁)
 	private static final String GET_ALL_STMT = "from SightVO order by sightId";
 
 	public List<SightVO> selectAll() {

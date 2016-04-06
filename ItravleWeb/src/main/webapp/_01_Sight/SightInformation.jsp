@@ -3,11 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="_00_Misc.model.*"%>
 <%@ page import="java.util.*"%>
-<%
-	CodeService service = new CodeService();
-	List<CodeVO> list = service.select("region");
-	pageContext.setAttribute("list", list);
-%>
+<%@ page import="_01_Sight.model.*"%>
+
+<jsp:useBean id="codeSvc" scope="page"
+	class="_00_Misc.model.CodeService" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,14 +32,32 @@
 <body>
 	<h1>景點資訊</h1>
 
-	<table border="1" width="300" height="300">
+	<div>
 
-	</table>
-	<select>
-		<c:forEach var="region" items="${list}">
-			<option value="${region.codeId}">${region.codeName}</option>
-		</c:forEach>
-	</select>
+		<p>地名:${sightVO.sightName}</p>
+		<p>
+			類型:
+			<c:forEach var="codeVO" items="${codeSvc.all}">
+				<c:if test="${codeVO.codeId==sightVO.sightTypeId}">
+								${codeVO.codeName}
+                             </c:if>
+			</c:forEach>
+		</p>
+		<p>門票:${sightVO.ticket}</p>
+		<p>營業時間:${openTime}-${closeTime}</p>
+		<p>建議停留時間:${sightVO.spendHour}</p>
+		<p>
+			建議旅行時段:
+			<c:forEach var="codeVO" items="${codeSvc.all}">
+				<c:if test="${codeVO.codeId==sightVO.playPeriod}">
+								${codeVO.codeName}
+                             </c:if>
+			</c:forEach>
+		</p>
+		<p>地址:${sightVO.addr}</p>
+		<p>交通方式:${sightVO.trans}</p>
+	</div>
+
 	<div id="tabs">
 	
 
