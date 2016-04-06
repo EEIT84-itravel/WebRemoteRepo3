@@ -33,11 +33,22 @@
 <!-- jQuery ui -->
 <script type="text/javascript" src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
 <script>
-	$(function() {
+	$(function() {		
 		//讓右邊景點可以被拖曳
+		var sightId;
+		var sightName;
+		var newIndex;
 		$(".sight").draggable({
-			helper : "clone" //只拖動複製的圖片，原始圖片保持不動
-		});
+ 			helper : "clone",	//複製一份
+ 			start: function( event, ui ) {
+ 				$("tr.sightId>td:first-child:last").each(function(){	//取得正在拖曳的物件的sightId
+ 					sightId =$(this).text();
+ 				});
+ 				$("tr.sightId>td:nth-child(3):last").each(function(){	//取得正在拖曳的物件的sightName
+ 					sightName =$(this).text(); 					
+ 				});
+ 			}
+		});		
 		//讓左邊行程可被放下
 		$(".day").droppable({
 			appendTo: "#day1",  //要黏到的目標				
@@ -45,13 +56,52 @@
 			activeClass: "ui-state-highlight",	//凸顯此區域是可以被放置的
 			drop : function(event, ui) {
 				$(this).find(".placeholder").remove();	//移除Add your items here
-				$("<table></table>").html( ui.draggable.html() ).appendTo(this);  //把拖曳到的物件以html格式寫到<table>
+				//放下的時候黏tr上去
+				$(".tripDetail").append('<tr><td class="tripDetailPic'+sightId+'"></td><td><span class="tripDetailSightId'+sightId+'"></span></td><td><span class="tripDetailSightName'+sightId+'"></span></td><td><input type="text" name="stayTime"></td><td><input type="text" name="notes"></td><td><input type="text" name="sightBudget" value="請在此輸入預算"></td><td><input type="hidden" name="tripId" value="${tripVO.tripId}"><P/></td><td><input type="submit" value="修改"></td></tr>');
+ 				//依照sightId抓到圖片，黏到剛剛的tr裡面
+				$(".tripDetailPic"+sightId).html('<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=' + sightId + '" />" width="80" height="60">');
+				//抓到sightId，黏到剛剛的tr裡面
+ 				$(".tripDetailSightId"+sightId).html(sightId);
+ 				//抓到sightName，黏到剛剛的tr裡面
+ 				$(".tripDetailSightName"+sightId).html(sightName); 				
 				ui.helper.draggable({
 					disabled : true
-				})				
+				});
+				$.post({
+					url:"<c:url value="/_02_TripAndJournal/member/WriteTrip.controller" />",
+					cache:false,
+					data:{
+						tripOrder:newIndex
+						//測試中
+					}
+					
+				})
 			}		
-		}).sortable({
-		      revert: true		      
+		});
+		
+		$(".tripDetail>tbody").sortable({
+			revert: true,
+			axis: 'y',	//只能延Y軸移動
+			start: function (event, ui) {
+				var start_pos = ui.item.index();		//被拖曳物件原本的順序(從0開始)
+				ui.item.data('start_pos', start_pos);	//把抓到的順序存到data裡
+			},
+			update: function (event, ui) {	            
+	            var oldIndex = ui.item.data('start_pos');	//取得被拖曳物件原本的順序(從0開始)
+	            newIndex = ui.item.index();				//新的順序(從0開始)
+	            console.log("oldIndex"+oldIndex);
+	            console.log("newIndex"+newIndex);
+	            $.ajax({	//利用ajax傳到後端?
+// 	                type: 'post',
+// 	                url: '/PeopleGroups/DropOrderItem',
+// 	                data: {
+// 	                    oldIndex: oldIndex + 1,
+// 	                    newIndex: newIndex + 1,
+// 	                    page: currPage,
+// 	                    pageSize: pageSize
+// 	                }
+	            });
+	        }
 	    });
 		// 建立右邊景點的分頁
 		$("#sightsTabs").tabs({
@@ -68,7 +118,7 @@
 		<!-- import共同的 -->
 	</nav>
 	<article>
-		<form action="" method="get">
+		<form action="" method="post">
 		<div id="left">
 			<table>
 				<tr>
@@ -79,7 +129,7 @@
 						<input type="button" value="預算一覽" name="budget">
 						<input type="button" value="下載旅遊書" name="download travel book">
 						<input type="button" value="旅伴" name="partner">
-						<input type="button" value="儲存" name="store">
+						<input type="submit" value="儲存" name="store">
 						<input type="button" value="發布" name="publish">
 					</td>
 				</tr>
@@ -100,16 +150,18 @@
 					<span><input type="button" value="顯示筆記" name="show notes"></span>
 					<span><input type="button" value="智慧調整" name="intelligent adjust"></span>
 				</div>	<!-- end div tripBut -->
-						
+				<button id="add_new">加一天</button>		
 				<div class="day">第一天
-      				<table class="placeholder"><tr><td>Add your items here</td></tr></table>
-   				</div>	<!-- end div day -->
-   				<div class="day">第二天
-      				<table class="placeholder"><tr><td>Add your items here</td></tr></table>
-   				</div>	<!-- end div day -->
-   				<div class="day">第三天
-      				<table class="placeholder"><tr><td>Add your items here</td></tr></table>
-   				</div>	<!-- end div day -->
+      				<table class="tripDetail">
+      				<thead>
+      					<tr><td>照片</td><td>景點id</td><td>景點名稱</td><td>停留時間</td><td>筆記</td><td>預算</td></tr>
+      					<tr class="placeholder"><td>請將景點拖曳到此區域</td></tr>
+      				</thead>
+					<tbody>
+					<!-- 拖過來的tripDetail長會在這裡 -->
+					</tbody>
+      				</table>     					
+   				</div>	<!-- end div day -->   				
 			</div>	<!-- end div 行程 -->
 		</div>	<!-- end div left -->
 		</form>		
@@ -133,10 +185,11 @@
 			<div>排序：評分最高/最多人收藏</div>			
 				<c:forEach var="sightVO" items="${sightVO}">
 				<table class="sight">
-				<tr>	
+				<tr class="sightId">	
+					<td>${sightVO.sightId}</td>
 					<td><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
 							 width="80" height="60">
-					</td>
+					</td>					
 					<td>${sightVO.sightName}</td>
 					<td>建議旅行時段:
 						<c:forEach var="codeVO" items="${codeSvc.all}">
@@ -150,18 +203,18 @@
 					<td>最愛</td>					
 				</tr>
 				</table>
-				<form action="<c:url value="/_02_TripAndJournal/member/WriteTrip.controller" />" method="post">
-					<!-- 下面的隱藏欄位都會送到後端 -->					
-					<input type="hidden" name="tripId" value="${tripVO.tripId}"><P/>
-					<input type="hidden" name="tripOrder" value=1><P/>  <!-- 先寫死 -->
-					<input type="hidden" name="stayTime" value="${sightVO.spendHour}"><P/>
-					<input type="hidden" name="whichDay" value=1><P/>  <!-- 先寫死 -->	
-					<input type="hidden" name="referenceType" value="type_id01"><P/>
-					<input type="hidden" name="sightId" value="${sightVO.sightId}"><p/>					
-					<input type="hidden" name="notes" value="test notes"><p/>  <!-- 先寫死 -->						
-					<input type="hidden" name="sightBudget" value=100.0><p/>  <!-- 先寫死 -->						
-					<input type="submit" value="加入本次行程">
-					</form>
+<%-- 				<form action="<c:url value="/_02_TripAndJournal/member/WriteTrip.controller" />" method="post"> --%>
+<!-- 					下面的隱藏欄位都會送到後端					 -->
+<%-- 					<input type="hidden" name="tripId" value="${tripVO.tripId}"><P/> --%>
+<!-- 					<input type="hidden" name="tripOrder" value=1><P/>  先寫死 -->
+<%-- 					<input type="hidden" name="stayTime" value="${sightVO.spendHour}"><P/> --%>
+<!-- 					<input type="hidden" name="whichDay" value=1><P/>  先寫死	 -->
+<!-- 					<input type="hidden" name="referenceType" value="type_id01"><P/> -->
+<%-- 					<input type="hidden" name="sightId" value="${sightVO.sightId}"><p/>					 --%>
+<!-- 					<input type="hidden" name="notes" value="test notes"><p/>  先寫死						 -->
+<!-- 					<input type="hidden" name="sightBudget" value=100.0><p/>  先寫死						 -->
+<!-- 					<input type="submit" value="加入本次行程"> -->
+<!-- 					</form> -->
 				</c:forEach>
 			</div>	<!-- end div tabs-1 -->
 			</div>	<!-- end div sightsTabs -->										
