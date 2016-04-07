@@ -41,8 +41,7 @@
 				<tbody>
 					<c:forEach var="forumVO" items="${forumVO}">
 						<tr>
-							<c:set value="select" target="${forumVO.forumTopic}"
-								var="forumAction" />
+							
 							<td>${forumVO.forumTypeId}</td>
 							<td><a
 								href="<c:url value="/_04_Forum/ShowArticle.controller?forumId=${forumVO.forumId}" />">${forumVO.forumTopic}</a></td>
