@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import _02_TripAndJournal.model.TripDetailService;
 import _02_TripAndJournal.model.TripDetailVO;
 
+//本servlet檔名取錯，報廢中
 @WebServlet("/_02_TripAndJournal/member/WriteTrip.controller")
 public class WriteTripServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,10 +27,10 @@ public class WriteTripServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {		
-
+			HttpServletResponse response) throws ServletException, IOException {	
+		
 		// 接收HTML Form資料
-		String temp1 = request.getParameter("tripId");
+		String temp1 = request.getParameter("tripId");		
 		String temp2 = request.getParameter("tripOrder");
 		String temp3 = request.getParameter("stayTime");
 		String temp4 = request.getParameter("whichDay");

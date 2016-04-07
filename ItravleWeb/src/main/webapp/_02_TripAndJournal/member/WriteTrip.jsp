@@ -37,6 +37,7 @@
 		//讓右邊景點可以被拖曳
 		var sightId;
 		var sightName;
+		var spendHour;
 		var newIndex;
 		$(".sight").draggable({
  			helper : "clone",	//複製一份
@@ -47,6 +48,9 @@
  				$("tr.sightId>td:nth-child(3):last").each(function(){	//取得正在拖曳的物件的sightName
  					sightName =$(this).text(); 					
  				});
+ 				$("tr.sightId>td:nth-child(6):last").each(function(){	//取得正在拖曳的物件的spendHour
+ 					spendHour =$(this).text(); 					
+ 				});
  			}
 		});		
 		//讓左邊行程可被放下
@@ -56,8 +60,8 @@
 			activeClass: "ui-state-highlight",	//凸顯此區域是可以被放置的
 			drop : function(event, ui) {
 				$(this).find(".placeholder").remove();	//移除Add your items here
-				//放下的時候黏tr上去
-				$(".tripDetail").append('<tr><td class="tripDetailPic'+sightId+'"></td><td><span class="tripDetailSightId'+sightId+'"></span></td><td><span class="tripDetailSightName'+sightId+'"></span></td><td><input type="text" name="stayTime"></td><td><input type="text" name="notes"></td><td><input type="text" name="sightBudget" value="請在此輸入預算"></td><td><input type="hidden" name="tripId" value="${tripVO.tripId}"><P/></td><td><input type="submit" value="修改"></td></tr>');
+				//放下的時候黏form上去，一個tirpDetail是一個form				
+				$(".tripDetail").append('<form action="<c:url value="/_02_TripAndJournal/member/TripDetail.controller" />" method="post"><table><tr><td class="tripDetailPic'+sightId+'"></td><td><span class="tripDetailSightId'+sightId+'"></span></td><td><span class="tripDetailSightName'+sightId+'"></span></td><td><input type="hidden" name="sightId" value="'+sightId+'"/></td><td><input type="text" name="stayTime" value="' + spendHour + '" /></td><td><input type="text" name="notes" placeholder="請在此輸入筆記" /></td><td><input type="text" name="sightBudget" placeholder="請在此輸入預算" /></td><td><input type="hidden" name="tripId" value="${tripVO.tripId}" /><P/></td><td><input type="hidden" name="tripOrder" value=1 /><P/></td><td><input type="hidden" name="whichDay" value=1 /><P/></td><td><input type="hidden" name="referenceType" value="type_id01" /><P/></td><td><input type="submit" value="修改" /></td></tr></table></form>');
  				//依照sightId抓到圖片，黏到剛剛的tr裡面
 				$(".tripDetailPic"+sightId).html('<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=' + sightId + '" />" width="80" height="60">');
 				//抓到sightId，黏到剛剛的tr裡面
@@ -67,19 +71,11 @@
 				ui.helper.draggable({
 					disabled : true
 				});
-				$.post({
-					url:"<c:url value="/_02_TripAndJournal/member/WriteTrip.controller" />",
-					cache:false,
-					data:{
-						tripOrder:newIndex
-						//測試中
-					}
-					
-				})
 			}		
 		});
-		
-		$(".tripDetail>tbody").sortable({
+		//讓tripDetail可排序
+// 		$(".tripDetail>tbody").sortable({
+		$(".tripDetail").sortable({
 			revert: true,
 			axis: 'y',	//只能延Y軸移動
 			start: function (event, ui) {
@@ -152,15 +148,9 @@
 				</div>	<!-- end div tripBut -->
 				<button id="add_new">加一天</button>		
 				<div class="day">第一天
-      				<table class="tripDetail">
-      				<thead>
-      					<tr><td>照片</td><td>景點id</td><td>景點名稱</td><td>停留時間</td><td>筆記</td><td>預算</td></tr>
-      					<tr class="placeholder"><td>請將景點拖曳到此區域</td></tr>
-      				</thead>
-					<tbody>
-					<!-- 拖過來的tripDetail長會在這裡 -->
-					</tbody>
-      				</table>     					
+					<div class="tripDetail">
+						<!-- 拖過來的tripDetail長會在這裡 -->					
+					</div>
    				</div>	<!-- end div day -->   				
 			</div>	<!-- end div 行程 -->
 		</div>	<!-- end div left -->
@@ -199,22 +189,11 @@
 						</c:forEach>
 					</td>
 					<td>${sightVO.score}分</td>
+ 					<td hidden="true">${sightVO.spendHour}</td>	<%-- 給jQuery抓每個景點預設的建議停留時間 --%>
 					<td>評論</td>
 					<td>最愛</td>					
 				</tr>
 				</table>
-<%-- 				<form action="<c:url value="/_02_TripAndJournal/member/WriteTrip.controller" />" method="post"> --%>
-<!-- 					下面的隱藏欄位都會送到後端					 -->
-<%-- 					<input type="hidden" name="tripId" value="${tripVO.tripId}"><P/> --%>
-<!-- 					<input type="hidden" name="tripOrder" value=1><P/>  先寫死 -->
-<%-- 					<input type="hidden" name="stayTime" value="${sightVO.spendHour}"><P/> --%>
-<!-- 					<input type="hidden" name="whichDay" value=1><P/>  先寫死	 -->
-<!-- 					<input type="hidden" name="referenceType" value="type_id01"><P/> -->
-<%-- 					<input type="hidden" name="sightId" value="${sightVO.sightId}"><p/>					 --%>
-<!-- 					<input type="hidden" name="notes" value="test notes"><p/>  先寫死						 -->
-<!-- 					<input type="hidden" name="sightBudget" value=100.0><p/>  先寫死						 -->
-<!-- 					<input type="submit" value="加入本次行程"> -->
-<!-- 					</form> -->
 				</c:forEach>
 			</div>	<!-- end div tabs-1 -->
 			</div>	<!-- end div sightsTabs -->										
