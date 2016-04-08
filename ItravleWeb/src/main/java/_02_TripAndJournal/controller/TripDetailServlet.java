@@ -5,6 +5,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -115,13 +116,27 @@ public class TripDetailServlet extends HttpServlet {
 		tripDetailVO.setSightBudget(sightBudget);
 		System.out.println(tripDetailVO);
 
+		
 		session = request.getSession(false);
-		if (session != null) {
+		if (session != null) {			
 			if (tripDetailCart != null) {
-				tripDetailCart.add(tripDetailVO);
-				System.out.println(tripDetailCart);
-				session.setAttribute("tripDetailCart", tripDetailCart);
-				System.out.println("tripDetailCart!=null");
+				// 檢查這個VO是否存在
+				boolean flag = true;
+				Iterator<TripDetailVO> it = tripDetailCart.iterator();
+				while (it.hasNext()) {
+					TripDetailVO tripDetailVO2 = it.next();
+					int tripOrder2 = tripDetailVO2.getTripOrder();
+					if (tripOrder == tripOrder2) {
+						System.out.println("tripOrder一樣");
+						flag = false;
+						tripDetailCart.remove(tripDetailVO2);
+						break;
+					}
+				}
+					tripDetailCart.add(tripDetailVO);
+					System.out.println(tripDetailCart);
+					session.setAttribute("tripDetailCart", tripDetailCart);
+					System.out.println("tripDetailCart!=null");
 			} else {
 				// 建cart
 				tripDetailCart = new ArrayList<TripDetailVO>();
