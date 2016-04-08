@@ -8,31 +8,43 @@
 	List<CodeVO> codeVO = codeService.select("region");
 	pageContext.setAttribute("region", codeVO);
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>進階搜尋</title>
 </head>
 <body>
-
-	<form action="">
-		<table>
-			<tr>
-				<td>地區:<select></select>
-				</td>
-				<td>縣市:<select></select>
-				</td>
-				<td>類型:<select></select>
-				</td>
-				<td>消費金額:<select></select>
-				</td>
-				<td>建議遊玩時間:<select></select>
-				</td>
-				<td>開放時間:<select></select>
-				</td>
-			</tr>
-		</table>
-	</form>
+	<header>
+		<!-- import共同的 -->
+	</header>
+	<!-- import共同的 -->
+	<nav class="navbar navbar-inverse" role="navigation">
+		<!-- import共同的 -->
+		<jsp:include page="/_00_Misc/top.jsp" />
+	</nav>
+	<article>
+		<form action="">
+			<table>
+				<tr>
+					<td>地區:<select></select>
+					</td>
+					<td>縣市:<select></select>
+					</td>
+					<td>類型:<select></select>
+					</td>
+					<td>消費金額:<select></select>
+					</td>
+					<td>建議遊玩時間:<select></select>
+					</td>
+					<td>開放時間:<select></select>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</article>
+	<footer>
+		<!-- import共同的 -->
+	</footer>
 </body>
 </html>

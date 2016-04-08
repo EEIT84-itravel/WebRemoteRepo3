@@ -48,19 +48,23 @@
 
 	});
 </script>
+<style type="text/css">
+article{
+  margin: 20px;
+}
+</style>
 </head>
 <body>
 	<header>
 		<!-- import共同的 -->
 	</header>
-	<nav>
+	<nav class="navbar navbar-inverse" role="navigation">
 		<!-- import共同的 -->
+		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article>
 		<h3>建立新的行程</h3>
-		<form
-			action="<c:url value="/_02_TripAndJournal/member/NewTrip.controller" />"
-			method="post">
+		<form action="<c:url value="/_02_TripAndJournal/member/NewTrip.controller" />" method="post">
 			<table>
 				<tr>
 					<td>行程名稱:</td>

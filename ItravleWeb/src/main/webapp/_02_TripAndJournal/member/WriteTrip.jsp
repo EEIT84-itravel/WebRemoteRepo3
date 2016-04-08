@@ -66,8 +66,10 @@
 	<header>
 		<!-- import共同的 -->
 	</header>
-	<nav>
 		<!-- import共同的 -->
+	<nav class="navbar navbar-inverse" role="navigation">
+		<!-- import共同的 -->
+		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article>
 		<form action="" method="get">
@@ -175,7 +177,7 @@
 								<td>評論</td>
 								<td>最愛</td>
 								<!-- 景點彈出視窗功能 -->
-								<td><button id="sightDetail" onclick="window.open('<c:url value="/ShowSightDetail.controller?sightId=${sightVO.sightId}" />','sightDetail','height=500,width=500,toolbar=no,titlebar=no,status=no,left=450,top=350');">詳情</button></td>
+								<td><button class="label label-primary" onclick="window.open('<c:url value="/ShowSightDetail.controller?sightId=${sightVO.sightId}" />','sightDetail','height=500,width=500,toolbar=no,titlebar=no,status=no,left=450,top=350');">詳情</button></td>
 							</tr>
 						</table>
 						<form action="<c:url value="/_02_TripAndJournal/member/WriteTrip.controller" />" method="post">

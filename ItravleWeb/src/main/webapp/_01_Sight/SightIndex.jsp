@@ -35,7 +35,7 @@
 	src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
 
 <style type="text/css">
-div {
+.SearchSight {
 	height: 400px; /* 高度 120 */
 	width: 400px; /* 寬度 120*/
 	/*background-color: #6699FF;  背景色 藍色*/
@@ -48,89 +48,102 @@ div {
 
 </head>
 <body>
-	<h5>首頁>看景點</h5>
-	<div>
-		<input type="button" value="進階搜尋"> <br>
-		<form action="<c:url value="/_01_Sight/SightIndex.controller" />">
-			<table>
-				<tr>
-					<td>地區:<select name="region"><c:forEach var="region"
-								items="${region}">
-								<option value="${region.codeId}">${region.codeName}</option>
-							</c:forEach></select>
-					</td>
-					<td>縣市:<select name="county"><c:forEach var="region"
-								items="${county}">
-								<option value="${region.codeId}">${region.codeName}</option>
-							</c:forEach></select>
-					</td>
-					<td>類型:<select name="sightType"><c:forEach
-								var="region" items="${sight_type}">
-								<option value="${region.codeId}">${region.codeName}</option>
-							</c:forEach></select>
-					</td>
-					<td>消費金額:<select name="money">
-							<option value="free">免費</option>
-							<option value="nofree">付費</option>
-					</select>
-					<td>開放時間:<select name="sightTime"><c:forEach
-								var="region" items="${sight_time}">
-								<option value="${region.codeId}">${region.codeName}</option>
-							</c:forEach></select>
-					</td>
-				</tr>
-			</table>
-			<input type="submit" />
-		</form>
-	</div>
-	<h5>熱門景點</h5>
-	<c:forEach var="watchNum" items="${watchNum}" begin="0" end="3">
-
-		<div id="tbl">
-			<p>No:</p>
-			<img alt=""
-				src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${watchNum.sightId}" />"
-				width="240" height="180">
-			<p>
-				<a
-					href="<c:url value="/_01_Sight/Sight.controller?sightId=${watchNum.sightId}" />">名稱:${watchNum.sightName}</a>
-			</p>
-			<p>類型:</p>
-			<p>縣市:</p>
-			<p>${watchNum.watchNum}人瀏覽,${watchNum.collectNum}人收藏</p>
+	<header>
+		<!-- import共同的 -->
+	</header>
+	<!-- import共同的 -->
+	<nav class="navbar navbar-inverse" role="navigation">
+		<!-- import共同的 -->
+		<jsp:include page="/_00_Misc/top.jsp" />
+	</nav>
+	<article>
+		<h5>首頁>看景點</h5>
+		<div class="SearchSight">
+			<input type="button" value="進階搜尋"> <br>
+			<form action="<c:url value="/_01_Sight/SightIndex.controller" />">
+				<table>
+					<tr>
+						<td>地區:<select name="region"><c:forEach var="region"
+									items="${region}">
+									<option value="${region.codeId}">${region.codeName}</option>
+								</c:forEach></select>
+						</td>
+						<td>縣市:<select name="county"><c:forEach var="region"
+									items="${county}">
+									<option value="${region.codeId}">${region.codeName}</option>
+								</c:forEach></select>
+						</td>
+						<td>類型:<select name="sightType"><c:forEach
+									var="region" items="${sight_type}">
+									<option value="${region.codeId}">${region.codeName}</option>
+								</c:forEach></select>
+						</td>
+						<td>消費金額:<select name="money">
+								<option value="free">免費</option>
+								<option value="nofree">付費</option>
+						</select>
+						<td>開放時間:<select name="sightTime"><c:forEach
+									var="region" items="${sight_time}">
+									<option value="${region.codeId}">${region.codeName}</option>
+								</c:forEach></select>
+						</td>
+					</tr>
+				</table>
+				<input type="submit" />
+			</form>
 		</div>
+		<h5>熱門景點</h5>
+		<c:forEach var="watchNum" items="${watchNum}" begin="0" end="3">
 
-	</c:forEach>
-	<br>
+			<div id="tbl">
+				<p>No:</p>
+				<img alt=""
+					src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${watchNum.sightId}" />"
+					width="240" height="180">
+				<p>
+					<a
+						href="<c:url value="/_01_Sight/Sight.controller?sightId=${watchNum.sightId}" />">名稱:${watchNum.sightName}</a>
+				</p>
+				<p>類型:</p>
+				<p>縣市:</p>
+				<p>${watchNum.watchNum}人瀏覽,${watchNum.collectNum}人收藏</p>
+			</div>
 
-	<c:forEach var="sightVO" items="${sightVO}">
-		<div id="tbl">
-			<p>No:${sightVO.sightId}</p>
-			<img alt=""
-				src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
-				width="240" height="180">
-			<p>
-				<a
-					href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />">名稱:${sightVO.sightName}</a>
-			</p>
-			<p>
-				類型:
-				<c:forEach var="codeVO" items="${codeSvc.all}">
-					<c:if test="${codeVO.codeId==sightVO.sightTypeId}">
+		</c:forEach>
+		<br>
+
+		<c:forEach var="sightVO" items="${sightVO}">
+			<div id="tbl">
+				<p>No:${sightVO.sightId}</p>
+				<img alt=""
+					src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
+					width="240" height="180">
+				<p>
+					<a
+						href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />">名稱:${sightVO.sightName}</a>
+				</p>
+				<p>
+					類型:
+					<c:forEach var="codeVO" items="${codeSvc.all}">
+						<c:if test="${codeVO.codeId==sightVO.sightTypeId}">
 								${codeVO.codeName}
                              </c:if>
-				</c:forEach>
-			</p>
-			<p>
-				縣市:
-				<c:forEach var="codeVO" items="${codeSvc.all}">
-					<c:if test="${codeVO.codeId==sightVO.countyId}">
+					</c:forEach>
+				</p>
+				<p>
+					縣市:
+					<c:forEach var="codeVO" items="${codeSvc.all}">
+						<c:if test="${codeVO.codeId==sightVO.countyId}">
 								${codeVO.codeName}
                              </c:if>
-				</c:forEach>
-			</p>
-			<p>${sightVO.watchNum}人瀏覽,${sightVO.collectNum}人收藏</p>
-		</div>
-	</c:forEach>
+					</c:forEach>
+				</p>
+				<p>${sightVO.watchNum}人瀏覽,${sightVO.collectNum}人收藏</p>
+			</div>
+		</c:forEach>
+	</article>
+	<footer>
+		<!-- import共同的 -->
+	</footer>
 </body>
 </html>
