@@ -9,6 +9,7 @@ import org.hibernate.Session;
 
 import _00_Misc.HibernateUtil_H4_Ver1;
 import _02_TripAndJournal.model.JournalVO;
+import _02_TripAndJournal.model.MessageVO;
 import _04_Forum.model.ForumVO;
 
 public class ForumDAOHibernate {
@@ -17,14 +18,14 @@ public class ForumDAOHibernate {
 
 		ForumDAOHibernate dao = new ForumDAOHibernate();
 		// select
-		// ForumVO res = dao.select(1);
-		// System.out.println(res);
+		 ForumVO res = dao.select(1);
+		 System.out.println(res);
 
 		// selectAll
-		 List<ForumVO> codes = dao.select();
-		 for (ForumVO detail : codes) {
-		 System.out.println(detail);
-		 }
+//		 List<ForumVO> codes = dao.select();
+//		 for (ForumVO detail : codes) {
+//		 System.out.println(detail);
+//		 }
 
 		// update
 		// java.sql.Timestamp timestamp = new Timestamp( new Date().getTime());
@@ -44,8 +45,27 @@ public class ForumDAOHibernate {
 		// System.out.println(forumVO);
 
 		// delete
-		System.out.println(dao.delete(6));
+	
 	}
+	//抓討論區之類型分類
+		private static final String GET_ALL_FORUMTYPE = "from ForumVO where forumTypeId=:forumTypeId";
+		public List<ForumVO> getForumType(String forumTypeId) {
+			List<ForumVO> list = null;
+			Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+					.getCurrentSession();
+			try {
+				session.beginTransaction();
+				Query query = session.createQuery(GET_ALL_FORUMTYPE);
+				query.setParameter("forumTypeId", forumTypeId);
+				list = query.list();
+				session.getTransaction().commit();
+			} catch (RuntimeException ex) {
+				session.getTransaction().rollback();
+				throw ex;
+			}
+			return list;
+		}
+	
 
 	public ForumVO insert(ForumVO forumVO) {
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
@@ -92,7 +112,7 @@ public class ForumDAOHibernate {
 		return forumVO;
 	}
 
-	private static final String GET_ALL_STMT = "from ForumVO order by forumId";
+	private static final String GET_ALL_STMT = "from ForumVO order by forumTime desc";
 
 	public List<ForumVO> select() {
 		List<ForumVO> list = null;

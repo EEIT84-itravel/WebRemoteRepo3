@@ -4,7 +4,7 @@
 <%@ page import="_02_TripAndJournal.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="_05_Member.model.*"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -20,14 +20,26 @@
 <title>從我的遊記選取</title>
 </head>
 <body>
-	<form
-		action="<c:url value="/_02_TripAndJournal/member/FromTripToJournal.controller"/>"
-		method="post">
-		<select name="tripId">
-			<c:forEach var="tripVO" items="${tripVO}">
-				<option value="${tripVO.tripId}">${tripVO.tripName}</option>
-			</c:forEach>
-		</select> <input type="submit">
-	</form>
+	<header>
+		<!-- import共同的 -->
+	</header>
+	<nav class="navbar navbar-inverse" role="navigation">
+		<!-- import共同的 -->
+		<jsp:include page="/_00_Misc/top.jsp" />
+	</nav>
+	<article>
+		<form
+			action="<c:url value="/_02_TripAndJournal/member/FromTripToJournal.controller"/>"
+			method="post">
+			<select name="tripId">
+				<c:forEach var="tripVO" items="${tripVO}">
+					<option value="${tripVO.tripId}">${tripVO.tripName}</option>
+				</c:forEach>
+			</select> <input type="submit">
+		</form>
+	</article>
+	<footer>
+		<!-- import共同的 -->
+	</footer>
 </body>
 </html>

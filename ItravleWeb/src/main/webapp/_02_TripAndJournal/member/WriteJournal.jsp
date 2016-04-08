@@ -1,38 +1,68 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ page import="_00_Misc.model.CodeVO"%>
+<%@ page import="_00_Misc.model.CodeService"%>
+<%@ page import="java.util.*"%>
+<%
+	CodeService service = new CodeService();
+	List<CodeVO> region = service.select("region");
+	pageContext.setAttribute("region", region);
+%>
+<script type="text/javascript"
+	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
 <title>ITravel-建立新遊記</title>
 </head>
 <body>
-	<c:if test="${not empty journalVO}">
-		<table>
-			<thead>
+	<header>
+		<!-- import共同的 -->
+	</header>
+	<nav class="navbar navbar-inverse" role="navigation">
+		<!-- import共同的 -->
+		<jsp:include page="/_00_Misc/top.jsp" />
+	</nav>
+	<article>
+		<h3>撰寫新遊記</h3>
+		<form>
+			<table>
 				<tr>
-					<th>journalId</th>
-					<th>memberId</th>
-					<th>journalName</th>
-					<th>beginTime</th>
-					<th>endTime</th>
-					<th>regionId</th>
-					<th>journalIntro</th>
+					<td>遊記名稱:</td>
+					<td colspan="2"><input type="text" name="journalName"
+						value="${journalVO.journalName}"></td>
+					<td>地區:</td>
+					<td><select name="regionId">
+							<c:forEach var="region" items="${region}">
+								<option value="${region.codeId}">${region.codeName}</option>
+							</c:forEach>
+					</select></td>
 				</tr>
-			</thead>
-			<tbody>
 				<tr>
-					<td>${journalVO.journalId}</td>
-					<td>${journalVO.memberId}</td>
-					<td>${journalVO.journalName}</td>
-					<td>${journalVO.beginTime}</td>
-					<td>${journalVO.endTime}</td>
-					<td>${journalVO.regionId}</td>
-					<td>${journalVO.journalIntro}</td>
+					<td>旅行日期-</td>
+					<td>開始日期:</td>
+					<td><input name="beginTime" type="date"
+						placeholder="${journalVO.beginTime}"></td>
+					<td>結束日期:</td>
+					<td><input name="endTime" type="date"
+						placeholder="${journalVO.endTime}"></td>
 				</tr>
-			</tbody>
-		</table>
-	</c:if>
+				<tr>
+					<td>遊記簡介</td>
+					<td colspan="4"><textarea name="journalIntro" rows="4"
+							cols="50">${journalVO.journalIntro}</textarea></td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="確定送出"></td>
+					<td><input type="button" value="clear"></td>
+				</tr>
+			</table>
+		</form>
+	</article>
+	<footer>
+		<!-- import共同的 -->
+	</footer>
 </body>
 </html>

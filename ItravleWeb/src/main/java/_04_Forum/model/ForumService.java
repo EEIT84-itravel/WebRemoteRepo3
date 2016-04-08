@@ -7,7 +7,7 @@ import _04_Forum.model.dao.ForumDAOHibernate;
 
 public class ForumService {
 
-	private ForumDAOHibernate fDao = new ForumDAOHibernate();
+	private ForumDAOHibernate fDao = new ForumDAOHibernate();	
 
 	 public List<ForumVO> select() {
 	 List<ForumVO> result = null;
@@ -17,6 +17,10 @@ public class ForumService {
 	 
 	 public ForumVO selectOne(Integer forumId){
 		 return fDao.select(forumId);
+	 }
+	 
+	 public List<ForumVO> getForumType(String forumTypeId) {
+		return fDao.getForumType(forumTypeId);	 
 	 }
 //	public List<ForumVO> select(ForumVO vo) {
 //		List<ForumVO> result = null;

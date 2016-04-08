@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import _02_TripAndJournal.model.MessageService;
 import _02_TripAndJournal.model.MessageVO;
@@ -23,31 +24,36 @@ public class ReplyServlet extends HttpServlet {
 	request.setCharacterEncoding("UTF-8");
 	// 接收資料
 	
-	String messageType = request.getParameter("messageType");
-	String content =request.getParameter("content");
-	String reply = request.getParameter("reply");
-    
+	String temp1 = request.getParameter("forumId");
+	
 	// 轉換資料
 	Map<String, String> error = new HashMap<String, String>();
 	request.setAttribute("error", error);
 	
-	//驗證
-	if(content == null || content.trim().length() == 0){
-		error.put("content","請輸入您要回覆的內容" );
+	int forumId = 0;
+	if(temp1 != null || temp1.trim().length() != 0 ){
+		try {
+			forumId = Integer.parseInt(temp1);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
 	}
-	if( error != null && !error.isEmpty()){
-		request.getRequestDispatcher("/_04_Forum/member/Reply.jsp").forward(request, response);
-		return;
-	}
+	//把抓到的forumId存入Session
+	HttpSession session = request.getSession();
+	session.setAttribute("referenceNo", forumId);
 	
+	//驗證
+
+//	if( error != null && !error.isEmpty()){
+//		request.getRequestDispatcher("/_04_Forum/member/Reply.jsp").forward(request, response);
+//		return;
+//	}
+//	
 	//呼叫model
 	MessageService ms = new MessageService();
 	MessageVO messageVO = new MessageVO();
 	
-//	if("reply".equals(reply)){
-//		request.getRequestDispatcher("/_04_Forum/member/Reply.jsp").forward(request, response);
-//		return;
-//	}
+
 	if (error != null && !error.isEmpty()) {
 		request.getRequestDispatcher("/_04_Forum/LookArticle.jsp").forward(
 				request, response);

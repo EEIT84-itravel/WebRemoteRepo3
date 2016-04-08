@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 外接程式碼 -->
 <%@ page import="_00_Misc.model.*"%>
 <%@ page import="_04_Forum.model.*"%>
 <%@ page import="java.util.*"%>
@@ -15,46 +16,51 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
 </style>
-<link rel="stylesheet" type="text/css" href="../css/_04_Forum/Forum.css" />
-<script type="text/javascript" src="">
-	
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_04_Forum/Forum.css"/>" />
+<link rel="stylesheet" type="text/css" href="../css/_04_Forum/datatable.css" />
+<link rel="stylesheet" type="text/css" href="../jquery-ui-1.11.4.custom/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.css"/>
+ 
+<script type="text/javascript" src="../js/jquery-2.2.1.min.js"></script>
+<script type="text/javascript" src="../jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+//DataTable設定
+var opt={
+	"sDom": '<"top">tf<"bottom"p><"clear">',	
+	"oLanguage":{"sProcessing":"處理中...",
+    "sLengthMenu":"顯示 _MENU_ 項結果",
+    "sZeroRecords":"沒有匹配結果",
+    "sInfo":"顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+    "sInfoEmpty":"顯示第 0 至 0 項結果，共 0 項",
+    "sInfoFiltered":"(從 _MAX_ 項結果過濾)",
+    "sSearch":"關鍵字搜尋:",
+    "oPaginate":{"sFirst":"首頁",
+                         "sPrevious":"上一頁",
+                         "sNext":"下一頁",
+                         "sLast":"最末頁"}
+    }
+};
+$(document).ready(function(){
+	$("#forum").DataTable(opt);
+})
+
 </script>
 <title>ITravel討論區</title>
 </head>
 <body>
-		<form action="<c:url value="/_04_Forum/Forum.controller"/>"	method="post">
-
+	<header>
+		<!-- import共同的 -->
+	</header>
+	<nav class="navbar navbar-inverse" role="navigation">
+		<!-- import共同的 -->
+		<jsp:include page="/_00_Misc/top.jsp" />
+	</nav>
+	<article>
+	<form action="<c:url value="/_04_Forum/Forum.controller"/>"
+		method="post">
 		<div id="header">
-			<div>
-				<table id="t1">
-					<tr id="tr1">
-						<td><a href="">全部</a>&nbsp;&nbsp;</td>
-						<td><a href="">行程</a>&nbsp;&nbsp;</td>
-						<td><a href="">遊記</a>&nbsp;&nbsp;</td>
-						<td><a href="">住宿</a>&nbsp;&nbsp;</td>
-						<td><a href="">交通</a>&nbsp;&nbsp;</td>
-					</tr>
-					<tr>
-						<td><a href="">飲食</a>&nbsp;&nbsp;</td>
-						<td><a href="">景點</a>&nbsp;&nbsp;</td>
-						<td><a href="">金錢</a>&nbsp;&nbsp;</td>
-						<td><a href="">消費</a>&nbsp;&nbsp;</td>
-						<td><a href="">其他</a>&nbsp;&nbsp;</td>
-					</tr>
-				</table>
-			</div>
-			<div id="d1">
-				排序方式<br> <select>
-					<option value="time">時間</option>
-					<option value="view">瀏覽數</option>
-				</select>
-			</div>
-			<div id="d2">
-				關鍵字搜尋<br> <input type="text" value="請輸入關鍵字" />
-			</div>
-			<div id="d3">
-				<input type="submit" name="forumAction" value="發表文章" />
-			</div>
+			<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
 			<table id="forum" border="1">
 				<thead>
 					<tr id="forumTitle">
@@ -66,22 +72,38 @@
 						<th>最後發表</th>
 					</tr>
 				</thead>
-				<tbody >
+				<tbody>
+				<c:if test="${empty forumVO1}">
 					<c:forEach var="forumVO" items="${forumVO}">
-						<tr>
-					<c:set value="select" target="${forumVO.forumTopic}" var="forumAction" />
-                            <td>${forumVO.forumTypeId}</td>                        
-							<td><a href="<c:url value="/_04_Forum/ShowArticle.controller?forumId=${forumVO.forumId}" />">${forumVO.forumTopic}</a></td>
+						<tr>							
+							<td>${forumVO.forumTypeId}</td>
+							<td><a
+								href="<c:url value="/_04_Forum/ShowArticle.controller?forumId=${forumVO.forumId}" />">${forumVO.forumTopic}</a></td>
 							<td>${forumVO.memberId}</td>
-							<td>${forumVO.visitorNum}</td>			
+							<td>${forumVO.visitorNum}</td>
 							<td>${forumVO.replyNum}</td>
 							<td>${forumVO.forumTime}</td>
-													
+						</tr>
+					</c:forEach>
+					</c:if>
+						<c:forEach var="forumVO1" items="${forumVO1}">
+						<tr>							
+							<td>${forumVO1.forumTypeId}</td>
+							<td><a
+								href="<c:url value="/_04_Forum/ShowArticle.controller?forumId=${forumVO1.forumId}" />">${forumVO1.forumTopic}</a></td>
+							<td>${forumVO1.memberId}</td>
+							<td>${forumVO1.visitorNum}</td>
+							<td>${forumVO1.replyNum}</td>
+							<td>${forumVO1.forumTime}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</form>
+	</article>
+	<footer>
+		<!-- import共同的 -->
+	</footer>
 </body>
 </html>

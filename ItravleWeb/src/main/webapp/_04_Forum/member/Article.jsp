@@ -10,7 +10,8 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/css/_04_Forum/Forum.css"/>" />
 <script type="text/javascript"
-	src="../js/_04_Forum/ckeditor/ckeditor.js"></script>
+	src="<c:url value="/js/_04_Forum/ckeditor/ckeditor.js" />"></script>
+
 
 <%@ page import="_00_Misc.model.CodeVO"%>
 <%@ page import="_00_Misc.model.CodeService"%>
@@ -22,12 +23,13 @@
 %>
 </head>
 <body>
-<h3>發表討論區新文章</h3>
+
 
 	<form action="<c:url value="/_04_Forum/member/Article.controller"/>"
 		method="post">
-		<div id="inputData">
+		<div id="header">
 			<table>
+				<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
 				<tr>
 					<td>文章主題：</td>
 					<td><input type="text" name="forumTopic"
@@ -45,17 +47,18 @@
 				<tr>
 					<td>文章內容：</td>
 					<td><textarea name="forumContent" rows="4" cols="50"></textarea></td>
-				    <td><span class="error">${error.forumContent}</span></td>
+					<script>
+						CKEDITOR.replace('forumContent', {
+							width:700,
+						});
+					</script>
+					<td><span class="error">${error.forumContent}</span></td>
 				</tr>
 				<tr>
 					<td><input type="submit" value="確定發表"></td>
 				</tr>
 			</table>
 		</div>
-
-
 	</form>
-
-
 </body>
 </html>

@@ -5,6 +5,9 @@
 <hibernate-configuration>
 
 	<session-factory>
+	
+	
+	
 
 		<property name="hibernate.connection.datasource">java:comp/env/jdbc/TestDB</property>
 

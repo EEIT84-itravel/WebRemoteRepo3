@@ -3,14 +3,12 @@ package _04_Forum.controller;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import _04_Forum.model.ForumService;
 import _04_Forum.model.ForumVO;
 
@@ -52,17 +50,17 @@ public class ArticleServlet extends HttpServlet {
 		forumVO.setForumTypeId(forumTypeId);
 		forumVO.setForumTopic(forumTopic);
 		forumVO.setForumContent(forumContent);
-		
+		String path = request.getContextPath();
 		ForumVO result = fs.insert(forumVO);
 		if(result == null){
 			error.put("forumTopic", "新增失敗");
-			request.getRequestDispatcher("/_04_Forum/member/Article.jsp").forward(request, response);
+			response.sendRedirect(path+"/_04_Forum/member/Article.jsp");
 			return;
 		}else{
 			HttpSession session = request.getSession();
 			session.setAttribute("forumVO", result);
 		}
-		String path = request.getContextPath();
+		
 		response.sendRedirect(path+"/_04_Forum/ForumIndex.jsp");
 	}
 
