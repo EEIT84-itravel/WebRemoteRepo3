@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="_00_Misc.model.*"%>
 <%@ page import="_01_Sight.model.*"%>
 <%@ page import="_02_TripAndJournal.model.*"%>
 <%@ page import="java.util.*"%>
 <!-- 以下的要再改成jQuery 的ajax   不要在jsp出現java code -->
-
 <%
 	CodeService codeService = new CodeService();
 	List<CodeVO> codeVO = codeService.select("region");
@@ -32,13 +32,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ITravel-排行程</title>
-<link rel="stylesheet" type="text/css" href="<c:url value="/css/_02_TripAndJournal/WriteTrip.css"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_02_TripAndJournal/WriteTrip.css"/>" />
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
 <!-- jQuery -->
 <script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
 <!-- jQuery ui -->
 <script type="text/javascript" src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+<!-- 景點dialog功能 -->
+<script type="text/javascript" src="<c:url value="/js/sightDialog.js"/>"></script>
 <script>
 	$(function() {		
 		//讓右邊景點可以被拖曳
@@ -74,7 +76,7 @@
 				//抓到sightId，黏到剛剛的tr裡面
  				$(".tripDetailSightId"+sightId).html(sightId);
  				//抓到sightName，黏到剛剛的tr裡面
- 				$(".tripDetailSightName"+sightId).html(sightName); 				
+ 				$(".tripDetailSightName"+sightId).html(sightName);
 				ui.helper.draggable({
 					disabled : true
 				});
@@ -107,7 +109,7 @@
 	    });
 		// 建立右邊景點的分頁
 		$("#sightsTabs").tabs({
-			heightStyle: "auto"	
+			heightStyle : "auto"
 		});
 	});
 </script>
@@ -188,13 +190,13 @@
 					</div>
    				</div>	<!-- end div day -->   				
 			</div>	<!-- end div 行程 -->
-		</div>	<!-- end div left -->			
+		</div>	<!-- end div left -->
 		<div id="right">
-			<div id="blank"></div>			
+			<div id="blank"></div>
 			<select>
-			<c:forEach var="region" items="${region}">
-				<option value="${region.codeId}">${region.codeName}</option>				
-			</c:forEach>
+				<c:forEach var="region" items="${region}">
+					<option value="${region.codeId}">${region.codeName}</option>
+				</c:forEach>
 			</select>
 			<div id="sightsTabs">
 			<ul>
@@ -226,19 +228,18 @@
 					<td>${sightVO.score}分</td>
  					<td hidden="true">${sightVO.spendHour}</td>	<%-- 給jQuery抓每個景點預設的建議停留時間 --%>
 					<td>評論</td>
-					<td>最愛</td>					
+					<td>最愛</td>
+					<!-- 景點彈出視窗功能 -->
+					<td><button id="sightDetail" onclick="window.open('<c:url value="/ShowSightDetail.controller?sightId=${sightVO.sightId}" />','sightDetail','height=500,width=500,toolbar=no,titlebar=no,status=no,left=450,top=350');">詳情</button></td>					
 				</tr>
 				</table>
 				</c:forEach>
 			</div>	<!-- end div tabs-1 -->
-			</div>	<!-- end div sightsTabs -->										
-			
+			</div>	<!-- end div sightsTabs -->
 		</div><!-- end div right -->
-
 	</article>
 	<footer>
 		<!-- import共同的 -->
 	</footer>
 </body>
 </html>
-
