@@ -136,12 +136,12 @@
 						<c:if test="${codeVO.codeId==sightVO.countyId}">
 								${codeVO.codeName}
                              </c:if>
-					</c:forEach>
-				</p>
-				<p>${sightVO.watchNum}人瀏覽,${sightVO.collectNum}人收藏</p>
-			</div>
-		</c:forEach>
-	</article>
+				</c:forEach>
+			</p>
+			<p>${sightVO.watchNum}人瀏覽,${sightVO.collectNum}人收藏</p>
+		</div>
+	</c:forEach>
+		</article>
 	<footer>
 		<!-- import共同的 -->
 	</footer>

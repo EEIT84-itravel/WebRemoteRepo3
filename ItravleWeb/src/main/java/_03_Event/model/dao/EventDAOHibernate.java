@@ -19,11 +19,11 @@ public class EventDAOHibernate {
 		 EventDAOHibernate dao = new EventDAOHibernate();
 		 EventVO vo = new EventVO();
 		System.out.println(dao.select(6));
-		File imageFile = new File("src/main/webapp/images/cat.jpg");		
-		InputStream is = new FileInputStream(imageFile);
-		byte[] p = new byte[is.available()];
-		is.read(p);
-		is.close();
+//		File imageFile = new File("src/main/webapp/images/cat.jpg");		
+//		InputStream is = new FileInputStream(imageFile);
+//		byte[] p = new byte[is.available()];
+//		is.read(p);
+//		is.close();
 		//vo.setEventId(5);
 //		vo.setEventPhoto(p);
 //		vo.setEventTopic("聖誕節");
