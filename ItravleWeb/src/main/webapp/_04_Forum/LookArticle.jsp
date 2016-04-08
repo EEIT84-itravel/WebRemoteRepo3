@@ -8,50 +8,53 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${forumVO.forumTopic}</title>
+<link rel="stylesheet" type="text/css" href="../css/_04_Forum/Forum.css" />
 </head>
 <body>
 	<form action="<c:url value="/_04_Forum/member/Reply.controller"/>"
 		method="post">
-		<input type="submit" value="回覆文章" name="reply"> <input
-			type="hidden" name="forumId" value="${forumVO.forumId}">
-		<table border="1">
-
-			<tr>
-				<td>作者：${forumVO.memberId}</td>
-			</tr>
-			<tr>
-				<td>文章主題：${forumVO.forumTopic}</td>
-			</tr>
-			<tr>
-				<td>文章內容：${forumVO.forumContent}</td>
-			</tr>
-			<tr>
-				<td>最後修改日期：${forumVO.forumTime}</td>
-			</tr>
-			<tr>
-				<td>瀏覽人次：${forumVO.visitorNum}</td>
-			</tr>
-			<tr>
-				<td>文章編號：${forumVO.forumId}</td>
-			</tr>
-
-			<input type="button" onclick="history.back()" value="上一頁" />
-			<a href="/ItravleWeb/_04_Forum/ForumIndex.jsp">回討論區首頁</a>
-		</table>
-		<table border='1' bgcolor="yellow">
-
-
-			<c:forEach var="messageVO" items="${messageVO}">
+		<div id="header">
+			<table border="1">
+				<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
+				<input type="submit" value="回覆文章" name="reply">
+				<input type="hidden" name="forumId" value="${forumVO.forumId}">
 				<tr>
-					<td>回文者：${messageVO.memberId}</td>
-				    <td>回文時間：${messageVO.updateTime}</td>
- 				</tr>
+					<td>作者：${forumVO.memberId}</td>
+				</tr>
 				<tr>
-					<td>回覆內容：${messageVO.content}</td>
-				</tr>			
-			</c:forEach>
+					<td>文章主題：${forumVO.forumTopic}</td>
+				</tr>
+				<tr>
+					<td>文章內容：${forumVO.forumContent}</td>
+				</tr>
+				<tr>
+					<td>最後修改日期：${forumVO.forumTime}</td>
+				</tr>
+				<tr>
+					<td>瀏覽人次：${forumVO.visitorNum}</td>
+				</tr>
+				<tr>
+					<td>文章編號：${forumVO.forumId}</td>
+				</tr>
 
-		</table>
+				<input type="button" onclick="history.back()" value="上一頁" />
+				<a href="/ItravleWeb/_04_Forum/ForumIndex.jsp">回討論區首頁</a>
+			</table>
+			<table border='1' bgcolor="yellow">
+
+
+				<c:forEach var="messageVO" items="${messageVO}">
+					<tr>
+						<td>回文者：${messageVO.memberId}</td>
+						<td>回文時間：${messageVO.updateTime}</td>
+					</tr>
+					<tr>
+						<td>回覆內容：${messageVO.content}<br></td>
+					</tr>
+					
+				</c:forEach>
+			</table>
+		</div>
 	</form>
 
 </body>

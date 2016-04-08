@@ -1,7 +1,3 @@
-<?php
-  if (is_null($_POST["theme"])) {$theme="hot-sneaks";}
-  else {$theme=$_POST["theme"];}
-?>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -20,7 +16,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
 </style>
-<link rel="stylesheet" type="text/css" href="../css/_04_Forum/Forum.css" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_04_Forum/Forum.css"/>" />
 <link rel="stylesheet" type="text/css" href="../css/_04_Forum/datatable.css" />
 <link rel="stylesheet" type="text/css" href="../jquery-ui-1.11.4.custom/jquery-ui.min.css" />
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.css"/>
@@ -30,7 +26,9 @@
 <script type="text/javascript" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 //DataTable設定
-var opt={"oLanguage":{"sProcessing":"處理中...",
+var opt={
+	"sDom": '<"top">tf<"bottom"p><"clear">',	
+	"oLanguage":{"sProcessing":"處理中...",
     "sLengthMenu":"顯示 _MENU_ 項結果",
     "sZeroRecords":"沒有匹配結果",
     "sInfo":"顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
