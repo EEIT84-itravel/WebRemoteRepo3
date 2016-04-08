@@ -1,10 +1,13 @@
 package _02_TripAndJournal.controller;
 
 import java.io.IOException;
-
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,21 +19,22 @@ import javax.servlet.http.HttpSession;
 import _02_TripAndJournal.model.TripDetailService;
 import _02_TripAndJournal.model.TripDetailVO;
 
-//本servlet檔名取錯，報廢中
-@WebServlet("/_02_TripAndJournal/member/WriteTrip.controller")
-public class WriteTripServlet extends HttpServlet {
+@WebServlet("/_02_TripAndJournal/member/TripDetail.controller")
+public class TripDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
+	
+	HttpSession session;
+	List<TripDetailVO> tripDetailCart;
 
 	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {	
-		
+			HttpServletResponse response) throws ServletException, IOException {
 		// 接收HTML Form資料
-		String temp1 = request.getParameter("tripId");		
+		String temp1 = request.getParameter("tripId");	
 		String temp2 = request.getParameter("tripOrder");
 		String temp3 = request.getParameter("stayTime");
 		String temp4 = request.getParameter("whichDay");
@@ -38,10 +42,18 @@ public class WriteTripServlet extends HttpServlet {
 		String temp5 = request.getParameter("sightId");
 		String notes = request.getParameter("notes");
 		String temp6 = request.getParameter("sightBudget");
+		System.out.println("tripId:"+temp1);
+		System.out.println("tripOrder:"+temp2);
+		System.out.println("stayTime:"+temp3);
+		System.out.println("whichDay:"+temp4);
+		System.out.println("sightId:"+temp5);
+		System.out.println("sightBudget:"+temp6);
+		System.out.println("referenceType:"+referenceType);
+		System.out.println("notes:"+notes);
 		
 		Map<String, String> error = new HashMap<String, String>();
 		request.setAttribute("error", error);
-
+		
 		// 轉換HTML Form資料
 		int tripId = 0;
 		if (temp1 != null && temp1.trim().length() != 0) {
@@ -89,7 +101,7 @@ public class WriteTripServlet extends HttpServlet {
 			sightBudget = java.math.BigDecimal.valueOf(temp7);
 		}
 		
-		// 驗證HTML Form資料：不用驗證，因為form都是hidden
+		// 驗證HTML Form資料		
 		
 		// 呼叫Model
 		TripDetailVO tripDetailVO = new TripDetailVO();
@@ -102,23 +114,42 @@ public class WriteTripServlet extends HttpServlet {
 		tripDetailVO.setNotes(notes);
 		tripDetailVO.setSightBudget(sightBudget);
 		System.out.println(tripDetailVO);
-		
-		TripDetailService service = new TripDetailService();
-		TripDetailVO result = service.insert(tripDetailVO);
-		
-		if (result == null) {
-			error.put("fail", "insert fail");
-			request.getRequestDispatcher(
-					"/_02_TripAndJournal/member/NewTrip.jsp").forward(request,
-					response);
+
+		session = request.getSession(false);
+		if (session != null) {
+			if (tripDetailCart != null) {
+				tripDetailCart.add(tripDetailVO);
+				System.out.println(tripDetailCart);
+				session.setAttribute("tripDetailCart", tripDetailCart);
+				System.out.println("tripDetailCart!=null");
+			} else {
+				// 建cart
+				tripDetailCart = new ArrayList<TripDetailVO>();
+				System.out.println("新建cart");
+				// vo丟進去
+				tripDetailCart.add(tripDetailVO);
+				session.setAttribute("tripDetailCart", tripDetailCart);
+				System.out.println("放進session");
+			}
 		} else {
-			HttpSession session = request.getSession();
-			//應該要塞到shoppingCart裡面才對?
-			session.setAttribute("tripDetailVO", result);
+			// 請使用者登入
+			System.out.println("導向登入頁面(未完成)");
 		}
+		
+				
+//		if (result == null) {
+//			error.put("fail", "insert fail");
+//			request.getRequestDispatcher("/_02_TripAndJournal/member/NewTrip.jsp")
+//			.forward(request,response);
+//		} else {
+//			session = request.getSession();
+//			session.getAttribute("tripDetailCart");
+//			//應該要塞到shoppingCart裡面才對?
+//			session.setAttribute("tripDetailVO", result);
+//		}
 		//送回編輯行程頁面
 		String path = request.getContextPath();
-		response.sendRedirect(path + "/_02_TripAndJournal/member/WriteTrip.jsp");
+		response.sendRedirect(path + "/_02_TripAndJournal/member/WriteTrip.jsp");		
 
 	}
 

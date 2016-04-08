@@ -4,6 +4,7 @@ package _01_Sight.model;
 import java.util.Arrays;
 import java.util.List;
 
+import _00_Misc.model.CodeVO;
 import _01_Sight.model.dao.SightDAOHibernate;
 
 public class SightService {
@@ -26,6 +27,10 @@ public class SightService {
 
 	// 全部景點(首頁)
 	public List<SightVO> select() {
+		return dao.selectAll();
+	}
+	//EL使用.all呼叫
+	public List<SightVO> getAll(){
 		return dao.selectAll();
 	}
 

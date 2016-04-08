@@ -108,4 +108,21 @@ public class TripDetailDAOHibernate {
 		}
 		return list;
 	}
+	
+	private static final String SELECT_BY_TRIPID="from TripDetailVO where tripId=:tripId";
+	public List<TripDetailVO> select(int tripId) {
+		List<TripDetailVO> list = null;
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(SELECT_BY_TRIPID);
+			query.setParameter("tripId", tripId);
+			list= query.list();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}		
+		return list;
+	}
 }
