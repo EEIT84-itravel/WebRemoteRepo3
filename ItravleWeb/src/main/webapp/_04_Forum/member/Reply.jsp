@@ -24,7 +24,7 @@
 					<td><textarea rows="5" cols="40" name="content"></textarea></td>
 					<script>
 						CKEDITOR.replace('content', {
-							width:1000,
+							width:700,
 						});
 					</script>
 					<td><span class="error">${error.content}</span></td>

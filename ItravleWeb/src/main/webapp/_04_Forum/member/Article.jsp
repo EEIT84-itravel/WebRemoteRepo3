@@ -49,7 +49,7 @@
 					<td><textarea name="forumContent" rows="4" cols="50"></textarea></td>
 					<script>
 						CKEDITOR.replace('forumContent', {
-							width:1000,
+							width:700,
 						});
 					</script>
 					<td><span class="error">${error.forumContent}</span></td>

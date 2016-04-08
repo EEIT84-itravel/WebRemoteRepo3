@@ -17,6 +17,7 @@
 			<table border="1">
 				<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
 				<input type="submit" value="回覆文章" name="reply">
+				<input type="submit" value="修改文章" name="modifydoc">
 				<input type="hidden" name="forumId" value="${forumVO.forumId}">
 				<tr>
 					<td>作者：${forumVO.memberId}</td>
@@ -26,6 +27,7 @@
 				</tr>
 				<tr>
 					<td>文章內容：${forumVO.forumContent}</td>
+					
 				</tr>
 				<tr>
 					<td>最後修改日期：${forumVO.forumTime}</td>
