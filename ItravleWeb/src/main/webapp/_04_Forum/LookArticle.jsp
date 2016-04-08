@@ -38,16 +38,17 @@
 			<input type="button" onclick="history.back()" value="上一頁" />
 			<a href="/ItravleWeb/_04_Forum/ForumIndex.jsp">回討論區首頁</a>
 		</table>
-		<table>
+		<table border='1' bgcolor="yellow">
 
 
 			<c:forEach var="messageVO" items="${messageVO}">
 				<tr>
 					<td>回文者：${messageVO.memberId}</td>
-				</tr>
+				    <td>回文時間：${messageVO.updateTime}</td>
+ 				</tr>
 				<tr>
 					<td>回覆內容：${messageVO.content}</td>
-				</tr>
+				</tr>			
 			</c:forEach>
 
 		</table>

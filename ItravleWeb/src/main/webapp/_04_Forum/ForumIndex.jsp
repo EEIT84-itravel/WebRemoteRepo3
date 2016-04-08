@@ -1,3 +1,7 @@
+<?php
+  if (is_null($_POST["theme"])) {$theme="hot-sneaks";}
+  else {$theme=$_POST["theme"];}
+?>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -17,8 +21,32 @@
 <style>
 </style>
 <link rel="stylesheet" type="text/css" href="../css/_04_Forum/Forum.css" />
-<script type="text/javascript" src="">
-	
+<link rel="stylesheet" type="text/css" href="../css/_04_Forum/datatable.css" />
+<link rel="stylesheet" type="text/css" href="../jquery-ui-1.11.4.custom/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.css"/>
+ 
+<script type="text/javascript" src="../js/jquery-2.2.1.min.js"></script>
+<script type="text/javascript" src="../jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+//DataTable設定
+var opt={"oLanguage":{"sProcessing":"處理中...",
+    "sLengthMenu":"顯示 _MENU_ 項結果",
+    "sZeroRecords":"沒有匹配結果",
+    "sInfo":"顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+    "sInfoEmpty":"顯示第 0 至 0 項結果，共 0 項",
+    "sInfoFiltered":"(從 _MAX_ 項結果過濾)",
+    "sSearch":"關鍵字搜尋:",
+    "oPaginate":{"sFirst":"首頁",
+                         "sPrevious":"上一頁",
+                         "sNext":"下一頁",
+                         "sLast":"最末頁"}
+    }
+};
+$(document).ready(function(){
+	$("#forum").DataTable(opt);
+})
+
 </script>
 <title>ITravel討論區</title>
 </head>
@@ -39,9 +67,9 @@
 					</tr>
 				</thead>
 				<tbody>
+				<c:if test="${empty forumVO1}">
 					<c:forEach var="forumVO" items="${forumVO}">
-						<tr>
-							
+						<tr>							
 							<td>${forumVO.forumTypeId}</td>
 							<td><a
 								href="<c:url value="/_04_Forum/ShowArticle.controller?forumId=${forumVO.forumId}" />">${forumVO.forumTopic}</a></td>
@@ -49,7 +77,18 @@
 							<td>${forumVO.visitorNum}</td>
 							<td>${forumVO.replyNum}</td>
 							<td>${forumVO.forumTime}</td>
-
+						</tr>
+					</c:forEach>
+					</c:if>
+						<c:forEach var="forumVO1" items="${forumVO1}">
+						<tr>							
+							<td>${forumVO1.forumTypeId}</td>
+							<td><a
+								href="<c:url value="/_04_Forum/ShowArticle.controller?forumId=${forumVO1.forumId}" />">${forumVO1.forumTopic}</a></td>
+							<td>${forumVO1.memberId}</td>
+							<td>${forumVO1.visitorNum}</td>
+							<td>${forumVO1.replyNum}</td>
+							<td>${forumVO1.forumTime}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

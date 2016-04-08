@@ -42,5 +42,6 @@ public class EventService {
 	 public EventVO selectOne(Integer eventId){
 		 return eDAO.select(eventId);
 	 }
+	 
 
 }
