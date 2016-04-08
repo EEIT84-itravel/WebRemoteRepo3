@@ -18,6 +18,7 @@ import _02_TripAndJournal.model.TripDetailVO;
 
 @WebServlet("/_02_TripAndJournal/member/SaveTripDetailCart.controller")
 public class SaveTripDetailCart extends HttpServlet {
+	//把session裡的所有tripDetail存到DB
 	private static final long serialVersionUID = 1L;
        
    	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

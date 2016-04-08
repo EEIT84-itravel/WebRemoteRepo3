@@ -49,7 +49,7 @@
 		var spendHour;
 		var newIndex;
 		$(".sight").draggable({
- 			helper : "clone",	//複製一份
+ 			helper : "clone",	//複製一份 			
  			start: function( event, ui ) {
  				$("tr.sightId>td:first-child:last").each(function(){	//取得正在拖曳的物件的sightId
  					sightId =$(this).text();

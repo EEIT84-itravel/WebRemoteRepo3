@@ -21,6 +21,7 @@ import _02_TripAndJournal.model.TripDetailVO;
 
 @WebServlet("/_02_TripAndJournal/member/TripDetail.controller")
 public class TripDetailServlet extends HttpServlet {
+	//把每筆tripDetail存到session
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request,
