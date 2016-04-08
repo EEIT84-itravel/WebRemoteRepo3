@@ -90,6 +90,19 @@ public class SightServlet extends HttpServlet {
 			request.setAttribute("closeTime", sightVO.getCloseIime().toString()
 					.substring(0, 5));
 
+			request.setAttribute(
+					"trans1",
+					sightVO.getTrans().substring(0,
+							sightVO.getTrans().indexOf(",")));
+			request.setAttribute(
+					"trans1",
+					sightVO.getTrans().substring(0,
+							sightVO.getTrans().indexOf(",")));
+			request.setAttribute(
+					"trans2",
+					sightVO.getTrans().substring(
+							sightVO.getTrans().indexOf(",") + 1));
+
 			request.getRequestDispatcher("/_01_Sight/SightInformation.jsp")
 					.forward(request, response);
 		}

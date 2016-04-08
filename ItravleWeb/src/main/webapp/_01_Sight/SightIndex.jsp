@@ -70,15 +70,16 @@ div {
 								<option value="${region.codeId}">${region.codeName}</option>
 							</c:forEach></select>
 					</td>
-					<td>消費金額:<select name="money">
-							<option value="free">免費</option>
-							<option value="nofree">付費</option>
-					</select>
-					<td>開放時間:<select name="sightTime"><c:forEach
-								var="region" items="${sight_time}">
-								<option value="${region.codeId}">${region.codeName}</option>
-							</c:forEach></select>
-					</td>
+					<!-- 					<td>消費金額:<select name="money"> -->
+					<!-- 							<option value="free">免費</option> -->
+					<!-- 							<option value="nofree">付費</option> -->
+					<!-- 					</select> -->
+					<!-- 					</td> -->
+					<%-- 					<td>開放時間:<select name="sightTime"><c:forEach --%>
+					<%-- 								var="region" items="${sight_time}"> --%>
+					<%-- 								<option value="${region.codeId}">${region.codeName}</option> --%>
+					<%-- 							</c:forEach></select> --%>
+					<!-- 					</td> -->
 				</tr>
 			</table>
 			<input type="submit" />
