@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -120,26 +121,34 @@ public class TripDetailServlet extends HttpServlet {
 		session = request.getSession(false);
 		if (session != null) {			
 			if (tripDetailCart != null) {
+				System.out.println("tripDetailCart!=null");
 				// 檢查這個VO是否存在
-				boolean flag = true;
 				Iterator<TripDetailVO> it = tripDetailCart.iterator();
+				TripDetailVO tripDetailVO2=null;
+				int order=-1;
 				while (it.hasNext()) {
-					TripDetailVO tripDetailVO2 = it.next();
+					tripDetailVO2 = it.next();
 					int tripOrder2 = tripDetailVO2.getTripOrder();
 					if (tripOrder == tripOrder2) {
 						System.out.println("tripOrder一樣");
-						flag = false;
+						//取得存在的那筆是第幾筆
+						order=tripDetailCart.indexOf(tripDetailVO2);
 						tripDetailCart.remove(tripDetailVO2);
 						break;
 					}
 				}
+				if(order>-1){
+					//把重複的換掉
+					tripDetailCart.add(order,tripDetailVO);					
+				}else{
+					//如果不是重複的就塞到最後面
 					tripDetailCart.add(tripDetailVO);
-					System.out.println(tripDetailCart);
-					session.setAttribute("tripDetailCart", tripDetailCart);
-					System.out.println("tripDetailCart!=null");
+				}
+				System.out.println(tripDetailCart);				
+				session.setAttribute("tripDetailCart", tripDetailCart);
 			} else {
 				// 建cart
-				tripDetailCart = new ArrayList<TripDetailVO>();
+				tripDetailCart = new LinkedList<TripDetailVO>();
 				System.out.println("新建cart");
 				// vo丟進去
 				tripDetailCart.add(tripDetailVO);
@@ -150,18 +159,7 @@ public class TripDetailServlet extends HttpServlet {
 			// 請使用者登入
 			System.out.println("導向登入頁面(未完成)");
 		}
-		
-				
-//		if (result == null) {
-//			error.put("fail", "insert fail");
-//			request.getRequestDispatcher("/_02_TripAndJournal/member/NewTrip.jsp")
-//			.forward(request,response);
-//		} else {
-//			session = request.getSession();
-//			session.getAttribute("tripDetailCart");
-//			//應該要塞到shoppingCart裡面才對?
-//			session.setAttribute("tripDetailVO", result);
-//		}
+
 		//送回編輯行程頁面
 		String path = request.getContextPath();
 		response.sendRedirect(path + "/_02_TripAndJournal/member/WriteTrip.jsp");		
