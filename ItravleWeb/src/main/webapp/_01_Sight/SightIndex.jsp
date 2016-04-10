@@ -82,6 +82,7 @@
 								<option value="free">免費</option>
 								<option value="nofree">付費</option>
 						</select>
+						</td>
 						<td>開放時間:<select name="sightTime"><c:forEach
 									var="region" items="${sight_time}">
 									<option value="${region.codeId}">${region.codeName}</option>
@@ -96,7 +97,7 @@
 		<h5>熱門景點</h5>
 		<c:forEach var="watchNum" items="${watchNum}" begin="0" end="3">
 
-			<div id="tbl">
+			<div class="SearchSight">
 				<p>No:</p>
 				<img alt=""
 					src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${watchNum.sightId}" />"
@@ -114,7 +115,7 @@
 		<br>
 
 		<c:forEach var="sightVO" items="${sightVO}">
-			<div id="tbl">
+			<div class="SearchSight">
 				<p>No:${sightVO.sightId}</p>
 				<img alt=""
 					src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
@@ -137,12 +138,12 @@
 						<c:if test="${codeVO.codeId==sightVO.countyId}">
 								${codeVO.codeName}
                              </c:if>
-				</c:forEach>
-			</p>
-			<p>${sightVO.watchNum}人瀏覽,${sightVO.collectNum}人收藏</p>
-		</div>
-	</c:forEach>
-		</article>
+					</c:forEach>
+				</p>
+				<p>${sightVO.watchNum}人瀏覽,${sightVO.collectNum}人收藏</p>
+			</div>
+		</c:forEach>
+	</article>
 	<footer>
 		<!-- import共同的 -->
 	</footer>

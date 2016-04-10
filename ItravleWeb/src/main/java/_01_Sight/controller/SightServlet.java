@@ -89,11 +89,6 @@ public class SightServlet extends HttpServlet {
 					.substring(0, 5));
 			request.setAttribute("closeTime", sightVO.getCloseIime().toString()
 					.substring(0, 5));
-
-			request.setAttribute(
-					"trans1",
-					sightVO.getTrans().substring(0,
-							sightVO.getTrans().indexOf(",")));
 			request.setAttribute(
 					"trans1",
 					sightVO.getTrans().substring(0,
