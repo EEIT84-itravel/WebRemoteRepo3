@@ -105,7 +105,7 @@ public class RegisteredServlet extends HttpServlet {
 			session.setAttribute("user", member);
 			
 			String path = request.getContextPath();
-			response.sendRedirect(path+"/_05_Member/Registeredsuccess.jsp");
+			response.sendRedirect(path+"/_05_Member/RegisteredSuccess.jsp");
 		}
 	}
 	
