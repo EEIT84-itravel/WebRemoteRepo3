@@ -6,13 +6,13 @@ import java.util.List;
 import _05_Member.model.dao.MemberDAOHibernate;
 
 public class MemberService {
-  private MemberDAOHibernate memberVo= new MemberDAOHibernate();
+  private MemberDAOHibernate memberDAO= new MemberDAOHibernate();
 	public static void main(String[] args) {  //測試程式
 		MemberService sercive = new MemberService();
 		MemberVO bean = sercive.login("b12345", "222");
 	}
  public MemberVO login(String memberAccount,String password){
-	 List<MemberVO> bean = memberVo.findByAccount(memberAccount);
+	 List<MemberVO> bean = memberDAO.findByAccount(memberAccount);
 	 MemberVO memberbean = bean.get(0);
 	 if(bean!=null){
 		 String pass = memberbean.getPassword();
@@ -24,5 +24,17 @@ public class MemberService {
 	 System.out.println("false");
 	 return null;
  }
-	
+ public boolean registered(MemberVO membervo){
+	 if(membervo != null){
+	memberDAO.insert(membervo);
+	return true;
+	 }
+	 return false;
+ }
+ public List<MemberVO> selectAll(String memberAccount){
+	 return memberDAO.findByAccount(memberAccount);
+ }
+ public List<MemberVO> selectAllByCellphone(String cellphone){
+	 return memberDAO.findByCellphone(cellphone);
+ }
 }

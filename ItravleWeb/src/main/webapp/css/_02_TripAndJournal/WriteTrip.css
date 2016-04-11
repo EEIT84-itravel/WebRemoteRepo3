@@ -1,0 +1,61 @@
+@CHARSET "UTF-8";
+table {
+	border: 1px solid blue;
+	width: 100%;	
+}
+h4{
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+#topButton {
+	width: auto;
+	height: auto;	
+	text-align: right;
+}
+#left {
+	width:65%;	
+	background-color:silver;
+	float: left;
+	height: 850px;
+}
+#right {
+	width:34%;	
+	background-color:silver;
+	float: right;
+	height: auto;
+}
+#blank {
+	height: 34px ;
+	border: 1px solid blue;
+}
+#days {
+	width: 25%;
+	height:auto;
+	border: 1px solid yellow;
+	float: left;
+	overflow: hidden;
+}
+#trip {
+	width: 74%;
+	height:800px;
+	border: 1px solid green;
+	float: right;
+
+}
+#tripBut{
+	align-content: right;
+}
+.day {
+	height: 250px;
+	border: 1px solid purple;
+}
+div .sight {
+	height: 30px;
+	width: 100%;	
+	border: 1px solid #ff80c0;
+	margin: auto;
+}
+#sightsTabs ul li a{
+	font-size:16px;
+}
+

@@ -17,6 +17,7 @@ public class MemberDAOHibernate {
 
 	private static final String GET_ALL_STMT = "from MemberVO order by memberId";
 	private static final String FIND_BY_ACCOUNT = "from MemberVO where memberAccount=:memberAccount";
+	private static final String FIND_BY_CELLPHONE = "from MemberVO where cellphone=:cellphone";
 	MemberVO memberVO = null;
 
 
@@ -45,6 +46,22 @@ public class MemberDAOHibernate {
 			session.beginTransaction();
 			Query query = session.createQuery(FIND_BY_ACCOUNT);
 			query.setParameter("memberAccount", memberAccount);
+		    list = query.list();	
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+			throw e;
+		}	
+    	return list;
+    }
+    public List<MemberVO> findByCellphone(String cellphone){
+    	List<MemberVO> list = null;
+    	Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+    	try {
+			session.beginTransaction();
+			Query query = session.createQuery(FIND_BY_CELLPHONE);
+			query.setParameter("cellphone", cellphone);
 		    list = query.list();	
 			session.getTransaction().commit();
 		} catch (RuntimeException e) {

@@ -21,6 +21,7 @@ public class ForumVO implements Serializable {
 	// 回復數(reply_num)
 	private Integer replyNum;
 
+
 	public Integer getForumId() {
 		return forumId;
 	}
