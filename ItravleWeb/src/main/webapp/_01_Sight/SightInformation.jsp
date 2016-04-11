@@ -70,6 +70,7 @@ html, body {
 		<div class="IntroSight">
 			<h1>景點資訊</h1>
 			<p>地名:${sightVO.sightName}</p>
+			<p>簡介:${sightVO.intro}</p>
 			<p>
 				類型:
 				<c:forEach var="codeVO" items="${codeSvc.all}">
