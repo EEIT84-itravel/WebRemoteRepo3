@@ -61,7 +61,8 @@ public class SightDAOHibernate {
 	}
 
 	// 進階搜尋測試
-	private static final String SEARCH = "from SightVO where region_id=:region_id and county_id=:county_id and sight_type_id=:sight_type_id and ticket=:ticket and play_period=:play_period";
+	//private static final String SEARCH = "from SightVO where region_id=:region_id and county_id=:county_id and sight_type_id=:sight_type_id and ticket=:ticket and play_period=:play_period";
+	private static final String SEARCH = "from SightVO where region_id=:region_id and county_id=:county_id and sight_type_id=:sight_type_id";
 
 	public List<SightVO> search(SightVO sightVOp) {
 		List<SightVO> sightVO = null;
@@ -73,8 +74,8 @@ public class SightDAOHibernate {
 			query.setParameter("region_id", sightVOp.getRegionId());
 			query.setParameter("county_id", sightVOp.getCountyId());
 			query.setParameter("sight_type_id", sightVOp.getSightTypeId());
-			query.setParameter("ticket", sightVOp.getTicket());
-			query.setParameter("play_period", sightVOp.getPlayPeriod());
+//			query.setParameter("ticket", sightVOp.getTicket());
+//			query.setParameter("play_period", sightVOp.getPlayPeriod());
 			sightVO = query.list();
 			session.getTransaction().commit();
 		} catch (HibernateException e) {

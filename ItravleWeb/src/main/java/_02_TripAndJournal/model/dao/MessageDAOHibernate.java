@@ -29,6 +29,24 @@ public class MessageDAOHibernate {
 		}
 		return messageVo;
 	}
+	//抓討論區之留言
+	private static final String GET_ALL_FORUMMESSAGE = "from MessageVO where referenceNo=:referenceNo order by updateTime";
+	public List<MessageVO> getForumMessage(Integer referenceNo) {
+		List<MessageVO> list = null;
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(GET_ALL_FORUMMESSAGE);
+			query.setParameter("referenceNo", referenceNo);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
 
 	public List<MessageVO> getAll() {
 		List<MessageVO> list = null;

@@ -35,6 +35,8 @@
 				<td>${sightVO.score}分</td>
 				<td>評論</td>
 				<td>最愛</td>
+				<!-- 景點彈出視窗功能 -->
+				<td><button class="label label-primary" onclick="window.open('<c:url value="/ShowSightDetail.controller?sightId=${sightVO.sightId}" />','sightDetail','height=500,width=500,toolbar=no,titlebar=no,status=no,left=450,top=350');">詳情</button></td>
 			</tr>
 		</table>
 	</c:forEach>

@@ -26,13 +26,12 @@ public class ForumServlet extends HttpServlet {
 
 		String temp = request.getParameter("memberId");
 		String forumAction = request.getParameter("forumAction");
-        String forumSelect = request.getParameter("select");
-        
+		String forumSelect = request.getParameter("select");
+
 		// 轉換資料
 		Map<String, String> error = new HashMap<String, String>();
 		request.setAttribute("error", error);
 
-		
 		// ForumVO vo = new ForumVO();
 		// List<ForumVO> forumVO = forumService.select();
 		// request.setAttribute("ForumVO", forumVO);
@@ -42,8 +41,7 @@ public class ForumServlet extends HttpServlet {
 		// error.put("memberId", "請先登入會員");
 		// }
 		// }
-		
-		
+
 		if (error != null && !error.isEmpty()) {
 			request.getRequestDispatcher("/_04_Forum/ForumIndex.jsp").forward(
 					request, response);
@@ -51,14 +49,15 @@ public class ForumServlet extends HttpServlet {
 		} else {
 			request.getRequestDispatcher("/_04_Forum/member/Article.jsp")
 					.forward(request, response);
-		}	
-//		if("select".equals(forumAction)){
-//			List<ForumVO> result = forumService.select();
-//			request.setAttribute("select", result);
-//			request.getRequestDispatcher(
-//					"/_04_Forum/LookArticle.jsp").forward(request, response);
-//		}
-		
+		}
+
+		// if("select".equals(forumAction)){
+		// List<ForumVO> result = forumService.select();
+		// request.setAttribute("select", result);
+		// request.getRequestDispatcher(
+		// "/_04_Forum/LookArticle.jsp").forward(request, response);
+		// }
+
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)

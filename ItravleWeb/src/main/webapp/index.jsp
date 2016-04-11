@@ -5,12 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>I Travel</title>
+<title>I-Travel首頁</title>
 </head>
 <body>
-<%@ page import="_00_Misc.model.dao.CodeDAOHibernate" %>
-<% CodeDAOHibernate  dao = new CodeDAOHibernate();%>
-<%=dao.select("county01")%>
+
 
 
 <h3>Welcome ${user.firstName}</h3>
