@@ -1,5 +1,6 @@
 package _01_Sight.model;
 
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,4 +39,5 @@ public class SightService {
 		result = dao.selectByType(sightType);
 		return result;
 	}
+
 }

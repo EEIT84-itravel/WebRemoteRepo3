@@ -44,15 +44,20 @@
 
 	});
 </script>
+<style type="text/css">
+article {
+	margin: 20px;
+}
+</style>
 <title>ITravel-建立新遊記</title>
-
 </head>
 <body>
 	<header>
 		<!-- import共同的 -->
 	</header>
-	<nav>
+	<nav class="navbar navbar-inverse" role="navigation">
 		<!-- import共同的 -->
+		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article>
 		<h3>建立新的遊記</h3>

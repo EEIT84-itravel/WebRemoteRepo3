@@ -23,8 +23,23 @@ public class SightIndexServlet extends HttpServlet {
 		SightService sightService = new SightService();
 		List<SightVO> sightVO = sightService.select();
 		List<SightVO> watchNum = sightService.selectByWatchNum();
+
+		String region = request.getParameter("region");
+		String county = request.getParameter("county");
+		String sightType = request.getParameter("sightType");
+		// String money = request.getParameter("money");
+		// String sightTime = request.getParameter("sightTime");
+		SightVO sightVO2 = new SightVO();
+		sightVO2.setRegionId(region);
+		sightVO2.setCountyId(county);
+		sightVO2.setSightTypeId(sightType);
+		// sightVO2.setTicket(money);
+		// sightVO2.setPlayPeriod(sightTime);
+		List<SightVO> sightVOp = sightService.search(sightVO2);
+		// request.setAttribute("sightVO", sightVOp);
+
 		request.setAttribute("sightVO", sightVO);
-		request.setAttribute("watchNum", watchNum);
+		// request.setAttribute("watchNum", watchNum);
 		request.getRequestDispatcher("/_01_Sight/SightIndex.jsp").forward(
 				request, response);
 	}

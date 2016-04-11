@@ -70,16 +70,27 @@
 			drop : function(event, ui) {
 				$(this).find(".placeholder").remove();	//移除Add your items here
 				//放下的時候黏form上去，一個tirpDetail是一個form
-				$(".tripDetail").append('<form action="<c:url value="/_02_TripAndJournal/member/TripDetail.controller" />" method="post"><table><tr><td rowspan="2" class="tripDetailPic'+sightId+'"></td><td rowspan="2"><span class="tripDetailSightId'+sightId+'"></span></td><td rowspan="2"><span class="tripDetailSightName'+sightId+'"></span></td><td rowspan="2"><input type="hidden" name="sightId" value="'+sightId+'"/></td><td><label>行程順序：</label><input type="text" name="tripOrder" value="" size="5" /><P/></td>	<td><label>停留時間：</label><input type="text" name="stayTime" value="' + spendHour + '" size="10" /></td><td><label>預算：</label><input type="text" name="sightBudget" placeholder="請在此輸入預算" /></td><td><input type="submit" value="修改" /></td></tr><tr><td colspan="4"><label>筆記：</label><textarea name="notes" rows="3" cols="70"></textarea></td></tr><tr><td><input type="hidden" name="tripId" value="${tripVO.tripId}" /><P/></td><td><input type="hidden" name="whichDay" value=1 /><P/></td><td><input type="hidden" name="referenceType" value="type_id01" /><P/></td></tr></table></form>');
+				$(".tripDetail").append('<form action="<c:url value="/_02_TripAndJournal/member/TripDetail.controller" />" method="post"><table><tr><td rowspan="2" class="tripDetailPic'+sightId+'"></td><td rowspan="2"><span class="tripDetailSightId'+sightId+'"></span></td><td rowspan="2"><span class="tripDetailSightName'+sightId+'"></span></td><td rowspan="2"><input type="hidden" name="sightId" value="'+sightId+'"/></td><td><label>行程順序：</label><span class="tripDetailOrder'+sightId+'"></span></td>	<td><label>停留時間：</label><input type="text" name="stayTime" value="' + spendHour + '" size="10" /></td><td><label>預算：</label><input type="text" name="sightBudget" placeholder="請在此輸入預算" /></td><td><input type="submit" value="修改" /></td></tr><tr><td colspan="4"><label>筆記：</label><textarea name="notes" rows="3" cols="70"></textarea></td></tr><tr><td><input type="hidden" name="tripId" value="${tripVO.tripId}" /><P/></td><td><input type="hidden" name="whichDay" value=1 /><P/></td><td><input type="hidden" name="referenceType" value="type_id01" /><P/></td></tr></table></form>');
 				//依照sightId抓到圖片，黏到剛剛的tr裡面
 				$(".tripDetailPic"+sightId).html('<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=' + sightId + '" />" width="80" height="60">');
 				//抓到sightId，黏到剛剛的tr裡面
  				$(".tripDetailSightId"+sightId).html(sightId);
  				//抓到sightName，黏到剛剛的tr裡面
  				$(".tripDetailSightName"+sightId).html(sightName);
+ 				//抓到擺放順序，當做行程順序
+ 				var order = ui.draggable.index();
+ 				$(".tripDetailOrder"+sightId).html(order); 				
 				ui.helper.draggable({
 					disabled : true
-				});
+				});	
+				
+				
+				$.post({	//利用ajax傳到後端?	                
+	                url: '<c:url value="/_02_TripAndJournal/member/TripDetail.controller" />',
+	                data: {
+// 	                    tripId: 111	                    
+	                }
+	            });
 			}		
 		});
 		//讓tripDetail可排序
@@ -89,12 +100,16 @@
 			start: function (event, ui) {
 				var start_pos = ui.item.index();		//被拖曳物件原本的順序(從0開始)
 				ui.item.data('start_pos', start_pos);	//把抓到的順序存到data裡
+				console.log(ui.item);
 			},
 			update: function (event, ui) {	            
-	            var oldIndex = ui.item.data('start_pos');	//取得被拖曳物件原本的順序(從0開始)
-	            newIndex = ui.item.index();				//新的順序(從0開始)
+	            var oldIndex = ui.item.data('start_pos');	//從data裡取得被拖曳物件原本的順序(從0開始)
+	            newIndex = ui.item.index()+1;				//新的順序(從0開始)
+	            console.log("update");
+	            console.log(ui.item);
 	            console.log("oldIndex"+oldIndex);
 	            console.log("newIndex"+newIndex);
+	            $(".tripDetailOrder"+sightId).html(newIndex);
 	            $.ajax({	//利用ajax傳到後端?
 // 	                type: 'post',
 // 	                url: '/PeopleGroups/DropOrderItem',
@@ -118,8 +133,9 @@
 	<header>
 		<!-- import共同的 -->
 	</header>
-	<nav>
+	<nav class="navbar navbar-inverse" role="navigation">
 		<!-- import共同的 -->
+		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article>		
 		<div id="left">
@@ -230,7 +246,7 @@
 					<td>評論</td>
 					<td>最愛</td>
 					<!-- 景點彈出視窗功能 -->
-					<td><button id="sightDetail" onclick="window.open('<c:url value="/ShowSightDetail.controller?sightId=${sightVO.sightId}" />','sightDetail','height=500,width=500,toolbar=no,titlebar=no,status=no,left=450,top=350');">詳情</button></td>					
+					<td><button class="label label-primary" onclick="window.open('<c:url value="/ShowSightDetail.controller?sightId=${sightVO.sightId}" />','sightDetail','height=500,width=500,toolbar=no,titlebar=no,status=no,left=450,top=350');">詳情</button></td>					
 				</tr>
 				</table>
 				</c:forEach>
