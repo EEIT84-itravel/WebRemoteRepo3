@@ -39,8 +39,6 @@
 <script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
 <!-- jQuery ui -->
 <script type="text/javascript" src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
-<!-- 景點dialog功能 -->
-<script type="text/javascript" src="<c:url value="/js/sightDialog.js"/>"></script>
 <script>
 var sightId;
 var spendHour;
@@ -127,9 +125,9 @@ var spendHour;
 	            console.log( "oldIndex"+oldIndex );
 	            console.log( "newIndex"+newIndex );
 	            $(".tripDetailOrder"+sightId).html(newIndex);
-	            $.ajax({	//利用ajax傳到後端?
-// 	                type: 'post',
-// 	                url: '/PeopleGroups/DropOrderItem',
+	            $.ajax({	//傳到servlet修改值
+	                type: 'post',
+	                url: '<c:url value="/_02_TripAndJournal/member/UpdateTripDetailOrder.controller" />',
 // 	                data: {
 // 	                    oldIndex: oldIndex + 1,
 // 	                    newIndex: newIndex + 1
@@ -167,7 +165,21 @@ var spendHour;
 	function saveTripDetailCart() {		
 		$.post({		                
             url: '<c:url value="/_02_TripAndJournal/member/SaveTripDetailCart.controller" />',
-            cache: false          
+            cache: false,
+            success: function(){
+            	$("#divSaveSuccess").dialog({
+					resizable: false,					
+					height:150,
+					modal: true,
+					buttons: {
+						"確認": function() {							
+							$( this ).dialog( "close" );
+							//導向我的行程頁，按瀏覽器"上一頁"看不到東西
+							window.location.replace('<c:url value="/_05_Member/member/MyTrip.jsp" />');						
+						}
+					}
+				})            	
+            }
         });
 	};
 	
@@ -177,7 +189,14 @@ var spendHour;
 			url: '<c:url value="/_02_TripAndJournal/member/TripDetail.controller" />',
 			cache: false,
 			processData: false,
-			data:$('.tripDetailForm'+sightId).serialize()	//把form裡面的資料變成字串送出
+			data:$('.tripDetailForm'+sightId).serialize(),	//把form裡面的資料變成字串送出
+			success: function(){
+				$("#divUpdateSuccess").dialog({
+					resizable: false,					
+					height:150,
+					modal: true
+				})
+			}
 		});
 	}
 	
@@ -306,9 +325,21 @@ var spendHour;
 			</div>	<!-- end div tabs-1 -->
 			</div>	<!-- end div sightsTabs -->
 		</div><!-- end div right -->
+		
+		<!-- 儲存行程觸發的對話框 -->
 		<div id="dialog-confirm" title="確認儲存?">
  			<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>確定要儲存嗎?</p>
-		</div>
+		</div>	<!-- end div dialog-confirm -->
+		
+		<!-- 修改tripDeatil成功觸發的對話框 -->
+		<div id="divUpdateSuccess" title="修改成功" hidden="true">
+			<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>修改成功</p>
+		</div>	<!-- end div divUpdateSuccess -->
+		
+		<!-- 儲存tripDeatilCart成功觸發的對話框 -->
+		<div id="divSaveSuccess" title="儲存成功" hidden="true">
+			<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>儲存成功</p>
+		</div>	<!-- end div divUpdateSuccess -->
 	</article>
 	<footer>
 		<!-- import共同的 -->
