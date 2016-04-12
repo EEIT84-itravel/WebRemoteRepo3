@@ -27,7 +27,8 @@
 <script type="text/javascript">
 //DataTable設定
 var opt={
-	"sDom": '<"top">tf<"bottom"p><"clear">',	
+	"iDisplayLength": 15,
+	"sDom": '<"top"fp><"bottom"><"clear">',	
 	"oLanguage":{"sProcessing":"處理中...",
     "sLengthMenu":"顯示 _MENU_ 項結果",
     "sZeroRecords":"沒有匹配結果",

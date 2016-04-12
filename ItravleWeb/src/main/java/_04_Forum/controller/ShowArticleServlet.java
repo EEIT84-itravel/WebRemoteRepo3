@@ -21,14 +21,8 @@ import _04_Forum.model.ForumVO;
 @WebServlet("/_04_Forum/ShowArticle.controller")
 public class ShowArticleServlet extends HttpServlet {
 	
-//	@Override
-//	public void init() throws ServletException {
-//	
-//		String article = this.getInitParameter("forumId");
-//		ServletContext application = this.getServletContext();
-//		String path = application.getRealPath(article);	
-//	}
-
+    //**在討論區首頁印出所有文章**
+	
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// 接收資料
@@ -51,7 +45,7 @@ public class ShowArticleServlet extends HttpServlet {
 				List<MessageVO> messageVO = ms.getForumMessage(forumId);
 				if(forumVO != null ) {					
 					request.setAttribute("forumVO", forumVO);	
-					request.setAttribute("messageVO", messageVO);
+					request.setAttribute("messageVO1", messageVO);
 				    request.getRequestDispatcher("/_04_Forum/LookArticle.jsp").forward(request, response);
 				}
 	}

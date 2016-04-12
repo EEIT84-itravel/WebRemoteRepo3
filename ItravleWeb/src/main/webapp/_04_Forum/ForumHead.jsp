@@ -38,7 +38,7 @@
 				href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type08" />">購物</a>&nbsp;&nbsp;</li>
 			<li><a
 				href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type09" />">金錢</a>&nbsp;&nbsp;</li>
-		<li><input type="submit" name="forumAction" value="發表文章" /></li>
+		<li><input type="button" name="forumAction" value="發表文章" onclick="location.href='<c:url value="/_04_Forum/member/Article.jsp?crud=NewArticle"/>'"/></li>
 		</ul>
 		<ul></ul>
 	</div>

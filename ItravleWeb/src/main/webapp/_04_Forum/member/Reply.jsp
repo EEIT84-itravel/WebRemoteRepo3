@@ -6,31 +6,41 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>I-Travel討論區回覆文章</title>
-<link rel="stylesheet" type="text/css" href="<c:url value="/css/_04_Forum/Forum.css"/>" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/css/_04_Forum/Forum.css"/>" />
 <script type="text/javascript"
 	src="<c:url value="/js/_04_Forum/ckeditor/ckeditor.js" />"></script>
 </head>
 
 <body>
 	<form
-		action="<c:url value="/_04_Forum/member/ReplyArticle.controller"/>"
+		action="<c:url value="/_04_Forum/member/MessageServlet.controller"/>"
 		method="post">
-		<input type="hidden" name="messageType" value="type_id05">
+		<!--抓到LookArticle.jsp傳過來的值 -->
+
+		<input type="hidden" name="referenceNo" value="${param.referenceNo}">
+		<input type="hidden" name="messageId" value="${param.messageId}">
+		<input type="hidden" name="messageId" value="${param.messageId}">
+		<input type="hidden" name="messageContent" value="${param.content}">
+		<input type="hidden" name="crud" value="${param.crud}">
+
+
 		<div id="header">
 			<table>
 				<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
 				<tr>
 					<td>回覆內容：</td>
-					<td><textarea rows="5" cols="40" name="content"></textarea></td>
+					<td><textarea rows="5" cols="40" name="content">${param.messageContent}</textarea></td>
 					<script>
 						CKEDITOR.replace('content', {
-							width:700,
+							width : 700,
 						});
 					</script>
 					<td><span class="error">${error.content}</span></td>
 				</tr>
 				<tr>
-					<td><input type="submit" value="確定回覆"></td>
+					<td><input type="submit" value="確定回覆"
+						onclick="if(confirm('您確定回覆此文章嗎?')) return true;else return false"></td>
 				</tr>
 				<tr>
 					<td></td>

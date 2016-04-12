@@ -30,7 +30,7 @@ public class MessageDAOHibernate {
 		return messageVo;
 	}
 	//抓討論區之留言
-	private static final String GET_ALL_FORUMMESSAGE = "from MessageVO where referenceNo=:referenceNo order by updateTime";
+	private static final String GET_ALL_FORUMMESSAGE = "from MessageVO where referenceNo=:referenceNo order by messageId";
 	public List<MessageVO> getForumMessage(Integer referenceNo) {
 		List<MessageVO> list = null;
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
@@ -69,7 +69,7 @@ public class MessageDAOHibernate {
 				.getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(messageVO);
+			session.update(messageVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
