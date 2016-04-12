@@ -12,50 +12,53 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import _02_TripAndJournal.model.TripDetailService;
-import _02_TripAndJournal.model.TripDetailVO;
+import _02_TripAndJournal.model.JournalService;
+import _02_TripAndJournal.model.JournalVO;
 import _02_TripAndJournal.model.TripService;
 import _02_TripAndJournal.model.TripVO;
 
-@WebServlet("/_02_TripAndJournal/ShowAllTripServlet.controller")
-public class ShowAllTripServlet extends HttpServlet {
+@WebServlet("/_02_TripAndJournal/ShowAllJournalServlet.controller")
+public class ShowAllJournalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+
 		// 接收參數
 		request.setCharacterEncoding("UTF-8");
-		String temp = request.getParameter("tripId");
+		String temp = request.getParameter("journalId");
 		Map<String, String> error = new HashMap<String, String>();
 		request.setAttribute("error", error);
 		// 型態轉換
-		int tripId = 0;
+		int journalId = 0;
 		if (temp != null && temp.trim().length() != 0) {
-			tripId = Integer.parseInt(temp);
+			journalId = Integer.parseInt(temp);
 		} else {
-			error.put("tripId", "行程ID必須是數字");
+			error.put("journalId", "遊記ID必須是數字");
 		}
 		// 資料驗證-無
 
-		TripService tripService = new TripService();
-		List<TripVO> tripVOs = null;
-		TripVO tripVO = null;
-		if (tripId == 0) {
-			tripVOs = tripService.getAll();
+		// 呼叫model
+		JournalService journalService = new JournalService();
+
+		List<JournalVO> journalVOs = null;
+		JournalVO journalVO = null;
+		if (journalId == 0) {
+			journalVOs = journalService.getAll();
 		} else {
-			tripVO = tripService.select(tripId);
+			journalVO = journalService.select(journalId);
 		}
-		if (!tripVOs.isEmpty()) {
+		if (!journalVOs.isEmpty()) {
 			HttpSession session = request.getSession();
-			session.setAttribute("tripVOs", tripVOs);
-			session.setAttribute("tripVO", tripVO);
+			session.setAttribute("journalVOs", journalVOs);
+			session.setAttribute("journalVO", journalVO);
 			String path = request.getContextPath();
-			response.sendRedirect(path + "/_02_TripAndJournal/TripIndex.jsp");
+			response.sendRedirect(path + "/_02_TripAndJournal/JournalIndex.jsp");
 		} else {
-			error.put("tripId", "查無行程資料");
+			error.put("journalId", "查無遊記資料");
 			request.getRequestDispatcher(
-					"/_02_TripAndJournal/member/NewTrip.jsp").forward(request,
-					response);
+					"/_02_TripAndJournal/member/NewJournal.jsp").forward(
+					request, response);
 		}
 	}
 

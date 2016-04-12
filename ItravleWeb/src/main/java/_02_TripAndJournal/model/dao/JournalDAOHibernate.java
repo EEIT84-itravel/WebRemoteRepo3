@@ -1,7 +1,5 @@
 package _02_TripAndJournal.model.dao;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 import _00_Misc.HibernateUtil_H4_Ver1;
@@ -11,32 +9,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 public class JournalDAOHibernate {
-
-	public static void main(String[] args) {
-		JournalDAOHibernate dao = new JournalDAOHibernate();
-		// System.out.println(dao.select(1));
-		// List<JournalVO> vo = dao.select();
-		// System.out.println(vo);
-		JournalVO bean = new JournalVO();
-		bean.setJournalId(7);
-		bean.setMemberId(3);
-		bean.setJournalName("呵呵哈哈ㄏff f f f f f ");
-		bean.setJournalIntro("今天天氣很溫和，很適");
-		bean.setBeginTime(new java.sql.Date(0));
-		bean.setEndTime(java.sql.Date.valueOf("2016-01-25"));
-		bean.setRegionId("region02");
-		bean.setVisitorNum(1);
-		java.util.Date now = new Date();
-		long nowtime = now.getTime();
-		java.sql.Date rightnow = new java.sql.Date(nowtime);
-		java.sql.Timestamp timestamp = new Timestamp(new Date().getTime());
-		bean.setModifyTime(timestamp);
-		// System.out.println(dao.insert(bean));
-		System.out.println(dao.update(bean));
-
-		// dao.delete(10);
-
-	}
 
 	// 單筆查詢
 	public JournalVO select(int journal_id) {
@@ -98,7 +70,6 @@ public class JournalDAOHibernate {
 			throw ex;
 		}
 		return vo;
-
 	}
 
 	// 刪除資料

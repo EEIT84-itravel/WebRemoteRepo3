@@ -21,10 +21,10 @@ import _02_TripAndJournal.model.JournalDetailVO;
 import _02_TripAndJournal.model.JournalPhotoService;
 import _02_TripAndJournal.model.JournalPhotoVO;
 
-@WebServlet(urlPatterns = { "/_01_Sight/ShowSightMainPic2.controller" },
-initParams = { @WebInitParam(name = "defaultFile", value = "/img/x.png") })
+@WebServlet(urlPatterns = { "/_02_TripAndJournal/ShowJournalMainPic.controller" }, initParams = { @WebInitParam(name = "defaultFile", value = "/img/x.png") })
 public class ShowJournalMainPic extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	// private File defaultPhoto;
 	private byte[] defaultPhoto;
 
 	@Override
@@ -63,12 +63,13 @@ public class ShowJournalMainPic extends HttpServlet {
 			journalId = Integer.parseInt(temp1);
 		}
 		// 驗證資料-無
-
+		
 		// 呼叫Model
 		JournalDetailService jds = new JournalDetailService();
-		List<JournalDetailVO> journalDetailVOs = jds.selectByJournalId(journalId);
-		JournalPhotoService jps=new JournalPhotoService();
-		JournalPhotoVO  journalPhotoVO=jps.selectCover(journalDetailVOs);
+		List<JournalDetailVO> journalDetailVOs = jds
+				.selectByJournalId(journalId);
+		JournalPhotoService jps = new JournalPhotoService();
+		JournalPhotoVO journalPhotoVO = jps.selectCover(journalDetailVOs);
 		byte[] bytes = null;
 		if (journalPhotoVO != null) {
 			bytes = journalPhotoVO.getJournalPhoto();
@@ -88,5 +89,4 @@ public class ShowJournalMainPic extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }

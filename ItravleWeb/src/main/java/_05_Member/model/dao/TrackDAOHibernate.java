@@ -8,7 +8,6 @@ import java.util.*;
 import _00_Misc.HibernateUtil_H4_Ver1;
 import _05_Member.model.TrackVO;
 
-
 public class TrackDAOHibernate {
 
 	private static final String GET_ALL_STMT = "from TrackVO order by  trackNo";
@@ -126,43 +125,4 @@ public class TrackDAOHibernate {
 		return list;
 
 	}
-
-	public static void main(String[] ages) {
-		TrackDAOHibernate dao = new TrackDAOHibernate();
-
-		// selectAll
-		// List <TrackVO> list = dao.getall();
-		// for(TrackVO aMember: list ){
-		// System.out.println(aMember);
-		// }
-
-		// select
-		// TrackVO res = dao.findByPrimaryKey(1);
-		// System.out.println(res);
-        // 用帳號查追蹤
-		//List<TrackVO> res = dao.findByMemberId(1);
-		//System.out.println(res);
-		//用帳號跟被追蹤作者查一筆
-		//List<TrackVO> res = dao.findByMemberIdAndFollowMember(1,2);
-		//System.out.println(res);
-		// update
-		// TrackVO res = dao.findByPrimaryKey(1);
-		// res.setMemberId(1);
-		// dao.update(res);
-		// System.out.println(res);
-
-		// insert
-		//TrackVO res = new TrackVO();
-		//res.setFollowMember(4);
-		//res.setMemberId(1);
-		//dao.insert(res);
-		// TrackVO res = dao.findByPrimaryKey(1);
-		// dao.insert(res);
-		// System.out.println(res);
-
-		// delete
-		// dao.delete(3);
-
-	}
-
 }

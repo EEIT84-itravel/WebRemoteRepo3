@@ -27,7 +27,7 @@ public class TripDetailService {
 	}
 
 	// 只選取各行程之行程明細第一筆資料,用於顯示行程主圖之功能
-	public List<TripDetailVO> getAll() {
+	public List<TripDetailVO> getMainPics() {
 		List<TripDetailVO> result = new LinkedList<TripDetailVO>();
 		tripDetailDAOHibernate = new TripDetailDAOHibernate();
 		List<TripDetailVO> temp = tripDetailDAOHibernate.select();

@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import java.util.*;
 
 import _00_Misc.HibernateUtil_H4_Ver1;
-import _05_Member.model.CollectionVO;
 import _05_Member.model.FriendVO;
 
 public class FriendDAOHibernate {
@@ -45,7 +44,6 @@ public class FriendDAOHibernate {
 		} catch (RuntimeException e) {
 			session.getTransaction().rollback();
 			throw e;
-
 		}
 		return friendVO;
 	}
@@ -165,40 +163,5 @@ public class FriendDAOHibernate {
 		 }
 		 System.out.println("false");
 		 return null;
-		
-	}
-	public static void main(String[] args) {
-
-		FriendDAOHibernate dao = new FriendDAOHibernate();
-		// selectAll
-		// List <FriendVO> list = dao.getall();
-		// for(FriendVO aMember: list ){
-		// System.out.println(aMember);
-		// }
-
-		// select
-		// FriendVO res = dao.findByPrimaryKey(1);
-		// System.out.println(res);
-		
-		//從帳號與好友(會員)編號找到該筆資料的好友編號
-		// List<FriendVO> res = dao.selectbyMemberIdAndFriendId(1,4);
-		// for(FriendVO friend : res){
-		// System.out.println(friend);
-		// }
-		// update
-		// FriendVO res = dao.findByPrimaryKey(6);
-		// res.setFriendId(3);
-		// dao.update(res);
-		// System.out.println(res);
-
-		// insert
-		// FriendVO res = dao.findByPrimaryKey(1);
-		// dao.insert(res);
-		//FriendVO res1 = dao.findByPrimaryKey(5);
-		//System.out.println(res1);
-
-		// delete
-		// System.out.println(dao.delete(13));
-
 	}
 }

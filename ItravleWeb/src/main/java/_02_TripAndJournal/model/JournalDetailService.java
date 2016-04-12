@@ -1,11 +1,8 @@
 package _02_TripAndJournal.model;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import _02_TripAndJournal.model.dao.JournalDetailDAOHibernate;
-import _02_TripAndJournal.model.dao.JournalPhotoDAOHibernate;
-import _02_TripAndJournal.model.dao.TripDetailDAOHibernate;
 
 public class JournalDetailService {
 	private JournalDetailDAOHibernate journalDetailDAOHibernate;
