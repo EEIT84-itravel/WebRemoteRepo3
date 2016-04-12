@@ -17,14 +17,15 @@
 	List<TripVO> tripVO = tripService.selectFromMember(1);//測試時榜定memberID
 	pageContext.setAttribute("tripVO", tripVO);
 %>
-<title>從我的遊記選取</title>
+<title>ITravel-從我的遊記選取</title>
 </head>
 <body>
 	<header>
 		<!-- import共同的 -->
 	</header>
-	<nav>
+	<nav class="navbar navbar-inverse" role="navigation">
 		<!-- import共同的 -->
+		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article>
 		<form

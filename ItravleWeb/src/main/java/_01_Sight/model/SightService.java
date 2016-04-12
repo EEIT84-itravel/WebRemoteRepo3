@@ -1,10 +1,7 @@
 package _01_Sight.model;
 
-
-import java.util.Arrays;
 import java.util.List;
 
-import _00_Misc.model.CodeVO;
 import _01_Sight.model.dao.SightDAOHibernate;
 
 public class SightService {
@@ -39,5 +36,4 @@ public class SightService {
 		result = dao.selectByType(sightType);
 		return result;
 	}
-
 }

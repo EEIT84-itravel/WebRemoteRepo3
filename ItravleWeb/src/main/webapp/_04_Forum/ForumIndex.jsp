@@ -50,6 +50,14 @@ $(document).ready(function(){
 <title>ITravel討論區</title>
 </head>
 <body>
+	<header>
+		<!-- import共同的 -->
+	</header>
+	<nav class="navbar navbar-inverse" role="navigation">
+		<!-- import共同的 -->
+		<jsp:include page="/_00_Misc/top.jsp" />
+	</nav>
+	<article>
 	<form action="<c:url value="/_04_Forum/Forum.controller"/>"
 		method="post">
 		<div id="header">
@@ -94,5 +102,9 @@ $(document).ready(function(){
 			</table>
 		</div>
 	</form>
+	</article>
+	<footer>
+		<!-- import共同的 -->
+	</footer>
 </body>
 </html>

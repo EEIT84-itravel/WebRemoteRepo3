@@ -14,14 +14,11 @@
 	pageContext.setAttribute("region", region);
 %>
 <!-- jQuery ui -->
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
 <!-- jQuery -->
-<script type="text/javascript"
-	src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
 <!-- jQuery ui -->
-<script type="text/javascript"
-	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		//起始日期用jQuery UI
@@ -44,15 +41,20 @@
 
 	});
 </script>
+<style type="text/css">
+article {
+	margin: 20px;
+}
+</style>
 <title>ITravel-建立新遊記</title>
-
 </head>
 <body>
 	<header>
 		<!-- import共同的 -->
 	</header>
-	<nav>
+	<nav class="navbar navbar-inverse" role="navigation">
 		<!-- import共同的 -->
+		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article>
 		<h3>建立新的遊記</h3>
@@ -88,7 +90,7 @@
 					<td><span class="error">${error.regionId}</span></td>
 				</tr>
 				<tr>
-					<td>行程簡介:</td>
+					<td>遊記簡介:</td>
 					<td><textarea name="journalIntro" rows="4" cols="50">${param.journalIntro}</textarea></td>
 					<td><span class="error">${error.journalIntro}</span></td>
 				</tr>

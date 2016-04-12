@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
@@ -30,7 +30,15 @@ function confirmDeleteMessage(n,m) {
 
 </head>
 <body>
-	<form method="post">
+	<header> 
+	<!-- import共同的 --> 
+	</header>
+	<nav class="navbar navbar-inverse" role="navigation"> 
+		<!-- import共同的 -->
+		<jsp:include page="/_00_Misc/top.jsp" />
+	</nav>
+	<article>
+	<form action="<c:url value="/_04_Forum/member/Reply.controller"/>" method="post">
 		<div id="header">
 			<table border="1">
 				<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
@@ -62,7 +70,11 @@ function confirmDeleteMessage(n,m) {
 					<td>文章主題：${forumVO.forumTopic} <span class="error">${error.forumTopic}</span></td>
 				</tr>
 				<tr>
+<<<<<<< HEAD
 					<td>文章內容：${forumVO.forumContent}</td>
+=======
+					<td>文章內容：${forumVO.forumContent}</td>				
+>>>>>>> branch 'master' of https://github.com/EEIT84-itravel/WebRemoteRepo3.git
 				</tr>
 				<tr>
 					<td>最後修改日期：${forumVO.forumTime}</td>
@@ -72,15 +84,25 @@ function confirmDeleteMessage(n,m) {
 				</tr>
 				<tr>
 					<td>文章編號：${forumVO.forumId}</td>
+<<<<<<< HEAD
 				</tr>
 				<tr>
 					<td><input type="button" onclick="history.back()" value="上一頁" />
 						<a href="/ItravleWeb/_04_Forum/ForumIndex.jsp">回討論區首頁</a></td>
 				</tr>
+=======
+				</tr>
+				<input type="button" onclick="history.back()" value="上一頁" />
+				<a href="/ItravleWeb/_04_Forum/ForumIndex.jsp">回討論區首頁</a>
+>>>>>>> branch 'master' of https://github.com/EEIT84-itravel/WebRemoteRepo3.git
 			</table>
 
 			<table border='1' bgcolor="yellow">
+<<<<<<< HEAD
 				<c:forEach var="messageVO" items="${messageVO1}">
+=======
+				<c:forEach var="messageVO" items="${messageVO}">
+>>>>>>> branch 'master' of https://github.com/EEIT84-itravel/WebRemoteRepo3.git
 					<tr>
 						<c:url value="/_04_Forum/member/Reply.jsp" var="reply"
 							scope="request">
@@ -103,11 +125,25 @@ function confirmDeleteMessage(n,m) {
 					</tr>
 					<tr>
 						<td>回覆內容：${messageVO.content}<br></td>
+<<<<<<< HEAD
 						<td>ID${messageVO.messageId}</td>
 					</tr>
+=======
+					</tr>					
+>>>>>>> branch 'master' of https://github.com/EEIT84-itravel/WebRemoteRepo3.git
 				</c:forEach>
+<<<<<<< HEAD
 			</table>
 		</div>
 	</form>
+=======
+				</table>
+			</div>
+		</form>
+	</article>
+	<footer> 
+	<!-- import共同的 --> 
+	</footer>
+>>>>>>> branch 'master' of https://github.com/EEIT84-itravel/WebRemoteRepo3.git
 </body>
 </html>
