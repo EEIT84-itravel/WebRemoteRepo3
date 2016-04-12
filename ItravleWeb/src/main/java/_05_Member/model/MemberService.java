@@ -31,10 +31,21 @@ public class MemberService {
 	 }
 	 return false;
  }
+ public boolean modify(MemberVO membervo){
+	 if(membervo != null){
+			memberDAO.update(membervo);
+			return true;
+			 }
+			 return false;
+	 
+ }
  public List<MemberVO> selectAll(String memberAccount){
 	 return memberDAO.findByAccount(memberAccount);
  }
  public List<MemberVO> selectAllByCellphone(String cellphone){
 	 return memberDAO.findByCellphone(cellphone);
+ }
+ public MemberVO selectById(Integer memberId){
+	 return memberDAO.findByPrimaryKey(memberId);
  }
 }

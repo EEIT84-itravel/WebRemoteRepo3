@@ -41,12 +41,10 @@ var path = "${pageContext.request.contextPath}";
 		 	sendRequest2("GET", url2, id2);
 		});
 
-		$('input[name="memberAccount"]').focus(function() {
-	 		$('input[name="memberAccount"]').val("");
+		$('input[name="memberAccount"]').focus(function() {	
 		 	$("span:eq(2)").empty("");
 		});
 		$('input[name="cellphone"]').focus(function() {
-	 		$('input[name="cellphone"]').val("");
 		 	$("span:eq(6)").empty("");
 		});
 	});
@@ -56,7 +54,7 @@ var path = "${pageContext.request.contextPath}";
 <h3>註冊會員</h3>
 <h5 style="color:red">*為必填欄位</h1>
 
-<form action="<c:url value="/_05_Member/registered.controller" />"  method="get">
+<form action="<c:url value="/_05_Member/registered.controller" />"  method="post" enctype="multipart/form-data">
 
 <table>
 <tr>

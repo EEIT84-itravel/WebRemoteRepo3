@@ -152,8 +152,9 @@ public class MemberDAOHibernate {
 		// select  by 帳號
 		// MemberVO res = dao.findByAccount("a12345");
 		// System.out.println(res);
+		
 		// update
-		// MemberVO res = dao.findByPrimaryKey(6);
+		// MemberVO res = dao.findByPrimaryKey(1);
 		// res.setMemberAccount("a123456");
 		// dao.update(res);
 		// System.out.println(res);
