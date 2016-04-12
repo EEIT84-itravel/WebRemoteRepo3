@@ -29,7 +29,7 @@ public class JournalVO implements Serializable{   //遊記
 	public void setJournalId(Integer journalId) {
 		this.journalId = journalId;
 	}
-	public boolean isPost() {
+	public boolean getPost() {
 		return post;
 	}
 	public void setPost(boolean post) {

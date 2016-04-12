@@ -2,7 +2,6 @@ package _02_TripAndJournal.controller;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.Time;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import _02_TripAndJournal.model.JournalService;
 import _02_TripAndJournal.model.JournalVO;
-import _02_TripAndJournal.model.TripService;
-import _02_TripAndJournal.model.TripVO;
 
 @WebServlet("/_02_TripAndJournal/member/NewJournal.controller")
 public class NewJournalServlet extends HttpServlet {

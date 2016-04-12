@@ -35,7 +35,7 @@ public class JournalPhotoVO implements Serializable{   //遊記照片
 	public void setJournalPhoto(byte[] journalPhoto) {
 		this.journalPhoto = journalPhoto;
 	}
-	public boolean isCover() {
+	public boolean getCover() {
 		return cover;
 	}
 	public void setCover(boolean cover) {

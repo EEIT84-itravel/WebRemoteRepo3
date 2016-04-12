@@ -14,52 +14,6 @@ import _01_Sight.model.SightVO;
 
 public class SightDAOHibernate {
 
-	public static void main(String[] args) {
-		SightDAOHibernate dao = new SightDAOHibernate();
-		SightVO sightVO = dao.findByPrimaryKey(1);
-		System.out.println("findByPrimaryKey測試: " + sightVO);
-
-		// sightVO.setDel(true);
-		// sightVO.setDel(false);
-		// java.util.Date now = new Date();
-		// long nowLong = now.getTime();
-		// java.sql.Timestamp sqlDate = new Timestamp(nowLong);
-		// sightVO.setModifyTime(sqlDate);
-		// SightVO sightVOupdate = dao.update(sightVO);
-		// System.out.println("update測試: " + sightVOupdate);
-
-		// SightVO sightVO2 = new SightVO();
-		// sightVO2.setSightName("testsight");
-		// sightVO2.setRegionId("region01");
-		// sightVO2.setCountyId("county01");
-		// sightVO2.setSightTypeId("sight_type01");
-		// java.sql.Time open= java.sql.Time.valueOf("09:00:00");
-		// sightVO2.setOpenTime(open);
-		// java.sql.Time close = java.sql.Time.valueOf("21:00:00");
-		// sightVO2.setCloseIime(close);
-		// java.sql.Time spend = java.sql.Time.valueOf("03:00:00");
-		// sightVO2.setSpendHour(spend);
-		// sightVO2.setPlayPeriod("sight_time05");
-		// sightVO2.setScore(0F);
-		// sightVO2.setLongitude(121.56455F);
-		// sightVO2.setLatitude(25.033602F);
-		// java.util.Date now2 = new Date();
-		// long nowLong2 = now2.getTime();
-		// java.sql.Timestamp sqlDate2 = new Timestamp(nowLong2);
-		// sightVO2.setCreateTime(sqlDate2);
-		// sightVO2.setCreator(1);
-		// sightVO2.setModifyTime(sqlDate2);
-		// sightVO2.setModifier(2);
-		// SightVO sightVOinsert = dao.insert(sightVO2);
-		// System.out.println("insert測試: " + sightVOinsert);
-
-		// boolean sightVOdelete = dao.delete(12);
-		// System.out.println("delete測試: " + sightVOdelete);
-
-		// List<SightVO> sightVOs = dao.selectAll();
-		// System.out.println("selectAll測試: " + sightVOs);
-	}
-
 	// 進階搜尋測試
 	//private static final String SEARCH = "from SightVO where region_id=:region_id and county_id=:county_id and sight_type_id=:sight_type_id and ticket=:ticket and play_period=:play_period";
 	private static final String SEARCH = "from SightVO where region_id=:region_id and county_id=:county_id and sight_type_id=:sight_type_id";
@@ -137,7 +91,6 @@ public class SightDAOHibernate {
 			session.getTransaction().rollback();
 			e.printStackTrace();
 		}
-
 		return sightVOs;
 	}
 

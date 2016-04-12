@@ -35,16 +35,16 @@
         <property name="cellphone" type="java.lang.String">
             <column name="cellphone" />
         </property>
-        <property name="admin" type="java.lang.Boolean">
+        <property name="admin" type="java.lang.Boolean" insert="false">
             <column name="admin" />
         </property>
-        <property name="del" type="java.lang.Boolean">
+        <property name="del" type="java.lang.Boolean" insert="false">
             <column name="del" />
         </property>
         <property name="modifier" type="java.lang.Integer">
             <column name="modifier" />
         </property>
-        <property name="modiftyTime" type="java.sql.Timestamp">
+        <property name="modiftyTime" type="java.sql.Timestamp" insert="false">
             <column name="modifty_time" />
         </property>
     </class>

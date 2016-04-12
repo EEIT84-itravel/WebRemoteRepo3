@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>sightDetail</title>
+<title>ITravel-SightDetail</title>
 <meta name="viewport" content="initial-scale=1.0">
 <meta charset="utf-8">
 <style>
@@ -44,10 +44,12 @@ var sightName;
 	<script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
 </head>
 <body>
+	<h3>${error.sightDetail}</h3>	<!--錯誤處理  -->
+	<c:if test="${not empty sightVO}">
     <div id="map"></div>
 	<div id="dialog-form" title="SightDetail">
  			<form class="sightDetailForm">
-				<fieldset>
+				<fieldset>						
 							<label>名稱；</label><span id="mySight">${sightVO.sightName}</span><br>
 							<label>地區；</label> 
 							<c:forEach var="codeVO" items="${codeSvc.all}">
@@ -90,6 +92,7 @@ var sightName;
 							<input type="button" value="close" onclick="window.close()">
 					</fieldset>
 			</form>
-</div>
+	</div>
+	</c:if>
 </body>
 </html>

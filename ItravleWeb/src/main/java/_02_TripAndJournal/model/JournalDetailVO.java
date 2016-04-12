@@ -8,14 +8,22 @@ public class JournalDetailVO implements Serializable{  //遊記明細
 	private Integer sightId; //景點編號
 	private Integer sightOrder; //景點順序
 	private String sightJournal; //景點的遊記
+	private Integer whichDay; //第幾天
 	
 	
+
 	@Override
 	public String toString() {
 		return "JournalDetailVO [journalDetailId=" + journalDetailId
 				+ ", journalId=" + journalId + ", sightId=" + sightId
-				+ ", sightOrder=" + sightOrder + ", sightJournal=" + sightJournal
-				+ "]";
+				+ ", sightOrder=" + sightOrder + ", sightJournal="
+				+ sightJournal + ", whichDay=" + whichDay + "]";
+	}
+	public Integer getWhichDay() {
+		return whichDay;
+	}
+	public void setWhichDay(Integer whichDay) {
+		this.whichDay = whichDay;
 	}
 	public Integer getJournalDetailId() {
 		return journalDetailId;
