@@ -86,12 +86,6 @@ function confirmDeleteMessage(n,m) {
 						<a href="/ItravleWeb/_04_Forum/ForumIndex.jsp">回討論區首頁</a></td>
 				</tr>
 			</table>
-			</div>
-			</form>
-			</article>
-			<article>
-			<form>
-			<div>
 			<table border='1'>
 
 				<c:forEach var="messageVO" items="${messageVO1}">
@@ -99,15 +93,8 @@ function confirmDeleteMessage(n,m) {
 						<c:url value="/_04_Forum/member/Reply.jsp" var="reply"
 							scope="request">
 							<c:param name="referenceNo" value="${forumVO.forumId}" />
-							<c:param name="replyNum" value="${forumVO.replyNum}"/>
-							<c:param name="forumTypeId" value="${forumVO.forumTypeId}"/>
-							<c:param name="forumTopic" value="${forumVO.forumTopic}"/>
-							<c:param name="forumContent" value="${forumVO.forumContent}"/>
-							<c:param name="visitorNum" value="${forumVO.visitorNum}"/>
-							<c:param name="forumTime" value="${forumVO.forumTime}"/>
 							<c:param name="messageId" value="${messageVO.messageId}" />
 							<c:param name="messageContent" value="${messageVO.content}" />
-							<c:param name="memberId" value="${messageVO.memberId}"/>
 							<c:param name="crud" value="Update" />
 						</c:url>
 						<td>

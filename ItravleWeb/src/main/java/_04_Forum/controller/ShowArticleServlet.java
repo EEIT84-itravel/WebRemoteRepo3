@@ -42,6 +42,7 @@ public class ShowArticleServlet extends HttpServlet {
 		// 呼叫Model
 				ForumService fs = new ForumService();
 				ForumVO forumVO = fs.selectOne(forumId);
+				//將瀏覽人次加1
 				forumVO.setForumId(forumId);
 				forumVO.setVisitorNum(forumVO.getVisitorNum()+1);
 				fs.update(forumVO);
