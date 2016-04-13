@@ -16,29 +16,37 @@ public class MemberService {
 				System.out.println("Success");
 				return memberbean;
 			}
-		}
-		System.out.println("false");
-		return null;
-	}
-
-	public boolean registered(MemberVO membervo) {
-		if (membervo != null) {
-			memberDAO.insert(membervo);
+	 }
+	 System.out.println("false");
+	 return null;
+ }
+ public boolean registered(MemberVO membervo){ //註冊會員資料
+	 if(membervo != null){
+	memberDAO.insert(membervo);
+	return true;
+	 }
+	 return false;
+ }
+ public boolean modify(MemberVO membervo){ //修改會員資料
+	 if(membervo != null){
+			memberDAO.update(membervo);
 			return true;
-		}
-		return false;
-	}
-
-	public List<MemberVO> selectAll(String memberAccount) {
-		return memberDAO.findByAccount(memberAccount);
-	}
-
+			 }
+			 return false;
+	 
+ }
+ public List<MemberVO> selectAll(String memberAccount){
+	 return memberDAO.findByAccount(memberAccount);
+ }
 	// ELjoin時使用
-	public List<MemberVO> getAll() {
-		return memberDAO.getall();
-	}
+public List<MemberVO> getAll() {
+	 return memberDAO.getall();
+ }
+ public List<MemberVO> selectAllByCellphone(String cellphone){
+	 return memberDAO.findByCellphone(cellphone);
+ }
+ public MemberVO selectById(Integer memberId){
+	 return memberDAO.findByPrimaryKey(memberId);
+ }
 
-	public List<MemberVO> selectAllByCellphone(String cellphone) {
-		return memberDAO.findByCellphone(cellphone);
-	}
 }

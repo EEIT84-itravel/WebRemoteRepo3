@@ -17,23 +17,21 @@ import javax.servlet.http.HttpSession;
 
 import _02_TripAndJournal.model.TripDetailVO;
 
-@WebServlet("/_02_TripAndJournal/member/TripDetail.controller")
-public class TripDetailServlet extends HttpServlet {
-	// 本Servlet功能：把每筆tripDetail存到session
+@WebServlet("/_02_TripAndJournal/member/AddToTripDetailCart.controller")
+public class AddToTripDetailCart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	HttpSession session;
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
-	HttpSession session;
-
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("------------------TripDetail------------------");
 		// 接收HTML Form資料
+		System.out.println("------------------AddToTripDetailCart------------------");
 		String temp1 = request.getParameter("tripId");
 		String temp2 = request.getParameter("tripOrder");
 		String temp3 = request.getParameter("stayTime");
@@ -51,7 +49,7 @@ public class TripDetailServlet extends HttpServlet {
 		System.out.println("notes:" + notes);
 		System.out.println("sightBudget:" + temp6);
 		System.out.println("------------------------");
-
+		
 		Map<String, String> error = new HashMap<String, String>();
 		request.setAttribute("error", error);
 
@@ -124,51 +122,23 @@ public class TripDetailServlet extends HttpServlet {
 		if (session != null) {
 			try {
 				tripDetailCart = (LinkedList<TripDetailVO>) session.getAttribute("tripDetailCart");			
-				if (tripDetailCart != null) {
-					System.out.println("tripDetailCart=" + tripDetailCart);
-					// 檢查這個VO是否存在
-					Iterator<TripDetailVO> it = tripDetailCart.iterator();
-					TripDetailVO tripDetailVO2 = null;
-					int order = -1;
-					while (it.hasNext()) {
-						tripDetailVO2 = it.next();
-						int tripOrder2 = tripDetailVO2.getTripOrder();
-						if (tripOrder == tripOrder2) {
-							System.out.println("tripOrder一樣");
-							// 取得存在的那筆是第幾筆
-							order = tripDetailCart.indexOf(tripDetailVO2);
-							System.out.println("order=" + order);
-							tripDetailCart.remove(tripDetailVO2);
-							break;
-						}
-					}
-					if (order > -1) {
-						// 把重複的換掉
-						tripDetailCart.add(order, tripDetailVO);
-					} else {
-						// 如果不是重複的就塞到最後面
-						tripDetailCart.add(tripDetailVO);
-					}
-					System.out.println(tripDetailCart);
-					session.setAttribute("tripDetailCart", tripDetailCart);
-				} else {
+				if (tripDetailCart == null) {					
 					// 建cart
 					tripDetailCart = new LinkedList<TripDetailVO>();
 					System.out.println("新建cart");
-					// vo丟進去
-					tripDetailCart.add(tripDetailVO);
-					session.setAttribute("tripDetailCart", tripDetailCart);
-					System.out.println("放進session");
-				}
+				}	
+				// vo丟進去
+				tripDetailCart.add(tripDetailVO);
+				session.setAttribute("tripDetailCart", tripDetailCart);
+				System.out.println("放進session");
+				System.out.println("tripDetailCart===>"+tripDetailCart);
 			} catch (ClassCastException e) {
 				System.out.println("Object cast to List<TripDetailVO> ClassCastException");
 				e.printStackTrace();
 			}
-		} else {
-			// 請使用者登入
-			System.out.println("導向登入頁面(未完成)");
-		}	
-
+		}
 	}
+	
+	
 
 }
