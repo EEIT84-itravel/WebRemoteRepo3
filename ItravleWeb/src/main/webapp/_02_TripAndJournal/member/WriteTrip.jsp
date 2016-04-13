@@ -72,9 +72,11 @@ var spendHour;
 			drop : function(event, ui) {
 				$(this).find(".placeholder").remove();	//移除Add your items here
 				//放下的時候黏form上去，一個tirpDetail是一個form
-				$(".tripDetail").append('<form class="tripDetailForm'+sightId+'" action="" method="post"><table><tr><td rowspan="2" class="tripDetailPic'+sightId+'"></td><td rowspan="2"><span class="tripDetailSightId'+sightId+'"></span></td><td rowspan="2"><span class="tripDetailSightName'+sightId+'"></span></td><td rowspan="2"><input type="hidden" name="sightId" value="'+sightId+'"/></td><td><label>行程順序：</label><span class="tripDetailOrder'+sightId+'"></span></td><td><label>停留時間：</label><input type="text" name="stayTime" value="' + spendHour + '" size="10" /></td><td><label>預算：</label><input type="text" name="sightBudget" placeholder="請在此輸入預算" /></td><td><input type="button" value="修改" onclick="updateTripDetail()"/></td></tr><tr><td colspan="4"><label>筆記：</label><textarea name="notes" rows="3" cols="70"></textarea></td></tr><tr><td><input type="hidden" name="tripId" value="${tripVO.tripId}" /><P/></td><td><input type="hidden" name="whichDay" value=1 /><P/></td><td><input type="hidden" name="referenceType" value="type_id01" /><P/></td></tr></table></form>');
+				$(".tripDetail").append('<form class="tripDetailForm'+sightId+'" action="" method="post"></form>');
+				//把table黏上去
+				$(".tripDetailForm"+sightId).html('<table><tr><td rowspan="2" class="tripDetailPic'+sightId+'"></td><td rowspan="2"><span class="tripDetailSightId'+sightId+'"></span></td><td rowspan="2"><span class="tripDetailSightName'+sightId+'"></span></td><td rowspan="2"><input type="hidden" name="sightId" value="'+sightId+'"/></td><td><label>行程順序：</label><span class="tripDetailOrder'+sightId+'"></span></td><td><label>停留時間：</label><input type="text" name="stayTime" value="' + spendHour + '" size="10" /></td><td><label>預算：</label><input type="text" name="sightBudget" placeholder="請在此輸入預算" /></td><td><input type="button" value="修改" onclick="updateTripDetail()"/></td></tr><tr><td colspan="4"><label>筆記：</label><textarea name="notes" rows="3" cols="70"></textarea></td></tr><tr><td><input type="hidden" name="tripId" value="${tripVO.tripId}" /><P/></td><td><input type="hidden" name="whichDay" value=1 /><P/></td><td><input type="hidden" name="referenceType" value="type_id01" /><P/></td></tr></table>');			
 				//依照sightId抓到圖片，黏到剛剛的tr裡面
-				$(".tripDetailPic"+sightId).html('<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=' + sightId + '" />" width="80" height="60">');
+				$(".tripDetailPic"+sightId).html('<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=' + sightId + '" />" width="120" height="90">');
 				//抓到sightId，黏到剛剛的tr裡面
  				$(".tripDetailSightId"+sightId).html(sightId);
  				//抓到sightName，黏到剛剛的tr裡面
@@ -82,7 +84,8 @@ var spendHour;
  				//順序從1開始
  				var order = i;
  				console.log(order);
- 				$(".tripDetailOrder"+sightId).html('<input type="text" name="tripOrder" value="'+ order +'"/>'); 	
+//  				$(".tripDetailOrder"+sightId).html('<input type="text" name="tripOrder" value="'+ order +'"/>');
+ 				$(".tripDetailOrder"+sightId).html('<span>'+ order +'</span>');
  				//每次放下順序+2
  				i = i + 2;
 //  			console.log("i:" +i);
@@ -92,8 +95,9 @@ var spendHour;
 // 				console.log("sightId"+sightId);
 // 				console.log("spendHour"+spendHour);
 				//放下的同時寫一筆資料到session裡的tripDetailCart
-				$.post({		                
-	                url: '<c:url value="/_02_TripAndJournal/member/TripDetail.controller" />',
+				var jqxhr = $.post({		                
+					//資料回填?
+					url: '<c:url value="/_02_TripAndJournal/member/AddToTripDetailCart.controller" />',
 	                cache: false,
 	                data: {
 	                    tripId: tripId,
@@ -105,6 +109,9 @@ var spendHour;
 	                    notes: "",
 	                    sightBudget: 0 
 	                }
+	            }).fail(function(){
+	            	alert("購物車更新失敗");
+	            	//要再改成按鈕，按下後把畫面上的那一筆tripDetail刪除
 	            });
 			}		
 		});
@@ -114,24 +121,30 @@ var spendHour;
 			axis: 'y',	//只能延Y軸移動
 			start: function (event, ui) {
 				var start_pos = ui.item.index();		//被拖曳物件原本的順序(從0開始)
-				ui.item.data( 'start_pos', start_pos );	//把抓到的順序存到data裡
-				console.log(ui.item);
+				ui.item.data( 'start_pos', start_pos );	//把抓到的順序存到data裡				
 			},
 			update: function (event, ui) {	            
 	            var oldIndex = ui.item.data( 'start_pos' );	//從data裡取得被拖曳物件原本的順序(從0開始)
-	            newIndex = ui.item.index()+1;				//新的順序(從0開始)
+	            newIndex = ui.item.index();				//新的順序(從0開始)
 	            console.log( "update" );
 	            console.log( ui.item );
-	            console.log( "oldIndex"+oldIndex );
-	            console.log( "newIndex"+newIndex );
-	            $(".tripDetailOrder"+sightId).html(newIndex);
-	            $.ajax({	//傳到servlet修改值
+	            console.log( "oldIndex:"+oldIndex );
+	            console.log( "newIndex:"+newIndex );
+	            var data = $(this).sortable('serialize');
+	            console.log(data);
+	            var jqxhr = $.ajax({	//傳到servlet修改值
 	                type: 'post',
 	                url: '<c:url value="/_02_TripAndJournal/member/UpdateTripDetailOrder.controller" />',
-// 	                data: {
-// 	                    oldIndex: oldIndex + 1,
-// 	                    newIndex: newIndex + 1
-// 	                }
+	                data: {
+	                    oldIndex: oldIndex,
+	                    newIndex: newIndex
+	                },
+	                success:{
+	                	//成功後修改畫面上的資料?
+	                }
+	            }).fail(function(){
+	            	alert("更新失敗");
+	            	//要再改成按鈕，後續處理?
 	            });
 	        }
 	    });
@@ -163,10 +176,11 @@ var spendHour;
 	
 	//呼叫servlet把cart裡的東西寫到DB
 	function saveTripDetailCart() {		
-		$.post({		                
+		var jqxhr = $.post({		                
             url: '<c:url value="/_02_TripAndJournal/member/SaveTripDetailCart.controller" />',
-            cache: false,
+            cache: false,            
             success: function(){
+            	//資料回填?
             	$("#divSaveSuccess").dialog({
 					resizable: false,					
 					height:150,
@@ -180,6 +194,9 @@ var spendHour;
 					}
 				})            	
             }
+        }).fail(function(){
+        	alert("儲存失敗");
+        	//要再改成按鈕，後續處理?
         });
 	};
 	
@@ -189,15 +206,21 @@ var spendHour;
 			url: '<c:url value="/_02_TripAndJournal/member/TripDetail.controller" />',
 			cache: false,
 			processData: false,
-			data:$('.tripDetailForm'+sightId).serialize(),	//把form裡面的資料變成字串送出
+			data: $('.tripDetailForm'+sightId).serialize(),	//把form裡面的資料變成字串送出			
 			success: function(){
+				//資料回填?
 				$("#divUpdateSuccess").dialog({
 					resizable: false,					
 					height:150,
-					modal: true
+					modal: true,
+					buttons: {
+						"確認": function() {							
+							$( this ).dialog( "close" );												
+						}
+					}
 				})
 			}
-		});
+		});		
 	}
 	
 </script>
@@ -205,12 +228,15 @@ var spendHour;
 <body>
 	<header>
 		<!-- import共同的 -->
+		
 	</header>
 	<nav class="navbar navbar-inverse" role="navigation">
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
+		
 	</nav>
-	<article>		
+	<article>
+	<p>${pageContext.session.id}</p>
 		<div id="left">
 			<table>
 				<tr>
@@ -248,33 +274,35 @@ var spendHour;
 				<div class="day">第一天
 					<div class="tripDetail">
 						<!-- 拖過來的tripDetail長會在這裡 -->	
-						<!-- 從session取出tripDetailCart -->
-						<c:if test="${not empty sessionScope.tripDetailCart}">						
-						<c:forEach var="tripDetailVO" items="${sessionScope.tripDetailCart}">
-							<form id="tripDetailForm" action="" method="post">
-							<table>
-							<tr>
-								<td rowspan="2"><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${tripDetailVO.referenceNo}" />" width="80" height="60"></td>
-								<td rowspan="2">${tripDetailVO.referenceNo}</td>
-								<td rowspan="2">${tripDetailVO.referenceNo}景點名稱</td>
-								<td rowspan="2"><input type="hidden" name="sightId" value="${tripDetailVO.referenceNo}"/></td>
-								<td><label>行程順序：</label><input type="text" name="tripOrder" value="${tripDetailVO.tripOrder}" size="5" /><P/></td>
-								<td><label>停留時間：</label><input type="text" name="stayTime" value="${tripDetailVO.stayTime}" size="10"/></td>
-								<td><label>預算：</label><input type="text" name="sightBudget" value="${tripDetailVO.sightBudget}" /></td>
-								<td><input type="button" value="修改" onclick="updateTripDetail()"/></td>
-							</tr>
-							<tr>
-								<td colspan="4"><label>筆記：</label><textarea name="notes" rows="3" cols="70">${tripDetailVO.notes}</textarea></td>
-							</tr>
-							<tr>
-								<td><input type="hidden" name="tripId" value="${tripVO.tripId}" /><P/></td>							
-								<td><input type="hidden" name="whichDay" value="${tripDetailVO.whichDay}" /><P/></td>
-								<td><input type="hidden" name="referenceType" value="${tripDetailVO.referenceType}" /><P/></td>
-							</tr>
-							</table>
-							</form>
-						</c:forEach>
-						</c:if>						
+						<!-- 如果是舊的行程拿出來改，要從session取出tripDetailCart -->
+<%-- 						<c:if test="${not empty sessionScope.tripDetailCart}">										 --%>
+<%-- 						<c:forEach var="tripDetailVO" items="${sessionScope.tripDetailCart}"> --%>
+<%-- 						<c:if test="${tripDetailVO.tripId==tripVO.tripId}"> --%>
+<!-- 							<form id="tripDetailForm" action="" method="post"> -->
+<!-- 							<table> -->
+<!-- 							<tr> -->
+<%-- 								<td rowspan="2"><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${tripDetailVO.referenceNo}" />" width="80" height="60"></td> --%>
+<%-- 								<td rowspan="2">${tripDetailVO.referenceNo}</td> --%>
+<%-- 								<td rowspan="2">${tripDetailVO.referenceNo}景點名稱</td> --%>
+<%-- 								<td rowspan="2"><input type="hidden" name="sightId" value="${tripDetailVO.referenceNo}"/></td> --%>
+<%-- 								<td><label>行程順序：</label><input type="text" name="tripOrder" value="${tripDetailVO.tripOrder}" size="5" /><P/></td> --%>
+<%-- 								<td><label>停留時間：</label><input type="text" name="stayTime" value="${tripDetailVO.stayTime}" size="10"/></td> --%>
+<%-- 								<td><label>預算：</label><input type="text" name="sightBudget" value="${tripDetailVO.sightBudget}" /></td> --%>
+<!-- 								<td><input type="button" value="修改" onclick="updateTripDetail()"/></td> -->
+<!-- 							</tr> -->
+<!-- 							<tr> -->
+<%-- 								<td colspan="4"><label>筆記：</label><textarea name="notes" rows="3" cols="70">${tripDetailVO.notes}</textarea></td> --%>
+<!-- 							</tr> -->
+<!-- 							<tr> -->
+<%-- 								<td><input type="hidden" name="tripId" value="${tripVO.tripId}" /><P/></td>							 --%>
+<%-- 								<td><input type="hidden" name="whichDay" value="${tripDetailVO.whichDay}" /><P/></td> --%>
+<%-- 								<td><input type="hidden" name="referenceType" value="${tripDetailVO.referenceType}" /><P/></td> --%>
+<!-- 							</tr> -->
+<!-- 							</table> -->
+<!-- 							</form> -->
+<%-- 						</c:if> --%>
+<%-- 						</c:forEach> --%>						
+<%-- 						</c:if>						 --%>
 					</div>
    				</div>	<!-- end div day -->   				
 			</div>	<!-- end div 行程 -->

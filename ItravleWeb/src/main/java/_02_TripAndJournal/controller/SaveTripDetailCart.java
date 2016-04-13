@@ -26,10 +26,8 @@ public class SaveTripDetailCart extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 接收資料
-		String temp = request.getParameter("tripId");
-		System.out.println(temp);
-		
+		// 接收資料		
+
 		// 轉換資料
 		
 		// 驗證資料
@@ -44,7 +42,7 @@ public class SaveTripDetailCart extends HttpServlet {
 		
 		Iterator<TripDetailVO> it =tripDetailCart.iterator();
 		while (it.hasNext()) {
-			TripDetailVO tripDetailVO=it.next();
+			TripDetailVO tripDetailVO = it.next();
 			service.insert(tripDetailVO);
 			System.out.println("insert 成功");
 		}
