@@ -100,9 +100,16 @@ public class MemberModifyServlet extends HttpServlet {
 				member.setBirth(birthday);
 				member.setCellphone(cellphone);
 				byte[] p = new byte[is.available()];
+				if(p.length != 0){
 				is.read(p);
 				is.close();
 				member.setPhoto(p);
+				}else{
+					byte[] bytes = null;
+					bytes = memberService.selectById(memberId).getPhoto();
+					member.setPhoto(bytes);
+					} 
+				
 //				java.sql.Timestamp timestamp = new Timestamp( new
 //							 java.util.Date().getTime());
 //				member.setModiftyTime(timestamp);   //資料庫有預設   
