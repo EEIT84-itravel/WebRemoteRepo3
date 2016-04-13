@@ -16,15 +16,17 @@
 <title>I-Travel修改文章</title>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/css/_04_Forum/Forum.css"/>" />
-	<script type="text/javascript"
-	src="<c:url value="/js/_04_Forum/ckeditor/ckeditor.js" />"></script>
+	
+	<!-- CKeditor文本編輯器CDN碼，可直接變更最新版本號碼 -->
+	<script src="//cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
+
 <script type="text/javascript">
 </script>
 </head>
 <body>
 	<form action="<c:url value="/_04_Forum/member/WritingsServlet.controller"/>"
 		method="post">
-		<div id="header">
+		<div id="forumHead">
 		<!-- 抓出從LookArticle.jsp傳過來的參數 -->
 
 			<input type="hidden" name="forumId" value="${param.forumId}">
@@ -54,9 +56,15 @@
 					<td>文章內容：</td>
 					<td><textarea name="forumContent" rows="4" cols="50" >${param.content}</textarea></td>
 					<script>
-						CKEDITOR.replace('forumContent', {
-							width : 700,
-						});
+					var toolbar =[
+					         	  //加粗     斜體，     下劃線      穿過線     文本顏色     背景顏色
+					         	  ['Bold','Italic','Underline','Strike','TextColor','BGColor'],
+					         	  //左對齊             居中對齊          右對齊          兩端對齊  超鏈接
+					         	  ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','Link'],        
+					         	  //樣式       格式      字體    字體大小  表情       特殊字符    
+					         	  ['Styles','Format','Font','FontSize','Smiley','SpecialChar']]
+					 var fontSize_sizes = '10pt/10pt;13/13px;16/16px;18/18px;20/20px;22/22px;24/24px;36/36px;48/48px;'        	  
+						CKEDITOR.replace('forumContent',{toolbar:toolbar} , {removePlugins:'sourcearea'} ,{fontSize:fontSize_sizes});
 					</script>
 					<td><span class="error">${error.forumContent}</span></td>
 				</tr>

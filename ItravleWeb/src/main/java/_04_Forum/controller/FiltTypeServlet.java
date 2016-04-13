@@ -18,6 +18,7 @@ public class FiltTypeServlet extends HttpServlet {
        
 	//**判斷討論區所要篩選的主題為何**
 	
+	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		request.getParameter("00");

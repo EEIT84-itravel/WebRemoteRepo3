@@ -2,13 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 外接程式碼 -->
+
 <%@ page import="_00_Misc.model.*"%>
+<%@ page import="_02_TripAndJournal.model.*"%>
 <%@ page import="_04_Forum.model.*"%>
 <%@ page import="java.util.*"%>
+<jsp:useBean id="MessageService" scope="page" class="_02_TripAndJournal.model.MessageService" />
 <%
 	ForumService forumService = new ForumService();
  	List<ForumVO> forumVO = forumService.select();
  	pageContext.setAttribute("forumVO", forumVO);
+ 	
+ 	MessageService ms = new MessageService();
+    request.getParameter("");
 %>
 <!DOCTYPE html >
 <html>
@@ -58,9 +64,8 @@ $(document).ready(function(){
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article>
-	<form action="<c:url value="/_04_Forum/Forum.controller"/>"
-		method="post">
-		<div id="header">
+	<form method="post">
+		<div id="forumHead">
 			<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
 			<table id="forum" border="1">
 				<thead>
@@ -82,7 +87,12 @@ $(document).ready(function(){
 								href="<c:url value="/_04_Forum/ShowArticle.controller?forumId=${forumVO.forumId}" />">${forumVO.forumTopic}</a></td>
 							<td>${forumVO.memberId}</td>
 							<td>${forumVO.visitorNum}</td>
-							<td>${forumVO.replyNum}</td>
+							<%int i=0; %>
+							<c:forEach var="MessageVO" items="${MessageService.allNum}" varStatus="vs">                            		   
+										<c:if test="${MessageVO.referenceNo==forumVO.forumId}">
+										<% i++; %></c:if>                             	
+								</c:forEach>	<td><%= i %></td>
+<%-- 							<td>${forumVO.replyNum}</td> --%>
 							<td>${forumVO.forumTime}</td>
 						</tr>
 					</c:forEach>
@@ -94,7 +104,11 @@ $(document).ready(function(){
 								href="<c:url value="/_04_Forum/ShowArticle.controller?forumId=${forumVO1.forumId}" />">${forumVO1.forumTopic}</a></td>
 							<td>${forumVO1.memberId}</td>
 							<td>${forumVO1.visitorNum}</td>
-							<td>${forumVO1.replyNum}</td>
+								<%int a=0; %>
+							<c:forEach var="MessageVO2" items="${MessageService.allNum}" varStatus="vs">                            		   
+										<c:if test="${MessageVO2.referenceNo==forumVO1.forumId}">
+										<% a++; %></c:if>                             	
+								</c:forEach>	<td><%= a %></td>
 							<td>${forumVO1.forumTime}</td>
 						</tr>
 					</c:forEach>

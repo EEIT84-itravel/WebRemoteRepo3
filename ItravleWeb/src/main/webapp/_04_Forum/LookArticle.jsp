@@ -39,7 +39,7 @@ function confirmDeleteMessage(n,m) {
 	</nav>
 	<article>
 	<form action="<c:url value="/_04_Forum/member/Reply.controller"/>" method="post">
-		<div id="header">
+		<div id="forumHead">
 			<table border="1">
 				<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
 				<tr>
@@ -70,54 +70,50 @@ function confirmDeleteMessage(n,m) {
 					<td>文章主題：${forumVO.forumTopic} <span class="error">${error.forumTopic}</span></td>
 				</tr>
 				<tr>
-<<<<<<< HEAD
 					<td>文章內容：${forumVO.forumContent}</td>
-=======
-					<td>文章內容：${forumVO.forumContent}</td>				
->>>>>>> branch 'master' of https://github.com/EEIT84-itravel/WebRemoteRepo3.git
 				</tr>
 				<tr>
 					<td>最後修改日期：${forumVO.forumTime}</td>
 				</tr>
 				<tr>
-					<td>瀏覽人次：${forumVO.visitorNum}</td>
+					<td>回應人次：${count}</td>
 				</tr>
 				<tr>
 					<td>文章編號：${forumVO.forumId}</td>
-<<<<<<< HEAD
 				</tr>
 				<tr>
 					<td><input type="button" onclick="history.back()" value="上一頁" />
 						<a href="/ItravleWeb/_04_Forum/ForumIndex.jsp">回討論區首頁</a></td>
 				</tr>
-=======
-				</tr>
-				<input type="button" onclick="history.back()" value="上一頁" />
-				<a href="/ItravleWeb/_04_Forum/ForumIndex.jsp">回討論區首頁</a>
->>>>>>> branch 'master' of https://github.com/EEIT84-itravel/WebRemoteRepo3.git
 			</table>
+			</div>
+			</form>
+			</article>
+			<article>
+			<form>
+			<div>
+			<table border='1'>
 
-			<table border='1' bgcolor="yellow">
-<<<<<<< HEAD
 				<c:forEach var="messageVO" items="${messageVO1}">
-=======
-				<c:forEach var="messageVO" items="${messageVO}">
->>>>>>> branch 'master' of https://github.com/EEIT84-itravel/WebRemoteRepo3.git
 					<tr>
 						<c:url value="/_04_Forum/member/Reply.jsp" var="reply"
 							scope="request">
 							<c:param name="referenceNo" value="${forumVO.forumId}" />
+							<c:param name="replyNum" value="${forumVO.replyNum}"/>
+							<c:param name="forumTypeId" value="${forumVO.forumTypeId}"/>
+							<c:param name="forumTopic" value="${forumVO.forumTopic}"/>
+							<c:param name="forumContent" value="${forumVO.forumContent}"/>
+							<c:param name="visitorNum" value="${forumVO.visitorNum}"/>
+							<c:param name="forumTime" value="${forumVO.forumTime}"/>
 							<c:param name="messageId" value="${messageVO.messageId}" />
 							<c:param name="messageContent" value="${messageVO.content}" />
+							<c:param name="memberId" value="${messageVO.memberId}"/>
 							<c:param name="crud" value="Update" />
 						</c:url>
 						<td>
-						<input type="button" value="1230" onclick="myFunction()">
-						<input type="button" value="編輯留言"
-							onclick="location.href='${reply}'"> 
+						<input type="button" value="編輯留言"	onclick="location.href='${reply}'"> 
 							<input	type="button" value="刪除留言"
 								onclick="confirmDeleteMessage(${messageVO.messageId},${forumVO.forumId})">
-<%-- 								location.href='<c:url value="/_04_Forum/member/MessageServlet.controller?referenceNo=${forumVO.forumId}&messageId=${messageVO.messageId}&crud=Delete"/>'"></td> --%>
 					</tr>
 					<tr>
 						<td>回文者：${messageVO.memberId}<span class="error">${error.messageTopic}</span></td>
@@ -125,18 +121,9 @@ function confirmDeleteMessage(n,m) {
 					</tr>
 					<tr>
 						<td>回覆內容：${messageVO.content}<br></td>
-<<<<<<< HEAD
 						<td>ID${messageVO.messageId}</td>
-					</tr>
-=======
-					</tr>					
->>>>>>> branch 'master' of https://github.com/EEIT84-itravel/WebRemoteRepo3.git
+					</tr>							
 				</c:forEach>
-<<<<<<< HEAD
-			</table>
-		</div>
-	</form>
-=======
 				</table>
 			</div>
 		</form>
@@ -144,6 +131,6 @@ function confirmDeleteMessage(n,m) {
 	<footer> 
 	<!-- import共同的 --> 
 	</footer>
->>>>>>> branch 'master' of https://github.com/EEIT84-itravel/WebRemoteRepo3.git
+
 </body>
 </html>

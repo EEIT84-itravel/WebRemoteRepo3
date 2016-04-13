@@ -12,11 +12,18 @@ public class MessageService {
 		result = messageDAOHibernate.getAll();
 		return result;
 	}
+	public List<MessageVO> getAllNum() {		
+		return messageDAOHibernate.getAllNum("type_id05");
+	}
+	
 	
 	public List<MessageVO> getForumMessage(Integer referenceNo){
 		return messageDAOHibernate.getForumMessage(referenceNo);	    
 	}
-	
+	//抓出某篇文章的回復人數
+	public long getForumMessageNum(Integer referenceNo){
+		return messageDAOHibernate.getForumMessageNum(referenceNo);	
+	}
 
 	public MessageVO selectOne(Integer messageId) {
 		return messageDAOHibernate.selectmessageId(messageId);
