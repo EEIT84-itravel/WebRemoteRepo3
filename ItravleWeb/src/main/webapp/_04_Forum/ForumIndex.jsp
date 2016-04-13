@@ -57,8 +57,7 @@ $(document).ready(function(){
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article>
-	<form action="<c:url value="/_04_Forum/Forum.controller"/>"
-		method="post">
+	<form action="<c:url value="/_04_Forum/Forum.controller"/>" method="post">
 		<div id="header">
 			<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
 			<table id="forum" border="1">

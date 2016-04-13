@@ -44,7 +44,7 @@
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article>
-		<form action="<c:url value="/_06_BeckEnd/beckend/NewEvent.controller" />">
+		<form action="<c:url value="/_06_BackEnd/backend/NewEvent.controller" />">
 			<table>
 				<tr>
 					<td>活動名稱：</td>

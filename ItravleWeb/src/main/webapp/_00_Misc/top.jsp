@@ -56,7 +56,18 @@ nav{
            					 <li><a href="#">我的好友</a></li>
         				  </ul>
        				 </li>
+       			<li><a href="<c:url value="/_06_BackEnd/backend/AllSight.jsp" />">後台</a></li>
 			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="<c:url value="/_05_Member/Registered.jsp" />">註冊</a></li>
+				<!-- 視session是否登入登出顯示login或logout -->
+				<c:if test="${empty user}">
+        		<li><a href="<c:url value="/_05_Member/Login.jsp" />">Login</a></li>
+        		</c:if>
+        		<c:if test="${not empty user}">
+      			<li><a href="<c:url value="/_05_Member/Logout.jsp" />">Logout</a></li>
+      			</c:if>
+          	</ul>
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>

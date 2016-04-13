@@ -71,11 +71,11 @@ article {
 	</nav>
 	<article>
 	<div id="tabs">
-  <ul>
-    <li><a href="#tabs-1">建立新的遊記</a></li>
-    <li><a href="<c:url value="/_02_TripAndJournal/member/FromTripToJournal.jsp"/>">從我的遊記載入</a></li>
-     </ul>
-  <div id="tabs-1">
+  		<ul>
+   			 <li><a href="#tabs-1">建立新的遊記</a></li>
+  			  <li><a href="<c:url value="/_02_TripAndJournal/member/FromTripToJournal.jsp"/>">從我的遊記載入</a></li>
+   	   </ul>
+ 	 <div id="tabs-1">
 		<h3>建立新的遊記</h3>
 		<form action="<c:url value="/_02_TripAndJournal/member/NewJournal.controller" />" method="post">
 			<table>
@@ -114,7 +114,7 @@ article {
 			</table>
 		</form>
 		</div>
-</div>
+	</div>
 	</article>
 	<footer>
 		<!-- import共同的 -->

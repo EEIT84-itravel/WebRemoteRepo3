@@ -1,6 +1,5 @@
-package _06_BeckEnd.controller;
+package _06_BackEnd.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.HashMap;
@@ -16,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import _03_Event.model.EventService;
 import _03_Event.model.EventVO;
 
-@WebServlet("/_06_BeckEnd/beckend/NewEvent.controller")
+@WebServlet("/_06_BackEnd/backend/NewEvent.controller")
 public class NewEventServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,
