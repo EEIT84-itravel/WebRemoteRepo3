@@ -3,7 +3,6 @@ package _02_TripAndJournal.model;
 import java.util.List;
 
 import _02_TripAndJournal.model.dao.MessageDAOHibernate;
-import _04_Forum.model.ForumVO;
 
 public class MessageService {
 	private MessageDAOHibernate messageDAOHibernate = new MessageDAOHibernate();

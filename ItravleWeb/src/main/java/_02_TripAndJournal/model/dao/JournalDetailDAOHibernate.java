@@ -2,37 +2,39 @@ package _02_TripAndJournal.model.dao;
 
 import java.util.List;
 
-import _00_Misc.HibernateUtil_H4_Ver1;
-import _02_TripAndJournal.model.JournalVO;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-public class JournalDAOHibernate {
+import _00_Misc.HibernateUtil_H4_Ver1;
+import _02_TripAndJournal.model.JournalDetailVO;
+
+public class JournalDetailDAOHibernate {
 
 	// 單筆查詢
-	public JournalVO select(int journal_id) {
-		JournalVO vo = null;
+	public JournalDetailVO select(Integer journalDetailId) {
+		JournalDetailVO vo = null;
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
 				.getCurrentSession();
 		try {
 			session.beginTransaction();
-			vo = (JournalVO) session.get(JournalVO.class, journal_id);
+			vo = (JournalDetailVO) session.get(JournalDetailVO.class,
+					journalDetailId);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.beginTransaction().rollback();
+			throw ex;
 		}
 		return vo;
 	}
 
 	// 查全部
-	public List<JournalVO> select() {
-		List<JournalVO> result = null;
+	public List<JournalDetailVO> select() {
+		List<JournalDetailVO> result = null;
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
 				.getCurrentSession();
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("from JournalVO");
+			Query query = session.createQuery("from JournalDetailVO");
 			result = query.list();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
@@ -41,9 +43,44 @@ public class JournalDAOHibernate {
 		}
 		return result;
 	}
+	
+	//由遊記編號搜尋遊記明細
+	private static final String SELECT_BY_JOURNALID="from JournalDetailVO where journalId=:journalId";
+	public List<JournalDetailVO> selectByJournalId(int journalId) {
+		List<JournalDetailVO> result = null;
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(SELECT_BY_JOURNALID);
+			query.setParameter("journalId", journalId);
+			result = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return result;
+	}
+	
 
 	// 修改資料
-	public JournalVO update(JournalVO vo) {
+	public JournalDetailVO update(JournalDetailVO vo) {
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.update(vo);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return vo;
+	}
+
+	// 新增資料
+	public JournalDetailVO insert(JournalDetailVO vo) {
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
 				.getCurrentSession();
 		try {
@@ -57,30 +94,15 @@ public class JournalDAOHibernate {
 		return vo;
 	}
 
-	// 新增資料
-	public JournalVO insert(JournalVO vo) {
-		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
-				.getCurrentSession();
-		try {
-			session.beginTransaction();
-			session.save(vo);
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
-		return vo;
-	}
-
 	// 刪除資料
-	public boolean delete(Integer JournalId) {
-		if (this.select(JournalId) != null) {
+	public boolean delete(int journalDetailId) {
+		if (this.select(journalDetailId) != null) {
 			Session session = HibernateUtil_H4_Ver1.getSessionFactory()
 					.getCurrentSession();
 			try {
 				session.beginTransaction();
-				JournalVO vo = (JournalVO) session.get(JournalVO.class,
-						JournalId);
+				JournalDetailVO vo = (JournalDetailVO) session.get(
+						JournalDetailVO.class, journalDetailId);
 				session.delete(vo);
 				session.getTransaction().commit();
 			} catch (RuntimeException ex) {
@@ -92,4 +114,5 @@ public class JournalDAOHibernate {
 			return false;
 		}
 	}
+
 }

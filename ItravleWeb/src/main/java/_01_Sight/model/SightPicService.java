@@ -8,9 +8,6 @@ import _01_Sight.model.dao.SightPicDAOHibernate;
 public class SightPicService {
 	SightPicDAOHibernate dao = new SightPicDAOHibernate();
 
-	public static void main(String[] args) {
-	}
-
 	public List<SightPicVO> selectBySightId(Integer sightId) {
 		return dao.selectBySightId(sightId);
 	}

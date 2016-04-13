@@ -1,8 +1,5 @@
 package _02_TripAndJournal.model.dao;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -106,37 +103,4 @@ public class MessageDAOHibernate {
 		}
     	return false;
     }	
-
-	public static void main(String[] args) {// 測試程式
-		MessageDAOHibernate dao = new MessageDAOHibernate();
-		// 查一筆↓
-		// MessageVO selectone = dao.selectmessageId(1);
-		// System.out.println(selectone);
-		// 查多筆↓
-		// List<MessageVO> list = dao.getAll();
-		// System.out.println(list);
-		// 更新
-//		 MessageVO messageVo = dao.selectmessageId(1);
-//		 messageVo.setMessageId(1);
-//		 messageVo.setMemberId(1);
-//		 messageVo.setMessageType("forum_type03");
-//		 messageVo.setReferenceNo(4);
-//		 messageVo.setContent("javatest11111");
-//		 MessageVO updatetest = dao.update(messageVo);
-//		 System.out.println(updatetest);
-		// 新增
-		// MessageVO messageVo = new MessageVO();
-		// messageVo.setMemberId(1);
-		// messageVo.setMessageType("forum_type04");
-		// messageVo.setReferenceNo(4);
-		// messageVo.setContent("javatest");
-		// java.sql.Timestamp timestamp = new Timestamp( new
-		// java.util.Date().getTime());
-		// messageVo.setUpdateTime(timestamp);
-		// MessageVO inserttest = dao.insert(messageVo);
-		// System.out.println(inserttest);
-		// 刪除
-		// boolean delect = dao.delete(6);
-		// System.out.println(delect);
-	}
 }

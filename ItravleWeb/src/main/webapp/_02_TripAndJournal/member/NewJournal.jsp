@@ -14,14 +14,11 @@
 	pageContext.setAttribute("region", region);
 %>
 <!-- jQuery ui -->
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
 <!-- jQuery -->
-<script type="text/javascript"
-	src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
 <!-- jQuery ui -->
-<script type="text/javascript"
-	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		//起始日期用jQuery UI
@@ -93,7 +90,7 @@ article {
 					<td><span class="error">${error.regionId}</span></td>
 				</tr>
 				<tr>
-					<td>行程簡介:</td>
+					<td>遊記簡介:</td>
 					<td><textarea name="journalIntro" rows="4" cols="50">${param.journalIntro}</textarea></td>
 					<td><span class="error">${error.journalIntro}</span></td>
 				</tr>
