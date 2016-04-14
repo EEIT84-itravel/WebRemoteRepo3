@@ -1,8 +1,5 @@
 package _02_TripAndJournal.model.dao;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -30,7 +27,7 @@ public class MessageDAOHibernate {
 		return messageVo;
 	}
 	//抓討論區之留言
-	private static final String GET_ALL_FORUMMESSAGE = "from MessageVO where referenceNo=:referenceNo order by updateTime";
+	private static final String GET_ALL_FORUMMESSAGE = "from MessageVO where referenceNo=:referenceNo order by messageId";
 	public List<MessageVO> getForumMessage(Integer referenceNo) {
 		List<MessageVO> list = null;
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
@@ -47,6 +44,44 @@ public class MessageDAOHibernate {
 		}
 		return list;
 	}
+	//抓出某篇文章的回覆人數
+	public Long getForumMessageNum(Integer referenceNo) {
+		long count = 0;
+		List<MessageVO> list = null;
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("select count(referenceNo) as count from MessageVO where referenceNo=:referenceNo");
+			query.setParameter("referenceNo", referenceNo);			
+ 			count = (Long)query.list().get(0);
+			System.out.println("※此文章共"+count+"筆回覆");
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return count;
+	}
+	//抓出某篇文章的回覆人數
+	public List<MessageVO> getAllNum(String messageType) {
+	
+		List<MessageVO> list = null;
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from MessageVO where messageType=:messageType");
+			query.setParameter("messageType", messageType);			
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
+	
 
 	public List<MessageVO> getAll() {
 		List<MessageVO> list = null;
@@ -69,7 +104,7 @@ public class MessageDAOHibernate {
 				.getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(messageVO);
+			session.update(messageVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -106,37 +141,4 @@ public class MessageDAOHibernate {
 		}
     	return false;
     }	
-
-	public static void main(String[] args) {// 測試程式
-		MessageDAOHibernate dao = new MessageDAOHibernate();
-		// 查一筆↓
-		// MessageVO selectone = dao.selectmessageId(1);
-		// System.out.println(selectone);
-		// 查多筆↓
-		// List<MessageVO> list = dao.getAll();
-		// System.out.println(list);
-		// 更新
-//		 MessageVO messageVo = dao.selectmessageId(1);
-//		 messageVo.setMessageId(1);
-//		 messageVo.setMemberId(1);
-//		 messageVo.setMessageType("forum_type03");
-//		 messageVo.setReferenceNo(4);
-//		 messageVo.setContent("javatest11111");
-//		 MessageVO updatetest = dao.update(messageVo);
-//		 System.out.println(updatetest);
-		// 新增
-		// MessageVO messageVo = new MessageVO();
-		// messageVo.setMemberId(1);
-		// messageVo.setMessageType("forum_type04");
-		// messageVo.setReferenceNo(4);
-		// messageVo.setContent("javatest");
-		// java.sql.Timestamp timestamp = new Timestamp( new
-		// java.util.Date().getTime());
-		// messageVo.setUpdateTime(timestamp);
-		// MessageVO inserttest = dao.insert(messageVo);
-		// System.out.println(inserttest);
-		// 刪除
-		// boolean delect = dao.delete(6);
-		// System.out.println(delect);
-	}
 }

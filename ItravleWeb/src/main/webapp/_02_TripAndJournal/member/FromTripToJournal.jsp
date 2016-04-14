@@ -17,7 +17,7 @@
 	List<TripVO> tripVO = tripService.selectFromMember(1);//測試時榜定memberID
 	pageContext.setAttribute("tripVO", tripVO);
 %>
-<title>從我的遊記選取</title>
+<title>ITravel-從我的遊記選取</title>
 </head>
 <body>
 	<header>

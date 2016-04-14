@@ -7,19 +7,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Top-nav</title>
 <!-- 最新編譯和最佳化的 CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 <!-- 選擇性佈景主題 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 <!-- 最新編譯和最佳化的 JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <!-- jQuery ui -->
-<script type="text/javascript"
-	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
 <style type="text/css">
 nav{
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -39,7 +33,7 @@ nav{
 				<span class="icon-bar"></span> 
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">ITravel</a>
+			<a class="navbar-brand" href="<c:url value="/index.jsp"/>">ITravel</a>
 		</div>
 		
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -47,9 +41,10 @@ nav{
 			<ul class="nav navbar-nav">
 			    <!--  正在被選取的物件-->
 		        <!-- 	<li class="active"><a href="#">看景點<span class="sr-only">(current)</span></a></li> -->
-				<li><a href="<c:url value="/_01_Sight/SightIndex.controller"/>">看景點</a></li>				
-        		<li><a href="#">看行程</a></li>
-        		<li><a href="#">看遊記</a></li>
+
+				<li><a href="<c:url value="/_01_Sight/SightIndex.controller"/>">看景點</a></li>							
+        		<li><a href="<c:url value="/_02_TripAndJournal/ShowAllTripServlet.controller"/>">看行程</a></li>
+        		<li><a href="<c:url value="/_02_TripAndJournal/ShowAllJournalServlet.controller"/>">看遊記</a></li>
         		<li><a href="<c:url value="/_02_TripAndJournal/member/NewTrip.jsp" />">排行程</a></li>
         		<li><a href="<c:url value="/_02_TripAndJournal/member/NewJournal.jsp" />">寫遊記</a></li>    		  		
         		<li><a href="<c:url value="/_04_Forum/ForumIndex.jsp" />">討論區</a></li>

@@ -8,34 +8,6 @@ import _00_Misc.model.CodeVO;
 
 public class CodeDAOHibernate {
 
-	public static void main(String[] args) {
-		CodeDAOHibernate dao = new CodeDAOHibernate();
-		// select
-		// CodeVO res = dao.select("county01");
-		// System.out.println(res);
-
-		// selectAll
-		// List<CodeVO> codes = dao.select();
-		// for (CodeVO pb : codes) {
-		// System.out.println(pb);
-		// }
-
-		// update
-		// CodeVO codeVO = dao.update("testLabel01", "測試標籤2");
-		// System.out.println(codeVO);
-
-		// insert
-		// CodeVO c1 = new CodeVO();
-		// c1.setCodeId("testLabel01");
-		// c1.setCodeName("測試標籤");
-		// CodeVO code = dao.insert(c1);
-		// System.out.println(code);
-
-		// delete
-		// System.out.println(dao.delete("testLabel01"));
-
-	}
-
 	public CodeVO insert(CodeVO codeVO) {
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory().getCurrentSession();
 		try {
@@ -46,9 +18,7 @@ public class CodeDAOHibernate {
 		} catch (RuntimeException e) {
 			session.getTransaction().rollback();
 			return null;
-		} finally {
-			session.close();
-		}
+		} 
 	}
 
 	public CodeVO update(String codeId, String codeName) {
@@ -63,9 +33,7 @@ public class CodeDAOHibernate {
 		} catch (RuntimeException e) {
 			session.getTransaction().rollback();
 			return null;
-		} finally {
-			session.close();
-		}
+		} 
 	}
 
 	public CodeVO select(String codeId) {

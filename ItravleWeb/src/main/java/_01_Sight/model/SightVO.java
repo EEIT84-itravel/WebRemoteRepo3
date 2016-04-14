@@ -185,7 +185,7 @@ public class SightVO implements Serializable {
 	public void setModifyTime(Timestamp modifyTime) {
 		this.modifyTime = modifyTime;
 	}
-	public boolean isDel() {
+	public boolean getDel() {
 		return del;
 	}
 	public void setDel(boolean del) {

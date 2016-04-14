@@ -1,7 +1,6 @@
 package _03_Event.model;
 
 import java.io.Serializable;
-import java.sql.Blob;
 import java.util.Arrays;
 
 public class EventVO implements Serializable{  //活動
@@ -67,17 +66,11 @@ public class EventVO implements Serializable{  //活動
 	public void setSightId(Integer sightId) {
 		this.sightId = sightId;
 	}
-	public boolean isEventRemoved() {
+	public boolean getEventRemoved() {
 		return eventRemoved;
 	}
 	public void setEventRemoved(boolean eventRemoved) {
 		this.eventRemoved = eventRemoved;
 	}
-    
-    
- 
-	
-	
-	
-	
+
 }

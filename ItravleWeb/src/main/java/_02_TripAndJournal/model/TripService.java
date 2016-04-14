@@ -42,4 +42,9 @@ public class TripService {
 		}
 		return result;
 	}
+
+	public List<TripVO> getAll() {
+		tripDAOHibernate = new TripDAOHibernate();
+		return tripDAOHibernate.select();
+	}
 }

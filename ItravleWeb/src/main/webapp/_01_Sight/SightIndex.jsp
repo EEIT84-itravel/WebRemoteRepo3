@@ -23,16 +23,14 @@
 	List<CodeVO> codeVO5 = codeService.select("sight_time");
 	pageContext.setAttribute("sight_time", codeVO5);
 %>
-<jsp:useBean id="codeSvc" scope="page"
-	class="_00_Misc.model.CodeService" />
+<jsp:useBean id="codeSvc" scope="page" class="_00_Misc.model.CodeService" />
 <!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>景點首頁</title>
-<script type="text/javascript"
-	src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
 
 <style type="text/css">
 .SearchSight {

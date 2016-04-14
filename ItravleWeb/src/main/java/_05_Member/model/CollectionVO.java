@@ -37,5 +37,4 @@ public class CollectionVO implements Serializable {
 				+ memberId + ", typeId=" + typeId + ", referenceType="
 				+ referenceType + "]";
 	}
-	
 }

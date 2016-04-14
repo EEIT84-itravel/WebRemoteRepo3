@@ -3,7 +3,6 @@ package _02_TripAndJournal.model;
 import java.util.List;
 
 import _02_TripAndJournal.model.dao.MessageDAOHibernate;
-import _04_Forum.model.ForumVO;
 
 public class MessageService {
 	private MessageDAOHibernate messageDAOHibernate = new MessageDAOHibernate();
@@ -13,11 +12,18 @@ public class MessageService {
 		result = messageDAOHibernate.getAll();
 		return result;
 	}
+	public List<MessageVO> getAllNum() {		
+		return messageDAOHibernate.getAllNum("type_id05");
+	}
+	
 	
 	public List<MessageVO> getForumMessage(Integer referenceNo){
 		return messageDAOHibernate.getForumMessage(referenceNo);	    
 	}
-	
+	//抓出某篇文章的回復人數
+	public long getForumMessageNum(Integer referenceNo){
+		return messageDAOHibernate.getForumMessageNum(referenceNo);	
+	}
 
 	public MessageVO selectOne(Integer messageId) {
 		return messageDAOHibernate.selectmessageId(messageId);
