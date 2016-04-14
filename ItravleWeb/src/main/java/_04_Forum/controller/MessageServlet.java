@@ -76,7 +76,7 @@ public class MessageServlet extends HttpServlet {
 			response.sendRedirect(path
 					+ "/_04_Forum/ShowArticle.controller?forumId="
 					+ referenceNo);
-		} else if ("Update".equals(crud)) {
+		} else if ("UpdateReply".equals(crud)) {
 			messageVO.setMessageId(messageId);
 			MessageVO result = ms.update(messageVO);
 			if (result == null) {

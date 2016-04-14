@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="MemberService" scope="page"
+	class="_05_Member.model.MemberService" />
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -30,93 +32,94 @@ function confirmDeleteMessage(n,m) {
 
 </head>
 <body>
-	<header> 
-	<!-- import共同的 --> 
+	<header>
+		<!-- import共同的 -->
 	</header>
-	<nav class="navbar navbar-inverse" role="navigation"> 
+	<nav class="navbar navbar-inverse" role="navigation">
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article>
-	<form action="<c:url value="/_04_Forum/member/Reply.controller"/>" method="post">
-		<div id="forumHead">
-			<table border="1">
-				<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
-				<tr>
-					<c:url value="/_04_Forum/member/ModifyArticle.jsp" var="forum"
-						scope="request">
-						<c:param name="forumId" value="${forumVO.forumId}" />
-						<c:param name="visit" value="${forumVO.visitorNum}" />
-						<c:param name="reply" value="${forumVO.replyNum}" />
-						<c:param name="forumTopic" value="${forumVO.forumTopic}" />
-						<c:param name="content" value="${forumVO.forumContent}" />
-						<c:param name="forumType" value="${forumVO.forumTypeId}" />
-						<c:param name="crud" value="Update" />
-					</c:url>
+		<form action="<c:url value="/_04_Forum/member/Reply.controller"/>"
+			method="post">
+			<div id="forumHead">
+				<table border="1" id="forumBody">
+					<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
 
-					<td><input type="button" value="回覆文章" name="reply"
-						onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&crud=NewReply"/>'"></td>
-					<td><input type="button" value="編輯文章" name="modify"
-						onclick="location.href='${forum}'" /></td>
-
-
-					<td><input	type="button" value="刪除文章" name="delete"
-							onclick="confirmDeleteArticle(${forumVO.forumId})"></td>
-				</tr>
-				<tr>
-					<td>作者：${forumVO.memberId}</td>
-				</tr>
-				<tr>
-					<td>文章主題：${forumVO.forumTopic} <span class="error">${error.forumTopic}</span></td>
-				</tr>
-				<tr>
-					<td>文章內容：${forumVO.forumContent}</td>
-				</tr>
-				<tr>
-					<td>最後修改日期：${forumVO.forumTime}</td>
-				</tr>
-				<tr>
-					<td>回應人次：${count}</td>
-				</tr>
-				<tr>
-					<td>文章編號：${forumVO.forumId}</td>
-				</tr>
-				<tr>
-					<td><input type="button" onclick="history.back()" value="上一頁" />
-						<a href="/ItravleWeb/_04_Forum/ForumIndex.jsp">回討論區首頁</a></td>
-				</tr>
-			</table>
-			<table border='1'>
-
-				<c:forEach var="messageVO" items="${messageVO1}">
 					<tr>
-						<c:url value="/_04_Forum/member/Reply.jsp" var="reply"
+						<td>文章主題：${forumVO.forumTopic} <span class="error">${error.forumTopic}</span></td>
+					</tr>
+					<tr>
+						<c:url value="/_04_Forum/member/FiltUrlServlet.controller" var="forum"
 							scope="request">
-							<c:param name="referenceNo" value="${forumVO.forumId}" />
-							<c:param name="messageId" value="${messageVO.messageId}" />
-							<c:param name="messageContent" value="${messageVO.content}" />
-							<c:param name="crud" value="Update" />
+							<c:param name="forumId" value="${forumVO.forumId}" />
+							<c:param name="crud" value="UpdateArticle" />
 						</c:url>
-						<td>
-						<input type="button" value="編輯留言"	onclick="location.href='${reply}'"> 
-							<input	type="button" value="刪除留言"
+
+						<td><input type="button" value="回覆文章" name="reply"
+							onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&crud=NewReply"/>'">
+							<input type="button" value="編輯文章" name="modify"
+							onclick="location.href='${forum}'" /> <input type="button"
+							value="刪除文章" name="delete"
+							onclick="confirmDeleteArticle(${forumVO.forumId})"></td>
+					</tr>
+					<tr>
+						<td><img src="" width="100px" height="100px"><br>作者：<c:forEach
+								var="MemberVO" items="${MemberService.all}">
+								<c:if test="${MemberVO.memberId==forumVO.memberId}">
+										${MemberVO.nickname}
+                             		</c:if>
+							</c:forEach></td>
+					</tr>
+
+					<tr>
+						<td>文章內容：${forumVO.forumContent}</td>
+					</tr>
+					<tr>
+						<td>最後修改日期：${forumVO.forumTime}</td>
+					</tr>
+				
+					<tr>
+						<td><input type="button" onclick="history.back()" value="上一頁" />
+							<a href="/ItravleWeb/_04_Forum/ForumIndex.jsp">回討論區首頁</a></td>
+					</tr>
+				</table>
+
+				<table border='1'>
+
+					<c:forEach var="messageVO" items="${messageVO1}">
+						<tr>
+							<c:url value="/_04_Forum/member/FiltUrlServlet.controller" var="reply"
+								scope="request">
+								<c:param name="referenceNo" value="${forumVO.forumId}" />
+								<c:param name="messageId" value="${messageVO.messageId}" />
+								<c:param name="crud" value="UpdateReply" />
+							</c:url>
+							<td><input type="button" value="編輯留言"
+								onclick="location.href='${reply}'"> <input type="button"
+								value="刪除留言"
 								onclick="confirmDeleteMessage(${messageVO.messageId},${forumVO.forumId})">
-					</tr>
-					<tr>
-						<td>回文者：${messageVO.memberId}<span class="error">${error.messageTopic}</span></td>
-						<td>回文時間：${messageVO.updateTime}</td>
-					</tr>
-					<tr>
-						<td>回覆內容：${messageVO.content}<br></td>
-						<td>ID${messageVO.messageId}</td>
-					</tr>							
-				</c:forEach>
+						</tr>
+						<tr>
+							<td>回文者：<c:forEach var="MemberVO"
+									items="${MemberService.all}">
+									<c:if test="${MemberVO.memberId==messageVO.memberId}">
+										${MemberVO.nickname}
+                             		</c:if>
+								</c:forEach><span class="error">${error.messageTopic}</span></td>
+							<td>回文時間：${messageVO.updateTime}</td>
+						</tr>
+						<tr>
+							<td>回覆內容：${messageVO.content}<br></td>
+							<td>ID${messageVO.messageId}</td>
+						</tr>
+					</c:forEach>
 				</table>
 			</div>
 		</form>
 	</article>
-	<footer> 
-	<!-- import共同的 --> 
+	<footer>
+		<!-- import共同的 -->
 	</footer>
 
 </body>

@@ -39,10 +39,9 @@
 			<div id="forumHead">
 				<!-- 抓出從LookArticle.jsp傳過來的參數 -->
 
-				<input type="hidden" name="forumId" value="${param.forumId}">
-				<input type="hidden" name="visit" value="${param.visit}"> <input
-					type="hidden" name="reply" value="${param.reply}"> <input
-					type="hidden" name="crud" value="${param.crud}">
+			<input type="hidden" name="forumId" value="${showThisArticle.forumId}">
+				<input type="hidden" name="visit" value="${showThisArticle.visitorNum}">
+				<input type="hidden" name="crud" value="${param.crud}">
 
 				<table>
 
@@ -51,7 +50,7 @@
 
 						<td>文章主題：</td>
 						<td><input type="text" name="forumTopic"
-							value="${param.forumTopic}" size="100" /></td>
+							value="${showThisArticle.forumTopic}" size="100" /></td>
 						<td><span class="error">${error.forumTopic}</span></td>
 					</tr>
 					<tr>
@@ -64,7 +63,7 @@
 					</tr>
 					<tr>
 						<td>文章內容：</td>
-						<td><textarea name="forumContent" rows="4" cols="50">${param.content}</textarea></td>
+						<td><textarea name="forumContent" rows="4" cols="50">${showThisArticle.forumContent}</textarea></td>
 						<script>
 							var toolbar = [
 									//加粗     斜體，     下劃線      穿過線     文本顏色     背景顏色

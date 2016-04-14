@@ -31,7 +31,6 @@ public class WritingsServlet extends HttpServlet {
 		String forumContent = request.getParameter("forumContent");
 		String temp1 = request.getParameter("forumId");
 		String temp2 = request.getParameter("visit");
-		String temp3 = request.getParameter("reply");
 		String crud = request.getParameter("crud");
 		System.out.println(crud);
 		// 轉換資料
@@ -51,16 +50,6 @@ public class WritingsServlet extends HttpServlet {
 			if (temp2 != null || temp2.trim().length() != 0) {
 				try {
 					visitorNum = Integer.parseInt(temp2);
-				} catch (NumberFormatException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		int reply = 0;
-		if (!"NewArticle".equals(crud) && !"Delete".equals(crud)) {
-			if (temp3 != null || temp3.trim().length() != 0) {
-				try {
-					visitorNum = Integer.parseInt(temp3);
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
 				}
@@ -97,10 +86,9 @@ public class WritingsServlet extends HttpServlet {
 				session.setAttribute("forumVO", result);
 			}
 			response.sendRedirect(path + "/_04_Forum/LookArticle.jsp");
-		} else if ("Update".equals(crud)) {
+		} else if ("UpdateArticle".equals(crud)) {
 			forumVO.setForumId(forumId);
 			forumVO.setVisitorNum(visitorNum);
-			forumVO.setReplyNum(reply);
 			System.out.println(forumId);
 			ForumVO result = fs.update(forumVO);
 			if (result == null) {
