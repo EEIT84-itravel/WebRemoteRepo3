@@ -39,8 +39,6 @@
 <script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
 <!-- jQuery ui -->
 <script type="text/javascript" src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
-<!-- 景點dialog功能 -->
-<script type="text/javascript" src="<c:url value="/js/sightDialog.js"/>"></script>
 <script>
 	$(function() {		
 		//讓右邊景點可以被拖曳
@@ -126,6 +124,41 @@
 		$("#sightsTabs").tabs({
 			heightStyle : "auto"
 		});
+		//景點詳情dialog功能
+		var uri="${pageContext.request.contextPath}/_02_TripAndJournal/ShowSightDetail.controller?sightId=";
+ 		var dialog;
+			dialog = $( "#mysight" ).dialog({
+	        autoOpen: false,
+	        height: 700,
+	        width: 600,
+	        draggable: true,
+	        resizable: false,
+	        modal: true,
+	        open: function() {
+	            closedialog = 1;
+	            $(document).bind('click', overlayclickclose); },
+	        focus: function() { 
+	            closedialog = 0; },
+	        close: function() { 
+	            $(document).unbind('click'); }
+	    });
+		$("tr.sightId>td:nth-child(9)").each(function(){
+			$(this).click(function(){
+					var sightId=$(this).prev().prev().prev().prev().prev().prev().prev().prev().text();	
+					console.log(sightId);
+					var stylei=' width="98%" height="98%"  frameborder="0" scrolling="auto"';
+					$("#mysight").html('<iframe src="'+uri+sightId+'"'+stylei+'></iframe>');
+					dialog.dialog( "open" );
+					closedialog = 0;
+			});
+		});
+		var closedialog;
+		 function overlayclickclose() {
+		        if (closedialog) {
+		            $('#mysight').dialog('close');
+		        }
+		        closedialog = 1;//set to one because click on dialog box sets to zero
+		    }
 	});
 </script>
 </head>
@@ -137,7 +170,9 @@
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>		
+	<article>	
+		<!-- 	景點dialog顯示頁面 平時隱藏 -->
+		<div id="mysight" title="景點明細"></div>	
 		<div id="left">
 			<table>
 				<tr>
@@ -246,7 +281,7 @@
 					<td>評論</td>
 					<td>最愛</td>
 					<!-- 景點彈出視窗功能 -->
-					<td><button class="label label-primary" onclick="window.open('<c:url value="/_02_TripAndJournal/ShowSightDetail.controller?sightId=${sightVO.sightId}" />','sightDetail','height=500,width=500,toolbar=no,titlebar=no,status=no,left=450,top=350');">詳情</button></td>					
+					<td><button class="label label-primary">詳情</button></td>					
 				</tr>
 				</table>
 				</c:forEach>

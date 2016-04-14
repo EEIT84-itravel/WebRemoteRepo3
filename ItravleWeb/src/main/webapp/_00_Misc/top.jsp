@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 <!-- 選擇性佈景主題 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+<!-- jQuery -->
+<script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
 <!-- 最新編譯和最佳化的 JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <!-- jQuery ui -->

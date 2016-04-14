@@ -14,11 +14,13 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
-
+#dialog-form{
+color: white;
+}
 #map {
 	height: 250px;
 	width: 480px;
-}
+	margin: 0 auto; } 
 </style>
 <script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
 <script>
@@ -88,7 +90,6 @@ var sightName;
 							<label>地址；</label> <span>${sightVO.addr}</span><br>
 							<label>交通方式；</label> <span>${sightVO.trans}</span><br> 
 							<label>上次更新時間；</label><span>${sightVO.modifyTime}</span><br> 
-							<input type="button" value="close" onclick="window.close()">
 					</fieldset>
 			</form>
 	</div>

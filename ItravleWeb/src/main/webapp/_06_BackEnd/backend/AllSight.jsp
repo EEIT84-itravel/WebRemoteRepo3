@@ -25,45 +25,54 @@
 	$(function() {
 		$("#tabs").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
 		$("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
-		
-		var uri="${pageContext.request.contextPath}/_01_Sight/ShowSightMainPic.controller?sightId=";
+		//景點詳情dialog功能
+		var uri="${pageContext.request.contextPath}/_02_TripAndJournal/ShowSightDetail.controller?sightId=";
  		var dialog;
 	    dialog = $( "#dialog-form" ).dialog({
 	        autoOpen: false,
-	        height: 300,
-	        width: 350,
+	        height: 700,
+	        width: 600,
+	        draggable: true,
+	        resizable: false,
 	        modal: true,
-	        buttons: {
-	          "確定": function() {
-	            dialog.dialog( "close" );
-	          }
-	        },
-	      });  
+	        open: function() {
+	            closedialog = 1;
+	            $(document).bind('click', overlayclickclose); },
+	        focus: function() { 
+	            closedialog = 0; },
+	        close: function() { 
+	            $(document).unbind('click'); }
+	    });
+
 		$("tbody>tr>td:nth-child(2)").each(function(){
-			$(this).mouseover(function(){
+			$(this).click(function(){
 					var sightId=$(this).prev().text();	
 					console.log(sightId);
-					$("#dialog-form").html('<img src="'+uri+sightId+'">').show("bounce", null, 1000); 
+					var stylei=' width="98%" height="98%"  frameborder="0" scrolling="auto"';
+					$("#dialog-form").html('<iframe src="'+uri+sightId+'"'+stylei+'></iframe>');
+					dialog.dialog( "open" );
+					closedialog = 0;
 			});
 		});
-		
-	    $( ".create-user" ).button().on( "click", function() {
-	    	console.log(sightId);
-	        dialog.dialog( "open" );
-	      });
+		var closedialog;
+		 function overlayclickclose() {
+		        if (closedialog) {
+		            $('#dialog-form').dialog('close');
+		        }
+		        closedialog = 1;//set to one because click on dialog box sets to zero   
+		    }
 	});
+
 </script>
 <style type="text/css">
 .ui-tabs-vertical {
 	width: 100%;
 }
-
 .ui-tabs-vertical .ui-tabs-nav {
 	padding: .2em .1em .2em .2em;
 	float: left;
 	width: 12em;
 }
-
 .ui-tabs-vertical .ui-tabs-nav li {
 	clear: left;
 	width: 100%;
@@ -71,35 +80,31 @@
 	border-right-width: 0 !important;
 	margin: 0 -1px .2em 0;
 }
-
 .ui-tabs-vertical .ui-tabs-nav li a {
 	display: block;
 }
-
 .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
 	padding-bottom: 0;
 	padding-right: .1em;
 	border-right-width: 1px;
 }
-
 .ui-tabs-vertical .ui-tabs-panel {
 	padding: 1em;
 	float: right;
 	width: 40em;
 }
 #tabs-1{
-float:left;
-width: 82%;
-padding: 0;
-margin: 5px;
+	float:left;
+	width: 82%;
+	padding: 0;
+	margin: 5px;
 }
 #tabs-1 h2{
-margin: 5px;
+	margin: 5px;
 }
 .backendTable thead tr th{
-text-align:center
+	text-align:center
 }
-
 </style>
 </head>
 <body>
@@ -112,6 +117,7 @@ text-align:center
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article>
+	    <div id="dialog-form"></div>
 		<div id="tabs">
 			<ul>
 				<li><a href="#tabs-1">管理景點</a></li>
@@ -132,24 +138,18 @@ text-align:center
 									<th>地區</th>
 									<th>縣市</th>
 									<th>景點類型</th>
-									<th>門票</th>
-									<th>開門時間</th>
-									<th>關門時間</th>
-									<th>建議停留時間</th>
-									<th>建議旅行時段</th>
 									<th>電話</th>
 									<th>地址</th>
 									<th>修改人</th>
 									<th>修改時間</th>
 									<th>隱藏</th>
 									<th></th>
-									<th></th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="sightVO" items="${sightVO}">
 								<tr>							
-									<td id="sightID'${sightVO.sightId}'">${sightVO.sightId}</td>
+									<td>${sightVO.sightId}</td>
 									<td>${sightVO.sightName}</td>
 									<c:forEach var="codeVO" items="${codeSvc.all}">
 										<c:if test="${codeVO.codeId==sightVO.regionId}">
@@ -166,23 +166,11 @@ text-align:center
 								             	<td>${codeVO.codeName}</td>
                                 	    </c:if>
 									</c:forEach>
-									<td>${sightVO.ticket}</td>
-									<td>${sightVO.openTime}</td>
-									<td>${sightVO.closeIime}</td>
-									<td>${sightVO.spendHour}</td>
-									<c:forEach var="codeVO" items="${codeSvc.all}">
-										<c:if test="${codeVO.codeId==sightVO.playPeriod}">
-								             	<td>${codeVO.codeName}</td>
-                                	    </c:if>
-									</c:forEach>
 									<td>${sightVO.phone}</td>
 									<td>${sightVO.addr}</td>
 									<td>${sightVO.modifier}</td>
 									<td>${sightVO.modifyTime}</td>
 									<td>${sightVO.del}</td>
-									<td>
-										<button class="create-user">修改</button>
-									</td>
 									<td>刪除</td>
 								</tr>
 								</c:forEach>
@@ -192,7 +180,6 @@ text-align:center
 				</form>
 			</div>
 		</div>
- 		<div id="dialog-form"></div>
 	</article>
 	<footer>
 		<!-- import共同的 -->
