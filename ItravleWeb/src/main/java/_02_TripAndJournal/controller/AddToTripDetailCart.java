@@ -118,25 +118,36 @@ public class AddToTripDetailCart extends HttpServlet {
 		String sessionId = session.getId();
 		System.out.println("sessionId:" + sessionId);
 		List<TripDetailVO> tripDetailCart = null;
+		
+		//新建行程時從session抓出來count(在NewTripServlet設定count初始值=1)
+		int count = (int) session.getAttribute("count");
 
 		if (session != null) {
 			try {
-				tripDetailCart = (LinkedList<TripDetailVO>) session.getAttribute("tripDetailCart");			
+				tripDetailCart = (LinkedList<TripDetailVO>) session.getAttribute("tripDetailCart");				
 				if (tripDetailCart == null) {					
 					// 建cart
 					tripDetailCart = new LinkedList<TripDetailVO>();
 					System.out.println("新建cart");
-				}	
+				}
+				//每次+2
+				count = count + 2;
 				// vo丟進去
 				tripDetailCart.add(tripDetailVO);
+								
 				session.setAttribute("tripDetailCart", tripDetailCart);
-				System.out.println("放進session");
-				System.out.println("tripDetailCart===>"+tripDetailCart);
+				System.out.println("tripDetailCart放進session");
+				System.out.println("tripDetailCart===>" + tripDetailCart);
+				session.setAttribute("count", count);
+				System.out.println("count===>" + count);
 			} catch (ClassCastException e) {
 				System.out.println("Object cast to List<TripDetailVO> ClassCastException");
 				e.printStackTrace();
 			}
 		}
+		
+		String path = request.getContextPath();
+		response.sendRedirect(path + "/_02_TripAndJournal/member/WriteTrip.jsp");
 	}
 	
 	

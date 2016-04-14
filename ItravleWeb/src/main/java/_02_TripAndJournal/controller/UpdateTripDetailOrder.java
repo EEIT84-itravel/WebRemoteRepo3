@@ -89,6 +89,9 @@ public class UpdateTripDetailOrder extends HttpServlet {
 			// 請使用者登入
 			System.out.println("導向登入頁面(未完成)");
 		}
+		
+		String path = request.getContextPath();
+		response.sendRedirect(path + "/_02_TripAndJournal/member/WriteTrip.jsp");
 	}
 
 }

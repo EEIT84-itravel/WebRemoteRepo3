@@ -1,5 +1,6 @@
 package _02_TripAndJournal.model.dao;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -39,6 +40,27 @@ public class TripDetailDAOHibernate {
 		}
 		return tripDetailVO;
 	}
+	
+	public boolean insert(List<TripDetailVO> tripDetailVOs) {
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+			Iterator<TripDetailVO> it = tripDetailVOs.iterator();
+			while (it.hasNext()) {
+				TripDetailVO tripDetailVO = it.next();
+				session.save(tripDetailVO);
+				System.out.println("insert 成功");
+			}			
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+			return false;			
+		}
+		return true;
+	}
+	
+
 
 	public TripDetailVO update(TripDetailVO tripDetailVO) {
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
