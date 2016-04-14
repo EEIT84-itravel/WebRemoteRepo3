@@ -52,7 +52,7 @@ public class MemberAccountServlet extends HttpServlet {
 			{
 			output.append("不能超過15個字符！");
 			}else if (!memberAccount.matches("^(?=.*\\d)(?=.*[a-zA-Z]).{1,15}$")){
-				output.append("格式錯誤!");
+				output.append("格式錯誤!請輸入至少一個英文與至少一個數字的帳號組合");
 			}else{
 			output.append("此帳號可使用");
 			}

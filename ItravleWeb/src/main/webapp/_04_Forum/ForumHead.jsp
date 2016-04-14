@@ -13,17 +13,29 @@
 <body>
 	<div>
 		<ul class="tabs">
-			<li><a href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type00"/>">全部</a>&nbsp;&nbsp;</li>
-			<li><a href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type01" />">其他</a>&nbsp;&nbsp;</li>
-			<li><a href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type02" />">景點</a>&nbsp;&nbsp;</li>
-			<li><a href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type03" />">行程</a>&nbsp;&nbsp;</li>
-			<li><a href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type04" />" name="">遊記</a>&nbsp;&nbsp;</li>
-			<li><a href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type05" />">交通</a>&nbsp;&nbsp;</li>
-			<li><a href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type06" />">飲食</a>&nbsp;&nbsp;</li>
-			<li><a href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type07" />">住宿</a>&nbsp;&nbsp;</li>
-			<li><a href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type08" />">購物</a>&nbsp;&nbsp;</li>
-			<li><a href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type09" />">金錢</a>&nbsp;&nbsp;</li>
-		<li><input type="submit" name="forumAction" value="發表文章" /></li>
+			<li><a
+				href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type00"/>">全部</a>&nbsp;&nbsp;</li>
+			<li><a
+				href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type01" />">其他</a>&nbsp;&nbsp;</li>
+			<li><a
+				href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type02" />">景點</a>&nbsp;&nbsp;</li>
+			<li><a
+				href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type03" />">行程</a>&nbsp;&nbsp;</li>
+			<li><a
+				href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type04" />"
+				name="">遊記</a>&nbsp;&nbsp;</li>
+
+			<li><a
+				href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type05" />">交通</a>&nbsp;&nbsp;</li>
+			<li><a
+				href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type06" />">飲食</a>&nbsp;&nbsp;</li>
+			<li><a
+				href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type07" />">住宿</a>&nbsp;&nbsp;</li>
+			<li><a
+				href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type08" />">購物</a>&nbsp;&nbsp;</li>
+			<li><a
+				href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type09" />">金錢</a>&nbsp;&nbsp;</li>
+		<li><input type="button" name="forumAction" value="發表文章" onclick="location.href='<c:url value="/_04_Forum/member/Article.jsp?crud=NewArticle"/>'"/></li>
 		</ul>
 		<ul></ul>
 	</div>

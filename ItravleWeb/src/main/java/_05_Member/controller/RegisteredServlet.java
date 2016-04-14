@@ -1,17 +1,21 @@
 package _05_Member.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+import java.util.regex.Pattern;
 
 import _05_Member.model.MemberService;
 import _05_Member.model.MemberVO;
@@ -19,9 +23,11 @@ import _05_Member.model.MemberVO;
 @WebServlet(
 		urlPatterns={"/_05_Member/registered.controller"}
 )
+@MultipartConfig 
 public class RegisteredServlet extends HttpServlet {
 	private MemberService memberService = new MemberService();
-	
+	public static final Pattern EMAIL_PATTERN = Pattern
+		      .compile("^\\w+\\.*\\w+@(\\w+\\.){1,5}[a-zA-Z]{2,3}$");
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	//接收註冊人的資料
@@ -33,7 +39,9 @@ public class RegisteredServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String birth = request.getParameter("birth");
 		String cellphone = request.getParameter("cellphone");
-		String temp = request.getParameter("photo");
+		Part filePart = request.getPart("photo"); // Retrieves <input type="file" name="file">
+		String fileName = filePart.getSubmittedFileName();
+		InputStream is = filePart.getInputStream();
 		Map<String, String> error = new HashMap<String, String>();
 		request.setAttribute("error", error);
 		
@@ -45,14 +53,6 @@ public class RegisteredServlet extends HttpServlet {
 				birthday = Date.valueOf(birth);
 			} catch (IllegalArgumentException e) {
 				error.put("birth", "日期格式錯誤");
-			}
-		}
-		byte[] photo = null;
-		if (temp != null && temp.trim().length() != 0) {
-			try {
-				photo = temp.getBytes();
-			} catch (IllegalArgumentException e) {
-				error.put("photo", "檔案選擇錯誤");
 			}
 		}
 		//檢查使用者輸入資料
@@ -70,6 +70,8 @@ public class RegisteredServlet extends HttpServlet {
 		}
 		if (email == null || email.trim().length() == 0) {
 			error.put("email","信箱欄必須輸入");
+		}else if(EMAIL_PATTERN.matcher(email).matches()!=true){
+			error.put("email","格式錯誤！");
 		}
 		if (birth == null || birth.trim().length() == 0) {
 			error.put("birth","生日欄必須輸入");
@@ -93,7 +95,10 @@ public class RegisteredServlet extends HttpServlet {
 		member.setEmail(email);
 		member.setBirth(birthday);
 		member.setCellphone(cellphone);
-		member.setPhoto(photo);
+		byte[] p = new byte[is.available()];
+		is.read(p);
+		is.close();
+		member.setPhoto(p);
 //		java.sql.Timestamp timestamp = new Timestamp( new
 //					 java.util.Date().getTime());
 //		member.setModiftyTime(timestamp);   //資料庫有預設   
