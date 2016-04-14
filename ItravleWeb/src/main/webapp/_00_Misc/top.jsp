@@ -47,7 +47,7 @@ nav{
 			<ul class="nav navbar-nav">
 			    <!--  正在被選取的物件-->
 		        <!-- 	<li class="active"><a href="#">看景點<span class="sr-only">(current)</span></a></li> -->
-				<li><a href="<c:url value="/_01_Sight/SightIndex.jsp"/>">看景點</a></li>				
+				<li><a href="<c:url value="/_01_Sight/SightIndex.controller"/>">看景點</a></li>				
         		<li><a href="#">看行程</a></li>
         		<li><a href="#">看遊記</a></li>
         		<li><a href="<c:url value="/_02_TripAndJournal/member/NewTrip.jsp" />">排行程</a></li>

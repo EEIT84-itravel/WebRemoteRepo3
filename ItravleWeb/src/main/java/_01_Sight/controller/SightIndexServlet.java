@@ -19,26 +19,33 @@ public class SightIndexServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		// 呼叫Model(首頁畫面)
-		SightService sightService = new SightService();
-		List<SightVO> sightVO = sightService.select();
-		List<SightVO> watchNum = sightService.selectByWatchNum();
 
+		// 接收HTML Form資料
 		String region = request.getParameter("region");
 		String county = request.getParameter("county");
 		String sightType = request.getParameter("sightType");
 		// String money = request.getParameter("money");
 		// String sightTime = request.getParameter("sightTime");
-		SightVO sightVO2 = new SightVO();
-		sightVO2.setRegionId(region);
-		sightVO2.setCountyId(county);
-		sightVO2.setSightTypeId(sightType);
+
+		// 轉換HTML Form資料
+
+		// 驗證HTML Form資料
+
+		// 呼叫Model(首頁畫面)
+		SightService sightService = new SightService();
+		//List<SightVO> sightVO = sightService.select();
+		// List<SightVO> watchNum = sightService.selectByWatchNum();
+
+		 SightVO sightVO2 = new SightVO();
+		 sightVO2.setRegionId(region);
+		 sightVO2.setCountyId(county);
+		 sightVO2.setSightTypeId(sightType);
 		// sightVO2.setTicket(money);
 		// sightVO2.setPlayPeriod(sightTime);
-		List<SightVO> sightVOp = sightService.search(sightVO2);
-		// request.setAttribute("sightVO", sightVOp);
+		 List<SightVO> sightVOp = sightService.search(sightVO2);
+		 request.setAttribute("sightVO", sightVOp);
 
-		request.setAttribute("sightVO", sightVO);
+		//request.setAttribute("sightVO", sightVO);
 		// request.setAttribute("watchNum", watchNum);
 		request.getRequestDispatcher("/_01_Sight/SightIndex.jsp").forward(
 				request, response);

@@ -36,13 +36,13 @@
 
 <style type="text/css">
 .SearchSight {
-	height: 400px; /* 高度 120 */
-	width: 400px; /* 寬度 120*/
-	/*background-color: #6699FF;  背景色 藍色*/
-	border: 1px solid #000000; /* 虛線邊框 2 像素 深藍色*/
-	margin: 20px; /* 四周邊界 20 像素 */
-	float: left;
+	height: 400px;
+	width: 350px;
+	border: 1px solid #000000;
+	margin: 20px;
 	padding: 10px;
+	float: left;
+	border-radius: 10px;
 }
 </style>
 
@@ -58,8 +58,8 @@
 	</nav>
 	<article>
 		<h5>首頁>看景點</h5>
-		<div class="SearchSight">
-			<input type="button" value="進階搜尋"> <br>
+<!-- 		<div class="SearchSight"> -->
+<!-- 			<input type="button" value="進階搜尋"> <br> -->
 			<form action="<c:url value="/_01_Sight/SightIndex.controller" />">
 				<table>
 					<tr>
@@ -78,30 +78,29 @@
 									<option value="${region.codeId}">${region.codeName}</option>
 								</c:forEach></select>
 						</td>
-						<td>消費金額:<select name="money">
-								<option value="free">免費</option>
-								<option value="nofree">付費</option>
-						</select>
-						</td>
-						<td>開放時間:<select name="sightTime"><c:forEach
-									var="region" items="${sight_time}">
-									<option value="${region.codeId}">${region.codeName}</option>
-								</c:forEach></select>
-						</td>
+<!-- 						<td>消費金額:<select name="money"> -->
+<!-- 								<option value="free">免費</option> -->
+<!-- 								<option value="nofree">付費</option> -->
+<!-- 						</select> -->
+<!-- 						</td> -->
+<%-- 						<td>開放時間:<select name="sightTime"><c:forEach --%>
+<%-- 									var="region" items="${sight_time}"> --%>
+<%-- 									<option value="${region.codeId}">${region.codeName}</option> --%>
+<%-- 								</c:forEach></select> --%>
+<!-- 						</td> -->
 					</tr>
 				</table>
 				<input type="submit" />
 			</form>
 
-		</div>
+<!-- 		</div> -->
 		<h5>熱門景點</h5>
 		<c:forEach var="watchNum" items="${watchNum}" begin="0" end="3">
 
 			<div class="SearchSight">
 				<p>No:</p>
-				<img alt=""
-					src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${watchNum.sightId}" />"
-					width="240" height="180">
+				<img
+					src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${watchNum.sightId}" />">
 				<p>
 					<a
 						href="<c:url value="/_01_Sight/Sight.controller?sightId=${watchNum.sightId}" />">名稱:${watchNum.sightName}</a>
@@ -119,7 +118,7 @@
 				<p>No:${sightVO.sightId}</p>
 				<img alt=""
 					src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
-					width="240" height="180">
+					width="280" height="210">
 				<p>
 					<a
 						href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />">名稱:${sightVO.sightName}</a>

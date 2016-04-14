@@ -48,10 +48,10 @@ html, body {
 .IntroSight {
 	width: 600px;
 	/*margin: 0;
-	padding: 0;
-	margin: 0 auto;*/ float : left;
+	margin: 0 auto;*/
+	padding: 10px;
 	border: solid black;
-	float: left;
+/* 	float: left; */
 }
 </style>
 
@@ -68,7 +68,6 @@ html, body {
 	</nav>
 	<article>
 		<div class="IntroSight">
-			<h1>景點資訊</h1>
 			<p>地名:${sightVO.sightName}</p>
 			<p>簡介:${sightVO.intro}</p>
 			<p>
@@ -120,23 +119,22 @@ html, body {
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU9JCqlrRPTLXt7fvy9ERvO2EU1QPcO_0&signed_in=true&callback=initMap"></script>
 
 		<!-- 		留言 -->
-		<!-- 		<div id="tabs"> -->
-		<!-- 			<ul> -->
-		<!-- 				<li><a href="#tabs-1">相關行程</a></li> -->
-		<!-- 				<li><a href="#tabs-2">相關遊記</a></li> -->
-		<!-- 				<li><a href="#tabs-3">留言</a></li> -->
-		<!-- 			</ul> -->
-		<!-- 			<div id="tabs-1"> -->
-		<!-- 				<p>台北小清新之旅</p> -->
-		<!-- 			</div> -->
-		<!-- 			<div></div> -->
-		<!-- 			<div id="tabs-2"> -->
-		<!-- 				<p>我的遊記</p> -->
-		<!-- 			</div> -->
-		<!-- 			<div id="tabs-3"> -->
-		<!-- 				<p>門票是不是漲價了</p> -->
-		<!-- 			</div> -->
-		<!-- 		</div> -->
+				<div id="tabs">
+					<ul>
+						<li><a href="#tabs-1">相關行程</a></li>
+						<li><a href="#tabs-2">相關遊記</a></li>
+						<li><a href="#tabs-3">留言</a></li>
+					</ul>
+					<div id="tabs-1">
+						<p>台北小清新之旅</p>
+					</div>
+					<div id="tabs-2">
+						<p>我的遊記</p>
+					</div>
+					<div id="tabs-3">
+						<p>門票是不是漲價了</p>
+					</div>
+				</div>
 	</article>
 	<div id="map"></div>
 	<footer>
