@@ -186,8 +186,7 @@ var spendHour;
 		            $('#mysight').dialog('close');
 		        }
 		        closedialog = 1;//set to one because click on dialog box sets to zero
-		    }
-		});		
+		    }	
 		// 儲存時的確認對話框
 		var dialog = $( "#dialog-confirm" ).dialog({
 			resizable: false,
@@ -208,6 +207,7 @@ var spendHour;
 		$("#saveTrip").button().on( "click", function() {
 		      dialog.dialog( "open" );
 	});
+		});
 	
 	//呼叫servlet把cart裡的東西寫到DB
 	function saveTripDetailCart() {		
@@ -392,7 +392,7 @@ var spendHour;
 		</div><!-- end div right -->
 		
 		<!-- 儲存行程觸發的對話框 -->
-		<div id="dialog-confirm" title="確認儲存?">
+		<div id="dialog-confirm" title="確認儲存?" >
  			<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>確定要儲存嗎?</p>
 		</div>	<!-- end div dialog-confirm -->
 		
