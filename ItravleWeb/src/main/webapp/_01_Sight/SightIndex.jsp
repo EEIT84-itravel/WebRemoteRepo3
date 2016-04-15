@@ -56,7 +56,9 @@
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
+
 	<article>
+
 		<h5>首頁>看景點</h5>
 		<div class="SearchSight">
 			<input type="button" value="進階搜尋"> <br>
@@ -92,7 +94,6 @@
 				</table>
 				<input type="submit" />
 			</form>
-
 		</div>
 		<h5>熱門景點</h5>
 		<c:forEach var="watchNum" items="${watchNum}" begin="0" end="3">
@@ -113,6 +114,7 @@
 
 		</c:forEach>
 		<br>
+		<div class="holder"></div>
 
 		<c:forEach var="sightVO" items="${sightVO}">
 			<div class="SearchSight">
