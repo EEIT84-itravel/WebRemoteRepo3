@@ -44,6 +44,7 @@ public class MemberModifyServlet extends HttpServlet {
 				String lastName = request.getParameter("lastName");
 				String firstName = request.getParameter("firstName");
 				String password = request.getParameter("password");
+				String nickname = request.getParameter("nickname");
 				String email = request.getParameter("email");
 				String birth = request.getParameter("birth");
 				String cellphone = request.getParameter("cellphone");
@@ -72,6 +73,9 @@ public class MemberModifyServlet extends HttpServlet {
 				if (password == null || password.trim().length() == 0) {
 					error.put("password","密碼欄必須輸入");
 				}
+				if (nickname == null || nickname.trim().length() == 0) {
+					error.put("nickname","暱稱欄必須輸入");
+				}
 				if (email == null || email.trim().length() == 0) {
 					error.put("email","信箱欄必須輸入");
 				}else if(EMAIL_PATTERN.matcher(email).matches()!=true){
@@ -95,6 +99,7 @@ public class MemberModifyServlet extends HttpServlet {
 				member.setMemberAccount(memberAccount);
 				member.setLastName(lastName);
 				member.setFirstName(firstName);
+				member.setNickname(nickname);
 				member.setPassword(password);
 				member.setEmail(email);
 				member.setBirth(birthday);
