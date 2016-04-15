@@ -21,6 +21,8 @@
 		<h3><a href="<c:url value="/_05_Member/Login.jsp" />">Login</a></h3>
 		<h3><a href="<c:url value="/_05_Member/Logout.jsp" />">Logout</a></h3>
 		<h3><a href="<c:url value="/_05_Member/Registered.jsp" />">註冊</a></h3>
+		<h3><a href="<c:url value="/_05_Member/MemberModify.jsp" />">修改會員資料</a></h3>
+		<h3><a href="<c:url value="/_05_Member/MemberSight.jsp" />">我的景點</a></h3>
 	</article>
 	<footer>
 		<!-- import共同的 -->

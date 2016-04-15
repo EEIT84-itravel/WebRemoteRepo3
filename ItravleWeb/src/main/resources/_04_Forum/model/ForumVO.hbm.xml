@@ -26,8 +26,5 @@
 		<property name="visitorNum" type="java.lang.Integer" insert="false">
 			<column name="visitor_num" />
 		</property>
-		<property name="replyNum" type="java.lang.Integer" insert="false">
-			<column name="reply_num" />
-		</property>
 	</class>
 </hibernate-mapping>

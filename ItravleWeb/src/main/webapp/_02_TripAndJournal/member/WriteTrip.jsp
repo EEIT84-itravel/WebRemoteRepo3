@@ -155,7 +155,43 @@ var spendHour;
 		// 建立右邊景點的分頁
 		$("#sightsTabs").tabs({
 			heightStyle : "fill"
-		});		
+		});
+		//景點詳情dialog功能
+		var uri="${pageContext.request.contextPath}/_02_TripAndJournal/ShowSightDetail.controller?sightId=";
+ 		var dialog2;
+			dialog2 = $( "#mysight" ).dialog({
+	        autoOpen: false,
+	        height: 700,
+	        width: 600,
+	        draggable: true,
+	        resizable: false,
+	        modal: true,
+	        open: function() {
+	            closedialog = 1;
+	            $(document).bind('click', overlayclickclose); },
+	        focus: function() { 
+	            closedialog = 0; },
+	        close: function() { 
+	            $(document).unbind('click'); }
+	    });
+		$("tr.sightId>td:nth-child(9)").each(function(){
+			$(this).click(function(){
+					var sightId=$(this).prev().prev().prev().prev().prev().prev().prev().prev().text();	
+					console.log(sightId);
+					var stylei=' width="98%" height="98%"  frameborder="0" scrolling="auto"';
+					$("#mysight").html('<iframe src="'+uri+sightId+'"'+stylei+'></iframe>');
+					dialog2.dialog( "open" );
+					closedialog = 0;
+			});
+		});
+		var closedialog;
+		 function overlayclickclose() {
+		        if (closedialog) {
+		            $('#mysight').dialog('close');
+		        }
+		        closedialog = 1;//set to one because click on dialog box sets to zero
+		    }	
+		    
 		// 儲存時的確認對話框
 		var dialog = $( "#dialog-confirm" ).dialog({
 			resizable: false,
@@ -175,7 +211,8 @@ var spendHour;
 		// 按鈕觸發對話框
 		$("#saveTrip").button().on( "click", function() {
 		      dialog.dialog( "open" );
-	    });			
+	    });		
+
 	});
 	
 	//呼叫servlet把cart裡的東西寫到DB
@@ -261,7 +298,9 @@ var spendHour;
 		<jsp:include page="/_00_Misc/top.jsp" />
 		
 	</nav>
-	<article>
+	<article>	
+		<!-- 	景點dialog顯示頁面 平時隱藏 -->
+		<div id="mysight" title="景點明細"></div>	
 	<p>${pageContext.session.id}</p>
 		<div id="left">
 			<table>
@@ -377,7 +416,7 @@ var spendHour;
 					<td>評論</td>
 					<td>最愛</td>
 					<!-- 景點彈出視窗功能 -->
-					<td><button class="label label-primary" onclick="window.open('<c:url value="/_02_TripAndJournal/ShowSightDetail.controller?sightId=${sightVO.sightId}" />','sightDetail','height=500,width=500,toolbar=no,titlebar=no,status=no,left=450,top=350');">詳情</button></td>					
+					<td><button class="label label-primary">詳情</button></td>					
 				</tr>
 				</table>
 				</c:forEach>
@@ -386,8 +425,8 @@ var spendHour;
 			</div>	<!-- end div sightsTabs -->
 		</div><!-- end div right -->
 		
-		<!-- 按"儲存行程"觸發的對話框 -->
-		<div id="dialog-confirm" title="確認儲存?">
+		<!-- 儲存行程觸發的對話框 -->
+		<div id="dialog-confirm" title="確認儲存?" >
  			<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>確定要儲存嗎?</p>
 		</div>	<!-- end div dialog-confirm -->
 		

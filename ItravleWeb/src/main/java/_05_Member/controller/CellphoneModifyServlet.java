@@ -14,9 +14,9 @@ import _05_Member.model.MemberService;
 import _05_Member.model.MemberVO;
 
 @WebServlet(
-		urlPatterns={"/_05_Member/cellphone.controller"}
+		urlPatterns={"/_05_Member/cellphonemodify.controller"}
 )
-public class CellphoneServlet extends HttpServlet {
+public class CellphoneModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,13 +25,17 @@ public class CellphoneServlet extends HttpServlet {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}	
-		this.textText2(request, response);
+		this.textText3(request, response);
 	}
-	private void textText2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void textText3(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/plain; charset=UTF-8");
 		PrintWriter out = response.getWriter();
+		//String cellphone1 = request.getParameter("cellphone1");
+		String cellphone1 = request.getParameter("cellphone1");
+		System.out.println(cellphone1);
 		StringBuilder output = new StringBuilder();
 		String cellphone = request.getParameter("cellphone");
+		System.out.println(cellphone);
 		if(cellphone==null || cellphone.trim().length()==0) {
 			output.append("電話是必要欄位");
 		}
@@ -52,7 +56,7 @@ public class CellphoneServlet extends HttpServlet {
 			output.append("此電話可使用");
 			}
 		}else {
-			output.append("此電話已有人使用");
+			output.append("此電話已有人使用,或是您原本的電話");
 		}
 		
 		out.print(output);
@@ -68,3 +72,4 @@ public class CellphoneServlet extends HttpServlet {
 	}
 
 }
+

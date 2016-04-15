@@ -27,7 +27,7 @@ public class MessageDAOHibernate {
 		return messageVo;
 	}
 	//抓討論區之留言
-	private static final String GET_ALL_FORUMMESSAGE = "from MessageVO where referenceNo=:referenceNo order by updateTime";
+	private static final String GET_ALL_FORUMMESSAGE = "from MessageVO where referenceNo=:referenceNo order by messageId";
 	public List<MessageVO> getForumMessage(Integer referenceNo) {
 		List<MessageVO> list = null;
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
@@ -44,6 +44,44 @@ public class MessageDAOHibernate {
 		}
 		return list;
 	}
+	//抓出某篇文章的回覆人數
+	public Long getForumMessageNum(Integer referenceNo) {
+		long count = 0;
+		List<MessageVO> list = null;
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("select count(referenceNo) as count from MessageVO where referenceNo=:referenceNo");
+			query.setParameter("referenceNo", referenceNo);			
+ 			count = (Long)query.list().get(0);
+			System.out.println("※此文章共"+count+"筆回覆");
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return count;
+	}
+	//抓出某篇文章的回覆人數
+	public List<MessageVO> getAllNum(String messageType) {
+	
+		List<MessageVO> list = null;
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from MessageVO where messageType=:messageType");
+			query.setParameter("messageType", messageType);			
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
+	
 
 	public List<MessageVO> getAll() {
 		List<MessageVO> list = null;
@@ -66,7 +104,7 @@ public class MessageDAOHibernate {
 				.getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(messageVO);
+			session.update(messageVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();

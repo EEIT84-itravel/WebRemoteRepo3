@@ -43,14 +43,11 @@
 			var id2 = $('input[name="cellphone"]').val();
 			sendRequest2("GET", url2, id2);
 		});
-
-		$('input[name="memberAccount"]').focus(function() {
-			$('input[name="memberAccount"]').val("");
-			$("span:eq(2)").empty("");
+		$('input[name="memberAccount"]').focus(function() {	
+		 	$("span:eq(2)").empty("");
 		});
 		$('input[name="cellphone"]').focus(function() {
-			$('input[name="cellphone"]').val("");
-			$("span:eq(6)").empty("");
+		 	$("span:eq(6)").empty("");
 		});
 	});
 </script>
@@ -67,7 +64,7 @@
 	<article>
 		<h3>註冊會員</h3>
 		<h5 style="color: red">*為必填欄位</h5>
-		<form action="<c:url value="/_05_Member/registered.controller" />" method="get">
+		<form action="<c:url value="/_05_Member/registered.controller" />" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td>*姓氏 :</td>
@@ -88,6 +85,11 @@
 					<td>*密碼 :</td>
 					<td><input type="text" name="password" value="${param.password}"></td>
 					<td><span class="error">${error.password}</span></td>
+				</tr>
+				<tr>
+					<td>*暱稱 :</td>
+					<td><input type="text" name="nickname" value="${param.nickname}"></td>
+					<td><span class="error">${error.nickname}</span></td>
 				</tr>
 				<tr>
 					<td>*信箱 :</td>
