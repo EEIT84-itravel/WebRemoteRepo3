@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:useBean id="codeSvc" scope="page"
-	class="_00_Misc.model.CodeService" />
+<jsp:useBean id="codeSvc" scope="page" class="_00_Misc.model.CodeService" />
 <!DOCTYPE html>
 <html>
 <head>
-<title>sightDetail</title>
+<title>ITravel-SightDetail</title>
 <meta name="viewport" content="initial-scale=1.0">
 <meta charset="utf-8">
 <style>
@@ -15,11 +14,13 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
-
+#dialog-form{
+color: white;
+}
 #map {
 	height: 250px;
 	width: 480px;
-}
+	margin: 0 auto; } 
 </style>
 <script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
 <script>
@@ -44,10 +45,12 @@ var sightName;
 	<script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
 </head>
 <body>
+	<h3>${error.sightDetail}</h3>	<!--錯誤處理  -->
+	<c:if test="${not empty sightVO}">
     <div id="map"></div>
 	<div id="dialog-form" title="SightDetail">
  			<form class="sightDetailForm">
-				<fieldset>
+				<fieldset>						
 							<label>名稱；</label><span id="mySight">${sightVO.sightName}</span><br>
 							<label>地區；</label> 
 							<c:forEach var="codeVO" items="${codeSvc.all}">
@@ -87,9 +90,9 @@ var sightName;
 							<label>地址；</label> <span>${sightVO.addr}</span><br>
 							<label>交通方式；</label> <span>${sightVO.trans}</span><br> 
 							<label>上次更新時間；</label><span>${sightVO.modifyTime}</span><br> 
-							<input type="button" value="close" onclick="window.close()">
 					</fieldset>
 			</form>
-</div>
+	</div>
+	</c:if>
 </body>
 </html>

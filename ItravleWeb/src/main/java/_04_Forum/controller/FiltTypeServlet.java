@@ -16,6 +16,9 @@ import _04_Forum.model.ForumVO;
 @WebServlet("/_04_Forum/FiltType.controller")
 public class FiltTypeServlet extends HttpServlet {
        
+	//**判斷討論區所要篩選的主題為何**
+	
+	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		request.getParameter("00");
@@ -33,13 +36,8 @@ public class FiltTypeServlet extends HttpServlet {
 			request.setAttribute("forumVO1", forum01);
 			request.getRequestDispatcher("/_04_Forum/ForumIndex.jsp").forward(request, response);
 			return;
-		}
-		
-			
-	}
-	
-
-	
+		}		
+	}	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.doGet(request, response);
 	}

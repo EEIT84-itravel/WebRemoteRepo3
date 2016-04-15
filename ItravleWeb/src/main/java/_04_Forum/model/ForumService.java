@@ -1,6 +1,5 @@
 package _04_Forum.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import _04_Forum.model.dao.ForumDAOHibernate;

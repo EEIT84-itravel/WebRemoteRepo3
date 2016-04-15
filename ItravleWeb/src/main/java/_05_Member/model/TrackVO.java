@@ -30,6 +30,4 @@ public class TrackVO implements Serializable {
 	public void setFollowMember(Integer followMember) {
 		this.followMember = followMember;
 	}
-	
-	
 }

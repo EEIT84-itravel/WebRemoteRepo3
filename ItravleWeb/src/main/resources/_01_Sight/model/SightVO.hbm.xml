@@ -11,6 +11,9 @@
         <property name="sightName" type="java.lang.String">
             <column name="sight_name" />
         </property>
+        <property name="intro" type="java.lang.String">
+            <column name="intro" />
+        </property>
         <property name="regionId" type="java.lang.String">
             <column name="region_id" />
         </property>

@@ -38,7 +38,7 @@ public class SightServlet extends HttpServlet {
 		// private Time closeIime; //關門時間
 		// private Time spendHour; //建議停留時間
 		// private String playPeriod; //建議旅行時段
-		// private Float score; //評分
+		//String score = request.getParameter("score"); //評分
 		// private Float longitude; //經度
 		// private Float latitude; //緯度
 		// private Integer watchNum; //瀏覽人次
@@ -97,7 +97,7 @@ public class SightServlet extends HttpServlet {
 					"trans2",
 					sightVO.getTrans().substring(
 							sightVO.getTrans().indexOf(",") + 1));
-
+			
 			request.getRequestDispatcher("/_01_Sight/SightInformation.jsp")
 					.forward(request, response);
 		}

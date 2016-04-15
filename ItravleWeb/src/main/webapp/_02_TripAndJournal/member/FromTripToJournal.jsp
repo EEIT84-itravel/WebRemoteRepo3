@@ -17,29 +17,20 @@
 	List<TripVO> tripVO = tripService.selectFromMember(1);//測試時榜定memberID
 	pageContext.setAttribute("tripVO", tripVO);
 %>
-<title>從我的遊記選取</title>
+<style type="text/css">
+#fromTripToJournal{
+color:black
+}
+</style>
+<title>ITravel-從我的遊記選取</title>
 </head>
 <body>
-	<header>
-		<!-- import共同的 -->
-	</header>
-	<nav class="navbar navbar-inverse" role="navigation">
-		<!-- import共同的 -->
-		<jsp:include page="/_00_Misc/top.jsp" />
-	</nav>
-	<article>
-		<form
-			action="<c:url value="/_02_TripAndJournal/member/FromTripToJournal.controller"/>"
-			method="post">
+		<form id="fromTripToJournal" action="<c:url value="/_02_TripAndJournal/member/FromTripToJournal.controller"/>" method="post">
 			<select name="tripId">
 				<c:forEach var="tripVO" items="${tripVO}">
 					<option value="${tripVO.tripId}">${tripVO.tripName}</option>
 				</c:forEach>
-			</select> <input type="submit">
+			</select> <input type="submit" value="開始寫遊記吧!">
 		</form>
-	</article>
-	<footer>
-		<!-- import共同的 -->
-	</footer>
 </body>
 </html>

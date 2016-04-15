@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import _01_Sight.model.SightService;
 import _01_Sight.model.SightVO;
 
-@WebServlet("/ShowSightDetail.controller")
+@WebServlet("/_02_TripAndJournal/ShowSightDetail.controller")
 public class ShowSightDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -23,15 +23,27 @@ public class ShowSightDetailServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String temp = request.getParameter("sightId");
 		Map<String, String> error = new HashMap<String, String>();
+		request.setAttribute("error", error);
 		// 型態轉換
 		int sightId = 0;
 		if (temp != null && temp.trim().length() != 0) {
-			sightId = Integer.parseInt(temp);
+			try {
+				sightId = Integer.parseInt(temp);
+			} catch (NumberFormatException e) {				
+				error.put("sightDetail", "景點ID必須是數字");
+			}
 		} else {
-			error.put("sightDetail", "景點ID必須是數字");
+			error.put("sightDetail", "景點ID不得空白");
 		}
 
 		// 資料驗證-無
+		if (error != null && !error.isEmpty()) {
+			request.getRequestDispatcher(
+					"/_02_TripAndJournal/ShowSightDetail.jsp").forward(request,
+					response);
+			return;
+		}
+		
 		// 呼叫model
 		SightService sightService = new SightService();
 		SightVO sightVO = sightService.findByPrimaryKey(sightId);
