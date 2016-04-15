@@ -31,7 +31,6 @@ public class RegionFiltTypeServlet extends HttpServlet {
 		Integer memberId = null;
 		ArrayList<Integer> sightID = new ArrayList<Integer>();
 		ArrayList<SightVO> sightVO1 = new ArrayList<SightVO>();
-		System.out.println(regionId);
 		//轉換資料型態
 		if (temp != null && temp.trim().length()!=0) {//memberId轉換型態成int
 			memberId = Integer.parseInt(temp);
@@ -80,7 +79,7 @@ public class RegionFiltTypeServlet extends HttpServlet {
 		 		}
             }
             System.out.println(sightVO1);
-            if(sightVO1.isEmpty()){//將景點資訊傳回頁面
+            if(!sightVO1.isEmpty()){//將景點資訊傳回頁面
          	request.setAttribute("sightVO1", sightVO1);
 				
             }else{

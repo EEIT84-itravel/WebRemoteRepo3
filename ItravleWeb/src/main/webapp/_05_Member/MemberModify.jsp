@@ -78,6 +78,11 @@
 				<td><span class="error">${error.password}</span></td>
 			</tr>
 			<tr>
+				<td>*暱稱 :</td>
+				<td><input type="text" name="nickname" value="${user.nickname}"></td>
+				<td><span class="error">${error.nickname}</span></td>
+			</tr>
+			<tr>
 				<td>*信箱 :</td>
 				<td><input type="text" name="email" value="${user.email}"></td>
 				<td><span class="error">${error.email}</span></td>

@@ -98,8 +98,9 @@
 				</tr>
 			</thead>
 			<tbody>
+
 				<c:if test="${empty sightVO1}">
-				<c:if test="${not empty noSightVO}">
+				<c:if test="${empty noSightVO}">
 					<c:forEach var="sightVO" items="${sightVO}">
 						<tr>
 							<td><img alt=""
@@ -111,12 +112,13 @@
 									<td>${codeVO.codeName}</td>
 								</c:if>
 							</c:forEach>
-							<td>${sightVO.score}</td>
-							<td>移出收藏</td>
+							<td>${sightVO.score}</td>  
+							<td><a href="<c:url value="/_05_Member/delsight.controller?memberId=${user.memberId}&referenceType=${sightVO.sightId}&typeId=type_id01&regionId=region00"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
 						</tr>
 					</c:forEach>
 				</c:if>
 				</c:if>
+				
 				<c:forEach var="sightVO1" items="${sightVO1}">
 					<tr>
 						<td><img alt=""
@@ -129,7 +131,7 @@
 							</c:if>
 						</c:forEach>
 						<td>${sightVO1.score}</td>
-						<td>移出收藏</td>
+						<td><a href="<c:url value="/_05_Member/delsight.controller?memberId=${user.memberId}&referenceType=${sightVO1.sightId}&typeId=type_id01&regionId=${param.regionId}"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
 					</tr>
 				</c:forEach>
 			</tbody>

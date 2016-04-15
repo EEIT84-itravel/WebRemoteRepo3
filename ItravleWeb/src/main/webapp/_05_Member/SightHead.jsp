@@ -18,7 +18,6 @@
 			<li><a href="<c:url value="/_05_Member/RegionFiltType.controller?regionId=region02&memberId=${user.memberId}" />">中區</a>&nbsp;&nbsp;</li>
 			<li><a href="<c:url value="/_05_Member/RegionFiltType.controller?regionId=region03&memberId=${user.memberId}" />">南區</a>&nbsp;&nbsp;</li>
 			<li><a href="<c:url value="/_05_Member/RegionFiltType.controller?regionId=region04&memberId=${user.memberId}" />">東區</a>&nbsp;&nbsp;</li>
-			<li><a href="<c:url value="/_05_Member/RegionFiltType.controller?regionId=region05&memberId=${user.memberId}" />">全台</a>&nbsp;&nbsp;</li>
 		</ul>
 		<ul></ul>
 	</div>
