@@ -47,7 +47,6 @@ function confirmDeleteMessage(n,m) {
 						scope="request">
 						<c:param name="forumId" value="${forumVO.forumId}" />
 						<c:param name="visit" value="${forumVO.visitorNum}" />
-						<c:param name="reply" value="${forumVO.replyNum}" />
 						<c:param name="forumTopic" value="${forumVO.forumTopic}" />
 						<c:param name="content" value="${forumVO.forumContent}" />
 						<c:param name="forumType" value="${forumVO.forumTypeId}" />

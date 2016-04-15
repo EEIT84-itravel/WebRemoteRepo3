@@ -56,9 +56,22 @@
 	</nav>
 	<article>
 		<h5>首頁>看景點</h5>
-<!-- 		<div class="SearchSight"> -->
-<!-- 			<input type="button" value="進階搜尋"> <br> -->
-			<form action="<c:url value="/_01_Sight/SightIndex.controller" />">
+		
+		<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  進階搜尋
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">進階搜尋</h4>
+      </div>
+      <div class="modal-body">
+        <form action="<c:url value="/_01_Sight/SightIndex.controller" />">
 				<table>
 					<tr>
 						<td>地區:<select name="region"><c:forEach var="region"
@@ -76,6 +89,20 @@
 									<option value="${region.codeId}">${region.codeName}</option>
 								</c:forEach></select>
 						</td>
+					</tr>
+				</table>
+				<input type="submit" />
+			</form>
+      </div>
+    </div>
+  </div>
+</div>
+		
+<!-- 		<div class="SearchSight"> -->
+<!-- 			<input type="button" value="進階搜尋"> <br> -->
+			<form action="<c:url value="/_01_Sight/SightIndex.controller" />">
+				<table>
+					<tr>
 <!-- 						<td>消費金額:<select name="money"> -->
 <!-- 								<option value="free">免費</option> -->
 <!-- 								<option value="nofree">付費</option> -->
@@ -88,7 +115,7 @@
 <!-- 						</td> -->
 					</tr>
 				</table>
-				<input type="submit" />
+<!-- 				<input type="submit" /> -->
 			</form>
 
 <!-- 		</div> -->
@@ -114,8 +141,7 @@
 		<c:forEach var="sightVO" items="${sightVO}">
 			<div class="SearchSight">
 				<p>No:${sightVO.sightId}</p>
-				<img alt=""
-					src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
+				<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
 					width="280" height="210">
 				<p>
 					<a
