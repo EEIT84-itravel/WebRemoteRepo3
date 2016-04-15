@@ -1,6 +1,8 @@
 package _04_Forum.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,23 +27,26 @@ public class FiltUrlServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
+		String path = request.getContextPath();
 		String forumTopic = request.getParameter("forumTopic");
 		String crud = request.getParameter("crud");
 		String temp1 = request.getParameter("forumId");
 		String temp2 = request.getParameter("messageId");
-		
+		String temp3 = request.getParameter("memberId");
+
+		Map<String, String> error = new HashMap<String, String>();
+		request.setAttribute("error", error);
+
 		int forumId = 0;
-		if ("UpdateArticle".equals(crud)) {
-			if (temp1 != null && temp1.trim().length() != 0) {
-				try {
-					forumId = Integer.parseInt(temp1);
-				} catch (NumberFormatException e) {
-					e.printStackTrace();
-				}
+		if("UpdateArticle".equals(crud))
+		if (temp1 != null && temp1.trim().length() != 0) {
+			try {
+				forumId = Integer.parseInt(temp1);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
 			}
 		}
-		fv = fs.selectOne(forumId);
-		
+
 		int messageId = 0;
 		if ("UpdateReply".equals(crud)) {
 			if (temp2 != null && temp2.trim().length() != 0) {
@@ -52,17 +57,48 @@ public class FiltUrlServlet extends HttpServlet {
 				}
 			}
 		}
-		mv = ms.selectOne(messageId);
-		
-		if("UpdateArticle".equals(crud)){
-	        request.setAttribute("showThisArticle", fv);
-	        request.getRequestDispatcher("/_04_Forum/member/ModifyArticle.jsp").forward(request, response);        
-		}else if("UpdateReply".equals(crud)){
-			request.setAttribute("showThisMessage", mv);
-			request.getRequestDispatcher("/_04_Forum/member/Reply.jsp").forward(request, response);
+		int memberId = 0;
+		if ("UpdateReply".equals(crud) || "UpdateArticle".equals(crud)) {
+			if (temp3 != null && temp3.trim().length() != 0) {
+				try {
+					memberId = Integer.parseInt(temp3);
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		if ("UpdateArticle".equals(crud)) {
+			if (fs.selectOne(forumId).getMemberId() == memberId) {
+				fv = fs.selectOne(forumId);
+				request.setAttribute("showThisArticle", fv);
+				request.setAttribute("memberId", memberId);
+				request.getRequestDispatcher(
+						"/_04_Forum/member/ModifyArticle.jsp").forward(request,
+						response);
+			} else {
+				error.put("fContent", "非本人不可編輯");
+				response.sendRedirect(path
+						+ "/_04_Forum/ShowArticle.controller?forumId="
+						+ forumId);
+				return;
+			}
+		}
+		if ("UpdateReply".equals(crud)) {
+			if (ms.selectOne(messageId).getMemberId() == memberId) {
+				mv = ms.selectOne(messageId);
+				request.setAttribute("showThisMessage", mv);
+				request.setAttribute("memberId", memberId);
+				request.getRequestDispatcher("/_04_Forum/member/Reply.jsp")
+						.forward(request, response);
+			} else {
+				error.put("fContent", "非本人不可編輯");
+				response.sendRedirect(path
+						+ "/_04_Forum/ShowArticle.controller?forumId="
+						+ forumId);
+				return;
+			}
 		}
 	}
-
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		this.doPost(request, response);

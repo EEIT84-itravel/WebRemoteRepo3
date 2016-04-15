@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 外接程式碼 -->
 
 <%@ page import="_00_Misc.model.*"%>
@@ -11,13 +12,12 @@
 	class="_00_Misc.model.CodeService" />
 <jsp:useBean id="MessageService" scope="page"
 	class="_02_TripAndJournal.model.MessageService" />
+<jsp:useBean id="MemberService" scope="page"
+	class="_05_Member.model.MemberService" />
 <%
 	ForumService forumService = new ForumService();
  	List<ForumVO> forumVO = forumService.select();
  	pageContext.setAttribute("forumVO", forumVO);
- 	
- 	MessageService ms = new MessageService();
-    request.getParameter("");
 %>
 <!DOCTYPE html >
 <html>
@@ -25,20 +25,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
 </style>
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/css/_04_Forum/Forum.css"/>" />
-<link rel="stylesheet" type="text/css"
-	href="../css/_04_Forum/datatable.css" />
-<link rel="stylesheet" type="text/css"
-	href="../jquery-ui-1.11.4.custom/jquery-ui.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.css" />
+<link rel="stylesheet" type="text/css"	href="<c:url value="/css/_04_Forum/Forum.css"/>" />
+<link rel="stylesheet" type="text/css"	href="../css/_04_Forum/datatable.css" />
+<link rel="stylesheet" type="text/css"	href="../jquery-ui-1.11.4.custom/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css"	href="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.css" />
 
 <script type="text/javascript" src="../js/jquery-2.2.1.min.js"></script>
-<script type="text/javascript"
-	src="../jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
-<script type="text/javascript"
-	src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript"	src="../jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+<script type="text/javascript"	src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 	//DataTable設定
 	var opt = {
@@ -60,9 +54,16 @@
 			}
 		}
 	};
+	//datatable
 	$(document).ready(function() {
-		$("#forum").DataTable(opt);
+		$("#forum").DataTable(opt);		
 	})
+</script>
+<script type="text/javascript">
+
+	var str = document.getElementById("topic");
+
+
 </script>
 <title>ITravel討論區</title>
 </head>
@@ -78,14 +79,15 @@
 		<form method="post">
 			<div id="forumHead">
 				<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
+				
 				<table id="forum" border="1">
 					<thead>
 						<tr id="forumTitle">
-							<th>討論類型</th>
+							<th>類型</th>
 							<th>討論主題</th>
 							<th>作者</th>
-							<th>瀏覽人次</th>
-							<th>回覆數</th>
+							<th>人氣</th>
+							<th>回應</th>
 							<th>最後發表</th>
 						</tr>
 					</thead>
@@ -98,51 +100,51 @@
 										${CodeVO.codeName}
                              		</c:if>
 										</c:forEach></td>
-									<td><a
+									<td id="topic"><a
 										href="<c:url value="/_04_Forum/ShowArticle.controller?forumId=${forumVO.forumId}" />">${forumVO.forumTopic}</a></td>
-									<td>${forumVO.memberId}</td>
+									<td>
+									    <c:forEach var="MemberVO" items="${MemberService.all}">
+											<c:if test="${MemberVO.memberId==forumVO.memberId}">${MemberVO.nickname}</c:if>
+										</c:forEach>
+									</td>
 									<td>${forumVO.visitorNum}</td>
-									<%
-										int i = 0;
-									%>
+									<%int i = 0;%>
 									<c:forEach var="MessageVO" items="${MessageService.allNum}"
 										varStatus="vs">
 										<c:if test="${MessageVO.referenceNo==forumVO.forumId}">
-											<%
-												i++;
-											%>
+											<%i++;%>
 										</c:if>
 									</c:forEach>
 									<td><%=i%></td>
-									<%-- 							<td>${forumVO.replyNum}</td> --%>
-									<td>${forumVO.forumTime}</td>
+									<td><fmt:formatDate value="${forumVO.forumTime}" timeStyle="full" type="time" pattern="yyyy-MM-dd hh:mm"/></td>
+									
 								</tr>
 							</c:forEach>
 						</c:if>
 						<c:forEach var="forumVO1" items="${forumVO1}">
 							<tr>
 								<td><c:forEach var="CodeVO" items="${CodeService.all}">
-											<c:if test="${CodeVO.codeId==forumVO1.forumTypeId}">
+										<c:if test="${CodeVO.codeId==forumVO1.forumTypeId}">
 										${CodeVO.codeName}
                              		</c:if>
-										</c:forEach></td>
+									</c:forEach></td>
 								<td><a
 									href="<c:url value="/_04_Forum/ShowArticle.controller?forumId=${forumVO1.forumId}" />">${forumVO1.forumTopic}</a></td>
-								<td>${forumVO1.memberId}</td>
+								<td>
+								    <c:forEach var="MemberVO" items="${MemberService.all}">
+											<c:if test="${MemberVO.memberId==forumVO1.memberId}">${MemberVO.nickname}</c:if>
+									</c:forEach>
+								</td>
 								<td>${forumVO1.visitorNum}</td>
-								<%
-									int a = 0;
-								%>
+								<%int a = 0;%>
 								<c:forEach var="MessageVO2" items="${MessageService.allNum}"
 									varStatus="vs">
 									<c:if test="${MessageVO2.referenceNo==forumVO1.forumId}">
-										<%
-											a++;
-										%>
+										<%a++;%>
 									</c:if>
 								</c:forEach>
 								<td><%=a%></td>
-								<td>${forumVO1.forumTime}</td>
+								<td><fmt:formatDate value="${forumVO1.forumTime}" pattern="yyyy-MM-dd hh:mm"/></td>
 							</tr>
 						</c:forEach>
 					</tbody>

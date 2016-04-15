@@ -25,9 +25,11 @@
 			method="post">
 			<!--抓到LookArticle.jsp傳過來的值 -->
 		<input type="hidden" name="referenceNo" value="${param.referenceNo}">
-			<input type="hidden" name="crud" value="${param.crud}">
 			<input type="hidden" name="messageId" value="${showThisMessage.messageId}">
 			<input type="hidden" name="messageContent" value="${showThisMessage.content}">
+			<input type="hidden" name="memberId" value="${param.memberId}" >
+			<input type="hidden" name="crud" value="${param.crud}">
+			
 
 			<div id="forumHead">
 				<table>

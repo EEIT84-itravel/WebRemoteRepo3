@@ -28,10 +28,11 @@ public class MessageServlet extends HttpServlet {
 		// 接收資料
 		String temp1 = request.getParameter("referenceNo");
 		String temp2 = request.getParameter("messageId");
+		String temp3 = request.getParameter("memberId");
 		String content = request.getParameter("content");
 		String crud = request.getParameter("crud");
-		System.out.println(temp1);
-		System.out.println(temp2);
+		String path = request.getContextPath();
+
 
 		// 轉換資料
 		Map<String, String> error = new HashMap<String, String>();
@@ -45,9 +46,17 @@ public class MessageServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		int memberId = 0;
+		if (temp3 != null || temp3.trim().length() != 0) {
+			try {
+				memberId = Integer.parseInt(temp3);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
 		// 新增文章不需轉換messageId
 		int messageId = 0;
-		if (!"NewReply".equals(crud)) {
+		if ("UpdateReply".equals(crud) || "Delete".equals(crud)) {
 			if (temp2 != null || temp2.trim().length() != 0) {
 				try {
 					messageId = Integer.parseInt(temp2);
@@ -56,13 +65,40 @@ public class MessageServlet extends HttpServlet {
 				}
 			}
 		}
-		messageVO.setMemberId(4);
+		if ("Delete".equals(crud)) {
+			if (ms.selectOne(messageId).getMemberId() == memberId) {
+			messageVO.setMessageId(messageId);
+				boolean result = ms.delete(messageVO);
+				if (result == false) {
+					error.put("messageTopic", "刪除失敗");
+					response.sendRedirect(path + "/_04_Forum/LookArticle.jsp");
+					return;
+				} else {
+					response.sendRedirect(path
+							+ "/_04_Forum/ShowArticle.controller?forumId="
+							+ referenceNo);
+					return;
+				}
+			}else{
+				error.put("content", "不可刪除非自己撰寫的文章");
+			}
+		}
+		
+		if (content == null || content.trim().length() == 0) {
+			error.put("content", "文章內容不可為空白");
+		}
+		if (error != null && !error.isEmpty()) {
+			request.getRequestDispatcher("/_04_Forum/member/Reply.jsp")
+					.forward(request, response);
+			return;
+		}
+		messageVO.setMemberId(memberId);
 		messageVO.setContent(content);
 		messageVO.setReferenceNo(referenceNo);
 		messageVO.setUpdateTime(new Timestamp(new Date().getTime()));
 		messageVO.setMessageType("type_id05"); // 寫死留言類型
 
-		String path = request.getContextPath();
+	
 		if ("NewReply".equals(crud)) {
 			MessageVO result = ms.insert(messageVO);
 			if (result == null) {
@@ -89,21 +125,9 @@ public class MessageServlet extends HttpServlet {
 			response.sendRedirect(path
 					+ "/_04_Forum/ShowArticle.controller?forumId="
 					+ referenceNo);
-		} else if ("Delete".equals(crud)) {
-			System.out.println(messageId);
-			messageVO.setMessageId(messageId);
-			boolean result = ms.delete(messageVO);
-			if (result == false) {
-				error.put("messageTopic", "刪除失敗");
-				response.sendRedirect(path + "/_04_Forum/LookArticle.jsp");
-				return;
-			} else {
-				response.sendRedirect(path
-						+ "/_04_Forum/ShowArticle.controller?forumId="
-						+ referenceNo);
-			}
-		}
+		} 
 	}
+
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		this.doGet(request, response);
