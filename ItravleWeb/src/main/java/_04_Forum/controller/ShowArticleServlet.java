@@ -21,13 +21,8 @@ import _04_Forum.model.ForumVO;
 @WebServlet("/_04_Forum/ShowArticle.controller")
 public class ShowArticleServlet extends HttpServlet {
 	
-//	@Override
-//	public void init() throws ServletException {
-//	
-//		String article = this.getInitParameter("forumId");
-//		ServletContext application = this.getServletContext();
-//		String path = application.getRealPath(article);	
-//	}
+    //**在討論區點選文章後可以印出該文章的所有留言以及文章詳細內容**
+	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -47,11 +42,22 @@ public class ShowArticleServlet extends HttpServlet {
 		// 呼叫Model
 				ForumService fs = new ForumService();
 				ForumVO forumVO = fs.selectOne(forumId);
+				//將瀏覽人次加1
+				forumVO.setForumId(forumId);
+				forumVO.setVisitorNum(forumVO.getVisitorNum()+1);
+				fs.update(forumVO);
+				
 				MessageService ms = new MessageService();
 				List<MessageVO> messageVO = ms.getForumMessage(forumId);
+				
+				
+			    long count = ms.getForumMessageNum(forumId);
+			
+			
 				if(forumVO != null ) {					
 					request.setAttribute("forumVO", forumVO);	
-					request.setAttribute("messageVO", messageVO);
+					request.setAttribute("messageVO1", messageVO);
+					request.setAttribute("count", count);
 				    request.getRequestDispatcher("/_04_Forum/LookArticle.jsp").forward(request, response);
 				}
 	}

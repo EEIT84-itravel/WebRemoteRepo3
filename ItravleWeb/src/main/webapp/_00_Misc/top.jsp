@@ -10,10 +10,11 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 <!-- 選擇性佈景主題 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+<!-- jQuery -->
+<script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
 <!-- 最新編譯和最佳化的 JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<!-- jQuery ui -->
-<script type="text/javascript" src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+
 <style type="text/css">
 nav{
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -57,7 +58,18 @@ nav{
            					 <li><a href="#">修改會員資料</a></li>
         				  </ul>
        				 </li>
+       			<li><a href="<c:url value="/_06_BackEnd/backend/AllSight.jsp" />">後台</a></li>
 			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="<c:url value="/_05_Member/Registered.jsp" />">註冊</a></li>
+				<!-- 視session是否登入登出顯示login或logout -->
+				<c:if test="${empty user}">
+        		<li><a href="<c:url value="/_05_Member/Login.jsp" />">Login</a></li>
+        		</c:if>
+        		<c:if test="${not empty user}">
+      			<li><a href="<c:url value="/_05_Member/Logout.jsp" />">Logout</a></li>
+      			</c:if>
+          	</ul>
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>
