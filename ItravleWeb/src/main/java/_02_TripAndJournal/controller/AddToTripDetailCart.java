@@ -31,6 +31,7 @@ public class AddToTripDetailCart extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// 接收HTML Form資料
+		request.setCharacterEncoding("UTF-8");
 		System.out.println("------------------AddToTripDetailCart------------------");
 		String temp1 = request.getParameter("tripId");
 		String temp2 = request.getParameter("tripOrder");

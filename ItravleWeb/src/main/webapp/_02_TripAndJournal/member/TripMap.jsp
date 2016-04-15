@@ -8,20 +8,28 @@
 <style>
 	#map {
         width:100%;
-        height: 500px;
+        height: 700px;
 	}
 </style>
 <script type="text/javascript">
-//取得畫面上的景點名稱順序?!?!
-// var sightNames = $("td.sightName").each(function(){
-// 	thisSight=$(this).css("color","red");
-
-// });
-// var sightNames = $("td.sightName").toArray();
-// console.log(sightNames);
-
 var directionsService;
 var directionsDisplay;
+var locationArray=[];
+// 取得中間的景點名稱
+var thisSight;
+$("td.sightName").each(function(){
+	thisSight = $(this).text().trim();
+	locationArray.push(thisSight);
+// 	console.log(thisSight);
+});
+console.log(locationArray);
+//從locationArray取得起點
+var start= locationArray[0];
+console.log(start);
+locationArray.shift();
+//從locationArray取得終點
+var end = locationArray.pop();
+console.log(end);
 
 function initMap() {
 	directionsService = new google.maps.DirectionsService;
@@ -42,22 +50,23 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 	
 	//經過地點
 	var waypts = [];
-	//從session依照順序取得景點字串?
-	var locationArray = ["台中市政府", "台中火車站"];
+// 	var locationArray = ["臺北101購物中心" ,"五分埔商圈", "饒河街觀光夜市"];
+	//從左側畫面依照順序取得景點字串
 	for (var i = 0; i < locationArray.length; i++) {
 		waypts.push({
 			location: locationArray[i],
 			stopover: true
 		});
 	};
+	console.log(waypts);
 	
 	//規畫路徑請求
 	directionsService.route({
-		origin: '台中市西區五權路50號',	//改從session接
-	    destination: '台中市體育場',	//改從session接
+		origin: start,	//改從左側畫面接
+	    destination: end,	//改從左側畫面接
 	    waypoints: waypts,
 	    optimizeWaypoints: true,
-	    travelMode: google.maps.TravelMode.DRIVING	//改從session接?
+	    travelMode: google.maps.TravelMode.DRIVING	//改從左側畫面接?
 	}, function(response, status) {
 		//規畫路徑回傳結果
 		if (status === google.maps.DirectionsStatus.OK) {

@@ -31,6 +31,7 @@ public class UpdateTripDetailOrder extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("call UpdateTripDetailOrder.controller");
 		// 接收資料
+		request.setCharacterEncoding("UTF-8");
 		String temp1 = request.getParameter("oldIndex");
 		String temp2 = request.getParameter("newIndex");
 		System.out.println("temp1:" + temp1);

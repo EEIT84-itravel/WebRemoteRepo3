@@ -27,7 +27,7 @@ public class SaveTripDetailCart extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 接收資料		
-
+		request.setCharacterEncoding("UTF-8");
 		// 轉換資料
 		
 		// 驗證資料
