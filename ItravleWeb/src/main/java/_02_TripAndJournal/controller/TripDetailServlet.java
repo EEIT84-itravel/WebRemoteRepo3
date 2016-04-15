@@ -32,6 +32,7 @@ public class TripDetailServlet extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		System.out.println("------------------TripDetail------------------");
 		// 接收HTML Form資料
 		String temp1 = request.getParameter("tripId");
@@ -167,7 +168,10 @@ public class TripDetailServlet extends HttpServlet {
 		} else {
 			// 請使用者登入
 			System.out.println("導向登入頁面(未完成)");
-		}	
+		}
+		
+		String path = request.getContextPath();
+		response.sendRedirect(path + "/_02_TripAndJournal/member/WriteTrip.jsp");
 
 	}
 

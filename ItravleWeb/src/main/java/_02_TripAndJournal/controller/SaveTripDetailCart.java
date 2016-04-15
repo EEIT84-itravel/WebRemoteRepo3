@@ -27,30 +27,24 @@ public class SaveTripDetailCart extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 接收資料		
-
+		request.setCharacterEncoding("UTF-8");
 		// 轉換資料
 		
 		// 驗證資料
 		
 		// 呼叫Model
 		HttpSession session = request.getSession(false);
+		@SuppressWarnings("unchecked")
 		LinkedList<TripDetailVO> tripDetailCart=(LinkedList<TripDetailVO>) session.getAttribute("tripDetailCart");
 		System.out.println(tripDetailCart);
 		TripDetailService service = new TripDetailService();
+		service.insert(tripDetailCart);
 		
-		//交易
-		
-		Iterator<TripDetailVO> it =tripDetailCart.iterator();
-		while (it.hasNext()) {
-			TripDetailVO tripDetailVO = it.next();
-			service.insert(tripDetailVO);
-			System.out.println("insert 成功");
-		}
-		Enumeration<String> e=session.getAttributeNames();
-		while(e.hasMoreElements()) {
-			String name =(String) e.nextElement();
-			System.out.println("session attribute names:" +name);
-		}		
+//		Enumeration<String> e=session.getAttributeNames();
+//		while(e.hasMoreElements()) {
+//			String name =(String) e.nextElement();
+//			System.out.println("session attribute names:" +name);
+//		}		
 		
 		session.removeAttribute("tripDetailCart");					
 		System.out.println("tripDetailCart已移除");

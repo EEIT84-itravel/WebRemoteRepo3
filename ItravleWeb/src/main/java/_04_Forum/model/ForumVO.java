@@ -18,7 +18,7 @@ public class ForumVO implements Serializable {
 	private String forumContent;
 	// 瀏覽人次(visitor_num)
 	private Integer visitorNum;
-	
+
 
 
 	public Integer getForumId() {
@@ -77,16 +77,15 @@ public class ForumVO implements Serializable {
 		this.visitorNum = visitorNum;
 	}
 
+
 	@Override
 	public String toString() {
 		return "ForumVO [forumId=" + forumId + ", forumTypeId=" + forumTypeId
 				+ ", forumTopic=" + forumTopic + ", memberId=" + memberId
 				+ ", forumTime=" + forumTime + ", forumContent=" + forumContent
 				+ ", visitorNum=" + visitorNum + "]";
+
 	}
 
-	
-
-	
 
 }

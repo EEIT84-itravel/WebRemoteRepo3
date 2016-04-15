@@ -1,25 +1,16 @@
 @CHARSET "UTF-8";
-
-#forumHead {
-	width: 1100px;
+/* 調整看文章頁面的文章及留言格式 */
+#forumHead ,#forumBody ,#messageBody {
+	width: 1000px;
 	height: auto;
 	margin: auto;
 }
-#t1 {
-	display: inline-block;
-	float: left;
-	margin: 5px;
-	padding: 5px;
+#forumBody{
+	border:1px solid #C9C9C9;
 }
-.d1 {
-	float: left;
-	border: 3px #0000ff solid;
-	margin: 3px;
-	padding: 5px;
-	display: inline-block;
-}
+
 #forum {
-	width: 1100px;
+	width: 1000px;
 	border: 2px solid red;
-	text-align: center;
+	text-align: left;
 }

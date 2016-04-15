@@ -31,6 +31,7 @@ public class UpdateTripDetailOrder extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("call UpdateTripDetailOrder.controller");
 		// 接收資料
+		request.setCharacterEncoding("UTF-8");
 		String temp1 = request.getParameter("oldIndex");
 		String temp2 = request.getParameter("newIndex");
 		System.out.println("temp1:" + temp1);
@@ -89,6 +90,9 @@ public class UpdateTripDetailOrder extends HttpServlet {
 			// 請使用者登入
 			System.out.println("導向登入頁面(未完成)");
 		}
+		
+		String path = request.getContextPath();
+		response.sendRedirect(path + "/_02_TripAndJournal/member/WriteTrip.jsp");
 	}
 
 }

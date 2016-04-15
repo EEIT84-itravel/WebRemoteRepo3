@@ -28,31 +28,16 @@ ul.tabs li {
 }
 ul.tabs li a {
 	display: block;
-	padding: 0 20px;
+	padding:0 26px;
 	color: #000;
 	border: 1px solid #fff;
 	text-decoration: none;
 }
 ul.tabs li a:hover {
-	background: #ccc;
+	background: #cccccc;
 }
-ul.tabs li.active  {
-	background: #fff;
-	border-bottom: 1px solid#fff;
+ul.tabs li a:active {
+	background: #C9FFFF;
 }
-ul.tabs li.active a:hover {
-	background: #fff;
-}
-div.tab_container {
-	clear: left;
-	width: 100%;
-	border: 1px solid #999;
-	border-top: none;
-	background: #fff;
-}
-div.tab_container .tab_content {
-	padding: 20px;
-}
-div.tab_container .tab_content h2 {
-	margin: 0 0 20px;
-}
+
+

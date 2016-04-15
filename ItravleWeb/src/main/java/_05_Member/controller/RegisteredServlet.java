@@ -34,6 +34,7 @@ public class RegisteredServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String lastName = request.getParameter("lastName");
 		String firstName = request.getParameter("firstName");
+		String nickname = request.getParameter("nickname");
 		String memberAccount = request.getParameter("memberAccount");
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
@@ -68,6 +69,9 @@ public class RegisteredServlet extends HttpServlet {
 		if (password == null || password.trim().length() == 0) {
 			error.put("password","密碼欄必須輸入");
 		}
+		if (nickname == null || nickname.trim().length() == 0) {
+			error.put("nickname","暱稱欄必須輸入");
+		}
 		if (email == null || email.trim().length() == 0) {
 			error.put("email","信箱欄必須輸入");
 		}else if(EMAIL_PATTERN.matcher(email).matches()!=true){
@@ -90,6 +94,7 @@ public class RegisteredServlet extends HttpServlet {
 		MemberVO member = new MemberVO();
 		member.setLastName(lastName);
 		member.setFirstName(firstName);
+		member.setNickname(nickname);
 		member.setMemberAccount(memberAccount);
 		member.setPassword(password);
 		member.setEmail(email);
