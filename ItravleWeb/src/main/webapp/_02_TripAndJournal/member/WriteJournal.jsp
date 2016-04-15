@@ -13,8 +13,34 @@
 	List<CodeVO> region = service.select("region");
 	pageContext.setAttribute("region", region);
 %>
-<script type="text/javascript"
-	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+<script type="text/javascript"	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+<!-- jQuery ui -->
+<link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
+<!-- jQuery -->
+<script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
+<!-- jQuery ui -->
+<script type="text/javascript" src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		//起始日期用jQuery UI
+		$('input[name="journalStartDate"]').datepicker({
+			appendText : "格式：YYYY-MM-DD",
+			dateFormat : "yy-mm-dd",
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+		}).attr("readonly", "readonly");
+		//結束日期用jQuery UI
+		$('input[name="journalEndDate"]').datepicker({
+			appendText : "格式：YYYY-MM-DD",
+			dateFormat : "yy-mm-dd",
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+		}).attr("readonly", "readonly");
+		//選時間的要再加上其他自己寫的jQuery UI plugin
+	});
+</script>
 <title>ITravel-建立新遊記</title>
 </head>
 <body>
