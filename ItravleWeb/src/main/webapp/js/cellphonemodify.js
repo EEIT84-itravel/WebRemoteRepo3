@@ -23,6 +23,6 @@ function processText3(data) {
 		var array3 = temp3.split(",");
 		$('input[name="cellphone"]').val(array3[0]);
 	}
-	$("span:eq(6)").text(show3);
+	$("span:eq(7)").text(show3);
 }
 

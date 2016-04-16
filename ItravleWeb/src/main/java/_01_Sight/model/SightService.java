@@ -36,4 +36,9 @@ public class SightService {
 		result = dao.selectByType(sightType);
 		return result;
 	}
+	public SightVO selectById(Integer sightId) {
+		SightVO result = null;
+		result = dao.findByPrimaryKey(sightId);
+		return result;
+	}
 }

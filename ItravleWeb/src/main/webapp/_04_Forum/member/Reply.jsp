@@ -24,17 +24,19 @@
 			action="<c:url value="/_04_Forum/member/MessageServlet.controller"/>"
 			method="post">
 			<!--抓到LookArticle.jsp傳過來的值 -->
-			<input type="hidden" name="referenceNo" value="${param.referenceNo}">
-			<input type="hidden" name="messageId" value="${param.messageId}">
-			<input type="hidden" name="messageContent" value="${param.content}">
+		<input type="hidden" name="referenceNo" value="${param.referenceNo}">
+			<input type="hidden" name="messageId" value="${showThisMessage.messageId}">
+			<input type="hidden" name="messageContent" value="${showThisMessage.content}">
+			<input type="hidden" name="memberId" value="${param.memberId}" >
 			<input type="hidden" name="crud" value="${param.crud}">
+			
 
 			<div id="forumHead">
 				<table>
 					<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
 					<tr>
 						<td>回覆內容：</td>
-						<td><textarea rows="5" cols="40" name="content">${param.messageContent}</textarea></td>
+						<td><textarea rows="5" cols="40" name="content">${showThisMessage.content}</textarea></td>
 						<script>
 							var toolbar = [
 									//加粗     斜體，     下劃線      穿過線     文本顏色     背景顏色

@@ -9,7 +9,9 @@ public class CodeService {
 
 	private CodeDAOHibernate dao = new CodeDAOHibernate();
 
+
 //	參數可選擇county、forum_type、label 、process_status、region、report_type、sight_time、sight_type、trans_form 、type_id
+
 	public List<CodeVO> select(String codeName) {
 		List<CodeVO> result = new ArrayList<CodeVO>();
 		List<CodeVO> temp= dao.select();

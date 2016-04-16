@@ -23,6 +23,6 @@ function processText(data) {
 		var array = temp.split(",");
 		$('input[name="memberAccount"]').val(array[0]);
 	}
-	$("span:eq(2)").text(show);
+	$("span:eq(7)").text(show);
 }
 

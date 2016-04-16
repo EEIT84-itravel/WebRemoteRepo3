@@ -16,13 +16,13 @@ h4{
 	width:65%;	
 	background-color:silver;
 	float: left;
-	height: 850px;
+	height: 855px;
 }
 #right {
 	width:34%;	
 	background-color:silver;
 	float: right;
-	height: auto;
+	height: 855px;
 }
 #blank {
 	height: 34px ;
@@ -37,10 +37,9 @@ h4{
 }
 #trip {
 	width: 74%;
-	height:800px;
+	height:700px;
 	border: 1px solid green;
 	float: right;
-
 }
 #tripBut{
 	align-content: right;

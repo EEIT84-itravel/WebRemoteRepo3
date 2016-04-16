@@ -22,6 +22,7 @@
 %>
 </head>
 <body>
+<c:set var="funcName" value="newArticle" scope="session"/>
 	<header>
 		<!-- import共同的 -->
 	</header>
@@ -34,11 +35,9 @@
 			action="<c:url value="/_04_Forum/member/WritingsServlet.controller"/>"
 			method="post">
 			<div id="forumHead">
-				<%
-					String crud = request.getParameter("crud");
-							request.setAttribute("crud", crud);
-				%>
-				<input type="hidden" name="crud" value="${crud}">
+
+				<input type="hidden" name="crud" value="${param.crud}">
+				<input type="hidden" name="memberId" value="${user.memberId}">
 				<table>
 					<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
 					<tr>
