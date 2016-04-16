@@ -78,6 +78,9 @@ $("#sel").change(function(){
 		<form action="<c:url value="/_06_BackEnd/controller/BackendSight.controller" />" method="post" enctype="multipart/form-data">
 			<table>
 			<c:if test="${not empty sightVO}">
+				<tr hidden="true">
+					<td><input type="text" name="sightId" value="${sightVO.sightId}"></td>
+				</tr>
 				<tr>
 					<td>景點名稱：</td>
 					<td><input type="text" name="sightName" value="${sightVO.sightName}"></td>
@@ -168,130 +171,145 @@ $("#sel").change(function(){
 					<td><span class="error">${error.addr}</span></td>
 				</tr>
 				<tr>
+					<td>是否顯示：</td>
+					<td><input type="radio" name="del" value="true">是
+					<input type="radio" name="del" value="false">否</td>
+				</tr>
+				<tr>
 					<td>交通方式：</td>
-					<td><textarea rows="8" cols="50">${sightVO.trans}</textarea>
+					<td><textarea rows="8" cols="50" name="trans">${sightVO.trans}</textarea>
 					</td>
 					<td><span class="error">${error.trans}</span></td>
 				</tr>
 				<tr>
-					<td>交通方式：</td>
-					<td><textarea rows="8" cols="50">${sightVO.intro}</textarea></td>
+					<td>簡介：</td>
+					<td><textarea rows="8" cols="50" name="intro">${sightVO.intro}</textarea></td>
 					<td><span class="error">${error.intro}</span></td>
 				</tr>
 				<tr>
 					<td>景點照片：</td>
+					<td><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="80" height="60"></td>
 					<td><input type="file" name="pic"></td>
+				</tr>
+			</c:if>
+			<c:if test="${empty sightVO}">
+				<tr hidden="true">
+					<td><input type="text" name="sightId" value="${param.sightId}"></td>
+				</tr>
+				<tr>
+					<td>景點名稱：</td>
+					<td><input type="text" name="sightName" value="${param.sightName}"></td>
+					<td><span class="error">${error.sightName}</span></td>
+				</tr>
+				<tr>
+					<td>地區：</td>
+					<td>
+						<select name="regionId" id="sel">
+							<c:forEach var="region" items="${region}">
+								<option value="${region.codeId}" ${(param.regionId==region.codeId)?'selected':'' }>${region.codeName}</option>
+							</c:forEach>
+						</select>
+					</td>
+					<td><span class="error">${error.regionId}</span></td>
+				</tr>
+				<tr>
+					<td>縣市：</td>
+					<td>
+						<select name="countyId" id="sel2">
+							<c:forEach var="county" items="${county}">
+								<option value="${county.codeId}" ${(param.countyId==county.codeId)?'selected':'' }>${county.codeName}</option>
+							</c:forEach>
+						</select>
+					</td>
+					<td><span class="error">${error.countyId}</span></td>
+				</tr>
+				<tr>
+					<td>景點類型：</td>
+					<td>
+						<select name="sightTypeId">
+							<c:forEach var="sightType" items="${sightType}">
+								<option value="${sightType.codeId}" ${(param.sightTypeId==sightType.codeId)?'selected':'' }>${sightType.codeName}</option>
+							</c:forEach>
+						</select>
+					</td>
+					<td><span class="error">${error.sightTypeId}</span></td>
+				</tr>
+				<tr>
+					<td>門票：</td>
+					<td><input type="text" name="ticket" value="${param.ticket}" size="45"></td>
+					<td><span class="error">${error.ticket}</span></td>
+				</tr>
+				<tr>
+					<td>開門時間：</td>
+					<td><input type="time" name="openTime" value="${param.openTime}"></td>
+					<td><span class="error">${error.openTime}</span></td>
+				</tr>
+				<tr>
+					<td>關門時間：</td>
+					<td><input type="time" name="closeIime" value="${param.closeIime}"></td>
+					<td><span class="error">${error.closeIime}</span></td>
+				</tr>
+				<tr>
+					<td>建議停留時間：</td>
+					<td><input type="time" name="spendHour" value="${param.spendHour}"></td>
+					<td><span class="error">${error.spendHour}</span></td>
+				</tr>
+				<tr>
+					<td>建議旅行時段：</td>
+					<td>
+						<select name="playPeriod">
+							<c:forEach var="sightTime" items="${sightTime}">
+								<option value="${sightTime.codeId}" ${(param.playPeriod==sightTime.codeId)?'selected':'' }>${sightTime.codeName}</option>
+							</c:forEach>
+						</select>
+					</td>
+					<td><span class="error">${error.playPeriod}</span></td>
+				</tr>
+				<tr>
+					<td>經度：</td>
+					<td><input type="text" name="longitude" value="${param.longitude}"></td>
+					<td><span class="error">${error.longitude}</span></td>
+				</tr>
+						<tr>
+					<td>緯度：</td>
+					<td><input type="text" name="latitude" value="${param.latitude}"></td>
+					<td><span class="error">${error.latitude}</span></td>
+				</tr>
+				<tr>
+					<td>電話：</td>
+					<td><input type="text" name="phone" value="${param.phone}"></td>
+					<td><span class="error">${error.phone}</span></td>
+				</tr>
+				<tr>
+					<td>地址：</td>
+					<td><input type="text" name="addr" value="${param.addr}" size="45"></td>
+					<td><span class="error">${error.addr}</span></td>
+				</tr>
+				<tr>
+					<td>是否顯示：</td>
+					<td><input type="radio" name="del" value="true">是
+					<input type="radio" name="del" value="false">否</td>
+				</tr>
+				<tr>
+					<td>交通方式：</td>
+					<td><textarea rows="8" cols="50" name="trans">${param.trans}</textarea>
+					</td>
+					<td><span class="error">${error.trans}</span></td>
+				</tr>
+				<tr>
+					<td>簡介：</td>
+					<td><textarea rows="8" cols="50" name="intro">${param.intro}</textarea></td>
+					<td><span class="error">${error.intro}</span></td>
+				</tr>
+				<tr>
+					<td>景點照片：</td>
+					<td><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${param.sightId}" />" width="80" height="60"><input type="file" name="pic"></td>
 					<td><span class="error">${error.pic}</span></td>
 				</tr>
 			</c:if>
-			<tr>
-					<td>景點名稱：</td>
-					<td><input type="text" name="sightName" value="${sightVO.sightName}"></td>
-					<td><span class="error">${error.sightName}</span></td>
-				</tr>
-				<tr>
-					<td>地區：</td>
-					<td>
-						<select name="regionId" id="sel">
-							<c:forEach var="region" items="${region}">
-								<option value="${region.codeId}" ${(sightVO.regionId==region.codeId)?'selected':'' }>${region.codeName}</option>
-							</c:forEach>
-						</select>
-					</td>
-					<td><span class="error">${error.regionId}</span></td>
-				</tr>
-				<tr>
-					<td>縣市：</td>
-					<td>
-						<select name="countyId" id="sel2">
-							<c:forEach var="county" items="${county}">
-								<option value="${county.codeId}" ${(sightVO.countyId==county.codeId)?'selected':'' }>${county.codeName}</option>
-							</c:forEach>
-						</select>
-					</td>
-					<td><span class="error">${error.countyId}</span></td>
-				</tr>
-				<tr>
-					<td>景點類型：</td>
-					<td>
-						<select name="sightTypeId">
-							<c:forEach var="sightType" items="${sightType}">
-								<option value="${sightType.codeId}" ${(sightVO.sightTypeId==sightType.codeId)?'selected':'' }>${sightType.codeName}</option>
-							</c:forEach>
-						</select>
-					</td>
-					<td><span class="error">${error.sightTypeId}</span></td>
-				</tr>
-				<tr>
-					<td>門票：</td>
-					<td><input type="text" name="ticket" value="${sightVO.ticket}" size="45"></td>
-					<td><span class="error">${error.ticket}</span></td>
-				</tr>
-				<tr>
-					<td>開門時間：</td>
-					<td><input type="time" name="openTime" value="${sightVO.openTime}"></td>
-					<td><span class="error">${error.openTime}</span></td>
-				</tr>
-				<tr>
-					<td>關門時間：</td>
-					<td><input type="time" name="closeIime" value="${sightVO.closeIime}"></td>
-					<td><span class="error">${error.closeIime}</span></td>
-				</tr>
-				<tr>
-					<td>建議停留時間：</td>
-					<td><input type="time" name="spendHour" value="${sightVO.spendHour}"></td>
-					<td><span class="error">${error.spendHour}</span></td>
-				</tr>
-				<tr>
-					<td>建議旅行時段：</td>
-					<td>
-						<select name="playPeriod">
-							<c:forEach var="sightTime" items="${sightTime}">
-								<option value="${sightTime.codeId}" ${(sightVO.playPeriod==sightTime.codeId)?'selected':'' }>${sightTime.codeName}</option>
-							</c:forEach>
-						</select>
-					</td>
-					<td><span class="error">${error.playPeriod}</span></td>
-				</tr>
-				<tr>
-					<td>經度：</td>
-					<td><input type="text" name="longitude" value="${sightVO.longitude}"></td>
-					<td><span class="error">${error.longitude}</span></td>
-				</tr>
-						<tr>
-					<td>緯度：</td>
-					<td><input type="text" name="latitude" value="${sightVO.latitude}"></td>
-					<td><span class="error">${error.latitude}</span></td>
-				</tr>
-				<tr>
-					<td>電話：</td>
-					<td><input type="text" name="phone" value="${sightVO.phone}"></td>
-					<td><span class="error">${error.phone}</span></td>
-				</tr>
-				<tr>
-					<td>地址：</td>
-					<td><input type="text" name="addr" value="${sightVO.addr}" size="45"></td>
-					<td><span class="error">${error.addr}</span></td>
-				</tr>
-				<tr>
-					<td>交通方式：</td>
-					<td><textarea rows="8" cols="50">${sightVO.trans}</textarea>
-					</td>
-					<td><span class="error">${error.trans}</span></td>
-				</tr>
-				<tr>
-					<td>交通方式：</td>
-					<td><textarea rows="8" cols="50">${sightVO.intro}</textarea></td>
-					<td><span class="error">${error.intro}</span></td>
-				</tr>
-				<tr>
-					<td>景點照片：</td>
-					<td><input type="file" name="pic"></td>
-					<td><span class="error">${error.pic}</span></td>
-				</tr>
 				<tr>
 					<td><input type="hidden" name="action" value="update"></td>
-					<td><input type="submit" value="新增景點" /></td>
+					<td><input type="submit" value="修改景點" /></td>
 				</tr>
 			</table>
 		</form>

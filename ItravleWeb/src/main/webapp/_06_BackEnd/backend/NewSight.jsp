@@ -84,11 +84,9 @@ $("#sel").change(function(){
 					<td>地區：</td>
 					<td>
 						<select name="regionId" id="sel">
-								<option value="region00">請選擇</option>
-								<option value="region01">北區</option>
-								<option value="region02">中區</option>
- 								<option value="region03">南區</option>
-								<option value="region04">東區及離島</option>
+							<c:forEach var="region" items="${region}">
+								<option value="${region.codeId}" ${(param.regionId==region.codeId)?'selected':'' }>${region.codeName}</option>
+							</c:forEach>
 						</select>
 					</td>
 					<td><span class="error">${error.regionId}</span></td>
@@ -96,7 +94,11 @@ $("#sel").change(function(){
 				<tr>
 					<td>縣市：</td>
 					<td>
-						<select name="countyId" id="sel2"></select>
+						<select name="countyId" id="sel2">
+							<c:forEach var="county" items="${county}">
+								<option value="${county.codeId}" ${(param.countyId==county.codeId)?'selected':'' }>${county.codeName}</option>
+							</c:forEach>
+						</select>
 					</td>
 					<td><span class="error">${error.countyId}</span></td>
 				</tr>
@@ -105,7 +107,7 @@ $("#sel").change(function(){
 					<td>
 						<select name="sightTypeId">
 							<c:forEach var="sightType" items="${sightType}">
-								<option value="${sightType.codeId}">${sightType.codeName}</option>
+								<option value="${sightType.codeId}" ${(param.sightTypeId==sightType.codeId)?'selected':'' }>${sightType.codeName}</option>
 							</c:forEach>
 						</select>
 					</td>
@@ -113,7 +115,7 @@ $("#sel").change(function(){
 				</tr>
 				<tr>
 					<td>門票：</td>
-					<td><input type="text" name="ticket" value="${param.ticket}"></td>
+					<td><input type="text" name="ticket" value="${param.ticket}" size="45"></td>
 					<td><span class="error">${error.ticket}</span></td>
 				</tr>
 				<tr>
@@ -136,8 +138,7 @@ $("#sel").change(function(){
 					<td>
 						<select name="playPeriod">
 							<c:forEach var="sightTime" items="${sightTime}">
-							<!-- option value="${deptVO.deptno}" ${(empVO.deptno==deptVO.deptno)?'selected':'' } >${deptVO.dname} -->
-								<option value="${sightTime.codeId}" ${(empVO.deptno==deptVO.deptno)?'selected':'' }>${sightTime.codeName}</option>
+								<option value="${sightTime.codeId}" ${(param.playPeriod==sightTime.codeId)?'selected':'' }>${sightTime.codeName}</option>
 							</c:forEach>
 						</select>
 					</td>
@@ -160,17 +161,24 @@ $("#sel").change(function(){
 				</tr>
 				<tr>
 					<td>地址：</td>
-					<td><input type="text" name="addr" value="${param.addr}"></td>
+					<td><input type="text" name="addr" value="${param.addr}" size="45"></td>
 					<td><span class="error">${error.addr}</span></td>
 				</tr>
 				<tr>
+					<td>是否顯示：</td>
+					<td>
+					<input type="radio" name="del" value="true" checked="checked">是
+					<input type="radio" name="del" value="false">否</td>
+				</tr>
+				<tr>
 					<td>交通方式：</td>
-					<td><textarea rows="8" cols="50">${param.trans}</textarea></td>
+					<td><textarea rows="8" cols="50" name="trans">${param.trans}</textarea>
+					</td>
 					<td><span class="error">${error.trans}</span></td>
 				</tr>
 				<tr>
 					<td>簡介：</td>
-					<td><textarea rows="8" cols="50">${param.intro}</textarea></td>
+					<td><textarea rows="8" cols="50" name="intro">${param.intro}</textarea></td>
 					<td><span class="error">${error.intro}</span></td>
 				</tr>
 				<tr>
