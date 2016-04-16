@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+
+#forumHead {
+	width: 1100px;
+	height: auto;
+	margin: auto;
+}
+#t1 {
+	display: inline-block;
+	float: left;
+	margin: 5px;
+	padding: 5px;
+}
+.d1 {
+	float: left;
+	border: 3px #0000ff solid;
+	margin: 3px;
+	padding: 5px;
+	display: inline-block;
+}
+#forum {
+	width: 1100px;
+	border: 2px solid red;
+	text-align: center;
+}
