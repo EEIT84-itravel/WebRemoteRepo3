@@ -27,14 +27,11 @@
 		$("#tabs").tabs({
 			event : "mouseover"
 		});
+		$("#collect").bind('click', collect);
 	});
-	
-	$(function() {
-		$("#SMALL img").click(function() {
-			var N = $(this).attr("id").substr(2);
-			$("#BIG").attr("src", "../img/12" + N + ".jpg")
-		});
-	});
+	function collect(){
+		window.location.href = "../_01_Sight/CollectSight.controller?sightId=" + $("#sightId").val();
+	};
 </script>
 
 <style>
@@ -73,8 +70,9 @@ html, body {
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article>
-
+		<c:if test=""></c:if>
 		<div class="IntroSight">
+		<input type="hidden" value="${sightVO.sightId}" name="sightId" id="sightId">
 			<p>地名:${sightVO.sightName}</p>
 			<p>簡介:${sightVO.intro}</p>
 			<p>
@@ -124,25 +122,29 @@ html, body {
 		</script>
 		<script async defer
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU9JCqlrRPTLXt7fvy9ERvO2EU1QPcO_0&signed_in=true&callback=initMap"></script>
-		<br> <br> <input type="button" onclick="history.back()"
-			value="上一頁" /> <a href="/ItravleWeb/_01_Sight/SightIndex.controller">回討論區首頁</a>
+		<br> <br> 
+		<c:if test="${flag}">
+		<input type="button" value="收藏景點" id='collect'>
+		</c:if>
+		<input type="button" onclick="history.back()"
+			value="上一頁" /> <a href="/ItravleWeb/_01_Sight/SightIndex.controller">回景點首頁</a>
 		<!-- 		留言 -->
-		<!-- 		<div id="tabs"> -->
-		<!-- 			<ul> -->
-		<!-- 				<li><a href="#tabs-1">相關行程</a></li> -->
-		<!-- 				<li><a href="#tabs-2">相關遊記</a></li> -->
-		<!-- 				<li><a href="#tabs-3">留言</a></li> -->
-		<!-- 			</ul> -->
-		<!-- 			<div id="tabs-1"> -->
-		<!-- 				<p>台北小清新之旅</p> -->
-		<!-- 			</div> -->
-		<!-- 			<div id="tabs-2"> -->
-		<!-- 				<p>我的遊記</p> -->
-		<!-- 			</div> -->
-		<!-- 			<div id="tabs-3"> -->
-		<!-- 				<p>門票是不是漲價了</p> -->
-		<!-- 			</div> -->
-		<!-- 		</div> -->
+				<div id="tabs">
+					<ul>
+						<li><a href="#tabs-1">相關行程</a></li>
+						<li><a href="#tabs-2">相關遊記</a></li>
+						<li><a href="#tabs-3">留言</a></li>
+					</ul>
+					<div id="tabs-1">
+						<p>台北小清新之旅</p>
+					</div>
+					<div id="tabs-2">
+						<p>我的遊記</p>
+					</div>
+					<div id="tabs-3">
+						<p>門票是不是漲價了</p>
+					</div>
+				</div>
 
 	</article>
 
