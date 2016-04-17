@@ -32,6 +32,7 @@
 	function collect(){
 		window.location.href = "../_01_Sight/CollectSight.controller?sightId=" + $("#sightId").val();
 	};
+
 </script>
 
 <style>

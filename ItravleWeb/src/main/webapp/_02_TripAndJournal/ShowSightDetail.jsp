@@ -88,7 +88,8 @@ var sightName;
 							<label>收藏人次；</label><span>${sightVO.collectNum}</span><br>
 							<label>電話；</label><span>${sightVO.phone}</span><br>
 							<label>地址；</label> <span>${sightVO.addr}</span><br>
-							<label>交通方式；</label> <span>${sightVO.trans}</span><br> 
+							<label>交通方式；</label> <span>${sightVO.trans}</span><br>
+							<label>簡介；</label> <span>${sightVO.intro}</span><br> 
 							<label>上次更新時間；</label><span>${sightVO.modifyTime}</span><br> 
 					</fieldset>
 			</form>

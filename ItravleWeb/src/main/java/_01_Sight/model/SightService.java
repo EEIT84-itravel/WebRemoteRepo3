@@ -41,4 +41,20 @@ public class SightService {
 		result = dao.findByPrimaryKey(sightId);
 		return result;
 	}
+	
+	public SightVO insert(SightVO sightVO) {
+		SightVO result = null;
+		if(sightVO!=null){
+			result=dao.insert(sightVO);
+		}
+		return result;
+	}
+	
+	public SightVO update(SightVO sightVO) {
+		SightVO result = null;
+		if(sightVO!=null){
+			result=dao.update(sightVO);
+		}
+		return result;
+	}
 }

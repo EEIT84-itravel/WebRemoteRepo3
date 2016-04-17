@@ -147,4 +147,5 @@ public class WritingsServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		this.doGet(request, response);
 	}
+
 }

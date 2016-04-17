@@ -15,7 +15,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>I-Travel後台:管理景點</title>
-<!-- jQuery ui -->
+<!-- jQuery ui css -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
 <!-- jQuery -->
 <script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
@@ -44,7 +44,7 @@
 	            $(document).unbind('click'); }
 	    });
 
-		$("tbody>tr>td:nth-child(2)").each(function(){
+		$("tr.sightId>td:nth-child(2)").each(function(){
 			$(this).click(function(){
 					var sightId=$(this).prev().text();	
 					console.log(sightId);
@@ -128,8 +128,9 @@
 			</ul>
 		<div id="tabs-1">
 			<h2>I-Travel後台:管理景點</h2>
-				<form action="<c:url value=""/>" method="post" >
+			<a href="<c:url value="/_06_BackEnd/backend/NewSight.jsp" />">新增景點</a>
 					<div>
+					<%@ include file="/_00_Misc/page1.file" %>
 						<table border="1" class="backendTable">
 							<thead>
 								<tr>
@@ -142,13 +143,13 @@
 									<th>地址</th>
 									<th>修改人</th>
 									<th>修改時間</th>
-									<th>隱藏</th>
-									<th></th>
+									<th>顯示</th>
+									<th>修改</th>
 								</tr>
 							</thead>
-							<tbody>
-								<c:forEach var="sightVO" items="${sightVO}">
-								<tr>							
+							<tbody> 
+								<c:forEach var="sightVO" items="${sightVO}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+								<tr class="sightId">							
 									<td>${sightVO.sightId}</td>
 									<td>${sightVO.sightName}</td>
 									<c:forEach var="codeVO" items="${codeSvc.all}">
@@ -171,13 +172,19 @@
 									<td>${sightVO.modifier}</td>
 									<td>${sightVO.modifyTime}</td>
 									<td>${sightVO.del}</td>
-									<td>刪除</td>
+									<td> 
+										<FORM METHOD="post" enctype="multipart/form-data" ACTION="<c:url value="/_06_BackEnd/controller/BackendSight.controller" />">
+			     							<input style="color:black" type="submit" value="修改">
+			     							<input type="hidden" name="action" value="getOne">
+			     							<input type="hidden" name="sightId" value="${sightVO.sightId}">
+			     						</FORM>
+			     					</td>
 								</tr>
 								</c:forEach>
 							</tbody>
 						</table>
+						<%@ include file="/_00_Misc/page2.file" %>
 					</div>
-				</form>
 			</div>
 		</div>
 	</article>

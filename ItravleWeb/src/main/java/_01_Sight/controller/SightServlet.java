@@ -32,7 +32,7 @@ public class SightServlet extends HttpServlet {
 		
 		// 接收HTML Form資料
 		String temp1 = request.getParameter("sightId"); // 景點編號
-		
+
 		// 驗證HTML Form資料
 		Map<String, String> error = new HashMap<String, String>();
 		request.setAttribute("error", error);
@@ -81,7 +81,6 @@ public class SightServlet extends HttpServlet {
 					"trans2",
 					sightVO.getTrans().substring(
 							sightVO.getTrans().indexOf(",") + 1));
-
 			request.getRequestDispatcher("/_01_Sight/SightInformation.jsp")
 					.forward(request, response);
 		}
