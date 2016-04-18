@@ -191,7 +191,7 @@ var spendHour;
 		        }
 		        closedialog = 1;//set to one because click on dialog box sets to zero
 		    }	
-		    
+		//景點明細dialog功能結束    
 		// 儲存時的確認對話框
 		var dialog = $( "#dialog-confirm" ).dialog({
 			resizable: false,

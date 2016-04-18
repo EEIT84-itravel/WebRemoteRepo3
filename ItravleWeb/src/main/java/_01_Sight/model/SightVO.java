@@ -10,6 +10,7 @@ public class SightVO implements Serializable {
 	
 	private Integer sightId;     //景點編號
 	private String sightName; 	 //名稱
+	private String intro;        //簡介(新增)
 	private String regionId; 	 //地區編號
 	private String countyId;     //縣市編號
 	private String sightTypeId;	 //景點類型編號
@@ -32,20 +33,19 @@ public class SightVO implements Serializable {
 	private Timestamp modifyTime;//上次更新時間
 	private boolean del;		 //刪除
 	
-	
 	@Override
 	public String toString() {
 		return "SightVO [sightId=" + sightId + ", sightName=" + sightName
-				+ ", regionId=" + regionId + ", countyId=" + countyId
-				+ ", sightTypeId=" + sightTypeId + ", ticket=" + ticket
-				+ ", openTime=" + openTime + ", closeIime=" + closeIime
-				+ ", spendHour=" + spendHour + ", playPeriod=" + playPeriod
-				+ ", score=" + score + ", longitude=" + longitude
+				+ ", intro=" + intro + ", regionId=" + regionId + ", countyId="
+				+ countyId + ", sightTypeId=" + sightTypeId + ", ticket="
+				+ ticket + ", openTime=" + openTime + ", closeIime="
+				+ closeIime + ", spendHour=" + spendHour + ", playPeriod="
+				+ playPeriod + ", score=" + score + ", longitude=" + longitude
 				+ ", latitude=" + latitude + ", watchNum=" + watchNum
 				+ ", collectNum=" + collectNum + ", phone=" + phone + ", addr="
 				+ addr + ", trans=" + trans + ", creator=" + creator
 				+ ", createTime=" + createTime + ", modifier=" + modifier
-				+ ", modifyTime=" + modifyTime + ", del=" + del + "]\n";
+				+ ", modifyTime=" + modifyTime + ", del=" + del + "]";
 	}
 	public Integer getSightId() {
 		return sightId;
@@ -58,6 +58,12 @@ public class SightVO implements Serializable {
 	}
 	public void setSightName(String sightName) {
 		this.sightName = sightName;
+	}
+	public String getIntro() {
+		return intro;
+	}
+	public void setIntro(String intro) {
+		this.intro = intro;
 	}
 	public String getRegionId() {
 		return regionId;

@@ -7,6 +7,10 @@ import _05_Member.model.dao.CollectionDAOHibernate;
 
 public class CollectionService {
     private CollectionDAOHibernate dao = new CollectionDAOHibernate();
+    //會員收藏景點
+    public CollectionVO collectionsight(CollectionVO collectionVO){
+    	return dao.insert(collectionVO);
+    }
     
     //某會員搜尋他的收藏景點
 	public List<CollectionVO> selectByMemberId(Integer memberId){

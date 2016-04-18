@@ -122,9 +122,9 @@ public class NewTripServlet extends HttpServlet {
 					response);
 		} else {
 			HttpSession session = request.getSession();
-			session.setAttribute("tripVO", result);			
+			session.setAttribute("tripVO", result);	
 		}
-		
+
 		String path = request.getContextPath();
 		response.sendRedirect(path + "/_02_TripAndJournal/member/WriteTrip.jsp");
 	}
