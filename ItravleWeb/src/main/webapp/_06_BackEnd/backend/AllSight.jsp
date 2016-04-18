@@ -105,6 +105,16 @@
 .backendTable thead tr th{
 	text-align:center
 }
+/* 由jQueryUI長出來的分頁id */
+#ui-id-3{
+width: 82%;
+padding: 0;
+margin: 5px;
+float: left;
+}
+#ui-id-3 h2{
+	margin: 5px;
+}
 </style>
 </head>
 <body>
@@ -121,6 +131,7 @@
 		<div id="tabs">
 			<ul>
 				<li><a href="#tabs-1">管理景點</a></li>
+				<li><a href="<c:url value="/_06_BackEnd/backend/AllMember.jsp" />	">管理會員</a></li>
 				<li><a href="<c:url value="/_06_BackEnd/backend/AllTrip.jsp" />	">管理行程</a></li>
 				<li><a href="<c:url value="/_06_BackEnd/backend/AllJournal.jsp" /> ">管理遊記</a></li>
 				<li><a href="<c:url value="/_06_BackEnd/backend/AllForum.jsp" />	">管理討論區</a></li>
@@ -186,7 +197,7 @@
 						</table>
 						<%@ include file="/_00_Misc/page2.file" %>
 					</div>
-			</div>
+			</div><!-- tabs-1 end tag -->
 		</div>
 	</article>
 	<footer>
