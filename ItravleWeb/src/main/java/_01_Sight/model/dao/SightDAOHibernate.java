@@ -131,6 +131,26 @@ public class SightDAOHibernate {
 		}
 		return sightVOs;
 	}
+	
+	//依縣市搜尋,後台用
+	private static final String SELECT_BY_COUNTY = "from SightVO where countyId=:countyId";
+
+	public List<SightVO> selectByCounty(String countyId) {
+		List<SightVO> sightVOs = null;
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(SELECT_BY_COUNTY);
+			query.setParameter("countyId", countyId);
+			sightVOs = query.list();
+			session.getTransaction().commit();
+		} catch (HibernateException e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
+		return sightVOs;
+	}
 
 	public SightVO update(SightVO sightVO) {
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()

@@ -5,6 +5,14 @@
 <%@ page import="_01_Sight.model.*"%>
 <%@ page import="_02_TripAndJournal.model.*"%>
 <%@ page import="java.util.*"%>
+<% 
+    int rowNumber=0;      //總筆數
+    int pageNumber=0;     //總頁數      
+    int whichPage=1;      //第幾頁
+    int pageIndexArray[]=null;
+    int pageIndex=0; 
+    int rowsPerPage;
+%>
 <!-- 以下的要再改成jQuery 的ajax   不要在jsp出現java code -->
 <%
 	CodeService codeService = new CodeService();
@@ -395,7 +403,8 @@ var spendHour;
   			</ul>	
   			<div id="tabs-1">		
 			<div>排序：評分最高/最多人收藏</div>
-			<%  int rowsPerPage = 10;  //每頁的筆數 %>
+				<%  rowsPerPage = 20;  //每頁的筆數 
+					   rowNumber=sightVO.size(); %>
 			<%@ include file="/_00_Misc/page1.file" %>
 				<c:forEach var="sightVO" items="${sightVO}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 				<table class="sight">

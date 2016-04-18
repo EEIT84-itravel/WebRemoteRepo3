@@ -57,7 +57,7 @@ public class modifyAdminServlet extends HttpServlet {
 				if(memberService.modify(memberVO)){
 					String path = request.getContextPath();
 					response.sendRedirect(path
-							+ "/_06_BackEnd/backend/AllMember.jsp");
+							+ "/_06_BackEnd/backend/AllSight.jsp#tabs-2");
 				}
 	}
 

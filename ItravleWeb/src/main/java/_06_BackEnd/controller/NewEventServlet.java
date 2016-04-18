@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import _03_Event.model.EventService;
 import _03_Event.model.EventVO;
 
 @WebServlet("/_06_BackEnd/backend/NewEvent.controller")
+@MultipartConfig
 public class NewEventServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,

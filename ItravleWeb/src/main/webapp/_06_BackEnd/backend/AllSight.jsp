@@ -3,13 +3,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 外接程式碼 -->
 <%@ page import="_01_Sight.model.*"%>
+<%@ page import="_03_Event.model.*"%>
+<%@ page import="_05_Member.model.*"%>
 <%@ page import="java.util.*"%>
 <%
 	SightService sightService = new SightService();
  	List<SightVO> sightVO = sightService.select();
  	pageContext.setAttribute("sightVO", sightVO);
+	MemberService memberService = new MemberService();
+ 	List<MemberVO> memberVO = memberService.getAll();
+ 	pageContext.setAttribute("memberVO", memberVO);
+ 	EventService eventService=new EventService();
+ 	List<EventVO> eventVO=eventService.select();
+ 	pageContext.setAttribute("eventVO", eventVO);
+%>
+<%
+	int rowNumber=0;      //總筆數
+    int pageNumber=0;     //總頁數      
+    int whichPage=1;      //第幾頁
+    int pageIndexArray[]=null;
+    int pageIndex=0; 
+    int rowsPerPage;
 %>
 <jsp:useBean id="codeSvc" scope="page" class="_00_Misc.model.CodeService" />
+<jsp:useBean id="SightService" scope="page" class="_01_Sight.model.SightService" />
+<jsp:useBean id="MemberService" scope="page" class="_05_Member.model.MemberService" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,53 +44,64 @@
 		$("#tabs").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
 		$("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
 		//景點詳情dialog功能
-		var uri="${pageContext.request.contextPath}/_02_TripAndJournal/ShowSightDetail.controller?sightId=";
- 		var dialog;
-	    dialog = $( "#dialog-form" ).dialog({
-	        autoOpen: false,
-	        height: 700,
-	        width: 600,
-	        draggable: true,
-	        resizable: false,
-	        modal: true,
-	        open: function() {
-	            closedialog = 1;
-	            $(document).bind('click', overlayclickclose); },
-	        focus: function() { 
-	            closedialog = 0; },
-	        close: function() { 
-	            $(document).unbind('click'); }
-	    });
-
-		$("tr.sightId>td:nth-child(2)").each(function(){
-			$(this).click(function(){
-					var sightId=$(this).prev().text();	
-					console.log(sightId);
-					var stylei=' width="98%" height="98%"  frameborder="0" scrolling="auto"';
-					$("#dialog-form").html('<iframe src="'+uri+sightId+'"'+stylei+'></iframe>');
-					dialog.dialog( "open" );
-					closedialog = 0;
-			});
+		var uri = "${pageContext.request.contextPath}/_02_TripAndJournal/ShowSightDetail.controller?sightId=";
+		var dialog;
+		dialog = $("#dialog-form").dialog({
+			autoOpen : false,
+			height : 700,
+			width : 600,
+			draggable : true,
+			resizable : false,
+			modal : true,
+			open : function() {
+				closedialog = 1;
+				$(document).bind('click', overlayclickclose);
+			},
+			focus : function() {
+				closedialog = 0;
+			},
+			close : function() {
+				$(document).unbind('click');
+			}
 		});
-		var closedialog;
-		 function overlayclickclose() {
-		        if (closedialog) {
-		            $('#dialog-form').dialog('close');
-		        }
-		        closedialog = 1;//set to one because click on dialog box sets to zero   
-		    }
-	});
 
+		$("tr.sightId>td:nth-child(2)")
+				.each(
+						function() {
+							$(this)
+									.click(
+											function() {
+												var sightId = $(this).prev()
+														.text();
+												console.log(sightId);
+												var stylei = ' width="98%" height="98%"  frameborder="0" scrolling="auto"';
+												$("#dialog-form")
+														.html(
+																'<iframe src="'+uri+sightId+'"'+stylei+'></iframe>');
+												dialog.dialog("open");
+												closedialog = 0;
+											});
+						});
+		var closedialog;
+		function overlayclickclose() {
+			if (closedialog) {
+				$('#dialog-form').dialog('close');
+			}
+			closedialog = 1;//set to one because click on dialog box sets to zero   
+		}
+	});
 </script>
 <style type="text/css">
 .ui-tabs-vertical {
 	width: 100%;
 }
+
 .ui-tabs-vertical .ui-tabs-nav {
 	padding: .2em .1em .2em .2em;
 	float: left;
 	width: 12em;
 }
+
 .ui-tabs-vertical .ui-tabs-nav li {
 	clear: left;
 	width: 100%;
@@ -80,46 +109,64 @@
 	border-right-width: 0 !important;
 	margin: 0 -1px .2em 0;
 }
+
 .ui-tabs-vertical .ui-tabs-nav li a {
 	display: block;
 }
+
 .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
 	padding-bottom: 0;
 	padding-right: .1em;
 	border-right-width: 1px;
 }
+
 .ui-tabs-vertical .ui-tabs-panel {
 	padding: 1em;
 	float: right;
 	width: 40em;
 }
-#tabs-1{
-	float:left;
+
+#tabs-1 {
+	float: left;
 	width: 82%;
 	padding: 0;
 	margin: 5px;
 }
-#tabs-1 h2{
+
+#tabs-1 h2 {
 	margin: 5px;
 }
-.backendTable thead tr th{
-	text-align:center
-}
-/* 由jQueryUI長出來的分頁id */
-#ui-id-3{
-width: 82%;
-padding: 0;
-margin: 5px;
-float: left;
-}
-#ui-id-3 h2{
+
+#tabs-2 {
+	float: left;
+	width: 82%;
+	padding: 0;
 	margin: 5px;
+}
+
+#tabs-2 h2 {
+	margin: 5px;
+}
+
+#tabs-3 {
+	float: left;
+	width: 82%;
+	padding: 0;
+	margin: 5px;
+}
+
+#tabs-3 h2 {
+	margin: 5px;
+}
+
+.backendTable thead tr th {
+	text-align: center
 }
 </style>
 </head>
 <body>
 	<header>
-		<!-- import共同的 -->
+	<!-- import共同的 -->
 	</header>
 	<!-- import共同的 -->
 	<nav class="navbar navbar-inverse" role="navigation">
@@ -127,77 +174,186 @@ float: left;
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article>
-	    <div id="dialog-form"></div>
+		<div id="dialog-form"></div>
 		<div id="tabs">
 			<ul>
 				<li><a href="#tabs-1">管理景點</a></li>
-				<li><a href="<c:url value="/_06_BackEnd/backend/AllMember.jsp" />	">管理會員</a></li>
+				<li><a href="#tabs-2">管理會員</a></li>
+				<li><a href="#tabs-3">管理活動</a></li>
 				<li><a href="<c:url value="/_06_BackEnd/backend/AllTrip.jsp" />	">管理行程</a></li>
 				<li><a href="<c:url value="/_06_BackEnd/backend/AllJournal.jsp" /> ">管理遊記</a></li>
 				<li><a href="<c:url value="/_06_BackEnd/backend/AllForum.jsp" />	">管理討論區</a></li>
-				<li><a href="<c:url value="/_06_BackEnd/backend/AllEvent.jsp" />	">管理活動</a></li>
 			</ul>
-		<div id="tabs-1">
-			<h2>I-Travel後台:管理景點</h2>
-			<a href="<c:url value="/_06_BackEnd/backend/NewSight.jsp" />">新增景點</a>
-					<div>
-					<%  int rowsPerPage = 20;  //每頁的筆數 %>
-					<%@ include file="/_00_Misc/page1.file" %>
-						<table border="1" class="backendTable">
-							<thead>
-								<tr>
-									<th>景點編號</th>
-									<th>景點名稱</th>
-									<th>地區</th>
-									<th>縣市</th>
-									<th>景點類型</th>
-									<th>電話</th>
-									<th>地址</th>
-									<th>修改人</th>
-									<th>修改時間</th>
-									<th>顯示</th>
-									<th>修改</th>
-								</tr>
-							</thead>
-							<tbody> 
-								<c:forEach var="sightVO" items="${sightVO}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-								<tr class="sightId">							
+			<div id="tabs-1">
+				<h2>I-Travel後台:管理景點</h2>
+				<a href="<c:url value="/_06_BackEnd/backend/NewSight.jsp" />">新增景點</a>
+				<div>
+					<%
+						rowsPerPage = 20; //每頁的筆數 
+						rowNumber = sightVO.size();
+					%>
+					<%@ include file="/_00_Misc/page1.file"%>
+					<table border="1" class="backendTable">
+						<thead>
+							<tr>
+								<th>景點編號</th>
+								<th>景點名稱</th>
+								<th>地區</th>
+								<th>縣市</th>
+								<th>景點類型</th>
+								<th>電話</th>
+								<th>地址</th>
+								<th>修改人</th>
+								<th>修改時間</th>
+								<th>顯示</th>
+								<th>修改</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="sightVO" items="${sightVO}"
+								begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+								<tr class="sightId">
 									<td>${sightVO.sightId}</td>
 									<td>${sightVO.sightName}</td>
 									<c:forEach var="codeVO" items="${codeSvc.all}">
 										<c:if test="${codeVO.codeId==sightVO.regionId}">
-								            <td>${codeVO.codeName}</td>
-                                		 </c:if>
+											<td>${codeVO.codeName}</td>
+										</c:if>
 									</c:forEach>
 									<c:forEach var="codeVO" items="${codeSvc.all}">
 										<c:if test="${codeVO.codeId==sightVO.countyId}">
-								         	<td>${codeVO.codeName}</td>
-                                	  	</c:if>
+											<td>${codeVO.codeName}</td>
+										</c:if>
 									</c:forEach>
 									<c:forEach var="codeVO" items="${codeSvc.all}">
 										<c:if test="${codeVO.codeId==sightVO.sightTypeId}">
-								             	<td>${codeVO.codeName}</td>
-                                	    </c:if>
+											<td>${codeVO.codeName}</td>
+										</c:if>
 									</c:forEach>
 									<td>${sightVO.phone}</td>
 									<td>${sightVO.addr}</td>
 									<td>${sightVO.modifier}</td>
 									<td>${sightVO.modifyTime}</td>
 									<td>${sightVO.del}</td>
-									<td> 
-										<FORM METHOD="post" enctype="multipart/form-data" ACTION="<c:url value="/_06_BackEnd/backEnd/BackendSight.controller" />">
-			     							<input style="color:black" type="submit" value="修改">
-			     							<input type="hidden" name="action" value="getOne">
-			     							<input type="hidden" name="sightId" value="${sightVO.sightId}">
-			     						</FORM>
-			     					</td>
+									<td>
+										<FORM METHOD="post" enctype="multipart/form-data"
+											ACTION="<c:url value="/_06_BackEnd/backEnd/BackendSight.controller" />">
+											<input style="color: black" type="submit" value="修改">
+											<input type="hidden" name="action" value="getOne"> <input
+												type="hidden" name="sightId" value="${sightVO.sightId}">
+										</FORM>
+									</td>
 								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					<%@ include file="/_00_Misc/page2.file"%>
+				</div>
+			</div>
+			<!-- tabs-1 end tag -->
+			<div id="tabs-2">
+				<h2>I-Travel後台:管理會員</h2>
+				<%
+					rowsPerPage = 20; //每頁的筆數
+					rowNumber = memberVO.size();
+				%>
+				<%@ include file="/_00_Misc/page1.file"%>
+				<table border="1" class="backendTable">
+					<thead>
+						<tr>
+							<th>會員帳號</th>
+							<th>姓</th>
+							<th>名</th>
+							<th>暱稱</th>
+							<th>email</th>
+							<th>生日</th>
+							<th>電話</th>
+							<th>修改人</th>
+							<th>修改時間</th>
+							<th>管理權限</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="memberVO" items="${memberVO}"
+							begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+							<tr>
+								<td>${memberVO.memberAccount}</td>
+								<td>${memberVO.lastName}</td>
+								<td>${memberVO.firstName}</td>
+								<td>${memberVO.nickname}</td>
+								<td>${memberVO.email}</td>
+								<td>${memberVO.birth}</td>
+								<td>${memberVO.cellphone}</td>
+								<c:forEach var="MemberVO" items="${MemberService.all}">
+									<c:if test="${MemberVO.memberId==memberVO.modifier}">
+										<td>${MemberVO.nickname}</td>
+									</c:if>
 								</c:forEach>
-							</tbody>
-						</table>
-						<%@ include file="/_00_Misc/page2.file" %>
-					</div>
-			</div><!-- tabs-1 end tag -->
+								<td>${memberVO.modiftyTime}</td>
+								<td>
+									<FORM
+										ACTION="<c:url value="/_06_BackEnd/backend/modifyAdmin.controller" />">
+										<select name="admin" style="color: black">
+											<option value="true" ${(memberVO.admin==true)?'selected':''}>管理員</option>
+											<option value="false"
+												${(memberVO.admin==false)?'selected':''}>普通會員</option>
+										</select> <input style="color: black" type="submit" value="修改">
+										<input type="hidden" name="memberId"
+											value="${memberVO.memberId}">
+									</FORM>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<%@ include file="/_00_Misc/page2.file"%>
+			</div><!-- tabs-2 end tag -->
+			<div id="tabs-3">
+				<h2>I-Travel後台:管理景點</h2>
+				<a href="<c:url value="/_06_BackEnd/backend/NewEvent.jsp" />">新增活動</a>
+				<div>
+					<%
+						rowsPerPage = 20; //每頁的筆數 
+						rowNumber = eventVO.size();
+					%>
+					<%@ include file="/_00_Misc/page1.file"%>
+					<table border="1" class="backendTable">
+						<thead>
+							<tr>
+								<th>活動主題</th>
+								<th>起始時間</th>
+								<th>結束時間</th>
+								<th>相關景點</th>
+								<th>是否下架</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="eventVO" items="${eventVO}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+								<tr id=eventId>
+									<td width="300">${eventVO.eventTopic}</td>
+									<td>${eventVO.eventStartDate}</td>
+									<td>${eventVO.eventEndDate}</td>
+									<c:forEach var="SightVO_All" items="${SightService.all}">
+										<c:if test="${SightVO_All.sightId==eventVO.sightId}">
+											<td>${SightVO_All.sightName}</td>
+										</c:if>
+									</c:forEach>
+									<td>${eventVO.eventRemoved}</td>
+									<td>
+										<FORM METHOD="post" enctype="multipart/form-data" ACTION="<c:url value="/_06_BackEnd/backend/NewEvent.controller" />">
+											<input style="color: black" type="submit" value="修改">
+											<input type="hidden" name="action" value="getOne"> 
+											<input type="hidden" name="eventId" value="${eventVO.eventId}">
+										</FORM>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					<%@ include file="/_00_Misc/page2.file"%>
+				</div>
+			</div>
+			<!-- tabs-3 end tag -->
 		</div>
 	</article>
 	<footer>
