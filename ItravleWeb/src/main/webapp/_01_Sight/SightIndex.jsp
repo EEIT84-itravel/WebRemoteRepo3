@@ -108,35 +108,12 @@
 <!-- 								<option value="nofree">付費</option> -->
 <!-- 						</select> -->
 <!-- 						</td> -->
-<%-- 						<td>開放時間:<select name="sightTime"><c:forEach --%>
-<%-- 									var="region" items="${sight_time}"> --%>
-<%-- 									<option value="${region.codeId}">${region.codeName}</option> --%>
-<%-- 								</c:forEach></select> --%>
-<!-- 						</td> -->
 					</tr>
 				</table>
 <!-- 				<input type="submit" /> -->
 			</form>
 
 <!-- 		</div> -->
-		<h5>熱門景點</h5>
-		<c:forEach var="watchNum" items="${watchNum}" begin="0" end="3">
-
-			<div class="SearchSight">
-				<p>No:</p>
-				<img
-					src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${watchNum.sightId}" />">
-				<p>
-					<a
-						href="<c:url value="/_01_Sight/Sight.controller?sightId=${watchNum.sightId}" />">名稱:${watchNum.sightName}</a>
-				</p>
-				<p>類型:</p>
-				<p>縣市:</p>
-				<p>${watchNum.watchNum}人瀏覽,${watchNum.collectNum}人收藏</p>
-			</div>
-
-		</c:forEach>
-		<br>
 
 		<c:forEach var="sightVO" items="${sightVO}">
 			<div class="SearchSight">

@@ -28,13 +28,6 @@
 			event : "mouseover"
 		});
 	});
-	
-	$(function() {
-		$("#SMALL img").click(function() {
-			var N = $(this).attr("id").substr(2);
-			$("#BIG").attr("src", "../img/12" + N + ".jpg")
-		});
-	});
 </script>
 
 <style>
@@ -75,6 +68,9 @@ html, body {
 	<article>
 
 		<div class="IntroSight">
+		<p>No:${sightVO.sightId}</p>
+				<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
+					width="280" height="210">
 			<p>地名:${sightVO.sightName}</p>
 			<p>簡介:${sightVO.intro}</p>
 			<p>
