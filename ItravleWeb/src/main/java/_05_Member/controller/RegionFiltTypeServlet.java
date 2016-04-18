@@ -16,7 +16,7 @@ import _05_Member.model.CollectionService;
 import _05_Member.model.CollectionVO;
 
 
-@WebServlet("/_05_Member/RegionFiltType.controller")
+@WebServlet("/_05_Member/member/RegionFiltType.controller")
 public class RegionFiltTypeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	CollectionService collectionService = new CollectionService();
@@ -56,7 +56,7 @@ public class RegionFiltTypeServlet extends HttpServlet {
                
                if(sightVO1 != null){//將景點資訊傳回頁面
             	request.setAttribute("sightVO1", sightVO1);
-   				request.getRequestDispatcher("/_05_Member/MemberSight.jsp").forward(request, response);
+   				request.getRequestDispatcher("/_05_Member/member/MemberSight.jsp").forward(request, response);
    				return;
                }
 		}else{//依照景點地區查詢
@@ -86,7 +86,7 @@ public class RegionFiltTypeServlet extends HttpServlet {
             	request.setAttribute("noSightVO", "noSightVO");
 				
             }
-            request.getRequestDispatcher("/_05_Member/MemberSight.jsp").forward(request, response);
+            request.getRequestDispatcher("/_05_Member/member/MemberSight.jsp").forward(request, response);
 			return;
 		}
 	}

@@ -86,7 +86,7 @@
 	</nav>
 	<article>
 	<div id="header">
-	<c:import url="/_05_Member/SightHead.jsp"></c:import>
+	<c:import url="/_05_Member/member/SightHead.jsp"></c:import>
 		<table id="forum" border="1">
 			<thead>
 				<tr id="forumTitle">
@@ -113,7 +113,7 @@
 								</c:if>
 							</c:forEach>
 							<td>${sightVO.score}</td>  
-							<td><a href="<c:url value="/_05_Member/delsight.controller?memberId=${user.memberId}&referenceType=${sightVO.sightId}&typeId=type_id01&regionId=region00"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
+							<td><a href="<c:url value="/_05_Member/member/delsight.controller?memberId=${user.memberId}&referenceType=${sightVO.sightId}&typeId=type_id01&regionId=region00"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
 						</tr>
 					</c:forEach>
 				</c:if>
@@ -131,7 +131,7 @@
 							</c:if>
 						</c:forEach>
 						<td>${sightVO1.score}</td>
-						<td><a href="<c:url value="/_05_Member/delsight.controller?memberId=${user.memberId}&referenceType=${sightVO1.sightId}&typeId=type_id01&regionId=${param.regionId}"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
+						<td><a href="<c:url value="/_05_Member/member/delsight.controller?memberId=${user.memberId}&referenceType=${sightVO1.sightId}&typeId=type_id01&regionId=${param.regionId}"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
 					</tr>
 				</c:forEach>
 			</tbody>

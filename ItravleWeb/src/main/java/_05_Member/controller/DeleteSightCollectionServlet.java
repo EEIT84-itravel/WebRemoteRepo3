@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import _05_Member.model.CollectionService;
 
-@WebServlet("/_05_Member/delsight.controller")
-public class DeleteCollectionServlet extends HttpServlet {
+@WebServlet("/_05_Member/member/delsight.controller")
+public class DeleteSightCollectionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     CollectionService collectionservice = new CollectionService();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,7 +43,7 @@ public class DeleteCollectionServlet extends HttpServlet {
 			collectionservice.delSightCollection(collectionNo);
 		}
 		 //依照當初刪除時所選的地區頁面回傳回去再查詢並秀出畫面
-		 request.getRequestDispatcher("/_05_Member/RegionFiltType.controller?regionId="+regionId+"&memberId="+memberId).forward(request,
+		 request.getRequestDispatcher("/_05_Member/member/RegionFiltType.controller?regionId="+regionId+"&memberId="+memberId).forward(request,
 		 response);
 		 return;
 	}

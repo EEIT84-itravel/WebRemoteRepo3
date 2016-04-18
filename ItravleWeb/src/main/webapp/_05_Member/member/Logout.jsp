@@ -23,7 +23,7 @@
 	<article>
 		您已經登出
 		<P />
-		<a href="../index.jsp">回首頁</a>
+		<a href="/ItravleWeb/index.jsp">回首頁</a>
 	</article>
 	<footer>
 		<!-- import共同的 -->
