@@ -1,5 +1,6 @@
 package _02_TripAndJournal.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import _02_TripAndJournal.model.dao.JournalDAOHibernate;
@@ -15,6 +16,14 @@ public class JournalService {
 		}
 		return result;
 	}
+	public boolean update(JournalVO journalVO){
+		journalDAOHibernate = new JournalDAOHibernate();
+		 if( journalVO != null){
+			 journalDAOHibernate.update(journalVO);
+				return true;
+				 }
+				 return false;
+	}
 	
 	public JournalVO select(Integer journalId) {
 		JournalVO result = null;
@@ -24,7 +33,25 @@ public class JournalService {
 		}
 		return result;
 	}
-	
+	//會員尋找他寫的遊記
+	public List<JournalVO> selectMemberJournal(Integer memberId){
+		List<JournalVO> result = null;
+		journalDAOHibernate = new JournalDAOHibernate();
+		result = journalDAOHibernate.selectByMemberId(memberId);
+		return result;
+	}
+	//查詢遊記相關明細編號
+	public ArrayList<Integer> selectDetail(Integer journalId){
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		JournalDetailService journaldetailservice = new JournalDetailService();
+		List<JournalDetailVO> journaldetailVO = journaldetailservice.selectByJournalId(journalId);
+		if(journaldetailVO != null && journaldetailVO.size()>0){
+			for (int i = 0; i < journaldetailVO.size(); i++) {
+				result.add(journaldetailVO.get(i).getJournalDetailId());
+			}
+		}
+		return result;
+	}
 	// ELjoin時使用
 	public List<JournalVO> getAll() {
 		journalDAOHibernate = new JournalDAOHibernate();

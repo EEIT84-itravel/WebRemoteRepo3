@@ -5,7 +5,7 @@
 <%@ page import="_05_Member.model.*"%>
 <%@ page import="_05_Member.model.dao.*"%>
 <%@ page import="java.util.*"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -34,7 +34,7 @@
 		}).attr("readonly", "readonly");
 		$('input[name="cellphone"]').blur(function() {
 			$("img:eq(1)").show();
-			var url3 = path + "/_05_Member/cellphonemodify.controller";
+			var url3 = path + "/_05_Member/member/cellphonemodify.controller";
 			var cellphone1 = $('input[name="cellphone1"]').val();
 			var id3 = $('input[name="cellphone"]').val();
 			sendRequest3("GET", url3, id3, cellphone1);
@@ -46,10 +46,11 @@
 </script>
 
 <title>修改會員資料</title>
-<h3>${user.firstName}的個人資料</h3>
+
 </head>
 <body>
-	<form action="<c:url value="/_05_Member/membermodify.controller" />"
+<h3>${user.firstName}的個人資料</h3>
+	<form action="<c:url value="/_05_Member/member/membermodify.controller" />"
 		method="post" enctype="multipart/form-data">
 		<input type="hidden" name="memberId" value="${user.memberId}">
 		<input type="hidden" name="photo" value="${user.photo}">
@@ -98,12 +99,12 @@
 				<td><input type="text" name="cellphone"
 					value="${user.cellphone}"></td>
 				<td><span class="error">${error.cellphone}</span><img
-					src="../img/ajax-loader.gif" style="display: none" /></td>
+					src="<c:url value="/img/ajax-loader.gif"/>" style="display: none" /></td>
 			</tr>
 			<tr>
 				<td>現在使用的大頭貼 :</td>
 				<td><img
-					src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${user.memberId}" />"
+					src="<c:url value="/_05_Member/member/ShowMemberPhoto.controller?memberId=${user.memberId}" />"
 					width="80" height="60"></td>
 			</tr>
 			<tr>
