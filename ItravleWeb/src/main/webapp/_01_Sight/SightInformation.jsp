@@ -27,29 +27,33 @@
 		$("#tabs").tabs({
 			event : "mouseover"
 		});
+		$("#collect").bind('click', collect);
 	});
+	function collect(){
+		window.location.href = "../_01_Sight/CollectSight.controller?sightId=" + $("#sightId").val();
+	};
+
 </script>
 
 <style>
 html, body {
 	height: 100%;
-	margin: 0;
+	margin: 0 auto;
 	padding: 0;
 }
 
 #map {
-	height: 400px;
+	height: 500px;
 	width: 600px;
-	/* 	margin: 0; 
-	padding: 0;
-	margin: 0 auto; */
+	/* 	margin: 10px; */
 }
 
 .IntroSight {
 	width: 600px;
 	/*margin: 0;
-	padding: 0;
-	margin: 0 auto;*/ float : left;
+	margin: 0 auto;*/
+	padding: 10px;
+	margin: 10px;
 	border: solid black;
 	float: left;
 }
@@ -67,9 +71,11 @@ html, body {
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article>
+		<c:if test=""></c:if>
 		<div class="IntroSight">
-			<h1>景點資訊</h1>
+		<input type="hidden" value="${sightVO.sightId}" name="sightId" id="sightId">
 			<p>地名:${sightVO.sightName}</p>
+			<p>簡介:${sightVO.intro}</p>
 			<p>
 				類型:
 				<c:forEach var="codeVO" items="${codeSvc.all}">
@@ -94,7 +100,7 @@ html, body {
 			<p>${trans1}</p>
 			<p>${trans2}</p>
 		</div>
-
+		<div id="map"></div>
 
 		<script>
 			function initMap() {
@@ -117,27 +123,32 @@ html, body {
 		</script>
 		<script async defer
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU9JCqlrRPTLXt7fvy9ERvO2EU1QPcO_0&signed_in=true&callback=initMap"></script>
-
+		<br> <br> 
+		<c:if test="${flag}">
+		<input type="button" value="收藏景點" id='collect'>
+		</c:if>
+		<input type="button" onclick="history.back()"
+			value="上一頁" /> <a href="/ItravleWeb/_01_Sight/SightIndex.controller">回景點首頁</a>
 		<!-- 		留言 -->
-		<!-- 		<div id="tabs"> -->
-		<!-- 			<ul> -->
-		<!-- 				<li><a href="#tabs-1">相關行程</a></li> -->
-		<!-- 				<li><a href="#tabs-2">相關遊記</a></li> -->
-		<!-- 				<li><a href="#tabs-3">留言</a></li> -->
-		<!-- 			</ul> -->
-		<!-- 			<div id="tabs-1"> -->
-		<!-- 				<p>台北小清新之旅</p> -->
-		<!-- 			</div> -->
-		<!-- 			<div></div> -->
-		<!-- 			<div id="tabs-2"> -->
-		<!-- 				<p>我的遊記</p> -->
-		<!-- 			</div> -->
-		<!-- 			<div id="tabs-3"> -->
-		<!-- 				<p>門票是不是漲價了</p> -->
-		<!-- 			</div> -->
-		<!-- 		</div> -->
+				<div id="tabs">
+					<ul>
+						<li><a href="#tabs-1">相關行程</a></li>
+						<li><a href="#tabs-2">相關遊記</a></li>
+						<li><a href="#tabs-3">留言</a></li>
+					</ul>
+					<div id="tabs-1">
+						<p>台北小清新之旅</p>
+					</div>
+					<div id="tabs-2">
+						<p>我的遊記</p>
+					</div>
+					<div id="tabs-3">
+						<p>門票是不是漲價了</p>
+					</div>
+				</div>
+
 	</article>
-	<div id="map"></div>
+
 	<footer>
 		<!-- import共同的 -->
 	</footer>

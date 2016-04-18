@@ -78,13 +78,14 @@ public class ForumVO implements Serializable {
 	}
 
 
-
 	@Override
 	public String toString() {
 		return "ForumVO [forumId=" + forumId + ", forumTypeId=" + forumTypeId
 				+ ", forumTopic=" + forumTopic + ", memberId=" + memberId
 				+ ", forumTime=" + forumTime + ", forumContent=" + forumContent
 				+ ", visitorNum=" + visitorNum + "]";
+
 	}
+
 
 }
