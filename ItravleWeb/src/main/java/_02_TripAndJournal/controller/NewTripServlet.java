@@ -122,8 +122,7 @@ public class NewTripServlet extends HttpServlet {
 					response);
 		} else {
 			HttpSession session = request.getSession();
-			session.setAttribute("tripVO", result);
-			session.setAttribute("count", 1);
+			session.setAttribute("tripVO", result);			
 		}
 		
 		String path = request.getContextPath();

@@ -103,7 +103,7 @@ public class AddToTripDetailCart extends HttpServlet {
 
 		// 驗證HTML Form資料
 
-		// 呼叫Model
+		// 呼叫Model		
 		TripDetailVO tripDetailVO = new TripDetailVO();
 		tripDetailVO.setTripId(tripId);
 		tripDetailVO.setTripOrder(tripOrder);
@@ -113,15 +113,12 @@ public class AddToTripDetailCart extends HttpServlet {
 		tripDetailVO.setReferenceNo(referenceNo);
 		tripDetailVO.setNotes(notes);
 		tripDetailVO.setSightBudget(sightBudget);
-		System.out.println(tripDetailVO);
-
+		System.out.println(tripDetailVO);	
+		
 		session = request.getSession(false);
 		String sessionId = session.getId();
 		System.out.println("sessionId:" + sessionId);
 		List<TripDetailVO> tripDetailCart = null;
-		
-		//新建行程時從session抓出來count(在NewTripServlet設定count初始值=1)
-		int count = (int) session.getAttribute("count");
 
 		if (session != null) {
 			try {
@@ -130,17 +127,13 @@ public class AddToTripDetailCart extends HttpServlet {
 					// 建cart
 					tripDetailCart = new LinkedList<TripDetailVO>();
 					System.out.println("新建cart");
-				}
-				//每次+2
-				count = count + 2;
+				}				
 				// vo丟進去
 				tripDetailCart.add(tripDetailVO);
 								
 				session.setAttribute("tripDetailCart", tripDetailCart);
 				System.out.println("tripDetailCart放進session");
-				System.out.println("tripDetailCart===>" + tripDetailCart);
-				session.setAttribute("count", count);
-				System.out.println("count===>" + count);
+				System.out.println("tripDetailCart===>" + tripDetailCart);				
 			} catch (ClassCastException e) {
 				System.out.println("Object cast to List<TripDetailVO> ClassCastException");
 				e.printStackTrace();

@@ -29,6 +29,7 @@
 						<th>tripStartDate</th>
 						<th>memberId</th>
 						<th>watchNum</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -51,6 +52,10 @@
 								</c:forEach>
 							</td>
 							<td>${row.watchNum}</td>
+							<c:url value="/_02_TripAndJournal/ShowTrip.controller" var="path" scope="page">
+								<c:param name="tripId" value="${row.tripId}" />									
+							</c:url>
+							<td><input type="button" value="看更多" onclick="location.href='${path}'"></td>
 						</tr>
 					</c:forEach>
 				</tbody>
