@@ -18,12 +18,11 @@ import _05_Member.model.CollectionService;
 import _05_Member.model.CollectionVO;
 import _05_Member.model.MemberVO;
 
-@WebServlet("/_01_Sight/CollectSight.controller")
+@WebServlet("/_01_Sight/member/CollectSight.controller")
 public class CollectSightServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
 		// 接收HTML Form資料

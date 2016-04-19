@@ -3,6 +3,7 @@ package _05_Member.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -31,16 +32,9 @@ public class MemberModifyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//接收註冊人的資料
 				request.setCharacterEncoding("UTF-8");
-				String temp = request.getParameter("memberId");
-				int memberId = 0;
-				if(temp!=null && temp.trim().length()!=0){
-					try {
-						memberId = Integer.parseInt(temp);
-					} catch (NumberFormatException e) {
-						e.printStackTrace();
-					}
-				}
-				String memberAccount = request.getParameter("memberAccount");
+				HttpSession session=request.getSession();
+				MemberVO memberVO =(MemberVO)session.getAttribute("user");
+				int memberId = memberVO.getMemberId();
 				String lastName = request.getParameter("lastName");
 				String firstName = request.getParameter("firstName");
 				String password = request.getParameter("password");
@@ -94,9 +88,7 @@ public class MemberModifyServlet extends HttpServlet {
 					return;
 				}
 				//呼叫Model
-				MemberVO member = new MemberVO();
-				member.setMemberId(memberId);
-				member.setMemberAccount(memberAccount);
+				MemberVO member = memberService.selectById(memberId);
 				member.setLastName(lastName);
 				member.setFirstName(firstName);
 				member.setNickname(nickname);
@@ -104,6 +96,10 @@ public class MemberModifyServlet extends HttpServlet {
 				member.setEmail(email);
 				member.setBirth(birthday);
 				member.setCellphone(cellphone);
+				member.setModifier(memberId);
+				java.util.Date now=new java.util.Date();
+				java.sql.Timestamp sqlTime= new Timestamp(now.getTime());
+				member.setModiftyTime(sqlTime);
 				byte[] p = new byte[is.available()];
 				if(p.length != 0){
 				is.read(p);
@@ -114,15 +110,11 @@ public class MemberModifyServlet extends HttpServlet {
 					bytes = memberService.selectById(memberId).getPhoto();
 					member.setPhoto(bytes);
 					} 
-				
-//				java.sql.Timestamp timestamp = new Timestamp( new
-//							 java.util.Date().getTime());
-//				member.setModiftyTime(timestamp);   //資料庫有預設   
 				System.out.println(member);
 				
 				boolean result = memberService.modify(member);
 				if(result == true){
-					HttpSession session = request.getSession();
+					session.removeAttribute("user");
 					session.setAttribute("user", member);
 					
 					String path = request.getContextPath();

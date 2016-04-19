@@ -27,6 +27,7 @@
 		<h3><a href="<c:url value="MemberCollectionTrip" />">收藏行程(未做)</a></h3>
 		<h3><a href="<c:url value="/_05_Member/member/MemberJournal.jsp" />">我的遊記(未做)</a></h3>
 		<h3><a href="<c:url value="MemberCollectionJournal" />">收藏遊記(未做)</a></h3>
+		<h3><a href="<c:url value="/_03_Event/AllEvent.jsp" />">所有活動</a></h3>
 	</article>
 	<footer>
 		<!-- import共同的 -->

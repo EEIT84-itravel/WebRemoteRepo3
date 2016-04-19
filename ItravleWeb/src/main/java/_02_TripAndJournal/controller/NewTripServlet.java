@@ -20,7 +20,7 @@ import _05_Member.model.MemberVO;
 @WebServlet("/_02_TripAndJournal/member/NewTrip.controller")
 public class NewTripServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	//建立新行程的controller 接收來自NewTrip.jsp資料,傳送至WriteTrip.jsp
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// 接收HTML Form資料
@@ -101,11 +101,10 @@ public class NewTripServlet extends HttpServlet {
 		TripService ts = new TripService();
 		TripVO tripVO = new TripVO();
 		// 由session接收會員資料
-		// HttpSession session = request.getSession();
-		// MemberVO memberVO = (MemberVO) session.getAttribute("user");
-		// int memberId = memberVO.getMemberId();
-		// tripVO.setMemberId(memberId);
-		tripVO.setMemberId(1);// 寫死memberId
+		 HttpSession session = request.getSession();
+		 MemberVO memberVO = (MemberVO) session.getAttribute("user");
+		 int memberId = memberVO.getMemberId();
+		 tripVO.setMemberId(memberId);
 		tripVO.setTripName(tripName);
 		tripVO.setTripStartDate(tripStartDate);
 		tripVO.setTripEndDate(tripEndDate);
@@ -121,7 +120,6 @@ public class NewTripServlet extends HttpServlet {
 					"/_02_TripAndJournal/member/NewTrip.jsp").forward(request,
 					response);
 		} else {
-			HttpSession session = request.getSession();
 			session.setAttribute("tripVO", result);
 			session.setAttribute("count", 1);
 		}

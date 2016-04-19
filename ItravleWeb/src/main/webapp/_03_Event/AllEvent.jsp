@@ -7,25 +7,18 @@
 	List<EventVO> eventVO = eventService.select();
 	pageContext.setAttribute("eventVO", eventVO);
 %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css"
-	href="../css/_04_Forum/datatable.css" />
-<link rel="stylesheet" type="text/css"
-	href="../jquery-ui-1.11.4.custom/jquery-ui.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.css" />
-
+<link rel="stylesheet" type="text/css" href="../css/_04_Forum/datatable.css" />
+<link rel="stylesheet" type="text/css" href="../jquery-ui-1.11.4.custom/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.css" />
 <script type="text/javascript" src="../js/jquery-2.2.1.min.js"></script>
-<script type="text/javascript"
-	src="../jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
-<script type="text/javascript"
-	src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 	//DataTable設定
 	var opt = {
