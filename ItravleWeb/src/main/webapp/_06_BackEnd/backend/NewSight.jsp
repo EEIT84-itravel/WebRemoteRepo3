@@ -73,7 +73,7 @@ $("#sel").change(function(){
 </head>
 <body>
 	<h2>I-Travel後台:新增景點</h2>
-		<form action="<c:url value="/_06_BackEnd/controller/BackendSight.controller" />" method="post" enctype="multipart/form-data">
+		<form action="<c:url value="/_06_BackEnd/backEnd/BackendSight.controller" />" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td>景點名稱：</td>
@@ -129,11 +129,6 @@ $("#sel").change(function(){
 					<td><span class="error">${error.closeIime}</span></td>
 				</tr>
 				<tr>
-					<td>建議停留時間：</td>
-					<td><input type="time" name="spendHour" value="${param.spendHour}"></td>
-					<td><span class="error">${error.spendHour}</span></td>
-				</tr>
-				<tr>
 					<td>建議旅行時段：</td>
 					<td>
 						<select name="playPeriod">
@@ -172,13 +167,13 @@ $("#sel").change(function(){
 				</tr>
 				<tr>
 					<td>交通方式：</td>
-					<td><textarea rows="8" cols="50" name="trans">${param.trans}</textarea>
+					<td><textarea rows="8" cols="50" name="trans" style="resize: none">${param.trans}</textarea>
 					</td>
 					<td><span class="error">${error.trans}</span></td>
 				</tr>
 				<tr>
 					<td>簡介：</td>
-					<td><textarea rows="8" cols="50" name="intro">${param.intro}</textarea></td>
+					<td><textarea rows="8" cols="50" name="intro" style="resize: none">${param.intro}</textarea></td>
 					<td><span class="error">${error.intro}</span></td>
 				</tr>
 				<tr>

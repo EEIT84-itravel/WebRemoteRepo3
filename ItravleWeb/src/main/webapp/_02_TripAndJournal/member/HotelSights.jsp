@@ -5,8 +5,15 @@
 <%@ page import="_01_Sight.model.*"%>
 <%@ page import="_01_Sight.model.dao.*"%>
 <%@ page import="java.util.*"%>
+<% 
+    int rowNumber=0;      //總筆數
+    int pageNumber=0;     //總頁數      
+    int whichPage=1;      //第幾頁
+    int pageIndexArray[]=null;
+    int pageIndex=0; 
+    int rowsPerPage;
+%>
 <!-- 以下的要再改成jQuery 的ajax   不要在jsp出現java code -->
-
 <%
 	SightService sightService = new SightService();
 	List<SightVO> sightVO = sightService.selectByType("sight_type04");
@@ -76,6 +83,8 @@ $(function(){
     	<!-- 	景點dialog顯示頁面 平時隱藏 -->
 		<div id="dialog-hotel" ></div>
 	HotelSights.jsp
+		<%  rowsPerPage = 10;  //每頁的筆數 
+				rowNumber=sightVO.size(); %>
 	<%@ include file="/_00_Misc/page1.file" %>
 				<c:forEach var="sightVO" items="${sightVO}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 				<table class="sight">

@@ -33,6 +33,7 @@
 				</thead>
 				<tbody>
 					<c:forEach var="row" items="${tripVOs}">
+					<c:if test="${row.post==true}">
 						<tr>
 							<td>
 								<c:forEach var="TripDetailVO" items="${TripDetailService.mainPics}">
@@ -52,6 +53,7 @@
 							</td>
 							<td>${row.watchNum}</td>
 						</tr>
+					</c:if>
 					</c:forEach>
 				</tbody>
 			</table>

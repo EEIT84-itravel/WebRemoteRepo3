@@ -32,6 +32,7 @@
 				</thead>
 				<tbody>
 					<c:forEach var="row" items="${journalVOs}">
+					<c:if test="${row.post==true}">
 						<tr>
 							<td><img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${row.journalId}" />" width="240" height="180"></td>
 							<td>${row.journalName}</td>
@@ -45,6 +46,7 @@
 							</td>
 							<td>${row.visitorNum}</td>
 						</tr>
+						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
