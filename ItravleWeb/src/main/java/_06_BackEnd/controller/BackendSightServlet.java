@@ -197,7 +197,7 @@ public class BackendSightServlet extends HttpServlet {
 				if (resultPic != null) {
 					String path = request.getContextPath();
 					response.sendRedirect(path
-							+ "/_06_BackEnd/backend/AllSight.jsp");
+							+ "/_06_BackEnd/backend/AllSight.jsp#tabs-1");
 				}
 			}
 		}
@@ -347,7 +347,7 @@ public class BackendSightServlet extends HttpServlet {
 				if (resultPic != null) {
 					String path = request.getContextPath();
 					response.sendRedirect(path
-							+ "/_06_BackEnd/backend/AllSight.jsp");
+							+ "/_06_BackEnd/backend/AllSight.jsp#tabs-1");
 				}
 			}
 		}

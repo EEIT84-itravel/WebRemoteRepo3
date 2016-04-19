@@ -1,6 +1,8 @@
 package _06_BackEnd.controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,6 +56,11 @@ public class modifyAdminServlet extends HttpServlet {
 				MemberService memberService=new MemberService();
 				MemberVO memberVO=memberService.selectById(memberId);
 				memberVO.setAdmin(admin);
+				memberVO.setModifier(1);//由session抓 先寫死
+				java.util.Date now = new Date();
+				long nowLong = now.getTime();
+				java.sql.Timestamp sqlDate = new Timestamp(nowLong);
+				memberVO.setModiftyTime(sqlDate);//寫死現在時間
 				if(memberService.modify(memberVO)){
 					String path = request.getContextPath();
 					response.sendRedirect(path

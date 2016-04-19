@@ -180,9 +180,6 @@
 				<li><a href="#tabs-1">管理景點</a></li>
 				<li><a href="#tabs-2">管理會員</a></li>
 				<li><a href="#tabs-3">管理活動</a></li>
-				<li><a href="<c:url value="/_06_BackEnd/backend/AllTrip.jsp" />	">管理行程</a></li>
-				<li><a href="<c:url value="/_06_BackEnd/backend/AllJournal.jsp" /> ">管理遊記</a></li>
-				<li><a href="<c:url value="/_06_BackEnd/backend/AllForum.jsp" />	">管理討論區</a></li>
 			</ul>
 			<div id="tabs-1">
 				<h2>I-Travel後台:管理景點</h2>
@@ -205,7 +202,7 @@
 								<th>地址</th>
 								<th>修改人</th>
 								<th>修改時間</th>
-								<th>顯示</th>
+								<th>是否顯示</th>
 								<th>修改</th>
 							</tr>
 						</thead>
@@ -234,13 +231,15 @@
 									<td>${sightVO.addr}</td>
 									<td>${sightVO.modifier}</td>
 									<td>${sightVO.modifyTime}</td>
-									<td>${sightVO.del}</td>
 									<td>
-										<FORM METHOD="post" enctype="multipart/form-data"
-											ACTION="<c:url value="/_06_BackEnd/backEnd/BackendSight.controller" />">
+									<c:if test="${sightVO.del==true}">否</c:if>
+									<c:if test="${sightVO.del==false}">是</c:if>
+									</td>
+									<td>
+										<FORM METHOD="post" enctype="multipart/form-data" ACTION="<c:url value="/_06_BackEnd/backEnd/BackendSight.controller" />">
 											<input style="color: black" type="submit" value="修改">
-											<input type="hidden" name="action" value="getOne"> <input
-												type="hidden" name="sightId" value="${sightVO.sightId}">
+											<input type="hidden" name="action" value="getOne"> 
+											<input type="hidden" name="sightId" value="${sightVO.sightId}">
 										</FORM>
 									</td>
 								</tr>
@@ -291,15 +290,13 @@
 								</c:forEach>
 								<td>${memberVO.modiftyTime}</td>
 								<td>
-									<FORM
-										ACTION="<c:url value="/_06_BackEnd/backend/modifyAdmin.controller" />">
+									<FORM ACTION="<c:url value="/_06_BackEnd/backend/modifyAdmin.controller" />">
 										<select name="admin" style="color: black">
 											<option value="true" ${(memberVO.admin==true)?'selected':''}>管理員</option>
-											<option value="false"
-												${(memberVO.admin==false)?'selected':''}>普通會員</option>
-										</select> <input style="color: black" type="submit" value="修改">
-										<input type="hidden" name="memberId"
-											value="${memberVO.memberId}">
+											<option value="false" ${(memberVO.admin==false)?'selected':''}>普通會員</option>
+										</select> 
+										<input style="color: black" type="submit" value="修改">
+										<input type="hidden" name="memberId" value="${memberVO.memberId}">
 									</FORM>
 								</td>
 							</tr>
@@ -338,8 +335,11 @@
 											<td>${SightVO_All.sightName}</td>
 										</c:if>
 									</c:forEach>
-									<td>${eventVO.eventRemoved}</td>
 									<td>
+									<c:if test="${eventVO.eventRemoved==true}">是</c:if>
+									<c:if test="${eventVO.eventRemoved==false}">否</c:if>
+									</td>
+									<td>																																			
 										<FORM METHOD="post" enctype="multipart/form-data" ACTION="<c:url value="/_06_BackEnd/backend/NewEvent.controller" />">
 											<input style="color: black" type="submit" value="修改">
 											<input type="hidden" name="action" value="getOne"> 

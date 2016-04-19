@@ -172,21 +172,22 @@ $("#sel").change(function(){
 				</tr>
 				<tr>
 					<td>交通方式：</td>
-					<td><textarea rows="8" cols="50" name="trans">${sightVO.trans}</textarea>
+					<td><textarea rows="8" cols="50" name="trans" style="resize: none">${sightVO.trans}</textarea>
 					</td>
 					<td><span class="error">${error.trans}</span></td>
 				</tr>
 				<tr>
 					<td>簡介：</td>
-					<td><textarea rows="8" cols="50" name="intro">${sightVO.intro}</textarea></td>
+					<td><textarea rows="8" cols="50" name="intro" style="resize: none">${sightVO.intro}</textarea></td>
 					<td><span class="error">${error.intro}</span></td>
 				</tr>
 				<tr>
 					<td>景點照片：</td>
-					<td><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="80" height="60"></td>
-					<td><input type="file" name="pic"></td>
+					<td><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="80" height="60"><input type="file" name="pic"></td>
+					<td><span class="error">${error.pic}</span></td>
 				</tr>
 			</c:if>
+			<!-- 錯誤處理由request參數回填 -->
 			<c:if test="${empty sightVO}">
 				<tr hidden="true">
 					<td><input type="text" name="sightId" value="${param.sightId}"></td>
@@ -282,13 +283,13 @@ $("#sel").change(function(){
 				</tr>
 				<tr>
 					<td>交通方式：</td>
-					<td><textarea rows="8" cols="50" name="trans">${param.trans}</textarea>
+					<td><textarea rows="8" cols="50" name="trans" style="resize: none">${param.trans}</textarea>
 					</td>
 					<td><span class="error">${error.trans}</span></td>
 				</tr>
 				<tr>
 					<td>簡介：</td>
-					<td><textarea rows="8" cols="50" name="intro">${param.intro}</textarea></td>
+					<td><textarea rows="8" cols="50" name="intro" style="resize: none">${param.intro}</textarea></td>
 					<td><span class="error">${error.intro}</span></td>
 				</tr>
 				<tr>

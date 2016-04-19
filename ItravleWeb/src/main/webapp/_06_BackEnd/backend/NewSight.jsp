@@ -167,13 +167,13 @@ $("#sel").change(function(){
 				</tr>
 				<tr>
 					<td>交通方式：</td>
-					<td><textarea rows="8" cols="50" name="trans">${param.trans}</textarea>
+					<td><textarea rows="8" cols="50" name="trans" style="resize: none">${param.trans}</textarea>
 					</td>
 					<td><span class="error">${error.trans}</span></td>
 				</tr>
 				<tr>
 					<td>簡介：</td>
-					<td><textarea rows="8" cols="50" name="intro">${param.intro}</textarea></td>
+					<td><textarea rows="8" cols="50" name="intro" style="resize: none">${param.intro}</textarea></td>
 					<td><span class="error">${error.intro}</span></td>
 				</tr>
 				<tr>
