@@ -130,6 +130,7 @@
 			<h2>I-Travel後台:管理景點</h2>
 			<a href="<c:url value="/_06_BackEnd/backend/NewSight.jsp" />">新增景點</a>
 					<div>
+					<% int rowsPerPage = 20;  //每頁的筆數 %>
 					<%@ include file="/_00_Misc/page1.file" %>
 						<table border="1" class="backendTable">
 							<thead>

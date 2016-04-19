@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <title>ITravel-行程首頁</title>
 </head>
 <body>
@@ -18,7 +19,7 @@
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
+	<article class="center-block">
 	<h3>首頁>看行程</h3>
 		<c:if test="${not empty tripVOs}">
 			<table border="1">

@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>I-Travel:註冊會員</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <!-- jQuery ui 日期相關-->
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />

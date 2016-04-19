@@ -22,6 +22,7 @@
 color:black
 }
 </style>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <title>ITravel-從我的遊記選取</title>
 </head>
 <body>

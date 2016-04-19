@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+#divTrip {
+	width: 600px;
+	margin: 5px;
+}
+
+#tripMap {
+	width: 590px;
+	height: 700px;
+}
+
+#tableTrip {
+	width: 580px;	
+}
+
+#backURL {
+	text-align: center;
+	clear:both;
+}
+
+img {
+	vertical-align:middle;
+}

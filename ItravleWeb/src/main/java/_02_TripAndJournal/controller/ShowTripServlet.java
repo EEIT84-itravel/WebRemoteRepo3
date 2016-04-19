@@ -2,6 +2,7 @@ package _02_TripAndJournal.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -52,7 +53,14 @@ public class ShowTripServlet extends HttpServlet {
 		System.out.println(tripVO);
 		request.setAttribute("tripVO", tripVO);
 		TripDetailService tripDetailService = new TripDetailService();
-		List<TripDetailVO> tripDetailVOs = tripDetailService.select(tripId);
+		List<TripDetailVO> result = tripDetailService.select(tripId);
+		List<TripDetailVO> tripDetailVOs = new LinkedList<TripDetailVO>();
+		//取出"景點"性質的tripDetailVO
+		for(TripDetailVO tripDetailVO: result){
+			if(tripDetailVO.getReferenceType().equals("type_id01")){
+				tripDetailVOs.add(tripDetailVO);
+			}
+		}
 		request.setAttribute("tripDetailVOs", tripDetailVOs);
 
 		// 根據結果選擇veiw

@@ -19,7 +19,7 @@ import _02_TripAndJournal.model.TripDetailVO;
 
 @WebServlet("/_02_TripAndJournal/member/TripDetail.controller")
 public class TripDetailServlet extends HttpServlet {
-	// 本Servlet功能：把每筆tripDetail存到session
+	// 本Servlet功能：按畫面上的"修改"按鈕時呼叫，比對tripDetail，決定放到session裡的哪個順序存到session
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request,

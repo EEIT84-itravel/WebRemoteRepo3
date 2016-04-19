@@ -35,6 +35,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
 </style>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/css/_04_Forum/forum.css"/>" />
 <link rel="stylesheet" type="text/css"
