@@ -8,6 +8,7 @@
 <title>I-Travel討論區回覆文章</title>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/css/_04_Forum/Forum.css"/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <!-- CKeditor文本編輯器CDN碼，可直接變更最新版本號碼 -->
 <script src="//cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
 </head>

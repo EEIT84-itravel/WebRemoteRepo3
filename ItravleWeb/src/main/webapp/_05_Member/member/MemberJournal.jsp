@@ -19,9 +19,7 @@ pageContext.setAttribute("journalVO", journalVO);
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css"
-	href="<c:url value="/css/_04_Forum/forum.css"/>" />
-<link rel="stylesheet" type="text/css"
-	href="../css/_04_Forum/datatable.css" />
+	href="<c:url value="/css/_04_Forum/Forum.css"/>" />
 <link rel="stylesheet" type="text/css"
 	href="../jquery-ui-1.11.4.custom/jquery-ui.min.css" />
 <link rel="stylesheet" type="text/css"

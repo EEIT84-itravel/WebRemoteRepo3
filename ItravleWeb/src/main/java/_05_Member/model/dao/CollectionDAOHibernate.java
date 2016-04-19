@@ -13,7 +13,8 @@ public class CollectionDAOHibernate {
 	private static final String GET_ALL_STMT = "from  CollectionVO order by  collectionNo";
 	private static final String FIND_SIGHT_BY_MEMBERID = "from  CollectionVO where type_id =:type_id and memberId=:memberId";
 	private static final String FIND_SIGHT_BY_MEMBERID_AND_REFERENCETYPE_AND_TYPEID = "from  CollectionVO where type_id =:type_id and memberId=:memberId and referenceType=:referenceType";
-
+	private static final String FIND_JOURNAL_BY_MEMBERID_AND_TYPEID = "from  CollectionVO where type_id =:type_id and memberId=:memberId";
+	
 	CollectionVO collectionVO = null;
 
 	public CollectionVO insert(CollectionVO collectionVO) {
@@ -86,6 +87,24 @@ public class CollectionDAOHibernate {
 			throw e;
 		}
 
+		return list;
+	}
+	public List<CollectionVO> findJournalBymemberId(Integer memberId){ //會員的收藏遊記
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		List<CollectionVO> list = null;
+		try {
+			session.beginTransaction();
+			Query query = session
+					.createQuery(FIND_JOURNAL_BY_MEMBERID_AND_TYPEID);
+			query.setParameter("type_id", "type_id03");
+			query.setParameter("memberId", memberId);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+			throw e;
+		}
 		return list;
 	}
 	

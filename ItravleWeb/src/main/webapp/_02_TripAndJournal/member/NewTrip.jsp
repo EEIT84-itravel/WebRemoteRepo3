@@ -48,11 +48,7 @@
 
 	});
 </script>
-<style type="text/css">
-article{
-  margin: 20px;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 </head>
 <body>
 	<header>
@@ -62,7 +58,7 @@ article{
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
+	<article class="center-block">
 		<h3>建立新的行程</h3>
 		<form action="<c:url value="/_02_TripAndJournal/member/NewTrip.controller" />" method="post">
 			<table>
@@ -84,11 +80,11 @@ article{
 						value="${param.tripEndDate}"></td>
 					<td><span class="error">${error.tripEndDate}</span></td>
 				</tr>
-				<tr>
-					<td>開始遊玩時間:</td>
-					<td><input type="time" name="startTime"></td>
-					<td><span class="error">${error.startTime}</span></td>
-				</tr>
+<!-- 				<tr> -->
+<!-- 					<td>開始遊玩時間:</td> -->
+<!-- 					<td><input type="time" name="startTime"></td> -->
+<%-- 					<td><span class="error">${error.startTime}</span></td> --%>
+<!-- 				</tr> -->
 				<tr>
 					<td>地區:</td>
 					<td><select name="regionId">
@@ -98,15 +94,15 @@ article{
 					</select></td>
 					<td><span class="error">${error.regionId}</span></td>
 				</tr>
-				<tr>
-					<td>交通工具:</td>
-					<td><select name="transFormId">
-							<c:forEach var="transForm" items="${transForm}">
-								<option value="${transForm.codeId}">${transForm.codeName}</option>
-							</c:forEach>
-					</select></td>
-					<td><span class="error">${error.transFormId}</span></td>
-				</tr>
+<!-- 				<tr> -->
+<!-- 					<td>交通工具:</td> -->
+<!-- 					<td><select name="transFormId"> -->
+<%-- 							<c:forEach var="transForm" items="${transForm}"> --%>
+<%-- 								<option value="${transForm.codeId}">${transForm.codeName}</option> --%>
+<%-- 							</c:forEach> --%>
+<!-- 					</select></td> -->
+<%-- 					<td><span class="error">${error.transFormId}</span></td> --%>
+<!-- 				</tr> -->
 				<tr>
 					<td>行程簡介:</td>
 					<td><textarea name="tripIntro" rows="4" cols="50">${param.tripIntro}</textarea></td>

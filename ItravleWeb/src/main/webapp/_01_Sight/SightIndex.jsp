@@ -31,7 +31,7 @@
 
 <title>景點首頁</title>
 <script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
-
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <style type="text/css">
 .SearchSight {
 	height: 400px;

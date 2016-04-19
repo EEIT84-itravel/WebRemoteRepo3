@@ -15,7 +15,7 @@ import _02_TripAndJournal.model.JournalVO;
 @WebServlet("/_05_Member/member/changejournalpost.controller")
 public class ChangeJournalPostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	JournalService journalservice= new JournalService();
+	private JournalService journalservice= new JournalService();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//接收資料
 		request.setCharacterEncoding("UTF-8");

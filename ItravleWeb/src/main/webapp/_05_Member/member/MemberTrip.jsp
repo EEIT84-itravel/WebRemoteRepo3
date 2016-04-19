@@ -38,6 +38,7 @@ pageContext.setAttribute("tripVO", tripVO);
 					<th>人氣</th>
 					<th>發佈狀態</th>
 					<th></th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -64,6 +65,7 @@ pageContext.setAttribute("tripVO", tripVO);
 			</c:if>		
 			</td>
 			<td><a href="<c:url value="/_05_Member/member/changetriplpost.controller?tripId=${tripVO.tripId}"/>">改變發佈狀態</a>&nbsp;&nbsp;</td>
+			<td><a href="<c:url value="/_05_Member/member/tripfinddetail.controller?tripId=${tripVO.tripId}"/>">修改行程</a>&nbsp;&nbsp;</td>
 			</tr>
 			</c:forEach>
 			</c:if>
