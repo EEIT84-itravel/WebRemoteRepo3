@@ -1,8 +1,14 @@
 package _05_Member.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
+
+
+
+import _02_TripAndJournal.model.JournalVO;
+import _02_TripAndJournal.model.dao.JournalDAOHibernate;
 import _05_Member.model.dao.CollectionDAOHibernate;
 
 public class CollectionService {
@@ -27,6 +33,19 @@ public class CollectionService {
 		}
 		return a;
 	}
+	//會員尋找他的收藏遊記
+	public ArrayList<Integer> selectjournalByMemberId(Integer memberId){
+		List<CollectionVO> result = null;//所有收藏遊記
+		ArrayList<Integer> journalID = new ArrayList<Integer>();
+		result = dao.findJournalBymemberId(memberId);
+		if(result!=null  && result.size() > 0){
+			for(int i = 0 ; i<result.size(); i++){
+				journalID.add(result.get(i).getReferenceType());
+			}
+		}
+		return journalID;
+		
+	}
 	//刪除收藏
 	public boolean delSightCollection(Integer collectionNo){
 		CollectionVO result = dao.findByPrimaryKey(collectionNo);
@@ -36,4 +55,5 @@ public class CollectionService {
 		}
 		return false;
 	}
+	
 }

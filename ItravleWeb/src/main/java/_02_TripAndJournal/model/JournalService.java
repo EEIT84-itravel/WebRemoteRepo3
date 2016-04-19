@@ -52,6 +52,13 @@ public class JournalService {
 		}
 		return result;
 	}
+	//從遊記ID查出遊記
+	public JournalVO selectMemberCollectionJournal(Integer journal_id){
+		JournalVO result = null;
+		journalDAOHibernate = new JournalDAOHibernate();
+		result = journalDAOHibernate.select(journal_id);
+		return result;
+	}
 	// ELjoin時使用
 	public List<JournalVO> getAll() {
 		journalDAOHibernate = new JournalDAOHibernate();

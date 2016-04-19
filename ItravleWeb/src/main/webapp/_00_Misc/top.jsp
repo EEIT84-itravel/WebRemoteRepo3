@@ -57,7 +57,7 @@ nav{
           				     <li><a href="<c:url value="/_05_Member/member/MemberTrip.jsp" />">我的行程</a></li>
           				     <li><a href="#">我的收藏行程</a></li>
            					 <li><a href="<c:url value="/_05_Member/member/MemberJournal.jsp" />">我的遊記</a></li>
-           					 <li><a href="#">我的收藏遊記</a></li>
+           					 <li><a href="<c:url value="/_05_Member/member/MemberCollectionJournal.jsp" />">我的收藏遊記</a></li>
            					 <li><a href="#">我的好友</a></li>
            					 <li><a href="<c:url value="/_05_Member/member/MemberModify.jsp " />">修改會員資料</a></li>
         				  </ul>
