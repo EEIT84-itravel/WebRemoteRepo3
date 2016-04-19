@@ -53,11 +53,13 @@ nav{
       		    <li class="dropdown">
           				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">會員功能<span class="caret"></span></a>
           				<ul class="dropdown-menu" role="menu">
-           			    	 <li><a href="<c:url value="/_05_Member/MemberSight.jsp" />">我的景點</a></li>
-          				     <li><a href="#">我的行程</a></li>
-           					 <li><a href="#">我的遊記</a></li>
+           			    	 <li><a href="<c:url value="/_05_Member/member/MemberSight.jsp" />">我的景點</a></li>
+          				     <li><a href="<c:url value="/_05_Member/member/MemberTrip.jsp" />">我的行程</a></li>
+          				     <li><a href="#">我的收藏行程</a></li>
+           					 <li><a href="<c:url value="/_05_Member/member/MemberJournal.jsp" />">我的遊記</a></li>
+           					 <li><a href="<c:url value="/_05_Member/member/MemberCollectionJournal.jsp" />">我的收藏遊記</a></li>
            					 <li><a href="#">我的好友</a></li>
-           					 <li><a href="#">修改會員資料</a></li>
+           					 <li><a href="<c:url value="/_05_Member/member/MemberModify.jsp " />">修改會員資料</a></li>
         				  </ul>
        				 </li>
        			<li><a href="<c:url value="/_06_BackEnd/backend/AllSight.jsp" />">後台</a></li>

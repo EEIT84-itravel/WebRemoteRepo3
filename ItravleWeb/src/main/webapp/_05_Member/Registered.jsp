@@ -19,8 +19,8 @@
 <script type="text/javascript" src="<c:url value="/js/account.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/js/cellphone.js"/>"></script>
 <script type="text/javascript">
-	var path = "${pageContext.request.contextPath}";
 	$(document).ready(function() {
+		var path = "${pageContext.request.contextPath}";
 		//生日日期用jQuery UI
 		$('input[name="birth"]').datepicker({
 			defaultDate : "-25y",
@@ -30,7 +30,6 @@
 			changeYear : true,
 			showButtonPanel : true,
 		}).attr("readonly", "readonly");
-
 		$('input[name="memberAccount"]').blur(function() {
 			$("img:eq(0)").show();
 			var url = path + "/_05_Member/memberAccount.controller";
@@ -54,15 +53,7 @@
 </script>
 </head>
 <body>
-	<header>
-		<!-- import共同的 -->
-	</header>
-	<!-- import共同的 -->
-	<nav class="navbar navbar-inverse" role="navigation">
-		<!-- import共同的 -->
-		<jsp:include page="/_00_Misc/top.jsp" />
-	</nav>
-	<article>
+
 		<h3>註冊會員</h3>
 		<h5 style="color: red">*為必填欄位</h5>
 		<form action="<c:url value="/_05_Member/registered.controller" />" method="post" enctype="multipart/form-data">
@@ -78,9 +69,9 @@
 					<td><span class="error">${error.firstName}</span></td>
 				</tr>
 				<tr>
-					<td>*帳號 :</td>
+					<td>*帳號 :</td>                             
 					<td><input type="text" name="memberAccount" value="${param.memberAccount}"></td>
-					<td><span class="error">${error.memberAccount}</span><img src="../img/ajax-loader.gif" style="display: none" /></td>
+					<td><span class="error">${error.memberAccount}</span><img src="<c:url value="/img/ajax-loader.gif"/>" style="display: none" /></td>
 				</tr>
 				<tr>
 					<td>*密碼 :</td>
@@ -105,7 +96,7 @@
 				<tr>
 					<td>電話 :</td>
 					<td><input type="text" name="cellphone" value="${param.cellphone}"></td>
-					<td><span class="error">${error.cellphone}</span><img src="../img/ajax-loader.gif" style="display: none" /></td>
+					<td><span class="error">${error.cellphone}</span><img src="<c:url value="/img/ajax-loader.gif"/>" style="display: none" /></td>
 				</tr>
 				<tr>
 					<td>大頭貼 :</td>
@@ -116,9 +107,5 @@
 				</tr>
 			</table>
 		</form>
-	</article>
-	<footer>
-		<!-- import共同的 -->
-	</footer>
 </body>
 </html>

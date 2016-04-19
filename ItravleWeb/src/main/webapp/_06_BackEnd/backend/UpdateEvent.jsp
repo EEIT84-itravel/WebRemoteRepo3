@@ -15,11 +15,11 @@
 	List<CodeVO> county = service.select("county");
 	pageContext.setAttribute("county", county);
 	SightService sightService=new SightService();
-	List<SightVO> sightVOTaipei=sightService.selectByCounty("county01");
-	pageContext.setAttribute("sightVOTaipei", sightVOTaipei);
+	List<SightVO> sightVO=sightService.select();
+	pageContext.setAttribute("sightVO", sightVO);
 %>
 <jsp:useBean id="SightService" scope="page" class="_01_Sight.model.SightService" />
-<title>I-Travel後台:新增活動</title>
+<title>I-Travel後台:修改活動</title>
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
 <!-- jQuery -->
@@ -123,9 +123,79 @@
 </script>
 </head>
 <body>
-	<h2>I-Travel後台:新增活動</h2>
+	<h2>I-Travel後台:修改活動</h2>
 		<form action="<c:url value="/_06_BackEnd/backend/NewEvent.controller" />" method="post" enctype="multipart/form-data">
 			<table>
+			<c:if test="${not empty eventVO}">
+				<tr hidden="true">
+					<td><input type="text" name="eventId" value="${eventVO.eventId}"></td>
+				</tr>
+				<tr>
+					<td>活動名稱：</td>
+					<td><input type="text" name="eventTopic" value="${eventVO.eventTopic}"></td>
+					<td><span class="error">${error.eventTopic}</span></td>
+				</tr>
+				<tr>
+					<td>活動內容：</td>
+					<td><textarea rows="5" cols="40" name="eventContent" style="resize: none">${eventVO.eventContent}</textarea></td>
+					<td><span class="error">${error.eventContent}</span></td>
+				</tr>
+				<tr>
+					<td>活動開始時間：</td>
+					<td><input type="text" id="eventStartDate" name="eventStartDate" value="${eventVO.eventStartDate}"></td>
+					<td><span class="error">${error.eventStartDate}</span></td>
+				</tr>
+				<tr>
+					<td>活動結束時間：</td>
+					<td><input type="text" id="eventEndDate" name="eventEndDate" value="${eventVO.eventEndDate}"></td>
+					<td><span class="error">${error.eventEndDate}</span></td>
+				</tr>
+				<c:forEach var="sightVO1" items="${sightVO}">
+				<c:if test="${eventVO.sightId==sightVO1.sightId}">
+				<tr>
+					<td>對應景點：</td>
+					<td>地區：
+						<select name="regionId" id="sel">
+							<c:forEach var="region" items="${region}">
+								<option value="${region.codeId}" ${(sightVO1.regionId==region.codeId)?'selected':'' }>${region.codeName}</option>
+							</c:forEach>
+						</select>
+							縣市：
+						<select name="countyId" id="sel2">
+							<c:forEach var="county" items="${county}">
+								<option value="${county.codeId}" ${(sightVO1.countyId==county.codeId)?'selected':'' }>${county.codeName}</option>
+							</c:forEach>
+						</select>
+					</td>
+				</tr>
+				</c:if>
+				</c:forEach>
+				<tr>
+				<td></td>
+					<td>
+						<select name="sightId" id="sel3">
+						<c:forEach var="sightVO2" items="${sightVO}">
+							<option value="${sightVO2.sightId}" ${(eventVO.sightId==sightVO2.sightId)?'selected':'' }>${sightVO2.sightName}</option>
+						</c:forEach>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>是否下架：</td>
+					<td><input type="radio" name="eventRemoved" value="true" >是
+					<input type="radio" name="eventRemoved" value="false" checked="checked">否</td>
+				</tr>
+				<tr>
+					<td>活動圖片：</td>
+					<td><img src="<c:url value="/_03_Event/ShowEventPic.controller?eventId=${eventVO.eventId}" />" width="80" height="60"><input type="file" name="eventPhoto"></td>
+					<td><span class="error">${error.eventPhoto}</span></td>
+				</tr>
+				</c:if>
+				<!-- 錯誤處理後由request參數回填 -->
+				<c:if test="${empty eventVO}">
+				<tr hidden="true">
+					<td><input type="text" name="eventId" value="${param.eventId}"></td>
+				</tr>
 				<tr>
 					<td>活動名稱：</td>
 					<td><input type="text" name="eventTopic" value="${param.eventTopic}"></td>
@@ -147,6 +217,9 @@
 					<td><span class="error">${error.eventEndDate}</span></td>
 				</tr>
 				<tr>
+				<c:forEach var="sightVO3" items="${sightVO}">
+				<c:if test="${eventVO.sightId==sightVO3.sightId}">
+				<tr>
 					<td>對應景點：</td>
 					<td>地區：
 						<select name="regionId" id="sel">
@@ -162,12 +235,14 @@
 						</select>
 					</td>
 				</tr>
+				</c:if>
+				</c:forEach>
 				<tr>
 				<td></td>
 					<td>
 						<select name="sightId" id="sel3">
-						<c:forEach var="taipei" items="${sightVOTaipei}">
-							<option value="${taipei.sightId}" >${taipei.sightName}</option>
+						<c:forEach var="sightVO4" items="${sightVO}">
+							<option value="${sightVO4.sightId}" ${(param.sightId==sightVO4.sightId)?'selected':'' }>${sightVO4.sightName}</option>
 						</c:forEach>
 						</select>
 					</td>
@@ -179,12 +254,13 @@
 				</tr>
 				<tr>
 					<td>活動圖片：</td>
-					<td><input type="file" name="eventPhoto"></td>
+					<td><img src="<c:url value="/_03_Event/ShowEventPic.controller?eventId=${param.eventId}" />" width="80" height="60"><input type="file" name="eventPhoto"></td>
 					<td><span class="error">${error.eventPhoto}</span></td>
 				</tr>
+				</c:if>
 				<tr>
-					<td><input type="hidden" name="action" value="insert"></td>
-					<td><input type="submit" value="新增活動" /></td>
+					<td><input type="hidden" name="action" value="update"></td>
+					<td><input type="submit" value="修改活動" /></td>
 				</tr>
 			</table>
 		</form>

@@ -106,8 +106,8 @@ html, body {
 		<script>
 			function initMap() {
 				var myLatLng = {
-					lat : ${sightVO.latitude},
-					lng : ${sightVO.longitude}
+					lat : '${sightVO.latitude}',
+					lng : '${sightVO.longitude}'
 				};
 
 				var map = new google.maps.Map(document.getElementById('map'), {

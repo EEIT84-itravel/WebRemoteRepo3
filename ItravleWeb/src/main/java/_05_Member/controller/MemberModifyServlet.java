@@ -19,7 +19,7 @@ import javax.servlet.http.Part;
 import _05_Member.model.MemberVO;
 import _05_Member.model.MemberService;
 @WebServlet(
-		urlPatterns={"/_05_Member/membermodify.controller"}
+		urlPatterns={"/_05_Member/member/membermodify.controller"}
 )
 @MultipartConfig 
 public class MemberModifyServlet extends HttpServlet {
@@ -89,7 +89,7 @@ public class MemberModifyServlet extends HttpServlet {
 				}
 				if (error != null && !error.isEmpty()) {
 					request.getRequestDispatcher(
-							"/_05_Member/MemberModify.jsp").forward(request,
+							"/_05_Member/member/MemberModify.jsp").forward(request,
 							response);
 					return;
 				}
@@ -126,7 +126,7 @@ public class MemberModifyServlet extends HttpServlet {
 					session.setAttribute("user", member);
 					
 					String path = request.getContextPath();
-					response.sendRedirect(path+"/_05_Member/MemberModify.jsp");
+					response.sendRedirect(path+"/_05_Member/member/MemberModify.jsp");
 				}
 	}
 	@Override

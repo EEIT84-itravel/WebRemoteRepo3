@@ -75,7 +75,7 @@ $("#sel").change(function(){
 </head>
 <body>
 	<h2>I-Travel後台:修改景點</h2>
-		<form action="<c:url value="/_06_BackEnd/controller/BackendSight.controller" />" method="post" enctype="multipart/form-data">
+		<form action="<c:url value="/_06_BackEnd/backEnd/BackendSight.controller" />" method="post" enctype="multipart/form-data">
 			<table>
 			<c:if test="${not empty sightVO}">
 				<tr hidden="true">
@@ -135,11 +135,6 @@ $("#sel").change(function(){
 					<td><span class="error">${error.closeIime}</span></td>
 				</tr>
 				<tr>
-					<td>建議停留時間：</td>
-					<td><input type="time" name="spendHour" value="${sightVO.spendHour}"></td>
-					<td><span class="error">${error.spendHour}</span></td>
-				</tr>
-				<tr>
 					<td>建議旅行時段：</td>
 					<td>
 						<select name="playPeriod">
@@ -172,26 +167,27 @@ $("#sel").change(function(){
 				</tr>
 				<tr>
 					<td>是否顯示：</td>
-					<td><input type="radio" name="del" value="true">是
+					<td><input type="radio" name="del" value="true" checked="checked">是
 					<input type="radio" name="del" value="false">否</td>
 				</tr>
 				<tr>
 					<td>交通方式：</td>
-					<td><textarea rows="8" cols="50" name="trans">${sightVO.trans}</textarea>
+					<td><textarea rows="8" cols="50" name="trans" style="resize: none">${sightVO.trans}</textarea>
 					</td>
 					<td><span class="error">${error.trans}</span></td>
 				</tr>
 				<tr>
 					<td>簡介：</td>
-					<td><textarea rows="8" cols="50" name="intro">${sightVO.intro}</textarea></td>
+					<td><textarea rows="8" cols="50" name="intro" style="resize: none">${sightVO.intro}</textarea></td>
 					<td><span class="error">${error.intro}</span></td>
 				</tr>
 				<tr>
 					<td>景點照片：</td>
-					<td><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="80" height="60"></td>
-					<td><input type="file" name="pic"></td>
+					<td><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="80" height="60"><input type="file" name="pic"></td>
+					<td><span class="error">${error.pic}</span></td>
 				</tr>
 			</c:if>
+			<!-- 錯誤處理由request參數回填 -->
 			<c:if test="${empty sightVO}">
 				<tr hidden="true">
 					<td><input type="text" name="sightId" value="${param.sightId}"></td>
@@ -241,18 +237,13 @@ $("#sel").change(function(){
 				</tr>
 				<tr>
 					<td>開門時間：</td>
-					<td><input type="time" name="openTime" value="${param.openTime}"></td>
+					<td><input type="time" name="openTime" value="${param.openTime}+':00'"></td>
 					<td><span class="error">${error.openTime}</span></td>
 				</tr>
 				<tr>
 					<td>關門時間：</td>
-					<td><input type="time" name="closeIime" value="${param.closeIime}"></td>
+					<td><input type="time" name="closeIime" value="${param.closeIime}+':00'"></td>
 					<td><span class="error">${error.closeIime}</span></td>
-				</tr>
-				<tr>
-					<td>建議停留時間：</td>
-					<td><input type="time" name="spendHour" value="${param.spendHour}"></td>
-					<td><span class="error">${error.spendHour}</span></td>
 				</tr>
 				<tr>
 					<td>建議旅行時段：</td>
@@ -287,18 +278,18 @@ $("#sel").change(function(){
 				</tr>
 				<tr>
 					<td>是否顯示：</td>
-					<td><input type="radio" name="del" value="true">是
+					<td><input type="radio" name="del" value="true" checked="checked">是
 					<input type="radio" name="del" value="false">否</td>
 				</tr>
 				<tr>
 					<td>交通方式：</td>
-					<td><textarea rows="8" cols="50" name="trans">${param.trans}</textarea>
+					<td><textarea rows="8" cols="50" name="trans" style="resize: none">${param.trans}</textarea>
 					</td>
 					<td><span class="error">${error.trans}</span></td>
 				</tr>
 				<tr>
 					<td>簡介：</td>
-					<td><textarea rows="8" cols="50" name="intro">${param.intro}</textarea></td>
+					<td><textarea rows="8" cols="50" name="intro" style="resize: none">${param.intro}</textarea></td>
 					<td><span class="error">${error.intro}</span></td>
 				</tr>
 				<tr>

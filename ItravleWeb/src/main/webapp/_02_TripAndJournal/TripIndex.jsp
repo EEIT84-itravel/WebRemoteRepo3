@@ -35,6 +35,7 @@
 				</thead>
 				<tbody>
 					<c:forEach var="row" items="${tripVOs}">
+					<c:if test="${row.post==true}">
 						<tr>
 							<td>
 								<c:forEach var="TripDetailVO" items="${TripDetailService.mainPics}">
@@ -58,6 +59,7 @@
 							</c:url>
 							<td><input type="button" value="看更多" onclick="location.href='${path}'"></td>
 						</tr>
+					</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
