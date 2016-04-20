@@ -47,7 +47,10 @@ nav{
 				<li><a href="<c:url value="/_01_Sight/SightIndex.controller"/>">看景點</a></li>							
         		<li><a href="<c:url value="/_02_TripAndJournal/ShowAllTripServlet.controller"/>">看行程</a></li>
         		<li><a href="<c:url value="/_02_TripAndJournal/ShowAllJournalServlet.controller"/>">看遊記</a></li>
-        		<li><a href="<c:url value="/_02_TripAndJournal/member/NewTrip.jsp" />">排行程</a></li>
+        		<c:choose>
+					<c:when test="${empty user}"><li><a href="<c:url value="/_05_Member/Login.jsp"/>">排行程</a></li></c:when>
+					<c:when test="${not empty user}"><li><a href="<c:url value="/_02_TripAndJournal/member/NewTrip.jsp" />">排行程</a></li></c:when>
+				</c:choose>
         		<li><a href="<c:url value="/_02_TripAndJournal/member/NewJournal.jsp" />">寫遊記</a></li>    		  		
         		<li><a href="<c:url value="/_04_Forum/ForumIndex.jsp" />">討論區</a></li>
       		    <li class="dropdown">

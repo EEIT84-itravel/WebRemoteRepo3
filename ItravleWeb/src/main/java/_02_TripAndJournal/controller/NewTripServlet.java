@@ -101,11 +101,11 @@ public class NewTripServlet extends HttpServlet {
 		TripService ts = new TripService();
 		TripVO tripVO = new TripVO();
 		// 由session接收會員資料
-		// HttpSession session = request.getSession();
-		// MemberVO memberVO = (MemberVO) session.getAttribute("user");
-		// int memberId = memberVO.getMemberId();
-		// tripVO.setMemberId(memberId);
-		tripVO.setMemberId(1);// 寫死memberId
+		 HttpSession session = request.getSession();
+		 MemberVO memberVO = (MemberVO) session.getAttribute("user");
+		 int memberId = memberVO.getMemberId();
+		 tripVO.setMemberId(memberId);
+//		tripVO.setMemberId(1);// 寫死memberId
 		tripVO.setTripName(tripName);
 		tripVO.setTripStartDate(tripStartDate);
 		tripVO.setTripEndDate(tripEndDate);
@@ -121,8 +121,7 @@ public class NewTripServlet extends HttpServlet {
 			request.getRequestDispatcher(
 					"/_02_TripAndJournal/member/NewTrip.jsp").forward(request,
 					response);
-		} else {
-			HttpSession session = request.getSession();
+		} else {			
 			session.setAttribute("tripVO", result);	
 		}
 

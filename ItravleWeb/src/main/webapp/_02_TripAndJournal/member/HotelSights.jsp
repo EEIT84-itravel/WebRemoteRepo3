@@ -70,9 +70,9 @@ $(function(){
         close: function() { 
             $(document).unbind('click'); }
     });
-	$("tr.sightId>td:nth-child(7)").each(function(){
+	$("tr.sightId>td:nth-child(9)").each(function(){
  		$(this).click(function(){
- 				var sightId=$(this).prev().prev().prev().prev().prev().prev().text();	
+ 				var sightId=$(this).prev().prev().prev().prev().prev().prev().prev().prev().text();	
  				console.log(sightId);
 				var stylei=' width="98%" height="98%"  frameborder="0" scrolling="auto"';
  				$("#dialog-hotel").html('<iframe src="'+uri+sightId+'"'+stylei+'></iframe>');
@@ -92,11 +92,10 @@ $(function(){
 </head>
 <body>
     	<!-- 	景點dialog顯示頁面 平時隱藏 -->
-		<div id="dialog-hotel" ></div>
-	HotelSights.jsp
+		<div id="dialog-hotel" ></div>	
 		<%  rowsPerPage = 10;  //每頁的筆數 
-				rowNumber=sightVO.size(); %>
-	<%@ include file="/_00_Misc/page1.file" %>
+			rowNumber=sightVO.size(); %>
+		<%@ include file="/_00_Misc/page1.file" %>
 				<c:forEach var="sightVO" items="${sightVO}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 				<table class="sight">
 				<tr class="sightId">	
