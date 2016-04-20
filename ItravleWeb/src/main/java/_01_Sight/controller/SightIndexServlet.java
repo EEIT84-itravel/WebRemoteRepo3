@@ -19,27 +19,30 @@ public class SightIndexServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+
+		// 接收HTML Form資料
+		String region = request.getParameter("region");// 地區
+		String county = request.getParameter("county");// 縣市
+		String sightType = request.getParameter("sightType");// 類型
+
+		// 轉換HTML Form資料
+
+		// 驗證HTML Form資料
+
 		// 呼叫Model(首頁畫面)
 		SightService sightService = new SightService();
-		List<SightVO> sightVO = sightService.select();
-		List<SightVO> watchNum = sightService.selectByWatchNum();
 
-		String region = request.getParameter("region");
-		String county = request.getParameter("county");
-		String sightType = request.getParameter("sightType");
-		// String money = request.getParameter("money");
-		// String sightTime = request.getParameter("sightTime");
 		SightVO sightVO2 = new SightVO();
 		sightVO2.setRegionId(region);
 		sightVO2.setCountyId(county);
 		sightVO2.setSightTypeId(sightType);
-		// sightVO2.setTicket(money);
-		// sightVO2.setPlayPeriod(sightTime);
-		List<SightVO> sightVOp = sightService.search(sightVO2);
-		// request.setAttribute("sightVO", sightVOp);
 
-		request.setAttribute("sightVO", sightVO);
-		// request.setAttribute("watchNum", watchNum);
+		// 根據Model執行結果顯示View
+		List<SightVO> sightVOp = sightService.search(sightVO2);
+		request.setAttribute("sightVO", sightVOp);
+		request.setAttribute("region", region);// 回傳選擇的地區
+		request.setAttribute("county", county);// 回傳選擇的縣市
+		request.setAttribute("sightType", sightType);// 回傳選擇的類型
 		request.getRequestDispatcher("/_01_Sight/SightIndex.jsp").forward(
 				request, response);
 	}

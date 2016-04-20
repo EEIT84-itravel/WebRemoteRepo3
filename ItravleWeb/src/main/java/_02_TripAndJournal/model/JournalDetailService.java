@@ -12,8 +12,10 @@ public class JournalDetailService {
 		journalDetailDAOHibernate = new JournalDetailDAOHibernate();
 		return journalDetailDAOHibernate.selectByJournalId(journalId);
 	}
+
 	public JournalDetailVO insert(JournalDetailVO vo){
 		journalDetailDAOHibernate = new JournalDetailDAOHibernate();
 		return journalDetailDAOHibernate.insert(vo);
 	}
+
 }

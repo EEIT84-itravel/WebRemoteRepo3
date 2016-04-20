@@ -30,6 +30,7 @@ textarea{/* Text Area 固定大小*/
 </style>
 <script type="text/javascript"
 	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
@@ -83,6 +84,7 @@ textarea{/* Text Area 固定大小*/
 	
 
 </script>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <title>ITravel-建立新遊記</title>
 </head>
 <body>

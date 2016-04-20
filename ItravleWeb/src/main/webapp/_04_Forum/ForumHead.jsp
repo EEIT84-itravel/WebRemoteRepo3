@@ -33,6 +33,7 @@
 				<c:when test="${empty user}"><li><a href="<c:url value="/_05_Member/Login.jsp"/>">發表文章</a></li></c:when>
 				<c:when test="${not empty user}"><li><a href="<c:url value="/_04_Forum/member/Article.jsp?crud=NewArticle&memberId=${user.memberId}"/>">發表文章</a></li></c:when>
 			</c:choose>
+
 		</ul>
 	</div>
 </body>

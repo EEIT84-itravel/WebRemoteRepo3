@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import _04_Forum.model.ForumService;
 import _04_Forum.model.ForumVO;
+import _05_Member.model.MemberVO;
 
 @WebServlet("/_04_Forum/member/WritingsServlet.controller")
 public class WritingsServlet extends HttpServlet {
@@ -38,7 +39,8 @@ public class WritingsServlet extends HttpServlet {
 		String forumContent = request.getParameter("forumContent");
 		String temp1 = request.getParameter("forumId");
 		String temp2 = request.getParameter("visit");
-		String temp3 = request.getParameter("memberId");
+		MemberVO memberVO =(MemberVO)session.getAttribute("user");
+		int memberId = memberVO.getMemberId();
 		String crud = request.getParameter("crud");
 		System.out.println(crud);
 		// 轉換資料
@@ -61,15 +63,6 @@ public class WritingsServlet extends HttpServlet {
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
 				}
-			}
-		}
-		int memberId = 0;
-
-		if (temp3 != null || temp3.trim().length() != 0) {
-			try {
-				memberId = Integer.parseInt(temp3);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
 			}
 		}
 		 if ("Delete".equals(crud)) {
@@ -108,7 +101,7 @@ public class WritingsServlet extends HttpServlet {
 			return;
 		}
 		// 塞資料
-		forumVO.setMemberId(memberId);// 暫時寫死會員id
+		forumVO.setMemberId(memberId);
 		forumVO.setForumTypeId(forumTypeId);
 		forumVO.setForumTopic(forumTopic);
 		forumVO.setForumContent(forumContent);
@@ -147,4 +140,5 @@ public class WritingsServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		this.doGet(request, response);
 	}
+
 }

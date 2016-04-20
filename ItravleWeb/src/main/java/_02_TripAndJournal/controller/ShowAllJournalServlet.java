@@ -20,7 +20,7 @@ import _02_TripAndJournal.model.TripVO;
 @WebServlet("/_02_TripAndJournal/ShowAllJournalServlet.controller")
 public class ShowAllJournalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+//顯示所有遊記至遊記首頁
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
@@ -49,11 +49,11 @@ public class ShowAllJournalServlet extends HttpServlet {
 			journalVO = journalService.select(journalId);
 		}
 		if (!journalVOs.isEmpty()) {
-			HttpSession session = request.getSession();
-			session.setAttribute("journalVOs", journalVOs);
-			session.setAttribute("journalVO", journalVO);
-			String path = request.getContextPath();
-			response.sendRedirect(path + "/_02_TripAndJournal/JournalIndex.jsp");
+			request.setAttribute("journalVOs", journalVOs);
+			request.setAttribute("journalVO", journalVO);
+			request.getRequestDispatcher(
+					"/_02_TripAndJournal/JournalIndex.jsp").forward(request,
+					response);
 		} else {
 			error.put("journalId", "查無遊記資料");
 			request.getRequestDispatcher(

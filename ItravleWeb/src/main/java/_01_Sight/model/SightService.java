@@ -41,4 +41,25 @@ public class SightService {
 		result = dao.findByPrimaryKey(sightId);
 		return result;
 	}
+	
+	public SightVO insert(SightVO sightVO) {
+		SightVO result = null;
+		if(sightVO!=null){
+			result=dao.insert(sightVO);
+		}
+		return result;
+	}
+	
+	public SightVO update(SightVO sightVO) {
+		SightVO result = null;
+		if(sightVO!=null){
+			result=dao.update(sightVO);
+		}
+		return result;
+	}
+	//依縣市搜尋景點
+	public List<SightVO> selectByCounty(String countyId) {
+		return dao.selectByCounty(countyId);
+	}
+
 }

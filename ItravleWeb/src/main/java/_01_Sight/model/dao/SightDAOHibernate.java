@@ -15,23 +15,41 @@ import _01_Sight.model.SightVO;
 public class SightDAOHibernate {
 
 	// 進階搜尋測試
-	//private static final String SEARCH = "from SightVO where region_id=:region_id and county_id=:county_id and sight_type_id=:sight_type_id and ticket=:ticket and play_period=:play_period";
-	private static final String SEARCH = "from SightVO where region_id=:region_id and county_id=:county_id and sight_type_id=:sight_type_id";
-
+//	private static final String SEARCH = "from SightVO where region_id=:region_id and county_id=:county_id and sight_type_id=:sight_type_id";
 	public List<SightVO> search(SightVO sightVOp) {
 		List<SightVO> sightVO = null;
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
 				.getCurrentSession();
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery(SEARCH);
-			query.setParameter("region_id", sightVOp.getRegionId());
-			query.setParameter("county_id", sightVOp.getCountyId());
-			query.setParameter("sight_type_id", sightVOp.getSightTypeId());
-//			query.setParameter("ticket", sightVOp.getTicket());
-//			query.setParameter("play_period", sightVOp.getPlayPeriod());
-			sightVO = query.list();
-			session.getTransaction().commit();
+			StringBuilder sb = new StringBuilder();
+			String sWhere = "where";
+			  sb.append(" from SightVO ");
+			  if(null != sightVOp.getRegionId() && !"".equals(sightVOp.getRegionId())){
+			   sb.append(sWhere).append(" region_id=:region_id ");
+			   sWhere = "and";
+			  }
+			  if(null != sightVOp.getCountyId() && !"".equals(sightVOp.getCountyId())){
+				   sb.append(sWhere).append(" county_id=:county_id ");
+				   sWhere = "and";
+				  }
+			  if(null != sightVOp.getSightTypeId() && !"".equals(sightVOp.getSightTypeId())){
+				   sb.append(sWhere).append(" sight_type_id=:sight_type_id ");
+				   sWhere = "and";
+				  }
+			  Query query = session.createQuery(sb.toString());
+			  
+			  if(null != sightVOp.getRegionId() && !"".equals(sightVOp.getRegionId())){
+				  query.setParameter("region_id", sightVOp.getRegionId());
+				  }
+				  if(null != sightVOp.getCountyId() && !"".equals(sightVOp.getCountyId())){
+					  query.setParameter("county_id", sightVOp.getCountyId());
+					  }
+				  if(null != sightVOp.getSightTypeId() && !"".equals(sightVOp.getSightTypeId())){
+					  query.setParameter("sight_type_id", sightVOp.getSightTypeId());
+					  }
+				  sightVO = query.list();
+				   session.getTransaction().commit();
 		} catch (HibernateException e) {
 			session.getTransaction().rollback();
 			e.printStackTrace();
@@ -104,6 +122,26 @@ public class SightDAOHibernate {
 			session.beginTransaction();
 			Query query = session.createQuery(SELECT_BY_TYPE);
 			query.setParameter("sightTypeId", sightType);
+			sightVOs = query.list();
+			session.getTransaction().commit();
+		} catch (HibernateException e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
+		return sightVOs;
+	}
+	
+	//依縣市搜尋,後台用
+	private static final String SELECT_BY_COUNTY = "from SightVO where countyId=:countyId";
+
+	public List<SightVO> selectByCounty(String countyId) {
+		List<SightVO> sightVOs = null;
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(SELECT_BY_COUNTY);
+			query.setParameter("countyId", countyId);
 			sightVOs = query.list();
 			session.getTransaction().commit();
 		} catch (HibernateException e) {

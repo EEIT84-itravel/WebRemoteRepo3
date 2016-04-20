@@ -1,6 +1,5 @@
 package _01_Sight.model;
 
-
 import java.util.List;
 
 import _01_Sight.model.dao.SightPicDAOHibernate;
@@ -21,5 +20,20 @@ public class SightPicService {
 			}
 		}
 		return sightPicVO;
+	}
+
+	public SightPicVO insert(SightPicVO sightPicVO) {
+		SightPicVO result = null;
+		if (sightPicVO != null) {
+			result = dao.insert(sightPicVO);
+		}
+		return result;
+	}
+	public SightPicVO update(SightPicVO sightPicVO){
+		SightPicVO result = null;
+		if (sightPicVO != null) {
+			result = dao.update(sightPicVO);
+		}
+		return result;
 	}
 }

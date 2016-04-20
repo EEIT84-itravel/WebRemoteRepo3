@@ -31,6 +31,7 @@ public class AddToTripDetailCart extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// 接收HTML Form資料
+		request.setCharacterEncoding("UTF-8");
 		System.out.println("------------------AddToTripDetailCart------------------");
 		String temp1 = request.getParameter("tripId");
 		String temp2 = request.getParameter("tripOrder");
@@ -102,7 +103,7 @@ public class AddToTripDetailCart extends HttpServlet {
 
 		// 驗證HTML Form資料
 
-		// 呼叫Model
+		// 呼叫Model		
 		TripDetailVO tripDetailVO = new TripDetailVO();
 		tripDetailVO.setTripId(tripId);
 		tripDetailVO.setTripOrder(tripOrder);
@@ -112,8 +113,8 @@ public class AddToTripDetailCart extends HttpServlet {
 		tripDetailVO.setReferenceNo(referenceNo);
 		tripDetailVO.setNotes(notes);
 		tripDetailVO.setSightBudget(sightBudget);
-		System.out.println(tripDetailVO);
-
+		System.out.println(tripDetailVO);	
+		
 		session = request.getSession(false);
 		String sessionId = session.getId();
 		System.out.println("sessionId:" + sessionId);
@@ -121,22 +122,26 @@ public class AddToTripDetailCart extends HttpServlet {
 
 		if (session != null) {
 			try {
-				tripDetailCart = (LinkedList<TripDetailVO>) session.getAttribute("tripDetailCart");			
+				tripDetailCart = (LinkedList<TripDetailVO>) session.getAttribute("tripDetailCart");				
 				if (tripDetailCart == null) {					
 					// 建cart
 					tripDetailCart = new LinkedList<TripDetailVO>();
 					System.out.println("新建cart");
-				}	
+				}				
 				// vo丟進去
 				tripDetailCart.add(tripDetailVO);
+								
 				session.setAttribute("tripDetailCart", tripDetailCart);
-				System.out.println("放進session");
-				System.out.println("tripDetailCart===>"+tripDetailCart);
+				System.out.println("tripDetailCart放進session");
+				System.out.println("tripDetailCart===>" + tripDetailCart);				
 			} catch (ClassCastException e) {
 				System.out.println("Object cast to List<TripDetailVO> ClassCastException");
 				e.printStackTrace();
 			}
 		}
+		
+		String path = request.getContextPath();
+		response.sendRedirect(path + "/_02_TripAndJournal/member/WriteTrip.jsp");
 	}
 	
 	

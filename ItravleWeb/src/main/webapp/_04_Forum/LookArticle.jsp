@@ -9,6 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${forumVO.forumTopic}</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <link rel="stylesheet" type="text/css" href="../css/_04_Forum/Forum.css" />
 <script type="text/javascript">
 function confirmDeleteArticle(n,m) {

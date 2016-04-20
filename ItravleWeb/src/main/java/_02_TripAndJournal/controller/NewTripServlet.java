@@ -20,7 +20,7 @@ import _05_Member.model.MemberVO;
 @WebServlet("/_02_TripAndJournal/member/NewTrip.controller")
 public class NewTripServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	//建立新行程的controller 接收來自NewTrip.jsp資料,傳送至WriteTrip.jsp
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// 接收HTML Form資料
@@ -28,9 +28,9 @@ public class NewTripServlet extends HttpServlet {
 		String tripName = request.getParameter("tripName");
 		String temp1 = request.getParameter("tripStartDate");
 		String temp2 = request.getParameter("tripEndDate");
-		String temp3 = request.getParameter("startTime");
+//		String temp3 = request.getParameter("startTime");
 		String regionId = request.getParameter("regionId");
-		String transFormId = request.getParameter("transFormId");
+//		String transFormId = request.getParameter("transFormId");
 		String tripIntro = request.getParameter("tripIntro");
 
 		Map<String, String> error = new HashMap<String, String>();
@@ -55,15 +55,15 @@ public class NewTripServlet extends HttpServlet {
 				error.put("tripEndDate", "日期格式錯誤");
 			}
 		}
-		java.sql.Time startTime = null;
-		if (temp3 != null && temp3.trim().length() != 0) {
-			// yyyy-[m]m-[d]d
-			try {
-				startTime = Time.valueOf(temp3 + ":00");
-			} catch (IllegalArgumentException e) {
-				error.put("startTime", "時間格式錯誤");
-			}
-		}
+//		java.sql.Time startTime = null;
+//		if (temp3 != null && temp3.trim().length() != 0) {
+//			// yyyy-[m]m-[d]d
+//			try {
+//				startTime = Time.valueOf(temp3 + ":00");
+//			} catch (IllegalArgumentException e) {
+//				error.put("startTime", "時間格式錯誤");
+//			}
+//		}
 
 		// 驗證HTML Form資料
 		if (tripName == null || tripName.trim().length() == 0) {
@@ -80,15 +80,15 @@ public class NewTripServlet extends HttpServlet {
 				error.put("tripEndDate", "結束日期必須大於開始日期");
 			}
 		}
-		if (startTime == null) {
-			error.put("startTime", "請輸入開始遊玩時間");
-		}
+//		if (startTime == null) {
+//			error.put("startTime", "請輸入開始遊玩時間");
+//		}
 		if (regionId == null || regionId.trim().length() == 0) {
 			error.put("regionId", "請選擇地區");
 		}
-		if (transFormId == null || transFormId.trim().length() == 0) {
-			error.put("transFormId", "請選擇交通工具");
-		}
+//		if (transFormId == null || transFormId.trim().length() == 0) {
+//			error.put("transFormId", "請選擇交通工具");
+//		}
 
 		if (error != null && !error.isEmpty()) {
 			request.getRequestDispatcher(
@@ -101,17 +101,17 @@ public class NewTripServlet extends HttpServlet {
 		TripService ts = new TripService();
 		TripVO tripVO = new TripVO();
 		// 由session接收會員資料
-		// HttpSession session = request.getSession();
-		// MemberVO memberVO = (MemberVO) session.getAttribute("user");
-		// int memberId = memberVO.getMemberId();
-		// tripVO.setMemberId(memberId);
-		tripVO.setMemberId(1);// 寫死memberId
+		 HttpSession session = request.getSession();
+		 MemberVO memberVO = (MemberVO) session.getAttribute("user");
+		 int memberId = memberVO.getMemberId();
+		 tripVO.setMemberId(memberId);
 		tripVO.setTripName(tripName);
 		tripVO.setTripStartDate(tripStartDate);
 		tripVO.setTripEndDate(tripEndDate);
+		java.sql.Time startTime = java.sql.Time.valueOf("00:00:00");
 		tripVO.setStartTime(startTime);
 		tripVO.setRegionId(regionId);
-		tripVO.setTransFormId(transFormId);
+		tripVO.setTransFormId("trans_form01");
 		tripVO.setTripIntro(tripIntro);
 		tripVO.setWatchNum(1);
 		TripVO result = ts.insert(tripVO);
@@ -121,9 +121,9 @@ public class NewTripServlet extends HttpServlet {
 					"/_02_TripAndJournal/member/NewTrip.jsp").forward(request,
 					response);
 		} else {
-			HttpSession session = request.getSession();
-			session.setAttribute("tripVO", result);
+			session.setAttribute("tripVO", result);	
 		}
+
 		String path = request.getContextPath();
 		response.sendRedirect(path + "/_02_TripAndJournal/member/WriteTrip.jsp");
 	}

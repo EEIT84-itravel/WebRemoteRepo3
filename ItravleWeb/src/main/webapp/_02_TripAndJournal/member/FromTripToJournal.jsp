@@ -11,10 +11,9 @@
 <%
 	TripService tripService = new TripService();
 	//memberId由session取出
-	//MemberVO memberVO = (MemberVO) session.getAttribute("user");
-	//int memberId = memberVO.getMemberId();
-	//List<TripVO> tripVO = tripService.selectFromMember(memberId);
-	List<TripVO> tripVO = tripService.selectFromMember(5);//測試時榜定memberID
+	MemberVO memberVO = (MemberVO) session.getAttribute("user");
+	int memberId = memberVO.getMemberId();
+	List<TripVO> tripVO = tripService.selectFromMember(memberId);
 	pageContext.setAttribute("tripVO", tripVO);
 %>
 <style type="text/css">
@@ -22,6 +21,7 @@
 color:black
 }
 </style>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <title>ITravel-從我的遊記選取</title>
 </head>
 <body>
@@ -30,7 +30,8 @@ color:black
 				<c:forEach var="tripVO" items="${tripVO}">
 					<option value="${tripVO.tripId}">${tripVO.tripName}</option>
 				</c:forEach>
-			</select> <input type="submit" value="開始寫遊記吧!">
+			</select> 
+			<input type="submit" value="開始寫遊記吧!">
 		</form>
 </body>
 </html>

@@ -21,6 +21,24 @@ public class TripDetailService {
 		}
 		return result;
 	}
+	
+	public TripDetailVO update(TripDetailVO tripDetailVO) {
+		TripDetailVO result = null;
+		if (tripDetailVO != null) {
+			tripDetailDAOHibernate = new TripDetailDAOHibernate();
+			result = tripDetailDAOHibernate.update(tripDetailVO);
+		}
+		return result;
+	}
+	
+	public boolean insert(List<TripDetailVO> tripDetailVOs) {
+		boolean result = false;
+		if (tripDetailVOs != null) {
+			tripDetailDAOHibernate = new TripDetailDAOHibernate();
+			result = tripDetailDAOHibernate.insert(tripDetailVOs);
+		}
+		return result;
+	}
 
 	public List<TripDetailVO> select(int tripId) {
 		List<TripDetailVO> result = null;
@@ -47,4 +65,14 @@ public class TripDetailService {
 		}
 		return result;
 	}
+	
+	public boolean delete(Integer tdetailId) {
+		boolean result = false;
+		if (tdetailId != null) {
+			tripDetailDAOHibernate = new TripDetailDAOHibernate();
+			result = tripDetailDAOHibernate.delete(tdetailId);
+		}
+		return result;
+	}
+	
 }
