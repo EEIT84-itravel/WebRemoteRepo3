@@ -2,10 +2,20 @@ package _02_TripAndJournal.model;
 
 import java.util.List;
 
+import _02_TripAndJournal.model.dao.JournalDAOHibernate;
 import _02_TripAndJournal.model.dao.TripDAOHibernate;
 
 public class TripService {
 	private TripDAOHibernate tripDAOHibernate;
+	
+	public boolean update(TripVO tripVO){
+		tripDAOHibernate = new TripDAOHibernate();
+		 if( tripVO != null){
+			 tripDAOHibernate.update(tripVO);
+				return true;
+				 }
+				 return false;
+	}
 
 	public TripVO insert(TripVO tripVO) {
 		TripVO result = null;
@@ -24,7 +34,7 @@ public class TripService {
 		}
 		return result;
 	}
-
+    //從會員找行程
 	public List<TripVO> selectFromMember(Integer memberId) {
 		List<TripVO> result = null;
 		if (memberId >= 0) {

@@ -16,7 +16,7 @@ import _01_Sight.model.SightVO;
 @WebServlet("/_02_TripAndJournal/ShowSightDetail.controller")
 public class ShowSightDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+//顯示單一景點詳情
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// 接收參數

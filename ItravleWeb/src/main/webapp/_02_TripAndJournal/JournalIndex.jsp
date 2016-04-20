@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ITravel-遊記首頁</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 </head>
 <body>
 	<header>
@@ -17,7 +18,7 @@
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
+	<article class="center-block">
 		<h3>首頁>看遊記</h3>
 		<c:if test="${not empty journalVOs}">
 			<table border="1">
@@ -32,6 +33,7 @@
 				</thead>
 				<tbody>
 					<c:forEach var="row" items="${journalVOs}">
+					<c:if test="${row.post==true}">
 						<tr>
 							<td><img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${row.journalId}" />" width="240" height="180"></td>
 							<td>${row.journalName}</td>
@@ -45,6 +47,7 @@
 							</td>
 							<td>${row.visitorNum}</td>
 						</tr>
+						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>

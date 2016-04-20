@@ -3,7 +3,7 @@ table {
 	border: 1px solid blue;
 	width: 100%;	
 }
-h4{
+h4 {
 	margin-bottom: 5px;
 	margin-top: 5px;
 }
@@ -57,4 +57,9 @@ div .sight {
 #sightsTabs ul li a{
 	font-size:16px;
 }
-
+.noteTextarea {
+	max-width:400px;
+ 	max-height:70px;
+ 	width:400px;
+ 	height:70px;
+}

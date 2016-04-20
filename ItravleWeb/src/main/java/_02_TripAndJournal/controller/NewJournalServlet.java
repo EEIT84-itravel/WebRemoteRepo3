@@ -14,11 +14,12 @@ import javax.servlet.http.HttpSession;
 
 import _02_TripAndJournal.model.JournalService;
 import _02_TripAndJournal.model.JournalVO;
+import _05_Member.model.MemberVO;
 
 @WebServlet("/_02_TripAndJournal/member/NewJournal.controller")
 public class NewJournalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+//建立新遊記的controller 接收來自NewJournal.jsp資料,傳送至WriteJournal.jsp
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// 接收HTML Form資料
@@ -81,11 +82,10 @@ public class NewJournalServlet extends HttpServlet {
 		JournalService js = new JournalService();
 		JournalVO journalVO = new JournalVO();
 		// 由session接收會員資料
-		// HttpSession session = request.getSession();
-		// MemberVO memberVO = (MemberVO) session.getAttribute("user");
-		// int memberId = memberVO.getMemberId();
-		// journalVO.setMemberId(memberId);
-		journalVO.setMemberId(1);// 寫死memberId
+		 HttpSession session = request.getSession();
+		 MemberVO memberVO = (MemberVO) session.getAttribute("user");
+		 int memberId = memberVO.getMemberId();
+		 journalVO.setMemberId(memberId);
 		journalVO.setJournalName(journalName);
 		journalVO.setBeginTime(beginTime);
 		journalVO.setEndTime(endTime);
@@ -99,7 +99,6 @@ public class NewJournalServlet extends HttpServlet {
 					"/_02_TripAndJournal/member/NewJournal.jsp").forward(
 					request, response);
 		} else {
-			HttpSession session = request.getSession();
 			session.setAttribute("journalVO", result);
 		}
 		String path = request.getContextPath();

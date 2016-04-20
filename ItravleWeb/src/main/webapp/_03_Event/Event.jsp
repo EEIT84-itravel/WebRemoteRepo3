@@ -1,46 +1,46 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-	pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html >
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${eventVO.eventTopic}</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <style type="text/css">
 </style>
 </head>
 <body>
 	<header>
-		<!-- import¦@¦Pªº -->
+		<!-- importå…±åŒçš„ -->
 	</header>
-	<!-- import¦@¦Pªº -->
+	<!-- importå…±åŒçš„ -->
 	<nav class="navbar navbar-inverse" role="navigation">
-		<!-- import¦@¦Pªº -->
+		<!-- importå…±åŒçš„ -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article>
 		<form>
 			<table>
 				<tr>
-					<td>¬¡°Ê¥DÃD¡G${eventVO.eventTopic}</td>
+					<td>æ´»å‹•ä¸»é¡Œï¼š${eventVO.eventTopic}</td>
 				</tr>
 				<tr>
-					<td>¬¡°Ê¤º®e¡G${eventVO.eventContent}</td>
+					<td>æ´»å‹•å…§å®¹ï¼š${eventVO.eventContent}</td>
 				</tr>
 				<tr>
-					<td>¬¡°Ê°_°W®É¶¡¡G${eventVO.eventStartDate}°_¡A¦Ü${eventVO.eventEndDate}</td>
+					<td>æ´»å‹•èµ·è¨–æ™‚é–“ï¼š${eventVO.eventStartDate}èµ·ï¼Œè‡³${eventVO.eventEndDate}</td>
 				</tr>
 				<tr>
-					<td>¬¡°Ê¹Ï¤ù¡G<img src="<c:url value="/_03_Event/ShowEventPic.controller?eventId=${eventVO.eventId}" />" width="600" height="500"></td>
+					<td>æ´»å‹•åœ–ç‰‡ï¼š<img src="<c:url value="/_03_Event/ShowEventPic.controller?eventId=${eventVO.eventId}" />" width="600" height="500"></td>
 				</tr>
 				<tr>
-					<td><a href="/ItravleWeb/_03_Event/AllEvent.jsp">¦^¬¡°Ê­º­¶</a></td>
+					<td><a href="<c:url value="/ItravleWeb/_03_Event/AllEvent.jsp" />">å›æ´»å‹•é¦–é </a></td>
 				</tr>
 			</table>
 		</form>
 	</article>
 	<footer>
-		<!-- import¦@¦Pªº -->
+		<!-- importå…±åŒçš„ -->
 	</footer>
 </body>
 </html>

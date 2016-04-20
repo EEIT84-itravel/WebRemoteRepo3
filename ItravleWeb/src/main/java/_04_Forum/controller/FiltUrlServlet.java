@@ -9,11 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import _02_TripAndJournal.model.MessageService;
 import _02_TripAndJournal.model.MessageVO;
 import _04_Forum.model.ForumService;
 import _04_Forum.model.ForumVO;
+import _05_Member.model.MemberVO;
 
 @WebServlet("/_04_Forum/member/FiltUrlServlet.controller")
 public class FiltUrlServlet extends HttpServlet {
@@ -26,13 +28,13 @@ public class FiltUrlServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-
+		HttpSession session = request.getSession();
 		String path = request.getContextPath();
-		String forumTopic = request.getParameter("forumTopic");
 		String crud = request.getParameter("crud");
 		String temp1 = request.getParameter("forumId");
 		String temp2 = request.getParameter("messageId");
-		String temp3 = request.getParameter("memberId");
+		MemberVO memberVO =(MemberVO)session.getAttribute("user");
+		int memberId = memberVO.getMemberId();
 
 		Map<String, String> error = new HashMap<String, String>();
 		request.setAttribute("error", error);
@@ -52,16 +54,6 @@ public class FiltUrlServlet extends HttpServlet {
 			if (temp2 != null && temp2.trim().length() != 0) {
 				try {
 					messageId = Integer.parseInt(temp2);
-				} catch (NumberFormatException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		int memberId = 0;
-		if ("UpdateReply".equals(crud) || "UpdateArticle".equals(crud)) {
-			if (temp3 != null && temp3.trim().length() != 0) {
-				try {
-					memberId = Integer.parseInt(temp3);
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
 				}

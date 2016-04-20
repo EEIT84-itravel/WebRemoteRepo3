@@ -57,4 +57,9 @@ public class SightService {
 		}
 		return result;
 	}
+	//依縣市搜尋景點
+	public List<SightVO> selectByCounty(String countyId) {
+		return dao.selectByCounty(countyId);
+	}
+
 }

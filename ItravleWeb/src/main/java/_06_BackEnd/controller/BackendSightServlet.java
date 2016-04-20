@@ -15,14 +15,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import _01_Sight.model.SightPicService;
 import _01_Sight.model.SightPicVO;
 import _01_Sight.model.SightService;
 import _01_Sight.model.SightVO;
+import _05_Member.model.MemberVO;
 
-@WebServlet("/_06_BackEnd/controller/BackendSight.controller")
+@WebServlet("/_06_BackEnd/backEnd/BackendSight.controller")
 @MultipartConfig
 public class BackendSightServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -105,18 +107,6 @@ public class BackendSightServlet extends HttpServlet {
 			} else {
 				error.put("closeIime", "關門時間必須輸入");
 			}
-			String temp3 = request.getParameter("spendHour");// 建議停留時間
-			java.sql.Time spendHour = null;
-			if (temp3 != null && temp3.trim().length() != 0) {
-				try {
-					spendHour = Time.valueOf(temp3);
-				} catch (Exception e) {
-					e.printStackTrace();
-					error.put("spendHour", "建議停留時間格式錯誤");
-				}
-			} else {
-				error.put("spendHour", "建議停留時間必須輸入");
-			}
 			String playPeriod = request.getParameter("playPeriod");// 建議旅行時段
 			if (playPeriod == null || playPeriod.trim().length() == 0) {
 				error.put("playPeriod", "建議旅行時段必須輸入");
@@ -149,7 +139,7 @@ public class BackendSightServlet extends HttpServlet {
 			String addr = request.getParameter("addr");// 地址,可null
 			String temp6 = request.getParameter("del");// 是否隱藏,true:隱藏與前端相反
 			boolean del = false;
-			if (temp5 != null && temp5.trim().length() != 0) {
+			if (temp6 != null && temp6.trim().length() != 0) {
 				if (temp6.equals("true")) {
 					del = false;
 				} else {
@@ -158,8 +148,7 @@ public class BackendSightServlet extends HttpServlet {
 			}
 			String trans = request.getParameter("trans");// 交通方式,可null
 			String intro = request.getParameter("intro"); // 簡介
-			Part filePart = request.getPart("pic"); // Retrieves <input
-													// type="file" name="pic">
+			Part filePart = request.getPart("pic"); // Retrieves <input type="file" name="pic">
 			InputStream is = filePart.getInputStream();
 
 			if (error != null && !error.isEmpty()) {
@@ -178,7 +167,8 @@ public class BackendSightServlet extends HttpServlet {
 			sightVO.setTicket(ticket);
 			sightVO.setOpenTime(openTime);
 			sightVO.setCloseIime(closeIime);
-			sightVO.setSpendHour(spendHour);
+			java.sql.Time spend = java.sql.Time.valueOf("03:00:00");
+			sightVO.setSpendHour(spend);//放棄欄位 寫死
 			sightVO.setPlayPeriod(playPeriod);
 			sightVO.setLongitude(longitude);
 			sightVO.setLatitude(latitude);
@@ -186,7 +176,9 @@ public class BackendSightServlet extends HttpServlet {
 			long nowLong2 = now2.getTime();
 			java.sql.Timestamp sqlDate2 = new Timestamp(nowLong2);
 			sightVO.setModifyTime(sqlDate2);// 寫死更新時間
-			sightVO.setModifier(2);// 由session抓 這邊寫死
+			HttpSession session=request.getSession();
+			MemberVO memberVO=(MemberVO)session.getAttribute("admin");
+			sightVO.setModifier(memberVO.getMemberId()); // 由session抓取現在登入的管理員
 			sightVO.setPhone(phone);
 			sightVO.setAddr(addr);
 			sightVO.setDel(del);
@@ -209,7 +201,7 @@ public class BackendSightServlet extends HttpServlet {
 				if (resultPic != null) {
 					String path = request.getContextPath();
 					response.sendRedirect(path
-							+ "/_06_BackEnd/backend/AllSight.jsp");
+							+ "/_06_BackEnd/backend/AllSight.jsp#tabs-1");
 				}
 			}
 		}
@@ -255,18 +247,6 @@ public class BackendSightServlet extends HttpServlet {
 				}
 			} else {
 				error.put("closeIime", "關門時間必須輸入");
-			}
-			String temp3 = request.getParameter("spendHour");// 建議停留時間
-			java.sql.Time spendHour = null;
-			if (temp3 != null && temp3.trim().length() != 0) {
-				try {
-					spendHour = Time.valueOf(temp3 + ":00");
-				} catch (Exception e) {
-					e.printStackTrace();
-					error.put("spendHour", "建議停留時間格式錯誤");
-				}
-			} else {
-				error.put("spendHour", "建議停留時間必須輸入");
 			}
 			String playPeriod = request.getParameter("playPeriod");// 建議旅行時段
 			if (playPeriod == null || playPeriod.trim().length() == 0) {
@@ -322,14 +302,15 @@ public class BackendSightServlet extends HttpServlet {
 
 			sightVO = new SightVO();
 			sightVO.setSightName(sightName);
-			sightVO.setIntro(intro);
 			sightVO.setRegionId(regionId);
+			sightVO.setIntro(intro);
 			sightVO.setCountyId(countyId);
 			sightVO.setSightTypeId(sightTypeId);
 			sightVO.setTicket(ticket);
 			sightVO.setOpenTime(openTime);
 			sightVO.setCloseIime(closeIime);
-			sightVO.setSpendHour(spendHour);
+			java.sql.Time spend = java.sql.Time.valueOf("03:00:00");
+			sightVO.setSpendHour(spend);//放棄欄位 寫死
 			sightVO.setPlayPeriod(playPeriod);
 			sightVO.setScore(1F);// 寫死評分
 			sightVO.setLongitude(longitude);
@@ -338,14 +319,15 @@ public class BackendSightServlet extends HttpServlet {
 			long nowLong2 = now2.getTime();
 			java.sql.Timestamp sqlDate2 = new Timestamp(nowLong2);
 			sightVO.setCreateTime(sqlDate2);// 寫死
-			sightVO.setCreator(1);// 寫死
+			HttpSession session=request.getSession();
+			MemberVO memberVO=(MemberVO)session.getAttribute("admin");
+			sightVO.setCreator(memberVO.getMemberId());  //由Session抓取
 			sightVO.setModifyTime(sqlDate2);// 寫死
-			sightVO.setModifier(2);// 寫死
+			sightVO.setModifier(memberVO.getMemberId());  //由Session抓取
 			sightVO.setPhone(phone);
 			sightVO.setAddr(addr);
 			sightVO.setDel(del);
 			sightVO.setTrans(trans);
-			sightVO.setCreator(1);// 由session抓 這邊寫死
 			result = sightService.insert(sightVO);
 
 			java.util.List<SightVO> sightVOs = new ArrayList<SightVO>();
@@ -370,12 +352,10 @@ public class BackendSightServlet extends HttpServlet {
 				if (resultPic != null) {
 					String path = request.getContextPath();
 					response.sendRedirect(path
-							+ "/_06_BackEnd/backend/AllSight.jsp");
+							+ "/_06_BackEnd/backend/AllSight.jsp#tabs-1");
 				}
 			}
-
 		}
-
 	}
 
 	protected void doPost(HttpServletRequest request,

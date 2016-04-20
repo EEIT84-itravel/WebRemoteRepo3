@@ -18,6 +18,7 @@
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <!-- jQuery -->
 <script type="text/javascript"
 	src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
@@ -110,8 +111,10 @@ html, body {
 		<div id="map"></div>
 		<script>
 			function initMap() {
+
 				var myLatLng = new google.maps.LatLng('${sightVO.latitude}',
 						'${sightVO.longitude}');
+
 				var map = new google.maps.Map(document.getElementById('map'), {
 					zoom : 15,
 					center : myLatLng
@@ -153,6 +156,7 @@ html, body {
 		<!-- 						<p>門票是不是漲價了</p> -->
 		<!-- 					</div> -->
 		<!-- 				</div> -->
+
 	</article>
 
 	<footer>

@@ -19,6 +19,7 @@ import _02_TripAndJournal.model.TripVO;
 @WebServlet("/_02_TripAndJournal/member/FromTripToJournal.controller")
 public class FromTripToJournalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	//由舊行程匯入成新遊記,來自FromTripToJournal.jsp資料,顯示至WriteJournal.jsp
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
