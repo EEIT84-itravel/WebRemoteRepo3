@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import _05_Member.model.MemberService;
 import _05_Member.model.MemberVO;
@@ -56,11 +57,16 @@ public class modifyAdminServlet extends HttpServlet {
 				MemberService memberService=new MemberService();
 				MemberVO memberVO=memberService.selectById(memberId);
 				memberVO.setAdmin(admin);
-				memberVO.setModifier(1);//由session抓 先寫死
+				
+				HttpSession session=request.getSession();
+				MemberVO manage=(MemberVO)session.getAttribute("admin");
+				memberVO.setModifier(manage.getMemberId());// 由session抓取現在登入的管理員
+				
 				java.util.Date now = new Date();
 				long nowLong = now.getTime();
 				java.sql.Timestamp sqlDate = new Timestamp(nowLong);
 				memberVO.setModiftyTime(sqlDate);//寫死現在時間
+				
 				if(memberService.modify(memberVO)){
 					String path = request.getContextPath();
 					response.sendRedirect(path

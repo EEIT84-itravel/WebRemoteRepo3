@@ -24,10 +24,11 @@
 		<h3><a href="<c:url value="/_05_Member/member/MemberModify.jsp" />">修改會員資料</a></h3>
 		<h3><a href="<c:url value="/_05_Member/member/MemberSight.jsp" />">我的景點</a></h3>
 		<h3><a href="<c:url value="/_05_Member/member/MemberTrip.jsp" />">我的行程(尚缺看行程)</a></h3>
-		<h3><a href="<c:url value="/_05_Member/member/MemberCollectionTrip.jsp" />">收藏行程(未做)</a></h3>
+		<h3><a href="<c:url value="/_05_Member/member/MemberCollectionTrip.jsp" />">收藏行程(尚缺看行程)</a></h3>
 		<h3><a href="<c:url value="/_05_Member/member/MemberJournal.jsp" />">我的遊記(尚缺看/修改遊記)</a></h3>
 		<h3><a href="<c:url value="/_05_Member/member/MemberCollectionJournal.jsp" />">收藏遊記(尚缺看遊記)</a></h3>
 	    <h3><a href="<c:url value="/_05_Member/member/MemberCollectionMember.jsp" />">我的追蹤作者</a></h3>
+		<h3><a href="<c:url value="/_03_Event/AllEvent.jsp" />">所有活動</a></h3>
 	</article>
 	<footer>
 		<!-- import共同的 -->

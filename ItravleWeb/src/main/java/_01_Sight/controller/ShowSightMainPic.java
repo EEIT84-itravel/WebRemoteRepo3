@@ -23,7 +23,7 @@ import _01_Sight.model.SightPicVO;
 initParams = { @WebInitParam(name = "defaultFile", value = "/img/x.png") })
 public class ShowSightMainPic extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	// private File defaultPhoto;
+	//顯示景點主圖 抓取該景點主圖
 	private byte[] defaultPhoto;
 
 	@Override

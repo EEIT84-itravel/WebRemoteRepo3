@@ -20,7 +20,7 @@ import _02_TripAndJournal.model.TripVO;
 @WebServlet("/_02_TripAndJournal/ShowAllTripServlet.controller")
 public class ShowAllTripServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	//顯示所有行程至行程首頁
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// 接收參數
@@ -46,11 +46,11 @@ public class ShowAllTripServlet extends HttpServlet {
 			tripVO = tripService.select(tripId);
 		}
 		if (!tripVOs.isEmpty()) {
-			HttpSession session = request.getSession();
-			session.setAttribute("tripVOs", tripVOs);
-			session.setAttribute("tripVO", tripVO);
-			String path = request.getContextPath();
-			response.sendRedirect(path + "/_02_TripAndJournal/TripIndex.jsp");
+			request.setAttribute("tripVOs", tripVOs);
+			request.setAttribute("tripVO", tripVO);
+			request.getRequestDispatcher(
+					"/_02_TripAndJournal/TripIndex.jsp").forward(request,
+					response);
 		} else {
 			error.put("tripId", "查無行程資料");
 			request.getRequestDispatcher(

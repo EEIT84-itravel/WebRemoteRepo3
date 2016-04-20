@@ -4,13 +4,13 @@
 <!DOCTYPE html >
 <c:remove var="LoginOK" />
 <%
-	session.removeAttribute("user");
-	session.removeAttribute("Admin");
+	session.invalidate();
 %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>I-Travel:登出頁面</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 </head>
 <body>
 	<header>
@@ -24,7 +24,7 @@
 	<article>
 		您已經登出
 		<P />
-		<a href="/ItravleWeb/index.jsp">回首頁</a>
+		<a href="../index.jsp">回首頁</a>
 	</article>
 	<footer>
 		<!-- import共同的 -->

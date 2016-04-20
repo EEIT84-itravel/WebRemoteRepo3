@@ -7,8 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import _05_Member.model.CollectionService;
+import _05_Member.model.MemberVO;
 
 @WebServlet("/_05_Member/member/delsight.controller")
 public class DeleteSightCollectionServlet extends HttpServlet {
@@ -17,11 +19,12 @@ public class DeleteSightCollectionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		//接收資料
-		Integer memberId = null;
 		Integer referenceType = null;
 		Integer collectionNo = null;
 		String temp = request.getParameter("referenceType");
-		String temp1 = request.getParameter("memberId");
+		HttpSession session=request.getSession();
+		MemberVO memberVO =(MemberVO)session.getAttribute("user");
+		Integer memberId=memberVO.getMemberId();
 		String typeId = request.getParameter("typeId");
 		String regionId = request.getParameter("regionId");//紀錄刪除時所選擇的畫面的地區
 		System.out.println(regionId);
@@ -30,11 +33,6 @@ public class DeleteSightCollectionServlet extends HttpServlet {
 			referenceType = Integer.parseInt(temp);
 		}else{
 			System.out.println("缺少景點編號");
-		}
-		if(temp1 != null && temp1.trim().length()!=0){
-			memberId = Integer.parseInt(temp1);
-		}else{
-			System.out.println("缺少會員編號");
 		}
 		//處理資料
 		//找到收藏編號

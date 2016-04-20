@@ -3,7 +3,7 @@ table {
 	border: 1px solid blue;
 	width: 100%;	
 }
-h4{
+h4 {
 	margin-bottom: 5px;
 	margin-top: 5px;
 }
@@ -13,13 +13,13 @@ h4{
 	text-align: right;
 }
 #left {
-	width:65%;	
+	width:58%;	
 	background-color:silver;
 	float: left;
 	height: 855px;
 }
 #right {
-	width:34%;	
+	width:41%;	
 	background-color:silver;
 	float: right;
 	height: 855px;
@@ -29,14 +29,14 @@ h4{
 	border: 1px solid blue;
 }
 #days {
-	width: 25%;
+	width: 20%;
 	height:auto;
 	border: 1px solid yellow;
 	float: left;
 	overflow: hidden;
 }
 #trip {
-	width: 74%;
+	width: 79%;
 	height:700px;
 	border: 1px solid green;
 	float: right;
@@ -57,4 +57,12 @@ div .sight {
 #sightsTabs ul li a{
 	font-size:16px;
 }
-
+.noteTextarea {
+	max-width:400px;
+ 	max-height:70px;
+ 	width:400px;
+ 	height:70px;
+}
+.tripDetailTable {
+	width: 99%;
+}

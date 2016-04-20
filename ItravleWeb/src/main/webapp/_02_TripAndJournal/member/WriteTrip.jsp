@@ -4,6 +4,7 @@
 <%@ page import="_00_Misc.model.*"%>
 <%@ page import="_01_Sight.model.*"%>
 <%@ page import="_02_TripAndJournal.model.*"%>
+<%@ page import="_05_Member.model.*"%>
 <%@ page import="java.util.*"%>
 <% 
     int rowNumber=0;      //總筆數
@@ -25,13 +26,12 @@
 	
 	TripService tripService = new TripService();
 	TripVO tripVO=(TripVO)session.getAttribute("tripVO");	
-// 	int dateDiff = tripService.selectDateDiff(tripVO.getTripId());	
+	int dateDiff = tripService.selectDateDiff(tripVO.getTripId());
 	
-	//以下三行應該放在會員的行程列表，點選可編輯單一行程的按鈕的servlet
-	TripDetailService tripDetailService = new TripDetailService();	
-// 	List<TripDetailVO> tripDetailVO = tripDetailService.select(tripVO.getTripId());
-//	List<TripDetailVO> tripDetailVO = tripDetailService.select(2);
-//	pageContext.setAttribute("tripDetailVO", tripDetailVO);
+	CollectionService collectionService = new CollectionService();
+	int memberId=((MemberVO)session.getAttribute("user")).getMemberId();
+	List<CollectionVO> memberColl =collectionService.selectByMemberId(memberId);
+	pageContext.setAttribute("memberColl", memberColl);
 	
 %>
 <jsp:useBean id="codeSvc" scope="page" class="_00_Misc.model.CodeService" />
@@ -41,6 +41,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ITravel-排行程</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_02_TripAndJournal/WriteTrip.css"/>" />
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
@@ -57,6 +58,8 @@ var spendHour;
 		var tripId = '${tripVO.tripId}';
 		var sightName;
 		var newIndex;
+		var latitude;	//緯度
+		var longitude;  //經度
 		
 		//讓右邊景點可以被拖曳
 		$(".sight").draggable({
@@ -71,31 +74,43 @@ var spendHour;
  				$("tr.sightId>td:nth-child(6):last").each(function(){	//取得正在拖曳的物件的spendHour
  					spendHour =$(this).text(); 					
  				});
+ 				$("tr.sightId>td:nth-child(10):last").each(function(){	//取得正在拖曳的物件的latitude(緯度)
+ 					latitude =$(this).text(); 	
+ 					console.log("latitude"+latitude);
+ 				});
+ 				$("tr.sightId>td:nth-child(11):last").each(function(){	//取得正在拖曳的物件的longitude(經度)
+ 					longitude =$(this).text(); 	
+ 					console.log("longitude"+longitude);
+ 				});
  			}
 		});	
 		
-		//從session取得tripDetailCart裡有幾筆
-		var i = '${sessionScope.count}';
 		//讓左邊行程可被放下
 		$(".day").droppable({
 			appendTo: "#day1",  //要黏到的目標				
 			accept: ".sight",	//只能接受sight class的物件
 			activeClass: "ui-state-highlight",	//凸顯此區域是可以被放置的
 			drop : function(event, ui) {
+				//form黏上去前取得div tripDetail有幾個小孩
+				var iii = $( ".tripDetail" ).children().length;	
+				var order = ( iii+1 ) * 2 - 1;
+ 				console.log("order="+order);
 				$(this).find(".placeholder").remove();	//移除Add your items here
 				//放下的時候黏form上去，一個tirpDetail是一個form
 				$(".tripDetail").append('<form class="tripDetailForm'+sightId+'" action="<c:url value="/_02_TripAndJournal/member/TripDetail.controller" />" method="post"></form>');
 				//把table黏上去
-				$(".tripDetailForm"+sightId).html('<table><tr class="delTripDetail"><td rowspan="2" class="tripDetailPic'+sightId+'"></td><td rowspan="2"><span class="tripDetailSightId'+sightId+'"></span></td><td rowspan="2"><span class="tripDetailSightName'+sightId+'"></span></td><td rowspan="2"><input type="hidden" name="sightId" value="'+sightId+'"/></td><td><label>行程順序：</label><span class="tripDetailOrder'+sightId+'"></span></td><td><label>停留時間：</label><input type="text" name="stayTime" value="' + spendHour + '" size="10" /></td><td><label>預算：</label><input type="text" name="sightBudget" placeholder="請在此輸入預算" /></td><td><input type="submit" value="修改"/></td><td><button>刪除</button></td></tr><tr><td colspan="4"><label>筆記：</label><textarea name="notes" rows="3" cols="70"></textarea></td></tr><tr><td><input type="hidden" name="tripId" value="${tripVO.tripId}" /><P/></td><td><input type="hidden" name="whichDay" value=1 /><P/></td><td><input type="hidden" name="referenceType" value="type_id01" /><P/></td></tr></table>');
+				$(".tripDetailForm"+sightId).html('<table class="tripDetailTable"><tr class="delTripDetail"><td rowspan="2" class="tripDetailPic'+sightId+'"></td><td rowspan="2"><span class="tripDetailSightId'+sightId+'"></span></td><td rowspan="2" class="sightName"><span class="tripDetailSightName'+sightId+'"></span></td><td rowspan="2"><input type="hidden" name="sightId" value="'+sightId+'"/></td><td><label>行程順序：</label><span class="tripDetailOrder'+sightId+'"></span></td><td><label>停留時間：</label><input type="text" name="stayTime" value="' + spendHour + '" size="10" /></td><td><label>預算：</label><input type="text" name="sightBudget" placeholder="請在此輸入預算" /></td><td><input type="submit" value="修改"/></td><td><input type="button" value="刪除" onclick="location.href=' + "'" + 'DelTripDetail.controller?tripOrder=' + order + "'" +'"></td></tr><tr><td colspan="4"><label>筆記：</label><textarea class="noteTextarea" name="notes"></textarea></td></tr><tr><td><input type="hidden" name="tripId" value="${tripVO.tripId}" /><P/></td><td><input type="hidden" name="whichDay" value=1 /><P/></td><td><input type="hidden" name="referenceType" value="type_id01" /><P/></td><td class="lat'+sightId+'"></td><td class="lng'+sightId+'"></td></tr></table>');
 				//依照sightId抓到圖片，黏到剛剛的tr裡面
 				$(".tripDetailPic"+sightId).html('<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=' + sightId + '" />" width="120" height="90">');
 				//抓到sightId，黏到剛剛的tr裡面
  				$(".tripDetailSightId"+sightId).html(sightId);
  				//抓到sightName，黏到剛剛的tr裡面
  				$(".tripDetailSightName"+sightId).html(sightName); 				
- 				var order = i;
- 				console.log("" + order);
- 				$(".tripDetailOrder"+sightId).html('<input type="text" name="tripOrder" value="'+ order +'"/>'); 				
+ 				$(".tripDetailOrder"+sightId).html('<input type="text" name="tripOrder" value="'+ order +'"/>');
+ 				//抓到latitude，黏到td裡面
+ 				$(".lat"+sightId).html('<input type="hidden" name="lat" value="'+ latitude +'"/>'); 
+ 				//抓到latitude，黏到td裡面
+ 				$(".lng"+sightId).html('<input type="hidden" name="lng" value="'+ longitude +'"/>'); 
 				//放下後關閉可拖動項目
  				ui.helper.draggable({
 					disabled : true
@@ -118,13 +133,13 @@ var spendHour;
 	                    sightBudget: 0 
 	                },
 	                success: function() {
-// 	                	location.reload();
-	                	alert("Insertion successful!");
+	                	alert("新增成功！");
 	                }
 	            }).fail(function(){
-	            	alert("購物車更新失敗");
+	            	alert("行程明細更新失敗，請再試一次");
 	            	//要再改成按鈕，按下後把畫面上的那一筆tripDetail刪除
-	            });
+	            });				
+				
 			}		
 		});
 		//讓tripDetail可排序
@@ -166,8 +181,8 @@ var spendHour;
 		});
 		//景點詳情dialog功能
 		var uri="${pageContext.request.contextPath}/_02_TripAndJournal/ShowSightDetail.controller?sightId=";
- 		var dialog2;
-			dialog2 = $( "#mysight" ).dialog({
+ 		var dialog;
+			dialog = $( "#mysight" ).dialog({
 	        autoOpen: false,
 	        height: 700,
 	        width: 600,
@@ -188,7 +203,7 @@ var spendHour;
 					console.log(sightId);
 					var stylei=' width="98%" height="98%"  frameborder="0" scrolling="auto"';
 					$("#mysight").html('<iframe src="'+uri+sightId+'"'+stylei+'></iframe>');
-					dialog2.dialog( "open" );
+					dialog.dialog( "open" );
 					closedialog = 0;
 			});
 		});
@@ -201,7 +216,7 @@ var spendHour;
 		    }	
 		//景點明細dialog功能結束    
 		// 儲存時的確認對話框
-		var dialog = $( "#dialog-confirm" ).dialog({
+		var dialog2 = $( "#dialog-confirm" ).dialog({
 			resizable: false,
 			autoOpen: false,
 			height:150,
@@ -218,11 +233,29 @@ var spendHour;
 		 });
 		// 按鈕觸發對話框
 		$("#saveTrip").button().on( "click", function() {
-		      dialog.dialog( "open" );
-	    });		
+		      dialog2.dialog( "open" );
+	    });	
+		
+// 		//刪除單筆tripDetail
+// 		$("td.delTripDetail").each(function(){
+// 			$(this).click(function() {	 			
+// 	 			$.post({
+// 	 				url: '<c:url value="/_02_TripAndJournal/member/DelTripDetail.controller" />',
+// 	 				cache: false,
+// 	 				processData: false,
+// 	 				data: {
+// 	 					tripOrder:$("#tripDetailForm")
+// 	 				},
+// 	 				success: function(){
+// 	 					alert("deleteeeeee");
+// 	 				}
+// 	 			});	 	
+// 	 		});
+// 		});
+		
 
-	});
-	
+	});  /* onload function end */
+ 	
 	//呼叫servlet把cart裡的東西寫到DB
 	function saveTripDetailCart() {		
 		var jqxhr = $.post({		                
@@ -238,7 +271,7 @@ var spendHour;
 						"確認": function() {							
 							$( this ).dialog( "close" );
 							//導向我的行程頁，按瀏覽器"上一頁"看不到東西
-							window.location.replace('<c:url value="/_05_Member/member/MyTrip.jsp" />');						
+							window.location.replace('<c:url value="/_05_Member/member/MemberTrip.jsp" />');						
 						}
 					}
 				})            	
@@ -246,28 +279,9 @@ var spendHour;
         }).fail(function(){
         	alert("儲存失敗");
         	//要再改成按鈕，後續處理?
-        });
-	};
-	
-	//刪除單筆tripDetail
-	$("tr.delTripDetail>td:last-child").each(function(){
-		$(this).hide();
-	});
-// 	$("button.delTripDetail").each(function() {
-// 		$(this).css("color", "red");
-// 		click(function() {
-// 			alert("555555555555555555555555");
-// 			$.post({
-// 				url: '<c:url value="/_02_TripAndJournal/member/DelTripDetail.controller" />',
-// 				cache: false,
-// 				processData: false,
-// 				success: function(){
-// 					alert("deleteeeeee");
-// 				}
-// 	// 			data: $('.tripDetailForm'+sightId).serialize(),
-// 			});
-// 		});
-// 	});
+        });		
+		
+	};	
 	
 	//修改單筆tripDetail
 // 	function updateTripDetail() {
@@ -303,11 +317,11 @@ var spendHour;
 	</header>
 	<nav class="navbar navbar-inverse" role="navigation">
 		<!-- import共同的 -->
-		<jsp:include page="/_00_Misc/top.jsp" />
-		
+		<jsp:include page="/_00_Misc/top.jsp" />		
 	</nav>
-	<article>	
-		<!-- 	景點dialog顯示頁面 平時隱藏 -->
+	<article class="center-block">	
+		<!-- 景點dialog顯示頁面 平時隱藏 -->
+		<!-- tab由左往右開dialog正常，但往左回來會怪怪 -->
 		<div id="mysight" title="景點明細"></div>	
 	<p>${pageContext.session.id}</p>
 		<div id="left">
@@ -320,20 +334,15 @@ var spendHour;
 						<h4>tripId：${tripVO.tripId}</h4>
 					</td>
 					<td id="topButton">						
-						<button id="btnBudget">預算一覽</button>							
-						<button id="btnPartner">旅伴</button>
+						<button id="btnBudget">預算一覽</button>
 						<button id="saveTrip">儲存行程</button>																		
 					</td>
 				</tr>
 			</table>		
 			<div id="days">
 				<p>行程開始日期：<br>${tripVO.tripStartDate}</p>
-<%-- 				<p>本行程共<%=dateDiff%>天</p> --%>
-				<p>行程開始時間：<br>${tripVO.startTime}</p>
-				<p>主要交通方式：${tripVO.transFormId}</p>				
-				<p>第一天：</p>
-				<p>第二天：</p>
-				<p>第三天：</p>
+				<p>本行程共<%=dateDiff%>天</p>
+				<p>行程開始時間：<br>${tripVO.startTime}</p>				
 				<button id="add_new">加一天</button>
 			</div> <!-- end div 選天數 -->
 			<div id="trip">
@@ -349,31 +358,48 @@ var spendHour;
 						<c:forEach var="tripDetailVO" items="${sessionScope.tripDetailCart}">
 <%-- 						<c:if test="${tripDetailVO.tripId==tripVO.tripId}"> --%>
 							<form id="tripDetailForm" action="<c:url value="/_02_TripAndJournal/member/TripDetail.controller" />" method="post">
-							<table>
-							<tr class="delTripDetail">
+							<table class="tripDetailTable">
+							<tr>
 								<td rowspan="2"><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${tripDetailVO.referenceNo}" />" width="120" height="90"></td>
 								<td rowspan="2">${tripDetailVO.referenceNo}</td>
 								<td rowspan="2" class="sightName">
 									<c:forEach var="sightVO2" items="${sightSvc.all}">
-                            			 <c:if test="${sightVO2.sightId==tripDetailVO.referenceNo}">
-												${sightVO2.sightName}
+                            			<c:if test="${sightVO2.sightId==tripDetailVO.referenceNo}">
+											${sightVO2.sightName}
                              			</c:if>
 									</c:forEach>
 								</td>
 								<td rowspan="2"><input type="hidden" name="sightId" value="${tripDetailVO.referenceNo}"/></td>
-								<td><label>行程順序111：</label><input type="text" name="tripOrder" value="${tripDetailVO.tripOrder}" size="5" /><P/></td>
+								<td><label>行程順序：</label><input type="text" name="tripOrder" value="${tripDetailVO.tripOrder}" size="5" /><P/></td>
 								<td><label>停留時間：</label><input type="text" name="stayTime" value="${tripDetailVO.stayTime}" size="10"/></td>
 								<td><label>預算：</label><input type="text" name="sightBudget" value="${tripDetailVO.sightBudget}" /></td>
 								<td><input type="submit" value="修改"/></td>
-								<td><button>刪除</button></td>
+								<c:url value="/_02_TripAndJournal/member/DelTripDetail.controller" var="path" scope="page">
+									<c:param name="tripOrder" value="${tripDetailVO.tripOrder}" />									
+								</c:url>
+								<td><input type="button" value="刪除" onclick="location.href='${path}'"></td>
 							</tr>
 							<tr>
-								<td colspan="4"><label>筆記：</label><textarea name="notes" rows="3" cols="70">${tripDetailVO.notes}</textarea></td>
+								<td colspan="4"><label>筆記：</label><textarea class="noteTextarea" name="notes">${tripDetailVO.notes}</textarea></td>
 							</tr>
 							<tr>
 								<td><input type="hidden" name="tripId" value="${tripVO.tripId}" /><P/></td>							
 								<td><input type="hidden" name="whichDay" value="${tripDetailVO.whichDay}" /><P/></td>
 								<td><input type="hidden" name="referenceType" value="${tripDetailVO.referenceType}" /><P/></td>
+								<td hidden="true">
+									<c:forEach var="sightVO3" items="${sightSvc.all}">
+                            			<c:if test="${sightVO3.sightId==tripDetailVO.referenceNo}">
+											<input type="text" name="lat" value="${sightVO3.latitude}"/>
+                             			</c:if>
+									</c:forEach>								
+								</td>
+								<td hidden="true">
+									<c:forEach var="sightVO4" items="${sightSvc.all}">
+                            			<c:if test="${sightVO4.sightId==tripDetailVO.referenceNo}">
+											<input type="text" name="lng" value="${sightVO4.longitude}"/>
+                             			</c:if>
+									</c:forEach>
+								</td>
 							</tr>
 							</table>
 							</form>							
@@ -399,14 +425,21 @@ var spendHour;
 			    <li><a href="<c:url value="/_02_TripAndJournal/member/FoodSights.jsp" />">美食</a></li>
 			    <li><a href="<c:url value="/_02_TripAndJournal/member/HotelSights.jsp" />">住宿</a></li>
 			    <li><a href="<c:url value="/_02_TripAndJournal/member/OthersSights.jsp" />">其他</a></li>
+<!-- 			    <li><a href="#tabs-1">娛樂</a></li> -->
+<!-- 			    <li><a href="#tabs-2">購物</a></li> -->
+<!-- 			    <li><a href="#tabs-3">美食</a></li> -->
+<!-- 			    <li><a href="#tabs-4">住宿</a></li> -->
+<!-- 			    <li><a href="#tabs-5">其他</a></li> -->
 			    <li><a href="<c:url value="/_02_TripAndJournal/member/TripMap.jsp" />">行程地圖</a></li>
   			</ul>	
-  			<div id="tabs-1">		
+  			<div id="tabs-1">
 			<div>排序：評分最高/最多人收藏</div>
-				<%  rowsPerPage = 20;  //每頁的筆數 
-					   rowNumber=sightVO.size(); %>
+				<%  rowsPerPage = 10;  //每頁的筆數 
+					   rowNumber=memberColl.size(); %>
 			<%@ include file="/_00_Misc/page1.file" %>
-				<c:forEach var="sightVO" items="${sightVO}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+			<c:forEach var="sightVO" items="${sightSvc.all}">
+				<c:forEach var="memberColl1" items="${memberColl}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+				<c:if test="${sightVO.sightId==memberColl1.referenceType}">
 				<table class="sight">
 				<tr class="sightId">	
 					<td>${sightVO.sightId}</td>
@@ -422,14 +455,19 @@ var spendHour;
 						</c:forEach>
 					</td>
 					<td>${sightVO.score}分</td>
- 					<td hidden="true">${sightVO.spendHour}</td>	<%-- 給jQuery抓每個景點預設的建議停留時間 --%>
-					<td>評論</td>
+ 					<td hidden="true">${sightVO.spendHour}</td>	<%-- 給jQuery抓每個景點預設的建議停留時間 --%> 					
+					<td hidden="true">評論</td>
 					<td>最愛</td>
 					<!-- 景點彈出視窗功能 -->
-					<td><button class="label label-primary">詳情</button></td>					
+					<td><button class="label label-primary">詳情</button></td>	
+					<td hidden="true">${sightVO.latitude}</td>	<%-- 給jQuery抓每個景點預設的緯度 --%>
+ 					<td hidden="true">${sightVO.longitude}</td>	<%-- 給jQuery抓每個景點預設的經度 --%>				
 				</tr>
 				</table>
+				</c:if>
 				</c:forEach>
+				
+						</c:forEach>
 				<%@ include file="/_00_Misc/page2.file" %>
 			</div>	<!-- end div tabs-1 -->
 			</div>	<!-- end div sightsTabs -->

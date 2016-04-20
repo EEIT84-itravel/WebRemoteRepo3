@@ -104,9 +104,6 @@ public class RegisteredServlet extends HttpServlet {
 		is.read(p);
 		is.close();
 		member.setPhoto(p);
-//		java.sql.Timestamp timestamp = new Timestamp( new
-//					 java.util.Date().getTime());
-//		member.setModiftyTime(timestamp);   //資料庫有預設   
 		System.out.println(member);
 		
 		boolean result = memberService.registered(member);

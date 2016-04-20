@@ -13,6 +13,7 @@
 	List<CodeVO> region = service.select("region");
 	pageContext.setAttribute("region", region);
 %>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
 <!-- jQuery -->

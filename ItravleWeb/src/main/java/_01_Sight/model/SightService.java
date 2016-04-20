@@ -8,9 +8,9 @@ public class SightService {
 	private SightDAOHibernate dao = new SightDAOHibernate();
 
 	// 進階搜尋測試
-//	public List<SightVO> search(SightVO sightVOp) {
-//		return dao.search(sightVOp);
-//	}
+	public List<SightVO> search(SightVO sightVOp) {
+		return dao.search(sightVOp);
+	}
 
 	// 景點資訊超連結
 	public SightVO findByPrimaryKey(Integer sightId) {
