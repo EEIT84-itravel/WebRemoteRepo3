@@ -14,6 +14,7 @@ public class CollectionDAOHibernate {
 	private static final String FIND_SIGHT_BY_MEMBERID = "from  CollectionVO where type_id =:type_id and memberId=:memberId";
 	private static final String FIND_SIGHT_BY_MEMBERID_AND_REFERENCETYPE_AND_TYPEID = "from  CollectionVO where type_id =:type_id and memberId=:memberId and referenceType=:referenceType";
 	private static final String FIND_JOURNAL_BY_MEMBERID_AND_TYPEID = "from  CollectionVO where type_id =:type_id and memberId=:memberId";
+	private static final String FIND_TRIP_BY_MEMBERID_AND_TYPEID = "from  CollectionVO where type_id =:type_id and memberId=:memberId";
 	
 	CollectionVO collectionVO = null;
 
@@ -107,7 +108,26 @@ public class CollectionDAOHibernate {
 		}
 		return list;
 	}
-	
+	//會員的收藏行程    
+	public List<CollectionVO> findTriplBymemberId(Integer memberId){ //會員的收藏遊記
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		List<CollectionVO> list = null;
+		try {
+			session.beginTransaction();
+			Query query = session
+					.createQuery(FIND_TRIP_BY_MEMBERID_AND_TYPEID);
+			query.setParameter("type_id", "type_id02");
+			query.setParameter("memberId", memberId);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+			throw e;
+		}
+		
+		return list;
+	}
 	public CollectionVO findByPrimaryKey(Integer CollectionNo) {
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
 				.getCurrentSession();

@@ -55,10 +55,12 @@ nav{
           				<ul class="dropdown-menu" role="menu">
            			    	 <li><a href="<c:url value="/_05_Member/member/MemberSight.jsp" />">我的景點</a></li>
           				     <li><a href="<c:url value="/_05_Member/member/MemberTrip.jsp" />">我的行程</a></li>
-          				     <li><a href="#">我的收藏行程</a></li>
            					 <li><a href="<c:url value="/_05_Member/member/MemberJournal.jsp" />">我的遊記</a></li>
+           					 <li><a href="">我的討論區</a></li>
+           					 <li><a href="<c:url value="/_05_Member/member/MemberCollectionTrip.jsp" />">我的收藏行程</a></li>
            					 <li><a href="<c:url value="/_05_Member/member/MemberCollectionJournal.jsp" />">我的收藏遊記</a></li>
-           					 <li><a href="#">我的好友</a></li>
+           					 <li><a href="">我的收藏討論區</a></li>
+           					 <li><a href="<c:url value="/_05_Member/member/MemberCollectionMember.jsp" />">我的追蹤作者</a></li>
            					 <li><a href="<c:url value="/_05_Member/member/MemberModify.jsp " />">修改會員資料</a></li>
         				  </ul>
        				 </li>
