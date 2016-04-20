@@ -1,16 +1,16 @@
 @CHARSET "UTF-8";
 #divTrip {
-	width: 600px;
+	width: 700px;
 	margin: 5px;
 }
 
 #tripMap {
-	width: 590px;
+	width: 690px;
 	height: 700px;
 }
 
 #tableTrip {
-	width: 580px;	
+	width: 690px;	
 }
 
 #backURL {

@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:useBean id="codeSvc" scope="page"
-	class="_00_Misc.model.CodeService" />
+<!DOCTYPE html >
+<html>
+<jsp:useBean id="codeSvc" scope="page" class="_00_Misc.model.CodeService" />
 <%@ page import="_00_Misc.model.*"%>
 <%@ page import="_01_Sight.model.*"%>
 <%@ page import="_05_Member.model.*"%>
@@ -29,24 +30,21 @@
  	}
  	pageContext.setAttribute("sightVO", sightVO);
 %>
-<!DOCTYPE html >
-<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
 </style>
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/css/_04_Forum/Forum.css"/>" />
-<link rel="stylesheet" type="text/css"
-	href="../jquery-ui-1.11.4.custom/jquery-ui.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.css" />
-
-<script type="text/javascript" src="../js/jquery-2.2.1.min.js"></script>
-<script type="text/javascript"
-	src="../jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
-<script type="text/javascript"
-	src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_04_Forum/Forum.css"/>" />
+<!-- jQuery ui css -->
+<link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
+<!-- Datatables css -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.css" />
+<!-- jQuery -->
+<script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js" />"></script>
+<!-- jQuery ui -->
+<script type="text/javascript" src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+<!-- Datatables-->
+<script type="text/javascript" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 	//DataTable設定
 	var opt = {
@@ -67,9 +65,9 @@
 			}
 		}
 	};
-	$(document).ready(function() {
+	$(function() {
 		$("#forum").DataTable(opt);
-	})
+	});
 </script>
 <title>${user.firstName}的收藏景點</title>
 </head>
@@ -96,7 +94,6 @@
 				</tr>
 			</thead>
 			<tbody>
-
 				<c:if test="${empty sightVO1}">
 				<c:if test="${empty noSightVO}">
 					<c:forEach var="sightVO" items="${sightVO}">
@@ -117,9 +114,7 @@
 				
 				<c:forEach var="sightVO1" items="${sightVO1}">
 					<tr>
-						<td><img alt=""
-					src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO1.sightId}" />"
-					width="100" height="50"></td>
+						<td><img alt="" src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO1.sightId}" />" width="100" height="50"></td>
 						<td>${sightVO1.sightName}</td>
 						<c:forEach var="codeVO" items="${codeSvc.all}">
 							<c:if test="${codeVO.codeId==sightVO1.countyId}">

@@ -1,9 +1,12 @@
 package _02_TripAndJournal.controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +17,8 @@ import javax.servlet.http.HttpSession;
 
 import _02_TripAndJournal.model.TripDetailService;
 import _02_TripAndJournal.model.TripDetailVO;
+import _02_TripAndJournal.model.TripService;
+import _02_TripAndJournal.model.TripVO;
 
 
 @WebServlet("/_02_TripAndJournal/member/SaveTripDetailCart.controller")
@@ -34,21 +39,35 @@ public class SaveTripDetailCart extends HttpServlet {
 		
 		// 呼叫Model
 		HttpSession session = request.getSession(false);
+		TripVO tripVO=(TripVO) session.getAttribute("tripVO");
+		int tripId =tripVO.getTripId();
 		@SuppressWarnings("unchecked")
 		LinkedList<TripDetailVO> tripDetailCart=(LinkedList<TripDetailVO>) session.getAttribute("tripDetailCart");
-		System.out.println(tripDetailCart);
+		System.out.println(tripDetailCart);		
 		TripDetailService service = new TripDetailService();
-		service.insert(tripDetailCart);
+		List<TripDetailVO> TripDetailVOFromDB = service.select(tripId);
 		
-//		Enumeration<String> e=session.getAttributeNames();
-//		while(e.hasMoreElements()) {
-//			String name =(String) e.nextElement();
-//			System.out.println("session attribute names:" +name);
-//		}		
+		//把DB裡的tripDetail刪除
+		for(TripDetailVO tripDetailVO1 :TripDetailVOFromDB) {
+			Integer tripDetailIdDB =tripDetailVO1.getTdetailId();
+			service.delete(tripDetailIdDB);
+		}
+		
+		//把cart裡的detail全部塞進去
+		for(TripDetailVO tripDetailVO2 :tripDetailCart){			
+			service.insert(tripDetailVO2);			
+		}
+		
+		//修改trip的modifyTime
+		TripService tripService = new TripService();
+		java.util.Date now = new Date();
+		long nowLong = now.getTime();
+		java.sql.Timestamp sqlDate = new Timestamp(nowLong);
+		tripVO.setModifyTime(sqlDate);
+		tripService.update(tripVO);
 		
 		session.removeAttribute("tripDetailCart");					
 		System.out.println("tripDetailCart已移除");
-
 
 	}
 

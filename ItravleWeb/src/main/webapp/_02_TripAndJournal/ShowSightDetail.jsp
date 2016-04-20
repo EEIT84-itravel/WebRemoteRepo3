@@ -44,7 +44,7 @@ var sightName;
 		var marker=new google.maps.Marker({position:myLatLng,map:map,title:sightName})
 	}
 </script>
-	<script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0Mlo6dd_r3AJczvlGoV0a3MjLTuirePg&callback=initMap" async defer></script>
 </head>
 <body>
 	<h3>${error.sightDetail}</h3>	<!--錯誤處理  -->
@@ -53,30 +53,30 @@ var sightName;
 	<div id="dialog-form" title="SightDetail">
  			<form class="sightDetailForm">
 				<fieldset>						
-							<label>名稱；</label><span id="mySight">${sightVO.sightName}</span><br>
-							<label>地區；</label> 
+							<label>名稱：</label><span id="mySight">${sightVO.sightName}</span><br>
+							<label>地區：</label> 
 							<c:forEach var="codeVO" items="${codeSvc.all}">
 									<c:if test="${codeVO.codeId==sightVO.regionId}">
 								            <span>${codeVO.codeName}</span><br>
                                 	 </c:if>
 							</c:forEach>
-							<label>縣市；</label> 
+							<label>縣市：</label> 
 							<c:forEach var="codeVO" items="${codeSvc.all}">
 									<c:if test="${codeVO.codeId==sightVO.countyId}">
 								             	<span>${codeVO.codeName}</span><br>
                                 	  </c:if>
 							</c:forEach>
-							<label>景點類型；</label> 
+							<label>景點類型：</label> 
 							<c:forEach var="codeVO" items="${codeSvc.all}">
 										<c:if test="${codeVO.codeId==sightVO.sightTypeId}">
 								             	<span>${codeVO.codeName}</span><br>
                                 	    </c:if>
 							</c:forEach>
-							<label>門票；</label> <span>${sightVO.ticket}</span><br>
-							<label>開門時間；</label> <span>${sightVO.openTime}</span><br>
-							<label>關門時間；</label> <span>${sightVO.closeIime}</span><br>
-							<label>建議停留時間；</label> <span>${sightVO.spendHour}</span><br>
-							<label>建議旅行時段；</label>
+							<label>門票：</label> <span>${sightVO.ticket}</span><br>
+							<label>開門時間：</label> <span>${sightVO.openTime}</span><br>
+							<label>關門時間：</label> <span>${sightVO.closeIime}</span><br>
+							<label>建議停留時間：</label> <span>${sightVO.spendHour}</span><br>
+							<label>建議旅行時段：</label>
 							<c:forEach var="codeVO" items="${codeSvc.all}">
 										<c:if test="${codeVO.codeId==sightVO.playPeriod}">
 								             	<span>${codeVO.codeName}</span><br>

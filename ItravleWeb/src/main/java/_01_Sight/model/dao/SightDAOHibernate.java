@@ -16,47 +16,53 @@ public class SightDAOHibernate {
 
 	// 進階搜尋測試
 //	private static final String SEARCH = "from SightVO where region_id=:region_id and county_id=:county_id and sight_type_id=:sight_type_id";
-
-//	public List<SightVO> search(SightVO sightVOp) {
-//		List<SightVO> sightVO = null;
-//		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
-//				.getCurrentSession();
-//		try {
-//			session.beginTransaction();
-//			StringBuilder sb = new StringBuilder();
-//			String sWhere = "where";
-//			  sb.append(" from SightVO ");
-//			  if(null != sightVOp.getRegionId() && !"".equals(sightVOp.getRegionId())){
-//			   sb.append(sWhere).append(" region_id=:region_id ");
-//			   sWhere = "and";
-//			  }
-//			  if(null != sightVOp.getCountyId() && !"".equals(sightVOp.getCountyId())){
-//				   sb.append(sWhere).append(" county_id=:county_id ");
-//				   sWhere = "and";
-//				  }
-//			  if(null != sightVOp.getSightTypeId() && !"".equals(sightVOp.getSightTypeId())){
-//				   sb.append(sWhere).append(" sight_type_id=:sight_type_id ");
-//				   sWhere = "and";
-//				  }
-//			  Query query = session.createQuery(sb.toString());
-//			  
-//			  if(null != sightVOp.getRegionId() && !"".equals(sightVOp.getRegionId())){
-//				  query.setParameter("region_id", sightVOp.getRegionId());
-//				  }
-//				  if(null != sightVOp.getCountyId() && !"".equals(sightVOp.getCountyId())){
-//					  query.setParameter("county_id", sightVOp.getCountyId());
-//					  }
-//				  if(null != sightVOp.getSightTypeId() && !"".equals(sightVOp.getSightTypeId())){
-//					  query.setParameter("sight_type_id", sightVOp.getSightTypeId());
-//					  }
-//				  sightVO = query.list();
-//				   session.getTransaction().commit();
-//		} catch (HibernateException e) {
-//			session.getTransaction().rollback();
-//			e.printStackTrace();
-//		}
-//		return sightVO;
-//	}
+	public List<SightVO> search(SightVO sightVOp) {
+		List<SightVO> sightVO = null;
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+			StringBuilder sb = new StringBuilder();
+			String sWhere = "where";
+			  sb.append(" from SightVO ");
+			  if(null != sightVOp.getRegionId() && !"".equals(sightVOp.getRegionId())){
+			   sb.append(sWhere).append(" region_id=:region_id ");
+			   sWhere = "and";
+			  }
+			  if(null != sightVOp.getCountyId() && !"".equals(sightVOp.getCountyId())){
+				   sb.append(sWhere).append(" county_id=:county_id ");
+				   sWhere = "and";
+				  }
+			  if(null != sightVOp.getSightTypeId() && !"".equals(sightVOp.getSightTypeId())){
+				   sb.append(sWhere).append(" sight_type_id=:sight_type_id ");
+				   sWhere = "and";
+				  }
+			  if(null != sightVOp.getSightName() && !"".equals(sightVOp.getSightName())){
+				   sb.append(sWhere).append(" sightName like :keyWord ");
+				   sWhere = "and";
+				  }
+			  Query query = session.createQuery(sb.toString());
+			  
+			  if(null != sightVOp.getRegionId() && !"".equals(sightVOp.getRegionId())){
+				  query.setParameter("region_id", sightVOp.getRegionId());
+				  }
+				  if(null != sightVOp.getCountyId() && !"".equals(sightVOp.getCountyId())){
+					  query.setParameter("county_id", sightVOp.getCountyId());
+					  }
+				  if(null != sightVOp.getSightTypeId() && !"".equals(sightVOp.getSightTypeId())){
+					  query.setParameter("sight_type_id", sightVOp.getSightTypeId());
+					  }
+				  if(null != sightVOp.getSightName() && !"".equals(sightVOp.getSightName())){
+					  query.setParameter("keyWord", "%"+sightVOp.getSightName()+"%");
+					  }
+				  sightVO = query.list();
+				   session.getTransaction().commit();
+		} catch (HibernateException e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
+		return sightVO;
+	}
 
 	// 景點按瀏覽人次排列(首頁)
 	private static final String GET_ALL_WATCHNUM = "from SightVO order by watchNum desc";

@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html >
 <!-- 外接程式碼 -->
 <%@ page import="_00_Misc.model.*"%>
 <%@ page import="_03_Event.model.*"%>
@@ -7,9 +10,6 @@
 	List<EventVO> eventVO = eventService.select();
 	pageContext.setAttribute("eventVO", eventVO);
 %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

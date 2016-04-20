@@ -40,18 +40,18 @@ public class CollectSightServlet extends HttpServlet {
 		if (temp1 != null || temp1.trim().length() != 0) {
 			sightId = Integer.parseInt(temp1);
 		}
-		
+
 		// 呼叫Model(首頁畫面)
 		CollectionVO collectionVO = new CollectionVO();
 		CollectionService collectionService = new CollectionService();
 		collectionVO.setMemberId(memberId);
-		collectionVO.setTypeId("type_id01");
+		collectionVO.setTypeId("type_id01");// 景點
 		collectionVO.setReferenceType(sightId);
 		collectionService.collectionsight(collectionVO);
 
 		// 根據Model執行結果顯示View
-		request.getRequestDispatcher("/_05_Member/MemberSight.jsp")
-				.forward(request, response);
+		String path=request.getContextPath();
+		response.sendRedirect(path+"/_01_Sight/Sight.controller?sightId="+sightId);
 	}
 
 	protected void doPost(HttpServletRequest request,

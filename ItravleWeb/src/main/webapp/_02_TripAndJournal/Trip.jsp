@@ -9,16 +9,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="initial-scale=1.0">
 <meta charset="utf-8">
-<!-- 最新編譯和最佳化的 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-<!-- 選擇性佈景主題 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
 <!-- jQuery -->
 <script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
-<!-- 最新編譯和最佳化的 JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <!-- jQuery ui -->
 <script type="text/javascript" src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+<!-- jQuery ui -->
+<link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_02_TripAndJournal/Trip.css"/>"/>
 </head>
@@ -32,9 +29,9 @@
 		<jsp:include page="/_00_Misc/top.jsp" />		
 	</nav>
 	<article class="center-block">
+		<h1 class="h1">${tripVO.tripName}</h1>
 		<div id="divTrip" class="pull-left">
-			<div id="divTripTop">
-				<h2 class="h2">${tripVO.tripName}</h2>
+			<div id="divTripTop">				
 				<h5 class="h5">起始日期: ${tripVO.tripStartDate}</h5>
 				<h5 class="h5">結束日期: ${tripVO.tripEndDate}</h5>
 				<h5 class="h5">startTime: ${tripVO.startTime}</h5>
@@ -54,7 +51,7 @@
 							<td>
 							<c:forEach var="sightVO2" items="${sightSvc.all}">
 	                            <c:if test="${sightVO2.sightId==tripDetailVOs.referenceNo}">
-									<h4 class="text-left h4">${sightVO2.sightName}</h4>
+									<h4 class="text-left h4"><strong>${sightVO2.sightName}</strong></h4>
 	                            </c:if>
 							</c:forEach>
 							停留時間：${tripDetailVOs.stayTime}<br>
