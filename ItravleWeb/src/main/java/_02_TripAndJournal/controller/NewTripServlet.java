@@ -125,7 +125,6 @@ public class NewTripServlet extends HttpServlet {
 			session.setAttribute("tripVO", result);
 			session.setAttribute("count", 1);
 		}
-		
 		String path = request.getContextPath();
 		response.sendRedirect(path + "/_02_TripAndJournal/member/WriteTrip.jsp");
 	}

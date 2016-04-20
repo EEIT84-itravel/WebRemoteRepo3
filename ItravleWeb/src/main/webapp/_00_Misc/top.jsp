@@ -63,8 +63,10 @@ nav{
        			<li><a href="<c:url value="/_06_BackEnd/backend/AllSight.jsp" />">後台</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
+				<!-- 視session是否登入登出顯示 login/註冊 或 logout -->
+				<c:if test="${empty user}">
 				<li><a href="<c:url value="/_05_Member/Registered.jsp" />">註冊</a></li>
-				<!-- 視session是否登入登出顯示login或logout -->
+				</c:if>
 				<c:if test="${empty user}">
         		<li><a href="<c:url value="/_05_Member/Login.jsp" />">Login</a></li>
         		</c:if>
@@ -78,3 +80,4 @@ nav{
 	<!-- /.container-fluid -->
 </body>
 </html>
+

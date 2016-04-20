@@ -9,7 +9,7 @@ import _00_Misc.HibernateUtil_H4_Ver1;
 import _02_TripAndJournal.model.MessageVO;
 
 public class MessageDAOHibernate {
-
+	
 	private static final String GET_ALL_MESSAGE = "from MessageVO order by message_id";
 
 	public MessageVO selectmessageId(Integer messageId) {
