@@ -4,7 +4,8 @@
 <!DOCTYPE html >
 <c:remove var="LoginOK" />
 <%
-	session.invalidate();
+	session.removeAttribute("user");
+	session.removeAttribute("Admin");
 %>
 <html>
 <head>

@@ -21,9 +21,9 @@ public class SightIndexServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		// 接收HTML Form資料
-		String region = request.getParameter("region");
-		String county = request.getParameter("county");
-		String sightType = request.getParameter("sightType");
+		String region = request.getParameter("region");// 地區
+		String county = request.getParameter("county");// 縣市
+		String sightType = request.getParameter("sightType");// 類型
 
 		// 轉換HTML Form資料
 
@@ -31,7 +31,6 @@ public class SightIndexServlet extends HttpServlet {
 
 		// 呼叫Model(首頁畫面)
 		SightService sightService = new SightService();
-		// List<SightVO> sightVO = sightService.select();
 
 		SightVO sightVO2 = new SightVO();
 		sightVO2.setRegionId(region);
@@ -39,10 +38,11 @@ public class SightIndexServlet extends HttpServlet {
 		sightVO2.setSightTypeId(sightType);
 
 		// 根據Model執行結果顯示View
-//		 List<SightVO> sightVOp = sightService.search(sightVO2);
-//		 request.setAttribute("sightVO", sightVOp);
-		request.setAttribute("region", region);
-		// request.setAttribute("sightVO", sightVO);
+		List<SightVO> sightVOp = sightService.search(sightVO2);
+		request.setAttribute("sightVO", sightVOp);
+		request.setAttribute("region", region);// 回傳選擇的地區
+		request.setAttribute("county", county);// 回傳選擇的縣市
+		request.setAttribute("sightType", sightType);// 回傳選擇的類型
 		request.getRequestDispatcher("/_01_Sight/SightIndex.jsp").forward(
 				request, response);
 	}

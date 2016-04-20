@@ -9,11 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import _01_Sight.model.SightService;
 import _01_Sight.model.SightVO;
 import _05_Member.model.CollectionService;
 import _05_Member.model.CollectionVO;
+import _05_Member.model.MemberVO;
 
 
 @WebServlet("/_05_Member/member/RegionFiltType.controller")
@@ -27,16 +29,11 @@ public class RegionFiltTypeServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		//接收資料
 		String regionId = request.getParameter("regionId");
-		String temp = request.getParameter("memberId"); //取得memberId(字串型態)
-		Integer memberId = null;
+		HttpSession session=request.getSession();
+		MemberVO memberVO=(MemberVO)session.getAttribute("user");
+		Integer memberId =memberVO.getMemberId();
 		ArrayList<Integer> sightID = new ArrayList<Integer>();
 		ArrayList<SightVO> sightVO1 = new ArrayList<SightVO>();
-		//轉換資料型態
-		if (temp != null && temp.trim().length()!=0) {//memberId轉換型態成int
-			memberId = Integer.parseInt(temp);
-		}else{
-			System.out.println("缺少memberId");
-		}
 		
 		//處理資料
 		if(regionId.equals("region00")){ //個人全部景點
@@ -81,10 +78,8 @@ public class RegionFiltTypeServlet extends HttpServlet {
             System.out.println(sightVO1);
             if(!sightVO1.isEmpty()){//將景點資訊傳回頁面
          	request.setAttribute("sightVO1", sightVO1);
-				
             }else{
             	request.setAttribute("noSightVO", "noSightVO");
-				
             }
             request.getRequestDispatcher("/_05_Member/member/MemberSight.jsp").forward(request, response);
 			return;

@@ -29,7 +29,7 @@ public class SightServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
+
 		// 接收HTML Form資料
 		String temp1 = request.getParameter("sightId"); // 景點編號
 
@@ -40,12 +40,6 @@ public class SightServlet extends HttpServlet {
 		if (temp1 != null || temp1.trim().length() != 0) {
 			sightId = Integer.parseInt(temp1);
 		}
-		// if (error != null && !error.isEmpty()) {
-		// request.getRequestDispatcher(
-		// "/_01_Sight/SightIndex.jsp").forward(request,
-		// response);
-		// return;
-		// }
 
 		// 呼叫Model
 		SightService sightService = new SightService();
@@ -56,12 +50,12 @@ public class SightServlet extends HttpServlet {
 			error.put("sightId", "此景點不存在");
 			request.getRequestDispatcher("/_01_Sight/SightIndex.jsp").forward(
 					request, response);
-		} 
-		else {
+		} else {
 			boolean flag = false;
 			CollectionService collectionService = new CollectionService();
 			MemberVO user = (MemberVO) request.getSession()
 					.getAttribute("user");
+			// 會員已登入且景點未收藏過會顯示景點收藏鈕
 			if (user != null
 					&& collectionService.selectCollection(sightVO.getSightId(),
 							user.getMemberId(), "type_id01") == null) {

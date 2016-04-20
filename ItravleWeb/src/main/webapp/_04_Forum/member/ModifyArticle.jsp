@@ -43,7 +43,7 @@
 			<input type="hidden" name="forumId" value="${showThisArticle.forumId}">
 				<input type="hidden" name="visit" value="${showThisArticle.visitorNum}">
 				<input type="hidden" name="crud" value="${param.crud}">
-				<input type="hidden" name="memberId" value="${param.memberId}">
+				<input type="hidden" name="memberId" value="${user.memberId}">
 
 				<table>
 

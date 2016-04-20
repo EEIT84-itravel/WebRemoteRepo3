@@ -18,12 +18,11 @@ import _05_Member.model.CollectionService;
 import _05_Member.model.CollectionVO;
 import _05_Member.model.MemberVO;
 
-@WebServlet("/_01_Sight/CollectSight.controller")
+@WebServlet("/_01_Sight/member/CollectSight.controller")
 public class CollectSightServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
 		// 接收HTML Form資料
@@ -41,18 +40,18 @@ public class CollectSightServlet extends HttpServlet {
 		if (temp1 != null || temp1.trim().length() != 0) {
 			sightId = Integer.parseInt(temp1);
 		}
-		
+
 		// 呼叫Model(首頁畫面)
 		CollectionVO collectionVO = new CollectionVO();
 		CollectionService collectionService = new CollectionService();
 		collectionVO.setMemberId(memberId);
-		collectionVO.setTypeId("type_id01");
+		collectionVO.setTypeId("type_id01");// 景點
 		collectionVO.setReferenceType(sightId);
 		collectionService.collectionsight(collectionVO);
 
 		// 根據Model執行結果顯示View
-		request.getRequestDispatcher("/_05_Member/MemberSight.jsp")
-				.forward(request, response);
+		request.getRequestDispatcher("/_05_Member/member/MemberSight.jsp").forward(
+				request, response);
 	}
 
 	protected void doPost(HttpServletRequest request,

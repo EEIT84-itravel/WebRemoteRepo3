@@ -101,9 +101,7 @@
 				<c:if test="${empty noSightVO}">
 					<c:forEach var="sightVO" items="${sightVO}">
 						<tr>
-							<td><img alt=""
-					src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
-					width="100" height="50"></td>
+							<td><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="100" height="50"></td>
 							<td>${sightVO.sightName}</td>
 							<c:forEach var="codeVO" items="${codeSvc.all}">
 								<c:if test="${codeVO.codeId==sightVO.countyId}">
@@ -111,7 +109,7 @@
 								</c:if>
 							</c:forEach>
 							<td>${sightVO.score}</td>  
-							<td><a href="<c:url value="/_05_Member/member/delsight.controller?memberId=${user.memberId}&referenceType=${sightVO.sightId}&typeId=type_id01&regionId=region00"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
+							<td><a href="<c:url value="/_05_Member/member/delsight.controller?referenceType=${sightVO.sightId}&typeId=type_id01&regionId=region00"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
 						</tr>
 					</c:forEach>
 				</c:if>

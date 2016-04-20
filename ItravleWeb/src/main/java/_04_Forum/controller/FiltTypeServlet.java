@@ -21,7 +21,6 @@ public class FiltTypeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		request.getParameter("00");
 		String forum_type = request.getParameter("forumTypeId");
 				
 		ForumService fs = new ForumService();

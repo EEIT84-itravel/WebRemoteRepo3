@@ -15,12 +15,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import _01_Sight.model.SightPicService;
 import _01_Sight.model.SightPicVO;
 import _01_Sight.model.SightService;
 import _01_Sight.model.SightVO;
+import _05_Member.model.MemberVO;
 
 @WebServlet("/_06_BackEnd/backEnd/BackendSight.controller")
 @MultipartConfig
@@ -174,7 +176,9 @@ public class BackendSightServlet extends HttpServlet {
 			long nowLong2 = now2.getTime();
 			java.sql.Timestamp sqlDate2 = new Timestamp(nowLong2);
 			sightVO.setModifyTime(sqlDate2);// 寫死更新時間
-			sightVO.setModifier(2);// 由session抓 這邊寫死
+			HttpSession session=request.getSession();
+			MemberVO memberVO=(MemberVO)session.getAttribute("admin");
+			sightVO.setModifier(memberVO.getMemberId()); // 由session抓取現在登入的管理員
 			sightVO.setPhone(phone);
 			sightVO.setAddr(addr);
 			sightVO.setDel(del);
@@ -298,8 +302,8 @@ public class BackendSightServlet extends HttpServlet {
 
 			sightVO = new SightVO();
 			sightVO.setSightName(sightName);
-			sightVO.setIntro(intro);
 			sightVO.setRegionId(regionId);
+			sightVO.setIntro(intro);
 			sightVO.setCountyId(countyId);
 			sightVO.setSightTypeId(sightTypeId);
 			sightVO.setTicket(ticket);
@@ -315,14 +319,15 @@ public class BackendSightServlet extends HttpServlet {
 			long nowLong2 = now2.getTime();
 			java.sql.Timestamp sqlDate2 = new Timestamp(nowLong2);
 			sightVO.setCreateTime(sqlDate2);// 寫死
-			sightVO.setCreator(1);// 寫死
+			HttpSession session=request.getSession();
+			MemberVO memberVO=(MemberVO)session.getAttribute("admin");
+			sightVO.setCreator(memberVO.getMemberId());  //由Session抓取
 			sightVO.setModifyTime(sqlDate2);// 寫死
-			sightVO.setModifier(2);// 寫死
+			sightVO.setModifier(memberVO.getMemberId());  //由Session抓取
 			sightVO.setPhone(phone);
 			sightVO.setAddr(addr);
 			sightVO.setDel(del);
 			sightVO.setTrans(trans);
-			sightVO.setCreator(1);// 由session抓 這邊寫死
 			result = sightService.insert(sightVO);
 
 			java.util.List<SightVO> sightVOs = new ArrayList<SightVO>();

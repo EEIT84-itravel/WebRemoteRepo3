@@ -28,7 +28,7 @@
 		<input type="hidden" name="referenceNo" value="${param.referenceNo}">
 			<input type="hidden" name="messageId" value="${showThisMessage.messageId}">
 			<input type="hidden" name="messageContent" value="${showThisMessage.content}">
-			<input type="hidden" name="memberId" value="${param.memberId}" >
+			<input type="hidden" name="memberId" value="${user.memberId}" >
 			<input type="hidden" name="crud" value="${param.crud}">
 			
 

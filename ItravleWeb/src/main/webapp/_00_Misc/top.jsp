@@ -65,7 +65,9 @@ nav{
            					 <li><a href="<c:url value="/_05_Member/member/MemberModify.jsp " />">修改會員資料</a></li>
         				  </ul>
        				 </li>
+       			<c:if test="${not empty admin}">
        			<li><a href="<c:url value="/_06_BackEnd/backend/AllSight.jsp" />">後台</a></li>
+       			</c:if>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<!-- 視session是否登入登出顯示 login/註冊 或 logout -->
@@ -76,7 +78,7 @@ nav{
         		<li><a href="<c:url value="/_05_Member/Login.jsp" />">Login</a></li>
         		</c:if>
         		<c:if test="${not empty user}">
-      			<li><a href="<c:url value="/_05_Member/Logout.jsp" />">Logout</a></li>
+      			<li><a href="<c:url value="/_05_Member/member/Logout.jsp" />">Logout</a></li>
       			</c:if>
           	</ul>
 		</div>

@@ -24,7 +24,7 @@ import _02_TripAndJournal.model.JournalPhotoVO;
 @WebServlet(urlPatterns = { "/_02_TripAndJournal/ShowJournalMainPic.controller" }, initParams = { @WebInitParam(name = "defaultFile", value = "/img/x.png") })
 public class ShowJournalMainPic extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	// private File defaultPhoto;
+//顯示遊記主圖 抓取該篇遊記第1天 順序1 且為主圖的圖片
 	private byte[] defaultPhoto;
 
 	@Override
