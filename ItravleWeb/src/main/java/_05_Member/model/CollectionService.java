@@ -56,4 +56,8 @@ public class CollectionService {
 		return false;
 	}
 	
+	//找出所有收藏景點
+	public List<CollectionVO> getSightCollect(){
+		return dao.findByTypeId("type_id01");
+	}
 }

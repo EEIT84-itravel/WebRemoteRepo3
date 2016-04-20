@@ -12,6 +12,7 @@ public class MessageService {
 		result = messageDAOHibernate.getAll();
 		return result;
 	}
+	//討論區回覆數
 	public List<MessageVO> getAllNum() {		
 		return messageDAOHibernate.getAllNum("type_id05");
 	}

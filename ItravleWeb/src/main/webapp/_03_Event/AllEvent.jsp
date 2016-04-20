@@ -71,11 +71,13 @@
 				</thead>
 				<tbody>
 					<c:forEach var="eventVO" items="${eventVO}">
+					<c:if test="${eventVO.eventRemoved==false}">
 						<tr>
 							<td><a href="<c:url value="/_03_Event/ShowEvent.controller?eventId=${eventVO.eventId}" />">${eventVO.eventTopic}</a></td>
 							<td>${eventVO.eventStartDate}</td>
 							<td>${eventVO.eventEndDate}</td>
 						</tr>
+					</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
