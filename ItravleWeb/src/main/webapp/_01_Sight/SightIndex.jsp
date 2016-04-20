@@ -31,7 +31,8 @@
 
 <title>景點首頁</title>
 <script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
-
+<link rel="stylesheet" type="text/css"	href="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.css" />
+<script type="text/javascript"	src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
 <style type="text/css">
 .SearchSight {
 	height: 400px; /* 高度 120 */
@@ -43,6 +44,32 @@
 	padding: 10px;
 }
 </style>
+<script type="text/javascript">
+	//DataTable設定
+	var opt = {
+		"iDisplayLength" : 15,
+		"sDom" : '<"top"fp><"bottom"><"clear">',
+		"oLanguage" : {
+			"sProcessing" : "處理中...",
+			"sLengthMenu" : "顯示 _MENU_ 項結果",
+			"sZeroRecords" : "沒有匹配結果",
+			"sInfo" : "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+			"sInfoEmpty" : "顯示第 0 至 0 項結果，共 0 項",
+			"sInfoFiltered" : "(從 _MAX_ 項結果過濾)",
+			"sSearch" : "關鍵字搜尋:",
+			"oPaginate" : {
+				"sFirst" : "首頁",
+				"sPrevious" : "上一頁",
+				"sNext" : "下一頁",
+				"sLast" : "最末頁"
+			}
+		}
+	};
+	//datatable
+	$(document).ready(function() {
+		$("#forum").DataTable(opt);		
+	})
+</script>
 
 </head>
 <body>
@@ -59,7 +86,7 @@
 		<div class="SearchSight">
 			<input type="button" value="進階搜尋"> <br>
 			<form action="<c:url value="/_01_Sight/SightIndex.controller" />">
-				<table>
+				<table id="forum">
 					<tr>
 						<td>地區:<select name="region"><c:forEach var="region"
 									items="${region}">

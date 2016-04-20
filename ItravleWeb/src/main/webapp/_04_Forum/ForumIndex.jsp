@@ -8,12 +8,9 @@
 <%@ page import="_02_TripAndJournal.model.*"%>
 <%@ page import="_04_Forum.model.*"%>
 <%@ page import="java.util.*"%>
-<jsp:useBean id="CodeService" scope="page"
-	class="_00_Misc.model.CodeService" />
-<jsp:useBean id="MessageService" scope="page"
-	class="_02_TripAndJournal.model.MessageService" />
-<jsp:useBean id="MemberService" scope="page"
-	class="_05_Member.model.MemberService" />
+<jsp:useBean id="CodeService" scope="page"	class="_00_Misc.model.CodeService" />
+<jsp:useBean id="MessageService" scope="page"	class="_02_TripAndJournal.model.MessageService" />
+<jsp:useBean id="MemberService" scope="page"	class="_05_Member.model.MemberService" />
 <%
 	ForumService forumService = new ForumService();
  	List<ForumVO> forumVO = forumService.select();
@@ -89,10 +86,10 @@
 							<th>人氣</th>
 							<th>回應</th>
 							<th>最後發表</th>
-
 						</tr>
 					</thead>
 					<tbody>
+					<!-- 如果一開始沒選任何分類標籤則顯示這個，反之顯示下面的forumVO1 -->
 						<c:if test="${empty forumVO1}">
 							<c:forEach var="forumVO" items="${forumVO}">
 								<tr>
@@ -109,7 +106,9 @@
 										</c:forEach>
 									</td>
 									<td>${forumVO.visitorNum}</td>
+									<!-- 回文人數起始為0 -->
 									<%int i = 0;%>
+									<!-- 跑回圈，如果留言參考的文章ID跟文章ID相同，就加1個回覆人數 -->														
 									<c:forEach var="MessageVO" items="${MessageService.allNum}"
 										varStatus="vs">
 										<c:if test="${MessageVO.referenceNo==forumVO.forumId}">
@@ -117,7 +116,7 @@
 										</c:if>
 									</c:forEach>
 									<td><%=i%></td>
-									<td><fmt:formatDate value="${forumVO.forumTime}" timeStyle="full" type="time" pattern="yyyy-MM-dd hh:mm"/></td>
+									<td><fmt:formatDate value="${forumVO.forumTime}" timeStyle="short" type="both" /></td>
 									
 								</tr>
 							</c:forEach>
@@ -129,15 +128,16 @@
 										${CodeVO.codeName}
                              		</c:if>
 									</c:forEach></td>
-								<td><a
-									href="<c:url value="/_04_Forum/ShowArticle.controller?forumId=${forumVO1.forumId}" />">${forumVO1.forumTopic}</a></td>
+								<td><a	href="<c:url value="/_04_Forum/ShowArticle.controller?forumId=${forumVO1.forumId}" />">${forumVO1.forumTopic}</a></td>
 								<td>
 								    <c:forEach var="MemberVO" items="${MemberService.all}">
 											<c:if test="${MemberVO.memberId==forumVO1.memberId}">${MemberVO.nickname}</c:if>
 									</c:forEach>
 								</td>
 								<td>${forumVO1.visitorNum}</td>
+								<!-- 回文人數起始為0 -->
 								<%int a = 0;%>
+								<!-- 跑回圈，如果留言參考的文章ID跟文章ID相同，就加1個回覆人數 -->
 								<c:forEach var="MessageVO2" items="${MessageService.allNum}"
 									varStatus="vs">
 									<c:if test="${MessageVO2.referenceNo==forumVO1.forumId}">
@@ -145,7 +145,7 @@
 									</c:if>
 								</c:forEach>
 								<td><%=a%></td>
-								<td><fmt:formatDate value="${forumVO1.forumTime}" pattern="yyyy-MM-dd hh:mm"/></td>
+								<td><fmt:formatDate value="${forumVO1.forumTime}" timeStyle="short" type="both"/></td>
 							</tr>
 						</c:forEach>
 					</tbody>

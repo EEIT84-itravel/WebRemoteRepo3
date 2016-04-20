@@ -14,7 +14,7 @@
 	//MemberVO memberVO = (MemberVO) session.getAttribute("user");
 	//int memberId = memberVO.getMemberId();
 	//List<TripVO> tripVO = tripService.selectFromMember(memberId);
-	List<TripVO> tripVO = tripService.selectFromMember(1);//測試時榜定memberID
+	List<TripVO> tripVO = tripService.selectFromMember(5);//測試時榜定memberID
 	pageContext.setAttribute("tripVO", tripVO);
 %>
 <style type="text/css">

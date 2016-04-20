@@ -15,6 +15,14 @@ public class JournalService {
 		}
 		return result;
 	}
+	public JournalVO update(JournalVO journalVO) {
+		JournalVO result = null;
+		if (journalVO != null) {
+			journalDAOHibernate = new JournalDAOHibernate();
+			result = journalDAOHibernate.update(journalVO);
+		}
+		return result;
+	}
 	
 	public JournalVO select(Integer journalId) {
 		JournalVO result = null;

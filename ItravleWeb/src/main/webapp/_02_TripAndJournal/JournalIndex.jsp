@@ -33,8 +33,9 @@
 				<tbody>
 					<c:forEach var="row" items="${journalVOs}">
 						<tr>
+						
 							<td><img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${row.journalId}" />" width="240" height="180"></td>
-							<td>${row.journalName}</td>
+							<td><a href="<c:url value="/_02_TripAndJournal/ShowJournalDetail.controller?journalId=${row.journalId}"/>">${row.journalName}</a></td>
 							<td>${row.beginTime}</td>
 							<td>
 								<c:forEach var="MemberVO" items="${MemberService.all}">

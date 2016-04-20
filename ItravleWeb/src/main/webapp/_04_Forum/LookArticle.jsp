@@ -52,7 +52,7 @@ function confirmDeleteMessage(n,m) {
 					</tr>
 					<HR color="#00FF00" size="10" width="50%">
 					<tr>
-						<td>最後修改日期：<fmt:formatDate value="${forumVO.forumTime}" pattern="yyyy-MM-dd hh:mm"/></td>						
+						<td>最後修改日期：<fmt:formatDate value="${forumVO.forumTime}" timeStyle="short" type="both"/></td>						
 					</tr>				
 					<tr>
 						<c:url value="/_04_Forum/member/FiltUrlServlet.controller"
@@ -61,7 +61,7 @@ function confirmDeleteMessage(n,m) {
 							<c:param name="memberId" value="${user.memberId}" />
 							<c:param name="crud" value="UpdateArticle" />
 						</c:url>
-						
+						<!-- 用choose判斷，user是否登入，登入才可以進行某些功能，並且自己只能對自己的文章及留言進行刪跟修 -->
 							<td><c:choose>		
 								<c:when test="${empty user}"><input type="button" value="回覆文章" onclick="location.href='<c:url value="/_05_Member/Login.jsp"/>'"></c:when>
 								<c:when test="${not empty user}"><input type="button" value="回覆文章"  onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&memberId=${user.memberId}&crud=NewReply"/>'"></c:when>
@@ -75,15 +75,6 @@ function confirmDeleteMessage(n,m) {
 								<c:when test="${user.memberId==forumVO.memberId}"><a href="javascript:if(confirm('確定要删除此文章嗎?'))location='<c:url value='/_04_Forum/member/WritingsServlet.controller?crud=Delete&forumId=${forumVO.forumId}&memberId=${user.memberId}'/>'">删除文章</a>
 								</c:when>
 							</c:choose></td>
-<%-- <a href="javascript:if(confirm('確定要删除此文章嗎?'))location='<c:url value='/_04_Forum/member/WritingsServlet.controller?crud=Delete&forumId=${forumVO.forumId}&memberId=${user.memberId}'/>'">删除</a></td> --%>
-<%--                             <a href="<c:url value='/_04_Forum/member/WritingsServlet.controller?crud=Delete&forumId=${forumVO.forumId}&memberId=${user.memberId}' />">刪除</a></td> --%>
-<%-- 							<c:choose>		 --%>
-<%-- 								<c:when test="${empty user}"><input type="button" value="刪除文章"	 onclick="location.href='<c:url value="/_05_Member/Login.jsp"/>'"></c:when> --%>
-<%-- 								<c:when test="${not empty user}"><input type="button" value="刪除文章" name="delete"	onclick="confirmDeleteArticle(${forumVO.forumId},${user.memberId})"></c:when> --%>
-<%-- 							</c:choose></td> --%>
-<%-- 						<input type="button" value="回覆文章" name="reply"	 onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&crud=NewReply"/>'"> --%>
-<%-- 							<input type="button" value="編輯文章" name="modify" onclick="location.href='${forum}'" /> --%>
-<%-- 							 <input type="button" value="刪除文章" name="delete"	onclick="confirmDeleteArticle(${forumVO.forumId},${user.memberId})"></td> --%>
 					</tr>
 					<tr>
 						<td><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${forumVO.memberId}" />" width="100px" height="100px"><br>作者：<c:forEach
@@ -115,6 +106,7 @@ function confirmDeleteMessage(n,m) {
 								<c:param name="crud" value="UpdateReply" />
 							</c:url>
 							<td>
+							<!-- 用choose判斷，user是否登入，登入才可以進行某些功能，並且自己只能對自己的文章及留言進行刪跟修 -->
 							<c:choose>		
 								<c:when test="${empty user}"><input type="button" value="回覆文章" onclick="location.href='<c:url value="/_05_Member/Login.jsp"/>'"></c:when>
 								<c:when test="${not empty user}"><input type="button" value="回覆文章"  onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&memberId=${user.memberId}&crud=NewReply"/>'"></c:when>
@@ -128,9 +120,6 @@ function confirmDeleteMessage(n,m) {
 								<c:when test="${user.memberId==messageVO.memberId}"><a href="javascript:if(confirm('確定要删除此留言嗎?'))location='<c:url value='/_04_Forum/member/MessageServlet.controller?crud=Delete&messageId=${messageVO.messageId}&referenceNo=${forumVO.forumId}&memberId=${user.memberId}'/>'">删除留言</a></c:when>
 							</c:choose></td>
 							
-<%-- 							<input type="button" value="回覆文章" name="reply"	 onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&crud=NewReply"/>'"> --%>
-<%-- 							<input	type="button" value="編輯留言" onclick="location.href='${reply}'"> --%>
-<%-- 							<input type="button" value="刪除留言"	onclick="confirmDeleteMessage(${messageVO.messageId},${forumVO.forumId})"> --%>
 						</tr>
 						<tr>
 							<td><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${messageVO.memberId}" />" width="100px" height="100px"><br>回文者：<c:forEach var="MemberVO"
@@ -141,7 +130,7 @@ function confirmDeleteMessage(n,m) {
 								</c:forEach><span class="error">${error.messageTopic}</span></td>
 						</tr>
 						<tr>
-							<td>回文時間：<fmt:formatDate value="${messageVO.updateTime}" pattern="yyyy-MM-dd hh:mm"/></td>					
+							<td>回文時間：<fmt:formatDate value="${messageVO.updateTime}" timeStyle="short" type="both"/></td>					
 						</tr>
 						<tr>
 							<td>回覆內容：${messageVO.content}<br></td>

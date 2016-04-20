@@ -29,12 +29,11 @@
 			<li><a	href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type08" />">購物</a></li>
 			<li><a	href="<c:url value="/_04_Forum/FiltType.controller?forumTypeId=forum_type09" />">金錢</a></li>
 <!-- 	有登入就可發表文章  反之導向登入		 -->
-		<c:choose>
-		<c:when test="${empty user}"><li><a href="<c:url value="/_05_Member/Login.jsp"/>">發表文章</a></li></c:when>
-		<c:when test="${not empty user}"><li><a href="<c:url value="/_04_Forum/member/Article.jsp?crud=NewArticle&memberId=${user.memberId}"/>">發表文章</a></li></c:when>
-		</c:choose>
+			<c:choose>
+				<c:when test="${empty user}"><li><a href="<c:url value="/_05_Member/Login.jsp"/>">發表文章</a></li></c:when>
+				<c:when test="${not empty user}"><li><a href="<c:url value="/_04_Forum/member/Article.jsp?crud=NewArticle&memberId=${user.memberId}"/>">發表文章</a></li></c:when>
+			</c:choose>
 		</ul>
-		<ul></ul>
 	</div>
 </body>
 </html>
