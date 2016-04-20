@@ -55,6 +55,7 @@ public class SightServlet extends HttpServlet {
 			CollectionService collectionService = new CollectionService();
 			MemberVO user = (MemberVO) request.getSession()
 					.getAttribute("user");
+			// 會員已登入且景點未收藏過會顯示景點收藏鈕
 			if (user != null
 					&& collectionService.selectCollection(sightVO.getSightId(),
 							user.getMemberId(), "type_id01") == null) {

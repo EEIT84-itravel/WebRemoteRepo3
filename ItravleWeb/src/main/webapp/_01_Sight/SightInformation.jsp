@@ -18,7 +18,6 @@
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
-<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <!-- jQuery -->
 <script type="text/javascript"
 	src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
@@ -76,7 +75,7 @@ html, body {
 		<div class="IntroSight">
 			<a
 				href="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
-				rel="lightbox" title="cute cat"><img border="0"
+				rel="lightbox" title="${sightVO.sightName}"><img border="0"
 				src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
 				width="280" height="210"></a> <input type="hidden"
 				value="${sightVO.sightId}" name="sightId" id="sightId">
@@ -134,6 +133,7 @@ html, body {
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU9JCqlrRPTLXt7fvy9ERvO2EU1QPcO_0&signed_in=true&callback=initMap"></script>
 		<!-- 		google map end -->
 		<br>
+		<!-- 		判斷收藏景點鈕是否出現 寫在SightServlet -->
 		<c:if test="${flag}">
 			<input type="button" value="收藏景點" id='collect'>
 		</c:if>

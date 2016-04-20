@@ -22,8 +22,10 @@
 
 <title>景點首頁</title>
 
-<script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
-<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
+<script type="text/javascript"
+	src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
+<!-- <link rel="stylesheet" type="text/css" -->
+<%-- 	href="<c:url value="/css/_00_Misc/main.css"/>" /> --%>
 
 <style type="text/css">
 .SearchSight {
@@ -104,6 +106,7 @@
 		<!-- 進階搜尋 互動視窗 End-->
 
 		<br>
+		<!-- 		景點欄位 -->
 		<c:forEach var="sightVO" items="${sightVO}">
 			<div class="SearchSight">
 				<p>No:${sightVO.sightId}</p>
@@ -134,6 +137,7 @@
 			</div>
 		</c:forEach>
 		<c:if test="${empty sightVO}">查無此筆資訊</c:if>
+		<!-- 		景點欄位 End -->
 	</article>
 	<footer>
 		<!-- import共同的 -->
