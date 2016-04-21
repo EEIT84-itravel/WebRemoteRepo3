@@ -158,7 +158,6 @@ padding: 20px;
 									</td>
 									<td>關鍵字:
 									<input type="text" name="keyWord" value="${param.keyWord}">
-									<input type="hidden" name="action" value="search">
 									</td>
 								</tr>
 							</table>
