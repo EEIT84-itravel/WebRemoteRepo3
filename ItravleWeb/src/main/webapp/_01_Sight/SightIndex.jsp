@@ -4,6 +4,9 @@
 <%@ page import="_01_Sight.model.*"%>
 <%@ page import="java.util.*"%>
 <%
+	SightService forumService = new SightService();
+	List<SightVO> sightVOs = forumService.select();
+	pageContext.setAttribute("sightVOs", sightVOs);
 	CodeService codeService = new CodeService();
 	List<CodeVO> codeVO = codeService.select("region");
 	pageContext.setAttribute("regions", codeVO);
@@ -11,6 +14,14 @@
 	pageContext.setAttribute("countys", codeVO2);
 	List<CodeVO> codeVO3 = codeService.select("sight_type");
 	pageContext.setAttribute("sight_type", codeVO3);
+%>
+<%
+	int rowNumber=0;      //總筆數
+    int pageNumber=0;     //總頁數      
+    int whichPage=1;      //第幾頁
+    int pageIndexArray[]=null;
+    int pageIndex=0; 
+    int rowsPerPage;
 %>
 <jsp:useBean id="codeSvc" scope="page" class="_00_Misc.model.CodeService" />
 <jsp:useBean id="CollectionService" scope="page" class="_05_Member.model.CollectionService" />
@@ -67,15 +78,32 @@ $(document).ready(function() {
 <style type="text/css">
 .SearchSight {
 	height: 400px;
-	width: 350px;
+	width: 320px;
 	border: 2px solid black;
-	margin: 20px;
+	margin: 15px;
 	padding: 10px;
 	float: left;
 	border-radius: 10px;
 }
 #pagebtn{
 clear: both;
+}
+#pageBottom{
+clear:both;
+}
+#pageBottom table{
+margin: 0 auto;
+}
+#pageTop{
+clear:both;
+}
+#searchBtn{
+float: right;
+}
+#sightTop h5{
+margin: 0;
+font-size: 30px;
+padding: 20px;
 }
 </style>
 </head>
@@ -89,9 +117,10 @@ clear: both;
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article class="center-block">
-		<h5>首頁>看景點</h5>
+	<div id="sightTop">
+		<h5>首頁>看景點
 		<!-- Button 進階搜尋 -->
-		<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">進階搜尋</button>
+		<button type="button" class="btn btn-primary btn-lg" id="searchBtn" data-toggle="modal" data-target="#myModal">進階搜尋</button></h5></div>
 		<br>
 		<!-- 進階搜尋 互動視窗 -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -144,12 +173,18 @@ clear: both;
 		<!-- 		景點欄位 -->
 	<div id="sights">
 	<c:if test="${empty sightVOSearch}">
-		<c:forEach var="sightVO" items="${sightVOs}">
+			<%
+						rowsPerPage = 8; //每頁的筆數 
+						rowNumber = sightVOs.size();
+			%>
+			<div id="pageTop">
+					<%@ include file="/_00_Misc/page1.file"%>
+			</div>
+		<c:forEach var="sightVO" items="${sightVOs}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 			<div class="SearchSight">
-				<p>No:${sightVO.sightId}</p>
 				<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="280" height="210">
 				<p>
-					<a href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />">名稱:${sightVO.sightName}</a>
+					<h3><a href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />">${sightVO.sightName}</a></h3>
 				</p>
 				<p>
 					類型:
@@ -178,14 +213,16 @@ clear: both;
 				<p>${sightVO.watchNum}人瀏覽,<%=i%>人收藏</p>
 			</div>
 			</c:forEach>
+			<div id="pageBottom">
+			<%@ include file="/_00_Misc/page2.file"%>
+			</div>
 		</c:if>
 		<c:if test="${not empty sightVOSearch}">
 		<c:forEach var="sightVO" items="${sightVOSearch}">
 			<div class="SearchSight">
-				<p>No:${sightVO.sightId}</p>
 				<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="280" height="210">
 				<p>
-					<a href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />">名稱:${sightVO.sightName}</a>
+					<h3><a href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />">${sightVO.sightName}</a></h3>
 				</p>
 				<p>
 					類型:
