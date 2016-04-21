@@ -15,6 +15,7 @@ import _04_Forum.model.ForumVO;
 public class ForumDAOHibernate {
 	//抓討論區之類型分類
 		private static final String GET_ALL_FORUMTYPE = "from ForumVO where forumTypeId=:forumTypeId";
+		private static final String FIND_BY_MEMBERID = "from ForumVO where memberId=:memberId";
 		public List<ForumVO> getForumType(String forumTypeId) {
 			List<ForumVO> list = null;
 			Session session = HibernateUtil_H4_Ver1.getSessionFactory()
@@ -60,7 +61,22 @@ public class ForumDAOHibernate {
 		}
 		return forumVO;
 	}
-
+	public List<ForumVO> selectByMemberId(Integer memberId){
+		List<ForumVO> list = null;
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(FIND_BY_MEMBERID);
+			query.setParameter("memberId", memberId);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
 	
 
 	public ForumVO select(Integer forumId) {

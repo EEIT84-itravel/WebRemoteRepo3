@@ -26,6 +26,25 @@ public class MessageDAOHibernate {
 		}
 		return messageVo;
 	}
+	//抓特定類型的所有留言
+		private static final String GET_ALL_MESSAGE_BY_TYPE= "from MessageVO where messageType=:messageType order by messageId";
+		public List<MessageVO> getTypeMessage(String messageType) {
+			List<MessageVO> list = null;
+			Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+					.getCurrentSession();
+			try {
+				session.beginTransaction();
+				Query query = session.createQuery(GET_ALL_MESSAGE_BY_TYPE);
+				query.setParameter("messageType", messageType);
+				list = query.list();
+				session.getTransaction().commit();
+			} catch (RuntimeException ex) {
+				session.getTransaction().rollback();
+				throw ex;
+			}
+			return list;
+		}
+	
 	//抓討論區之留言
 	private static final String GET_ALL_FORUMMESSAGE = "from MessageVO where referenceNo=:referenceNo order by messageId";
 	public List<MessageVO> getForumMessage(Integer referenceNo) {

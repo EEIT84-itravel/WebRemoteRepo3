@@ -8,7 +8,7 @@
 <style>
 	#map {
         width:100%;
-        height: 700px;
+        height:100%;
 	}
 </style>
 <script type="text/javascript">

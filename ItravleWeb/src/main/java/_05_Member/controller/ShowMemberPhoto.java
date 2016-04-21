@@ -23,6 +23,7 @@ import _05_Member.model.MemberVO;
 
 @WebServlet(urlPatterns = { "/_05_Member/ShowMemberPhoto.controller" },
 initParams = { @WebInitParam(name = "defaultFile", value = "/img/noHead.JPG") })
+
 public class ShowMemberPhoto extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private byte[] defaultPhoto;

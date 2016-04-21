@@ -20,6 +20,7 @@ import _02_TripAndJournal.model.TripVO;
 @WebServlet("/_02_TripAndJournal/ShowAllTripServlet.controller")
 public class ShowAllTripServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	//目前沒用到XD
 	//顯示所有行程至行程首頁
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {

@@ -36,8 +36,8 @@
 			      break;
 					case "region01": 
 			      $("#sel2 option").remove();
-			      var array = [ "臺北市","新北市","基隆市","宜蘭縣","桃園縣","新竹市","新竹縣"];
-			      var arrayId=["county01","county02","county07","county17","county03","county08","county10"];
+			      var array = [ "請選擇","臺北市","新北市","基隆市","宜蘭縣","桃園縣","新竹市","新竹縣"];
+			      var arrayId=["","county01","county02","county07","county17","county03","county08","county10"];
 			      //利用each遍歷array中的值並將每個值新增到Select中
 			      $.each(array, function(i, val) {
 			        $("#sel2").append($("<option value='" + arrayId[i] + "'>" + array[i] + "</option>"));
@@ -150,27 +150,25 @@
 					<td>對應景點：</td>
 					<td>地區：
 						<select name="regionId" id="sel">
+								<option value="">請選擇</option>
 							<c:forEach var="region" items="${region}">
 								<option value="${region.codeId}" ${(param.regionId==region.codeId)?'selected':'' }>${region.codeName}</option>
 							</c:forEach>
 						</select>
 							縣市：
 						<select name="countyId" id="sel2">
-							<c:forEach var="county" items="${county}">
-								<option value="${county.codeId}" ${(param.countyId==county.codeId)?'selected':'' }>${county.codeName}</option>
-							</c:forEach>
+							<option value="">請選擇</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-				<td></td>
+					<td></td>
 					<td>
 						<select name="sightId" id="sel3">
-						<c:forEach var="taipei" items="${sightVOTaipei}">
-							<option value="${taipei.sightId}" >${taipei.sightName}</option>
-						</c:forEach>
+							<option value="">請選擇</option>
 						</select>
 					</td>
+					<td><span>${error.sightId}</span></td>
 				</tr>
 				<tr>
 					<td>是否下架：</td>

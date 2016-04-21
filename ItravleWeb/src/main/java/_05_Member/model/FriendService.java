@@ -11,22 +11,23 @@ import _05_Member.model.dao.FriendDAOHibernate;
 public class FriendService {
 	private FriendDAOHibernate friendDAO = new FriendDAOHibernate();
 
-	public ArrayList<Integer> findFriend(Integer memberId) { // 找朋友名單
-		List<FriendVO> list = friendDAO.selectbyMemberId(memberId);
-		ArrayList<Integer> listname = new ArrayList<Integer>();
-		if (list != null) {
-			// System.out.println("Success");
-			for (int i = 0; i < list.size(); i++) {
-				if (list.get(i).getIsfriend() == true) {
-					int a = list.get(i).getFriendId();
-					listname.add(a);
-				}
-			}
-			return listname;
-		}
-		System.out.println("false");
-		return null;
-	}
+	public ArrayList<Integer> findFriend(Integer memberId){  //找朋友名單
+		List<FriendVO> list = new ArrayList<FriendVO>();
+		 list = friendDAO.selectbyMemberId(memberId);
+		 for(FriendVO VO: list){
+			 System.out.println(VO);
+		 }
+		 ArrayList<Integer> listname = new ArrayList<Integer>();
+		 if(!list.isEmpty()){
+			 for(int i = 0; i < list.size();i++){
+				 if((list.get(i)).getIsfriend()){
+				 int a = list.get(i).getFriendId();
+				 listname.add(a);
+				 }
+			 }
+		 }
+		 return listname;
+	 }
 
 	public ArrayList<Integer> findNotFriend(Integer memberId) { // 找黑名單名單
 		List<FriendVO> list = friendDAO.selectbyMemberId(memberId);
@@ -246,4 +247,5 @@ public class FriendService {
 		// System.out.println("刪除失敗");
 		return false;
 	}
+	
 }

@@ -47,9 +47,10 @@
 </script>
 
 <title>修改會員資料</title>
-<h3>${user.firstName}的個人資料</h3>
+
 </head>
 <body>
+ <h3>${user.firstName}的個人資料</h3>
 	<form action="<c:url value="/_05_Member/membermodify.controller" />"
 		method="post" enctype="multipart/form-data">
 		<input type="hidden" name="memberId" value="${user.memberId}">

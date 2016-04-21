@@ -2,6 +2,7 @@ package _04_Forum.model;
 
 import java.util.List;
 
+import _02_TripAndJournal.model.JournalVO;
 import _04_Forum.model.dao.ForumDAOHibernate;
 
 public class ForumService {
@@ -34,7 +35,13 @@ public class ForumService {
 //		}
 //		return result;
 //	}
-
+    //會員找自己的討論區
+	public List<ForumVO> selectMemberForum(Integer memberId){
+		List<ForumVO> result = null;
+		result = fDao.selectByMemberId(memberId);
+		return result;
+	}
+	 
 	public ForumVO insert(ForumVO vo) {
 		ForumVO result = null;
 		if (vo != null) {
