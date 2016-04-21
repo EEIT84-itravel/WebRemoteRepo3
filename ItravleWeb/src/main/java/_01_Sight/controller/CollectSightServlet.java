@@ -50,8 +50,8 @@ public class CollectSightServlet extends HttpServlet {
 		collectionService.collectionsight(collectionVO);
 
 		// 根據Model執行結果顯示View
-		request.getRequestDispatcher("/_05_Member/member/MemberSight.jsp").forward(
-				request, response);
+		String path=request.getContextPath();
+		response.sendRedirect(path+"/_01_Sight/Sight.controller?sightId="+sightId);
 	}
 
 	protected void doPost(HttpServletRequest request,

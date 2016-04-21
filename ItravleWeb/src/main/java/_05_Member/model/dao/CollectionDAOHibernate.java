@@ -13,7 +13,10 @@ public class CollectionDAOHibernate {
 	private static final String GET_ALL_STMT = "from  CollectionVO order by  collectionNo";
 	private static final String FIND_SIGHT_BY_MEMBERID = "from  CollectionVO where type_id =:type_id and memberId=:memberId";
 	private static final String FIND_SIGHT_BY_MEMBERID_AND_REFERENCETYPE_AND_TYPEID = "from  CollectionVO where type_id =:type_id and memberId=:memberId and referenceType=:referenceType";
-	private static final String FIND_JOURNAL_BY_MEMBERID_AND_TYPEID = "from  CollectionVO where type_id =:type_id and memberId=:memberId";
+
+	private static final String FIND_BY_MEMBERID_AND_TYPEID = "from  CollectionVO where type_id =:type_id and memberId=:memberId";
+	private static final String FIND_SIGHT_BY_TYPEID = "from  CollectionVO where type_id =:type_id";
+	
 	
 	CollectionVO collectionVO = null;
 
@@ -34,10 +37,8 @@ public class CollectionDAOHibernate {
 	}
 
 	public CollectionVO update(CollectionVO collectionVO) {
-
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
 				.getCurrentSession();
-
 		try {
 			session.beginTransaction();
 			session.update(collectionVO);
@@ -54,7 +55,6 @@ public class CollectionDAOHibernate {
 	public Boolean delete(Integer CollectionNo) {
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
 				.getCurrentSession();
-
 		try {
 			session.beginTransaction();
 			CollectionVO collectionVO = new CollectionVO();
@@ -66,8 +66,26 @@ public class CollectionDAOHibernate {
 			session.getTransaction().rollback();
 			return false;
 		}
-
 	}
+	//找出同類型的總收藏數
+	public List<CollectionVO> findByTypeId(String typeId){
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+			List<CollectionVO> list = null;
+			try {
+				session.beginTransaction();
+				Query query = session
+						.createQuery(FIND_SIGHT_BY_TYPEID);
+				query.setParameter("type_id", typeId);
+				list = query.list();
+				session.getTransaction().commit();
+			} catch (RuntimeException e) {
+				session.getTransaction().rollback();
+				throw e;
+			}
+			return list;
+			}
+	
 	public List<CollectionVO> findBymemberIdAndsightIdAndtypeId(
 			Integer referenceType, Integer memberId, String typeId) { // 尋找某個會員收藏某個類型的收藏編號
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
@@ -86,7 +104,6 @@ public class CollectionDAOHibernate {
 			session.getTransaction().rollback();
 			throw e;
 		}
-
 		return list;
 	}
 	public List<CollectionVO> findJournalBymemberId(Integer memberId){ //會員的收藏遊記
@@ -96,7 +113,7 @@ public class CollectionDAOHibernate {
 		try {
 			session.beginTransaction();
 			Query query = session
-					.createQuery(FIND_JOURNAL_BY_MEMBERID_AND_TYPEID);
+					.createQuery(FIND_BY_MEMBERID_AND_TYPEID);
 			query.setParameter("type_id", "type_id03");
 			query.setParameter("memberId", memberId);
 			list = query.list();
@@ -107,7 +124,46 @@ public class CollectionDAOHibernate {
 		}
 		return list;
 	}
-	
+	//會員的收藏討論區
+	public List<CollectionVO> findForumlBymemberId(Integer memberId){ //會員的收藏遊記
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		List<CollectionVO> list = null;
+		try {
+			session.beginTransaction();
+			Query query = session
+					.createQuery(FIND_BY_MEMBERID_AND_TYPEID);
+			query.setParameter("type_id", "type_id05");
+			query.setParameter("memberId", memberId);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+			throw e;
+		}
+		
+		return list;
+	}
+	//會員的收藏行程    
+	public List<CollectionVO> findTriplBymemberId(Integer memberId){ //會員的收藏遊記
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		List<CollectionVO> list = null;
+		try {
+			session.beginTransaction();
+			Query query = session
+					.createQuery(FIND_BY_MEMBERID_AND_TYPEID);
+			query.setParameter("type_id", "type_id02");
+			query.setParameter("memberId", memberId);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+			throw e;
+		}
+		
+		return list;
+	}
 	public CollectionVO findByPrimaryKey(Integer CollectionNo) {
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
 				.getCurrentSession();
@@ -156,33 +212,5 @@ public class CollectionDAOHibernate {
 			throw e;
 		}
 		return list;
-	}
-
-	public static void main(String[] args) {
-
-		CollectionDAOHibernate dao = new CollectionDAOHibernate();
-		// selectAll
-		// List <CollectionVO> list = dao.getall();
-		// for(CollectionVO aMember: list ){
-		// System.out.println(aMember);
-		// }
-
-		// select
-		// CollectionVO res = dao.findByPrimaryKey(1);
-		// System.out.println(res);
-
-		// update
-		// CollectionVO res = dao.findByPrimaryKey(1);
-		// res.setCollectionNo(1);
-		// dao.update(res);
-		// System.out.println(res);
-
-		// insert
-		// CollectionVO res = dao.findByPrimaryKey(1);
-		// dao.insert(res);
-		// System.out.println(res);
-
-		// delete
-		// dao.delete(5);
 	}
 }

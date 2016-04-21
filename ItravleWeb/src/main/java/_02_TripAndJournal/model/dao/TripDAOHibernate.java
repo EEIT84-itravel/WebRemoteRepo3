@@ -10,6 +10,23 @@ import _00_Misc.HibernateUtil_H4_Ver1;
 import _02_TripAndJournal.model.TripVO;
 
 public class TripDAOHibernate {
+		// 照瀏覽人次排序
+		public List<TripVO> selectOrderByWatch() {
+			List<TripVO> list = null;
+			Session session = HibernateUtil_H4_Ver1.getSessionFactory().getCurrentSession();
+			try {
+				session.beginTransaction();
+				Query query = session.createQuery("from TripVO order by watchNum desc");
+				list = query.list();
+				session.getTransaction().commit();
+			} catch (RuntimeException e) {
+				session.getTransaction().rollback();
+				throw e;
+			}
+			return list;
+		}
+	
+	
 
 	// selectFromMemberID
 	private String SELECT_FROM_MEMBERID = "from TripVO where memberId=:memberId";

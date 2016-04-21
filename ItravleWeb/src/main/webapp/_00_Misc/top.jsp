@@ -61,9 +61,9 @@ nav {
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 			    <!--  正在被選取的物件-->
-		        <!-- 	<li class="active"><a href="#">看景點<span class="sr-only">(current)</span></a></li> -->
 
-				<li class="whiteNav"><a href="<c:url value="/_01_Sight/SightIndex.controller"/>">看景點</a></li>							
+		        <!-- 	<li class="active"><a href="#">看景點<span class="sr-only">(current)</span></a></li> -->
+				<li class="whiteNav"><a href="<c:url value="/_01_Sight/SightIndex.jsp"/>">看景點</a></li>							
         		<li class="whiteNav"><a href="<c:url value="/_02_TripAndJournal/TripIndex.jsp"/>">看行程</a></li>
         		<li class="whiteNav"><a href="<c:url value="/_02_TripAndJournal/ShowAllJournalServlet.controller"/>">看遊記</a></li>
         		<c:choose>
@@ -77,12 +77,14 @@ nav {
           				<ul class="dropdown-menu navbar-nav" role="menu">
            			    	 <li class="whiteNav"><a href="<c:url value="/_05_Member/member/MemberSight.jsp" />">我的景點</a></li>
           				     <li class="whiteNav"><a href="<c:url value="/_05_Member/member/MemberTrip.jsp" />">我的行程</a></li>
-          				     <li class="whiteNav"><a href="#">我的收藏行程</a></li>
            					 <li class="whiteNav"><a href="<c:url value="/_05_Member/member/MemberJournal.jsp" />">我的遊記</a></li>
+           					 <li class="whiteNav"><a href="<c:url value="/_05_Member/member/MemberForum.jsp" />">我的討論區</a></li>
+           					 <li class="whiteNav"><a href="<c:url value="/_05_Member/member/MemberCollectionTrip.jsp" />">我的收藏行程</a></li>
            					 <li class="whiteNav"><a href="<c:url value="/_05_Member/member/MemberCollectionJournal.jsp" />">我的收藏遊記</a></li>
-           					 <li class="whiteNav"><a href="#">我的好友</a></li>
+           					 <li class="whiteNav"><a href="<c:url value="/_05_Member/member/MemberCollectionForum.jsp" />">我的收藏討論區</a></li>
+           					 <li class="whiteNav"><a href="<c:url value="/_05_Member/member/MemberCollectionMember.jsp" />">我的追蹤作者</a></li>
            					 <li class="whiteNav"><a href="<c:url value="/_05_Member/member/MemberModify.jsp " />">修改會員資料</a></li>
-        				</ul>
+        				  </ul>
        				 </li>
        			<c:if test="${not empty admin}">
        			<li><a href="<c:url value="/_06_BackEnd/backend/AllSight.jsp" />">後台</a></li>

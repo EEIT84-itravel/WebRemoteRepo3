@@ -4,40 +4,34 @@
 <%@ page import="_00_Misc.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="_01_Sight.model.*"%>
-
-<jsp:useBean id="codeSvc" scope="page"
-	class="_00_Misc.model.CodeService" />
+<jsp:useBean id="codeSvc" scope="page" class="_00_Misc.model.CodeService" />
+<jsp:useBean id="MemberService" scope="page" class="_05_Member.model.MemberService" />
+<jsp:useBean id="TripDetailService" scope="page" class="_02_TripAndJournal.model.TripDetailService" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>景點資訊</title>
 <!-- lightbox -->
-<link rel="stylesheet" type="text/css"
-	href="../css/_01_Sight/lightbox.min.css" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_01_Sight/lightbox.min.css" />" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <!-- jQuery ui -->
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
 <!-- jQuery -->
-<script type="text/javascript"
-	src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
 <!-- jQuery ui -->
-<script type="text/javascript"
-	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
-
+<script type="text/javascript" src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
 <script type="text/javascript">
 	$(function() {
 		$("#tabs").tabs({
-			event : "mouseover"
+			event : "click"
 		});
 		$("#collect").bind('click', collect);
 	});
 	function collect() {
-		window.location.href = "../_01_Sight/member/CollectSight.controller?sightId="
-				+ $("#sightId").val();
+		window.location.href = "../_01_Sight/member/CollectSight.controller?sightId="+ $("#sightId").val();
 	};
 </script>
-
 <style>
 html, body {
 	height: 100%;
@@ -52,17 +46,18 @@ html, body {
 }
 
 .IntroSight {
-	width: 600px;
+	width: 700px;
 	padding: 10px;
 	margin: 10px;
 	border: solid black;
 	float: left;
 }
+#tabss{
+width: 600px;
+}
 </style>
-
 </head>
 <body>
-
 	<header>
 		<!-- import共同的 -->
 	</header>
@@ -71,15 +66,15 @@ html, body {
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
-		<div class="IntroSight">
-			<a
-				href="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
-				rel="lightbox" title="${sightVO.sightName}"><img border="0"
-				src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
-				width="280" height="210"></a> <input type="hidden"
-				value="${sightVO.sightId}" name="sightId" id="sightId">
-			<p>地名:${sightVO.sightName}</p>
+	<article class="center-block">
+		<div class="IntroSight"><!-- rightside end -->
+			<a href="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" rel="lightbox" title="${sightVO.sightName}">
+			<img border="0" src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="280" height="210"></a>
+			 <input type="hidden" value="${sightVO.sightId}" name="sightId" id="sightId">
+			<p>地名:${sightVO.sightName}  <!-- 		判斷收藏景點鈕是否出現 寫在SightServlet -->
+																		<c:if test="${flag}">
+																			<input type="button" value="收藏景點" id='collect'>
+																		</c:if></p>
 			<p>簡介:${sightVO.intro}</p>
 			<p>
 				類型:
@@ -104,18 +99,94 @@ html, body {
 			<p>交通方式</p>
 			<p>${trans1}</p>
 			<p>${trans2}</p>
-		</div>
+						<div id="tabss">
+						<div id="tabs">
+							<ul>
+								<li><a href="#tabs-1">相關行程</a></li>
+								<li><a href="#tabs-2">相關遊記</a></li>
+								<li><a href="#tabs-3">留言</a></li>
+							</ul>
+							<div id="tabs-1">
+							<table>
+								<c:forEach var="tripVO" items="${tripVOs}" end="4"><!-- "4"為顯示5筆  -->
+								<tr>
+								<td>
+								<c:forEach var="TripDetailVO" items="${TripDetailService.mainPics}" >
+                             		<c:if test="${TripDetailVO.tripId==tripVO.tripId}">
+										<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${TripDetailVO.referenceNo}" />" width="88" height="66">
+                             		</c:if>
+								</c:forEach>
+								</td>
+								<td>
+									<c:forEach var="MemberVOt" items="${MemberService.all}">
+                             		<c:if test="${MemberVOt.memberId==journalVO.memberId}">
+										${MemberVOt.nickname}
+                             		</c:if>
+								</c:forEach>
+								</td>
+								<td>行程名稱:${tripVO.tripName}</td>
+								<td>瀏覽人次:${tripVO.watchNum}</td>
+								</tr>
+								</c:forEach>
+							</table>
+							</div>
+							<div id="tabs-2">
+							<table>
+							<c:forEach var="journalVO" items="${journalVOs}" end="4"><!-- "4"為顯示5筆  -->
+							<tr>
+								<td><img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${journalVO.journalId}" />" width="88" height="66"></td>
+								<td>${journalVO.journalName}</td>
+								<c:forEach var="MemberVOj" items="${MemberService.all}">
+                             		<c:if test="${MemberVOj.memberId==journalVO.memberId}">
+										<td>${MemberVOj.nickname}</td>
+                             		</c:if>
+								</c:forEach>
+								<td>${journalVO.visitorNum}</td>
+							</tr>
+							</c:forEach>
+							</table>
+							</div>
+							<div id="tabs-3"><!-- tab 留言 -->
+							<table>
+							<c:forEach var="messageVO" items="${messageVOs}">
+								<tr>
+									<td>${messageVO.content}</td>
+									<c:forEach var="MemberVOm" items="${MemberService.all}">
+                             			<c:if test="${MemberVOm.memberId==messageVO.memberId}">
+											<td>${MemberVOm.nickname}</td>
+                             			</c:if>
+									</c:forEach>
+									<td>${messageVO.updateTime}</td>
+								</tr>
+							</c:forEach>
+							</table>
+							<form action="<c:url value="/_01_Sight/member/SightReplyServlet.controller" />" method="post">
+								<table>
+								<tr><td>
+								<input type="hidden" name="sightID" value="${sightVO.sightId}"></td></tr>
+								<tr><td>
+								<textarea rows="5" cols="40" name="reply" style="color:black">${param.reply}</textarea>
+								</td></tr>
+								<tr><td>
+								<span>${error.reply}</span></td></tr>
+								<tr><td>
+								<input type="submit" value="確定送出" style="color:black"></td></tr>
+								</table>
+							</form>	
+							</div><!-- tab 留言 end-->
+						</div>
+						</div>
+						<input type="button" onclick="history.back()" value="上一頁" /> 
+					<a href="<c:url value="/_01_Sight/SightIndex.controller?action=selectAll" />">回景點首頁</a>
+		</div><!-- rightside end -->
 
 		<!-- 	 	google map -->
 		<div id="map"></div>
 		<script>
 			function initMap() {
-
-				var myLatLng = new google.maps.LatLng('${sightVO.latitude}',
-						'${sightVO.longitude}');
-
+				var myLatLng = new google.maps.LatLng('${sightVO.latitude}','${sightVO.longitude}');
 				var map = new google.maps.Map(document.getElementById('map'), {
-					zoom : 15,
+					zoom : 16,
 					center : myLatLng
 				});
 				var marker = new google.maps.Marker({
@@ -129,36 +200,9 @@ html, body {
 				});
 			}
 		</script>
-		<script async defer
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU9JCqlrRPTLXt7fvy9ERvO2EU1QPcO_0&signed_in=true&callback=initMap"></script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU9JCqlrRPTLXt7fvy9ERvO2EU1QPcO_0&signed_in=true&callback=initMap"></script>
 		<!-- 		google map end -->
-		<br>
-		<!-- 		判斷收藏景點鈕是否出現 寫在SightServlet -->
-		<c:if test="${flag}">
-			<input type="button" value="收藏景點" id='collect'>
-		</c:if>
-		<input type="button" onclick="history.back()" value="上一頁" /> <a
-			href="/ItravleWeb/_01_Sight/SightIndex.controller">回景點首頁</a>
-		<!-- 		留言 -->
-		<!-- 				<div id="tabs"> -->
-		<!-- 					<ul> -->
-		<!-- 						<li><a href="#tabs-1">相關行程</a></li> -->
-		<!-- 						<li><a href="#tabs-2">相關遊記</a></li> -->
-		<!-- 						<li><a href="#tabs-3">留言</a></li> -->
-		<!-- 					</ul> -->
-		<!-- 					<div id="tabs-1"> -->
-		<!-- 						<p>台北小清新之旅</p> -->
-		<!-- 					</div> -->
-		<!-- 					<div id="tabs-2"> -->
-		<!-- 						<p>我的遊記</p> -->
-		<!-- 					</div> -->
-		<!-- 					<div id="tabs-3"> -->
-		<!-- 						<p>門票是不是漲價了</p> -->
-		<!-- 					</div> -->
-		<!-- 				</div> -->
-
 	</article>
-
 	<footer>
 		<!-- import共同的 -->
 	</footer>

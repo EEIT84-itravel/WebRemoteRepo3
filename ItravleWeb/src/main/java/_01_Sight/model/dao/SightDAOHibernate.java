@@ -37,6 +37,11 @@ public class SightDAOHibernate {
 				   sb.append(sWhere).append(" sight_type_id=:sight_type_id ");
 				   sWhere = "and";
 				  }
+			  if(null != sightVOp.getSightName() && !"".equals(sightVOp.getSightName())){
+				   sb.append(sWhere).append(" sightName like :keyWord ");
+				   sWhere = "and";
+				  }
+			  sb.append(" order by watchNum desc");
 			  Query query = session.createQuery(sb.toString());
 			  
 			  if(null != sightVOp.getRegionId() && !"".equals(sightVOp.getRegionId())){
@@ -48,6 +53,10 @@ public class SightDAOHibernate {
 				  if(null != sightVOp.getSightTypeId() && !"".equals(sightVOp.getSightTypeId())){
 					  query.setParameter("sight_type_id", sightVOp.getSightTypeId());
 					  }
+				  if(null != sightVOp.getSightName() && !"".equals(sightVOp.getSightName())){
+					  query.setParameter("keyWord", "%"+sightVOp.getSightName()+"%");
+					  }
+				 
 				  sightVO = query.list();
 				   session.getTransaction().commit();
 		} catch (HibernateException e) {
