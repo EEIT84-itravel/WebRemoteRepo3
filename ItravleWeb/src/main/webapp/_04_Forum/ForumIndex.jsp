@@ -73,7 +73,7 @@
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
+	<article class="center-block">
 		<form method="post">
 			<div id="forumHead">
 				<c:import url="/_04_Forum/ForumHead.jsp"></c:import>

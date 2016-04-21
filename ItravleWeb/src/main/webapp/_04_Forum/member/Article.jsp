@@ -30,7 +30,7 @@
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
+	<article class="center-block">
 		<form
 			action="<c:url value="/_04_Forum/member/WritingsServlet.controller"/>"
 			method="post">
@@ -82,6 +82,7 @@
 					</tr>
 				</table>
 			</div>
+			<div id="editor"></div>
 		</form>
 	</article>
 	<footer>

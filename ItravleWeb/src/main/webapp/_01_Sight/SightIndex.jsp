@@ -21,18 +21,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>景點首頁</title>
-<<<<<<< HEAD
-<script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
-<link rel="stylesheet" type="text/css"	href="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.css" />
-<script type="text/javascript"	src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
-=======
+
 
 <script type="text/javascript"
 	src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
 <!-- <link rel="stylesheet" type="text/css" -->
 <%-- 	href="<c:url value="/css/_00_Misc/main.css"/>" /> --%>
 
->>>>>>> branch 'master' of https://github.com/EEIT84-itravel/WebRemoteRepo3.git
 <style type="text/css">
 .SearchSight {
 	height: 400px;

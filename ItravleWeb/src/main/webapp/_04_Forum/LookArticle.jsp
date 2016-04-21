@@ -41,7 +41,7 @@ function confirmDeleteMessage(n,m) {
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
+	<article class="center-block">
 		<form action="<c:url value="/_04_Forum/member/Reply.controller"/>"
 			method="post">
 			<div id="forumHead">

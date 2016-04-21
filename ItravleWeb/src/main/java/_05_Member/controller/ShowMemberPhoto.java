@@ -21,8 +21,8 @@ import _01_Sight.model.SightPicVO;
 import _05_Member.model.MemberService;
 import _05_Member.model.MemberVO;
 
-@WebServlet(urlPatterns = { "/_05_Member/member/ShowMemberPhoto.controller" },
-initParams = { @WebInitParam(name = "defaultFile", value = "/img/x.png") })
+@WebServlet(urlPatterns = { "/_05_Member/ShowMemberPhoto.controller" },
+initParams = { @WebInitParam(name = "defaultFile", value = "/img/noHead.JPG") })
 public class ShowMemberPhoto extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private byte[] defaultPhoto;
@@ -67,7 +67,11 @@ public class ShowMemberPhoto extends HttpServlet{
 		MemberVO memberVO = memberDAO.selectById(memberId);
 		byte[] bytes = null;
 		if (memberVO != null) {
+			if(memberVO.getPhoto()!=null){
 			bytes = memberVO.getPhoto();
+			}else{
+			  bytes = defaultPhoto;	
+			}
 		} else {
 			bytes = defaultPhoto;
 		}

@@ -37,7 +37,7 @@ public class LoginFilter implements Filter {
 
 			String path = request.getContextPath();
 			response.sendRedirect(path + "/_05_Member/Login.jsp");
-			chain.doFilter(request, response);
+			
 		}
 	}
 
