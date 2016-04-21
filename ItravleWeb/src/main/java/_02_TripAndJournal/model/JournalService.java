@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import _02_TripAndJournal.model.dao.JournalDAOHibernate;
+import _02_TripAndJournal.model.dao.TripDAOHibernate;
 
 public class JournalService {
 	private JournalDAOHibernate journalDAOHibernate;
@@ -63,5 +64,18 @@ public class JournalService {
 	public List<JournalVO> getAll() {
 		journalDAOHibernate = new JournalDAOHibernate();
 		return journalDAOHibernate.select();
+	}
+
+	// 取得所有狀態為"已發佈"的行程
+	public List<JournalVO> getAllPost() {
+		List<JournalVO> result = new ArrayList<JournalVO>();
+		journalDAOHibernate = new JournalDAOHibernate();
+		List<JournalVO> all = journalDAOHibernate.select();
+		for (JournalVO vo : all) {
+			if (vo.getPost() == true) {
+				result.add(vo);
+			}
+		}
+		return result;
 	}
 }

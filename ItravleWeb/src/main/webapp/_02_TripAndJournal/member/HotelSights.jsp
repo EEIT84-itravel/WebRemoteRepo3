@@ -19,6 +19,7 @@
 	List<SightVO> sightVO = sightService.selectByType("sight_type04");
 	pageContext.setAttribute("sightVO", sightVO);
 %>
+<jsp:useBean id="codeSvc" scope="page" class="_00_Misc.model.CodeService" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,7 +98,7 @@ $(function(){
 			rowNumber=sightVO.size(); %>
 		<%@ include file="/_00_Misc/page1.file" %>
 				<c:forEach var="sightVO" items="${sightVO}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-				<table class="sight">
+				<table class="sight table">
 				<tr class="sightId">	
 					<td>${sightVO.sightId}</td>
 					<td><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
@@ -114,7 +115,7 @@ $(function(){
 					<td>${sightVO.score}分</td>
  					<td hidden="true">${sightVO.spendHour}</td>	<%-- 給jQuery抓每個景點預設的建議停留時間 --%>
 					<td hidden="true">評論</td>
-					<td>最愛</td>
+					<td hidden="true">最愛</td>
 					<!-- 景點彈出視窗功能 -->
 					<td><button class="label label-primary">詳情</button></td>
 					<td hidden="true">${sightVO.latitude}</td>	<%-- 給jQuery抓每個景點預設的緯度 --%>

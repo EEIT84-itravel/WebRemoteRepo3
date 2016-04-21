@@ -24,7 +24,7 @@
     } 
 %>
 <%if (pageNumber>0){%>
-<b><font color= red>第<%=whichPage%>/<%=pageNumber%>頁　</font></b>
+<font color="#000099">第<%=whichPage%>/<%=pageNumber%>頁　</font>
 <%}%>
-<b>共<font color=red><%=rowNumber%></font>筆</b>
+共<font color="#000099"><%=rowNumber%></font>筆
 

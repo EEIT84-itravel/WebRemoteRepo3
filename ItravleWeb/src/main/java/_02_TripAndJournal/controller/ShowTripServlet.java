@@ -50,6 +50,9 @@ public class ShowTripServlet extends HttpServlet {
 		// 呼叫model
 		TripService tripService = new TripService();
 		TripVO tripVO = tripService.select(tripId);
+		// 點一次就增加瀏覽人次
+		tripVO.setWatchNum(tripVO.getWatchNum()+1);
+		tripService.update(tripVO);
 		System.out.println(tripVO);
 		request.setAttribute("tripVO", tripVO);
 		TripDetailService tripDetailService = new TripDetailService();
