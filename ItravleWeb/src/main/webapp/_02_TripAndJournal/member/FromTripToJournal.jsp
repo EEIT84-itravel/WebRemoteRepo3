@@ -25,6 +25,14 @@ color:black
 <title>ITravel-從我的遊記選取</title>
 </head>
 <body>
+	<header>
+		<!-- import共同的 -->
+	</header>
+	<nav class="navbar navbar-inverse" role="navigation">
+		<!-- import共同的 -->
+		<jsp:include page="/_00_Misc/top.jsp" />
+	</nav>
+		<article class="center-block">
 		<form id="fromTripToJournal" action="<c:url value="/_02_TripAndJournal/member/FromTripToJournal.controller"/>" method="post">
 			<select name="tripId">
 				<c:forEach var="tripVO" items="${tripVO}">
@@ -33,5 +41,9 @@ color:black
 			</select> 
 			<input type="submit" value="開始寫遊記吧!">
 		</form>
+		</article>
+	<footer>
+		<!-- import共同的 -->
+	</footer>
 </body>
 </html>

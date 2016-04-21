@@ -65,18 +65,13 @@
 			}
 		});
 
-		$("tr.sightId>td:nth-child(2)")
-				.each(
+		$("tr.sightId>td:nth-child(2)").each(
 						function() {
-							$(this)
-									.click(
-											function() {
-												var sightId = $(this).prev()
-														.text();
+							$(this).click(function() {
+												var sightId = $(this).prev().text();
 												console.log(sightId);
 												var stylei = ' width="98%" height="98%"  frameborder="0" scrolling="auto"';
-												$("#dialog-form")
-														.html(
+												$("#dialog-form").html(
 																'<iframe src="'+uri+sightId+'"'+stylei+'></iframe>');
 												dialog.dialog("open");
 												closedialog = 0;

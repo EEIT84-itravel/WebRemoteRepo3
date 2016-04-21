@@ -1,68 +1,79 @@
 @CHARSET "UTF-8";
-table {
-	border: 1px solid blue;
-	width: 100%;	
-}
+
 h4 {
 	margin-bottom: 5px;
 	margin-top: 5px;
 }
+img {
+	vertical-align:middle;
+}
+#tripName{
+	float: left;
+}
 #topButton {
-	width: auto;
-	height: auto;	
-	text-align: right;
+	float: right;
 }
 #left {
-	width:58%;	
-	background-color:silver;
+	width:57%;	
 	float: left;
-	height: 855px;
+	height: 800px;
 }
 #right {
-	width:41%;	
-	background-color:silver;
+	width:42%;
 	float: right;
-	height: 855px;
-}
-#blank {
-	height: 34px ;
-	border: 1px solid blue;
+	height: 800px;
 }
 #days {
 	width: 20%;
 	height:auto;
-	border: 1px solid yellow;
 	float: left;
 	overflow: hidden;
 }
 #trip {
 	width: 79%;
-	height:700px;
-	border: 1px solid green;
-	float: right;
+	height:800px;
+	float: right;	
 }
 #tripBut{
 	align-content: right;
 }
 .day {
-	height: 650px;
-	border: 1px solid purple;
+	height: 734.2px;
+	overflow-y: auto;
+	overflow-x:hidden;	
 }
 div .sight {
 	height: 30px;
-	width: 100%;	
-	border: 1px solid #ff80c0;
+	width: 100%;
 	margin: auto;
 }
 #sightsTabs ul li a{
 	font-size:16px;
 }
 .noteTextarea {
-	max-width:400px;
- 	max-height:70px;
- 	width:400px;
- 	height:70px;
+	max-width:300px;
+ 	max-height:50px;
+ 	width:300px;
+ 	height:50px;
 }
 .tripDetailTable {
-	width: 99%;
+	border-radius: 10px;	
+	width: 99%;	
+	background-color: #D6F8D6;	
+	margin-top: 10px;
+	margin-bottom: 10px;
+	box-shadow: 4px 4px 2pt 0pt silver;
+}
+
+.tripDetailTable td {
+	padding: 6px 6px 6px 10px;
+}
+
+.tripDetailTable h3 {
+	margin-top: 10px;
+}
+#divsaveTrip {	
+	text-align: right;
+	margin-bottom: 10px;
+	margin-top: 10px;
 }

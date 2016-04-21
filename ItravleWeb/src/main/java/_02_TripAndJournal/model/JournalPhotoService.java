@@ -11,5 +11,13 @@ public class JournalPhotoService {
 		journalPhotoDAOHibernate = new JournalPhotoDAOHibernate();
 		return journalPhotoDAOHibernate.selectCover(journalDetailVOs);
 	}
+	public JournalPhotoVO insert(JournalPhotoVO vo){
+		journalPhotoDAOHibernate = new JournalPhotoDAOHibernate();
+		return journalPhotoDAOHibernate.insert(vo);
+	}
+	public JournalPhotoVO update(JournalPhotoVO vo){
+		journalPhotoDAOHibernate = new JournalPhotoDAOHibernate();
+		return journalPhotoDAOHibernate.update(vo);
+	}
 
 }
