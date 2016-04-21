@@ -71,6 +71,7 @@ public class JournalService {
 		}
 		return result;
 	}
+	
 	//從遊記ID查出遊記
 	public JournalVO selectMemberCollectionJournal(Integer journal_id){
 		JournalVO result = null;

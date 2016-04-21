@@ -104,7 +104,7 @@
 			<tr>
 				<td>現在使用的大頭貼 :</td>
 				<td><img
-					src="<c:url value="/_05_Member/member/ShowMemberPhoto.controller?memberId=${user.memberId}" />"
+					src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${user.memberId}" />"
 					width="80" height="60"></td>
 			</tr>
 			<tr>

@@ -21,7 +21,7 @@ import _01_Sight.model.SightPicVO;
 import _05_Member.model.MemberService;
 import _05_Member.model.MemberVO;
 
-@WebServlet(urlPatterns = { "/_05_Member/member/ShowMemberPhoto.controller" },
+@WebServlet(urlPatterns = { "/_05_Member/ShowMemberPhoto.controller" },
 initParams = { @WebInitParam(name = "defaultFile", value = "/img/x.png") })
 public class ShowMemberPhoto extends HttpServlet{
 	private static final long serialVersionUID = 1L;
