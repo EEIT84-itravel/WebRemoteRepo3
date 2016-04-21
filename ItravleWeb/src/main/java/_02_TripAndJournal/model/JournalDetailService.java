@@ -12,5 +12,10 @@ public class JournalDetailService {
 		journalDetailDAOHibernate = new JournalDetailDAOHibernate();
 		return journalDetailDAOHibernate.selectByJournalId(journalId);
 	}
+
+	public List<JournalDetailVO> getAll(){
+		journalDetailDAOHibernate = new JournalDetailDAOHibernate();
+		return journalDetailDAOHibernate.select();
+	}
 	
 }

@@ -1,22 +1,35 @@
 package _02_TripAndJournal.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import _02_TripAndJournal.model.dao.MessageDAOHibernate;
 
 public class MessageService {
 	private MessageDAOHibernate messageDAOHibernate = new MessageDAOHibernate();
-
+	public List<MessageVO> selectSightMessage(Integer referenceNo) {
+		List<MessageVO> list = null;
+		List<MessageVO> result = new ArrayList<MessageVO>();
+		list=messageDAOHibernate.getTypeMessage("type_id01");
+		for(MessageVO vo:list){
+			if(vo.getReferenceNo()==referenceNo){
+				result.add(vo);
+			}
+		}
+		return result;
+	}
+	
+	
 	public List<MessageVO> select() {
 		List<MessageVO> result = null;
 		result = messageDAOHibernate.getAll();
 		return result;
 	}
+	//討論區回覆數
 	public List<MessageVO> getAllNum() {		
 		return messageDAOHibernate.getAllNum("type_id05");
 	}
-	
-	
+
 	public List<MessageVO> getForumMessage(Integer referenceNo){
 		return messageDAOHibernate.getForumMessage(referenceNo);	    
 	}

@@ -47,8 +47,12 @@ public class ShowSightDetailServlet extends HttpServlet {
 		// 呼叫model
 		SightService sightService = new SightService();
 		SightVO sightVO = sightService.findByPrimaryKey(sightId);
-		if (sightVO != null) {
-			request.setAttribute("sightVO", sightVO);
+		//將瀏覽人次加1
+		sightVO.setWatchNum(sightVO.getWatchNum()+1);
+		SightVO result=sightService.update(sightVO);
+		
+		if (result != null) {
+			request.setAttribute("sightVO", result);
 			request.getRequestDispatcher("/_02_TripAndJournal/ShowSightDetail.jsp").forward(request, response);
 		} else {
 			error.put("sightDetail", "查無此景點");

@@ -72,15 +72,15 @@ public class BackendSightServlet extends HttpServlet {
 			}
 			String regionId = request.getParameter("regionId");// 地區
 			if (regionId == null || regionId.trim().length() == 0) {
-				error.put("regionId", "地區必須輸入");
+				error.put("regionId", "請選擇地區");
 			}
 			String countyId = request.getParameter("countyId");// 縣市
 			if (countyId == null || countyId.trim().length() == 0) {
-				error.put("countyId", "縣市必須輸入");
+				error.put("countyId", "請選擇縣市");
 			}
 			String sightTypeId = request.getParameter("sightTypeId");// 景點類型
 			if (sightTypeId == null || sightTypeId.trim().length() == 0) {
-				error.put("sightTypeId", "景點類型必須輸入");
+				error.put("sightTypeId", "請選擇景點類型");
 			}
 			String ticket = request.getParameter("ticket");// 門票,可null
 			String temp1 = request.getParameter("openTime");// 開門時間
@@ -213,15 +213,15 @@ public class BackendSightServlet extends HttpServlet {
 			}
 			String regionId = request.getParameter("regionId");// 地區
 			if (regionId == null || regionId.trim().length() == 0) {
-				error.put("regionId", "地區必須輸入");
+				error.put("regionId", "請選擇地區");
 			}
 			String countyId = request.getParameter("countyId");// 縣市
 			if (countyId == null || countyId.trim().length() == 0) {
-				error.put("countyId", "縣市必須輸入");
+				error.put("countyId", "請選擇縣市");
 			}
 			String sightTypeId = request.getParameter("sightTypeId");// 景點類型
 			if (sightTypeId == null || sightTypeId.trim().length() == 0) {
-				error.put("sightTypeId", "景點類型必須輸入");
+				error.put("sightTypeId", "請選擇景點類型");
 			}
 			String ticket = request.getParameter("ticket");// 門票,可null
 			String temp1 = request.getParameter("openTime");// 開門時間

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean id="codeSvc" scope="page" class="_00_Misc.model.CodeService" />
+<jsp:useBean id="CollectionService" scope="page" class="_05_Member.model.CollectionService" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,24 +75,30 @@ var sightName;
 							<label>門票：</label> <span>${sightVO.ticket}</span><br>
 							<label>開門時間：</label> <span>${sightVO.openTime}</span><br>
 							<label>關門時間：</label> <span>${sightVO.closeIime}</span><br>
-							<label>建議停留時間：</label> <span>${sightVO.spendHour}</span><br>
 							<label>建議旅行時段：</label>
 							<c:forEach var="codeVO" items="${codeSvc.all}">
 										<c:if test="${codeVO.codeId==sightVO.playPeriod}">
 								             	<span>${codeVO.codeName}</span><br>
                                 	    </c:if>
 							</c:forEach>
-							<label>評分：</label> <span>${sightVO.score}</span><br> 
 							<!-- 經緯度隱藏欄位 -->
 							<span id="myLng" hidden="true">${sightVO.longitude}</span>
 							<span id="myLat" hidden="true">${sightVO.latitude}</span>
-							<label>瀏覽人次：</label><span>${sightVO.watchNum}</span><br> 
-							<label>收藏人次：</label><span>${sightVO.collectNum}</span><br>
-							<label>電話：</label><span>${sightVO.phone}</span><br>
-							<label>地址：</label> <span>${sightVO.addr}</span><br>
-							<label>交通方式：</label> <span>${sightVO.trans}</span><br>
-							<label>簡介：</label> <span>${sightVO.intro}</span><br> 
-							<label>上次更新時間：</label><span>${sightVO.modifyTime}</span><br> 
+							<!-- 瀏覽人次由servlet+1 -->
+							<label>瀏覽人次；</label><span>${sightVO.watchNum}</span><br> 
+							<!-- 收藏人次直接由DB CollectionTable撈資料 -->
+										<%int i = 0;%>
+									<c:forEach var="CollectionVO" items="${CollectionService.sightCollect}">
+										<c:if test="${CollectionVO.referenceType==sightVO.sightId}">
+											<%i++;%>
+										</c:if>
+									</c:forEach>
+							<label>收藏人次；</label><span><%=i%></span><br>
+							<label>電話；</label><span>${sightVO.phone}</span><br>
+							<label>地址；</label> <span>${sightVO.addr}</span><br>
+							<label>交通方式；</label> <span>${sightVO.trans}</span><br>
+							<label>簡介；</label> <span>${sightVO.intro}</span><br> 
+							<label>上次更新時間；</label><span>${sightVO.modifyTime}</span><br> 
 					</fieldset>
 			</form>
 	</div>

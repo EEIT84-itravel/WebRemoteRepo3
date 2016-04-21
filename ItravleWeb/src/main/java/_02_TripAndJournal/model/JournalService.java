@@ -4,9 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import _02_TripAndJournal.model.dao.JournalDAOHibernate;
+import _02_TripAndJournal.model.dao.TripDAOHibernate;
+import _02_TripAndJournal.model.dao.TripDetailDAOHibernate;
 
 public class JournalService {
 	private JournalDAOHibernate journalDAOHibernate;
+	
+	//查詢遊記中包含特定景點的遊記 傳回JournalVO的List
+		public List<JournalVO> getSightJournal(Integer sightId){
+			List<JournalVO> result=new ArrayList<JournalVO>();
+			JournalDetailService journalDetailService=new JournalDetailService();
+			JournalService journalService=new JournalService();
+			List<JournalDetailVO> journalDetailVOs =journalDetailService.getAll();
+			for(JournalDetailVO journalDetailVO:journalDetailVOs){
+					if(journalDetailVO.getSightId()==sightId){//參照編號為景點編號
+						JournalVO journalVO=journalService.select(journalDetailVO.getJournalId());//由detail查出遊記ID
+						if(!result.contains(journalVO)){//如果result中沒有那筆遊記
+							result.add(journalVO);
+						}
+					}
+			}
+			return result;
+		}
 
 	public JournalVO insert(JournalVO journalVO) {
 		JournalVO result = null;
