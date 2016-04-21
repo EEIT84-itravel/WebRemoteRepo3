@@ -84,6 +84,7 @@ $("#sel").change(function(){
 					<td>地區：</td>
 					<td>
 						<select name="regionId" id="sel">
+								<option value="">請選擇</option>
 							<c:forEach var="region" items="${region}">
 								<option value="${region.codeId}" ${(param.regionId==region.codeId)?'selected':'' }>${region.codeName}</option>
 							</c:forEach>
@@ -95,9 +96,7 @@ $("#sel").change(function(){
 					<td>縣市：</td>
 					<td>
 						<select name="countyId" id="sel2">
-							<c:forEach var="county" items="${county}">
-								<option value="${county.codeId}" ${(param.countyId==county.codeId)?'selected':'' }>${county.codeName}</option>
-							</c:forEach>
+							<option value="">請選擇</option>
 						</select>
 					</td>
 					<td><span class="error">${error.countyId}</span></td>
@@ -106,6 +105,7 @@ $("#sel").change(function(){
 					<td>景點類型：</td>
 					<td>
 						<select name="sightTypeId">
+								<option value="">請選擇</option>
 							<c:forEach var="sightType" items="${sightType}">
 								<option value="${sightType.codeId}" ${(param.sightTypeId==sightType.codeId)?'selected':'' }>${sightType.codeName}</option>
 							</c:forEach>

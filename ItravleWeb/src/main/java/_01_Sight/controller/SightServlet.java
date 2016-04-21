@@ -19,8 +19,12 @@ import _00_Misc.model.CodeService;
 import _00_Misc.model.CodeVO;
 import _01_Sight.model.SightService;
 import _01_Sight.model.SightVO;
+import _02_TripAndJournal.model.JournalService;
+import _02_TripAndJournal.model.JournalVO;
 import _02_TripAndJournal.model.MessageService;
 import _02_TripAndJournal.model.MessageVO;
+import _02_TripAndJournal.model.TripService;
+import _02_TripAndJournal.model.TripVO;
 import _05_Member.model.CollectionService;
 import _05_Member.model.MemberService;
 import _05_Member.model.MemberVO;
@@ -50,9 +54,15 @@ public class SightServlet extends HttpServlet {
 		//將瀏覽人次加1
 		sightVO.setWatchNum(sightVO.getWatchNum()+1);
 		SightVO result=sightService.update(sightVO);
-		
+		//查詢景點相關留言
 		MessageService messageService=new MessageService();
 		List<MessageVO> messageVOs=messageService.selectSightMessage(sightId);
+		//查詢景點相關行程
+		TripService tripService=new TripService();
+		List<TripVO> tripVOs= tripService.getSightTrip(sightId);
+		//查詢景點相關遊記
+		JournalService journalService=new JournalService();
+		List<JournalVO> journalVOs=journalService.getSightJournal(sightId);
 		
 
 		// 根據Model執行結果顯示View
@@ -71,6 +81,8 @@ public class SightServlet extends HttpServlet {
 			request.setAttribute("flag", flag);
 			request.setAttribute("sightVO", result);
 			request.setAttribute("messageVOs", messageVOs);
+			request.setAttribute("tripVOs", tripVOs);
+			request.setAttribute("journalVOs", journalVOs);
 			request.setAttribute("openTime", result.getOpenTime().toString().substring(0, 5));
 			request.setAttribute("closeTime", result.getCloseIime().toString().substring(0, 5));
 			request.setAttribute("trans1",result.getTrans().substring(0,result.getTrans().indexOf(",")));

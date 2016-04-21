@@ -188,13 +188,15 @@ public class NewEventServlet extends HttpServlet {
 				} catch (IllegalArgumentException e) {
 					error.put("sightId", "景點ID必須是數字");
 				}
+			}else{
+				error.put("sightId", "請選擇相關景點");
 			}
 			Part filePart = request.getPart("eventPhoto"); // Retrieves <input type="file" name="eventPhoto">
 			InputStream is = filePart.getInputStream();
 
 			if (error != null && !error.isEmpty()) {
 				request.getRequestDispatcher(
-						"/_06_BackEnd/backend/UpdateEvent.jsp").forward(
+						"/_06_BackEnd/backend/NewEvent.jsp").forward(
 						request, response);
 				return;
 			}

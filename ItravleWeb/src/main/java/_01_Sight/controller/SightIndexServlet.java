@@ -1,7 +1,9 @@
 package _01_Sight.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,33 +21,47 @@ public class SightIndexServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-
-		// 接收HTML Form資料
-		String region = request.getParameter("regionId");// 地區
-		String county = request.getParameter("countyId");// 縣市
-		String sightType = request.getParameter("sightType");// 類型
-		String keyWord=request.getParameter("keyWord");//關鍵字查詢
-
-		// 轉換HTML Form資料
-
-		// 驗證HTML Form資料
-
-		// 呼叫Model(首頁畫面)
+		Map<String, String> error = new HashMap<String, String>();
+		request.setAttribute("error", error);
+		//判斷行為 有selectAll及search
+		String action=request.getParameter("action");
+		
+		List<SightVO> sightVOs =null;
+		//呼叫model
 		SightService sightService = new SightService();
-
-		SightVO sightVO2 = new SightVO();
-		sightVO2.setRegionId(region);
-		sightVO2.setCountyId(county);
-		sightVO2.setSightTypeId(sightType);
-		sightVO2.setSightName(keyWord);
+		
+		if(action!=null&&action.trim().length()!=0){
+			if("selectAll".equals(action)){
+				sightVOs=sightService.select();
+				request.setAttribute("sightVOs", sightVOs);
+			}else if("search".equals(action)){
+				// 接收HTML Form資料
+				String region = request.getParameter("regionId");// 地區
+				String county = request.getParameter("countyId");// 縣市
+				String sightType = request.getParameter("sightType");// 類型
+				String keyWord=request.getParameter("keyWord");//關鍵字查詢
+				
+				SightVO sightVO2 = new SightVO();
+				sightVO2.setRegionId(region);
+				sightVO2.setCountyId(county);
+				sightVO2.setSightTypeId(sightType);
+				sightVO2.setSightName(keyWord);
+				
+				sightVOs=sightService.search(sightVO2);
+				if(sightVOs.isEmpty()){
+					error.put("noneSearch", "查無此筆資訊");
+				}
+				if (error != null && !error.isEmpty()) {
+					request.getRequestDispatcher("/_01_Sight/SightIndex.jsp").forward(
+							request, response);
+					return;
+				}
+				request.setAttribute("sightVOSearch", sightVOs);
+			}
+		}
 
 		// 根據Model執行結果顯示View
-		List<SightVO> sightVOp = sightService.search(sightVO2);
-		request.setAttribute("sightVOs", sightVOp);
-		request.setAttribute("regionId", region);// 回傳選擇的地區
-		request.setAttribute("countyId", county);// 回傳選擇的縣市
-		request.setAttribute("sightType", sightType);// 回傳選擇的類型
-		request.setAttribute("keyWord", keyWord);// 回傳關鍵字
+		
 		request.getRequestDispatcher("/_01_Sight/SightIndex.jsp").forward(
 				request, response);
 	}

@@ -1,12 +1,33 @@
 package _02_TripAndJournal.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import _02_TripAndJournal.model.dao.JournalDAOHibernate;
 import _02_TripAndJournal.model.dao.TripDAOHibernate;
+import _02_TripAndJournal.model.dao.TripDetailDAOHibernate;
 
 public class TripService {
 	private TripDAOHibernate tripDAOHibernate;
+	
+	//查詢行程中包含特定景點的行程 傳回tripVO的List
+	public List<TripVO> getSightTrip(Integer sightId){
+		List<TripVO> result=new ArrayList<TripVO>();
+		TripDetailDAOHibernate tripDetailDAOHibernate =new TripDetailDAOHibernate();
+		TripDAOHibernate tripDAOHibernate=new TripDAOHibernate();
+		List<TripDetailVO> tripDetailVOs =tripDetailDAOHibernate.select();
+		for(TripDetailVO tripDetailVO:tripDetailVOs){
+			if("type_id01".equals(tripDetailVO.getReferenceType())){//類型為景點
+				if(tripDetailVO.getReferenceNo()==sightId){//參照編號為景點編號
+					TripVO tripVO=tripDAOHibernate.select(tripDetailVO.getTripId());//由detail查出遊記ID
+					if(!result.contains(tripVO)){//如果result中沒有那筆遊記
+						result.add(tripVO);
+					}
+				}
+			}
+		}
+		return result;
+	}
 	
 	public boolean update(TripVO tripVO){
 		tripDAOHibernate = new TripDAOHibernate();

@@ -41,6 +41,7 @@ public class SightDAOHibernate {
 				   sb.append(sWhere).append(" sightName like :keyWord ");
 				   sWhere = "and";
 				  }
+			  sb.append(" order by watchNum desc");
 			  Query query = session.createQuery(sb.toString());
 			  
 			  if(null != sightVOp.getRegionId() && !"".equals(sightVOp.getRegionId())){
@@ -55,6 +56,7 @@ public class SightDAOHibernate {
 				  if(null != sightVOp.getSightName() && !"".equals(sightVOp.getSightName())){
 					  query.setParameter("keyWord", "%"+sightVOp.getSightName()+"%");
 					  }
+				 
 				  sightVO = query.list();
 				   session.getTransaction().commit();
 		} catch (HibernateException e) {

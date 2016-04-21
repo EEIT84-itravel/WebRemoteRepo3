@@ -4,9 +4,6 @@
 <%@ page import="_01_Sight.model.*"%>
 <%@ page import="java.util.*"%>
 <%
-	SightService sightService = new SightService();
-	List<SightVO> sightVOs = sightService.select();
-	pageContext.setAttribute("sightVOs", sightVOs);
 	CodeService codeService = new CodeService();
 	List<CodeVO> codeVO = codeService.select("region");
 	pageContext.setAttribute("regions", codeVO);
@@ -14,14 +11,6 @@
 	pageContext.setAttribute("countys", codeVO2);
 	List<CodeVO> codeVO3 = codeService.select("sight_type");
 	pageContext.setAttribute("sight_type", codeVO3);
-%>
-<%
-	int rowNumber=0;      //總筆數
-    int pageNumber=0;     //總頁數      
-    int whichPage=1;      //第幾頁
-    int pageIndexArray[]=null;
-    int pageIndex=0; 
-    int rowsPerPage;
 %>
 <jsp:useBean id="codeSvc" scope="page" class="_00_Misc.model.CodeService" />
 <jsp:useBean id="CollectionService" scope="page" class="_05_Member.model.CollectionService" />
@@ -39,8 +28,8 @@ $(document).ready(function() {
 		  switch ($(this).val()){
 				case "region01": 
 		      $("#sel2 option").remove();
-		      var array = [ "臺北市","新北市","基隆市","宜蘭縣","桃園縣","新竹市","新竹縣"];
-		      var arrayId=["county01","county02","county07","county17","county03","county08","county10"];
+		      var array = [ "請選擇","臺北市","新北市","基隆市","宜蘭縣","桃園縣","新竹市","新竹縣"];
+		      var arrayId=["","county01","county02","county07","county17","county03","county08","county10"];
 		      //利用each遍歷array中的值並將每個值新增到Select中
 		      $.each(array, function(i, val) {	
 		        $("#sel2").append($("<option value='" + arrayId[i] + "'>" + array[i] + "</option>"));
@@ -104,11 +93,6 @@ clear: both;
 		<!-- Button 進階搜尋 -->
 		<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">進階搜尋</button>
 		<br>
-		<%
-				rowsPerPage = 9; //每頁的筆數 
-				rowNumber = sightVOs.size();
-		%>
-		<%@ include file="/_00_Misc/page1.file"%>
 		<!-- 進階搜尋 互動視窗 -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -125,27 +109,27 @@ clear: both;
 								<tr>
 								<td>地區：
 									<select name="regionId" id="sel">
-										<option value="">請選擇</option>
+											<option value="">請選擇</option>
 										<c:forEach var="region" items="${regions}">
-											<option value="${region.codeId}" ${(param.regionId==region.codeId)?'selected':'' }>${region.codeName}</option>
+											<option value="${region.codeId}" >${region.codeName}</option>
 										</c:forEach>
 									</select>
 												縣市：
 									<select name="countyId" id="sel2">
-									<option value="">請選擇</option>
+										<option value="">請選擇</option>
 									</select>
 								</td>
 									<td>類型:
 										<select name="sightType">
 											<option value="">請選擇</option>
 											<c:forEach var="region" items="${sight_type}">
-												<option value="${region.codeId}"
-													<c:if test="${sightType == region.codeId}">selected</c:if>>${region.codeName}</option>
+												<option value="${region.codeId}">${region.codeName}</option>
 											</c:forEach>
 										</select>
 									</td>
 									<td>關鍵字:
 									<input type="text" name="keyWord" value="${param.keyWord}">
+									<input type="hidden" name="action" value="search">
 									</td>
 								</tr>
 							</table>
@@ -159,8 +143,9 @@ clear: both;
 		<br>
 		<!-- 		景點欄位 -->
 	<div id="sights">
-		<c:forEach var="sightVO" items="${sightVOs}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-				<div class="SearchSight">
+	<c:if test="${empty sightVOSearch}">
+		<c:forEach var="sightVO" items="${sightVOs}">
+			<div class="SearchSight">
 				<p>No:${sightVO.sightId}</p>
 				<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="280" height="210">
 				<p>
@@ -191,12 +176,49 @@ clear: both;
 										</c:if>
 									</c:forEach>
 				<p>${sightVO.watchNum}人瀏覽,<%=i%>人收藏</p>
-		</div>
-		</c:forEach>
-		</div>
-		<c:if test="${empty sightVOs}">查無此筆資訊</c:if>
+			</div>
+			</c:forEach>
+		</c:if>
+		<c:if test="${not empty sightVOSearch}">
+		<c:forEach var="sightVO" items="${sightVOSearch}">
+			<div class="SearchSight">
+				<p>No:${sightVO.sightId}</p>
+				<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="280" height="210">
+				<p>
+					<a href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />">名稱:${sightVO.sightName}</a>
+				</p>
+				<p>
+					類型:
+					<c:forEach var="codeVO" items="${codeSvc.all}">
+						<c:if test="${codeVO.codeId==sightVO.sightTypeId}">
+								${codeVO.codeName}
+                             </c:if>
+					</c:forEach>
+				</p>
+				<p>
+					縣市:
+					<c:forEach var="codeVO" items="${codeSvc.all}">
+						<c:if test="${codeVO.codeId==sightVO.countyId}">
+								${codeVO.codeName}
+                             </c:if>
+					</c:forEach>
+				</p>
+				<!-- 瀏覽人次由servlet+1 -->
+				<!-- 收藏人次直接由DB CollectionTable撈資料 -->
+										<%int i = 0;%>
+									<c:forEach var="CollectionVO" items="${CollectionService.sightCollect}">
+										<c:if test="${CollectionVO.referenceType==sightVO.sightId}">
+											<%i++;%>
+										</c:if>
+									</c:forEach>
+				<p>${sightVO.watchNum}人瀏覽,<%=i%>人收藏</p>
+			</div>
+			</c:forEach>
+		</c:if>
+		</div><!-- end of 景點欄位 -->
+		<p>${error.noneSearch}</p>
 		<!-- 		景點欄位 End -->
-		<div id="pagebtn"><%@ include file="/_00_Misc/page2.file"%></div>
+		<div id="pagebtn"></div>
 	</article>
 	<footer>
 		<!-- import共同的 -->

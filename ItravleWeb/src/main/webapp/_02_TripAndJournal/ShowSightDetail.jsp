@@ -75,7 +75,6 @@ var sightName;
 							<label>門票：</label> <span>${sightVO.ticket}</span><br>
 							<label>開門時間：</label> <span>${sightVO.openTime}</span><br>
 							<label>關門時間：</label> <span>${sightVO.closeIime}</span><br>
-							<label>建議停留時間：</label> <span>${sightVO.spendHour}</span><br>
 							<label>建議旅行時段：</label>
 							<c:forEach var="codeVO" items="${codeSvc.all}">
 										<c:if test="${codeVO.codeId==sightVO.playPeriod}">

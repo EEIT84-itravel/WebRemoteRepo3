@@ -6,13 +6,14 @@
 <%@ page import="_01_Sight.model.*"%>
 <jsp:useBean id="codeSvc" scope="page" class="_00_Misc.model.CodeService" />
 <jsp:useBean id="MemberService" scope="page" class="_05_Member.model.MemberService" />
+<jsp:useBean id="TripDetailService" scope="page" class="_02_TripAndJournal.model.TripDetailService" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>景點資訊</title>
 <!-- lightbox -->
-<%-- <link rel="stylesheet" type="text/css" href="<c:url value="/css/_01_Sight/lightbox.min.css" />" /> --%>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_01_Sight/lightbox.min.css" />" />
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
@@ -23,7 +24,7 @@
 <script type="text/javascript">
 	$(function() {
 		$("#tabs").tabs({
-			event : "mouseover"
+			event : "click"
 		});
 		$("#collect").bind('click', collect);
 	});
@@ -67,7 +68,7 @@ width: 600px;
 	</nav>
 	<article class="center-block">
 		<div class="IntroSight"><!-- rightside end -->
-<%-- 			<a href="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" rel="lightbox" title="${sightVO.sightName}"> --%>
+			<a href="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" rel="lightbox" title="${sightVO.sightName}">
 			<img border="0" src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="280" height="210"></a>
 			 <input type="hidden" value="${sightVO.sightId}" name="sightId" id="sightId">
 			<p>地名:${sightVO.sightName}  <!-- 		判斷收藏景點鈕是否出現 寫在SightServlet -->
@@ -106,20 +107,54 @@ width: 600px;
 								<li><a href="#tabs-3">留言</a></li>
 							</ul>
 							<div id="tabs-1">
-								<p>台北小清新之旅</p>
+							<table>
+								<c:forEach var="tripVO" items="${tripVOs}" end="4"><!-- "4"為顯示5筆  -->
+								<tr>
+								<td>
+								<c:forEach var="TripDetailVO" items="${TripDetailService.mainPics}" >
+                             		<c:if test="${TripDetailVO.tripId==tripVO.tripId}">
+										<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${TripDetailVO.referenceNo}" />" width="88" height="66">
+                             		</c:if>
+								</c:forEach>
+								</td>
+								<td>
+									<c:forEach var="MemberVOt" items="${MemberService.all}">
+                             		<c:if test="${MemberVOt.memberId==journalVO.memberId}">
+										${MemberVOt.nickname}
+                             		</c:if>
+								</c:forEach>
+								</td>
+								<td>行程名稱:${tripVO.tripName}</td>
+								<td>瀏覽人次:${tripVO.watchNum}</td>
+								</tr>
+								</c:forEach>
+							</table>
 							</div>
 							<div id="tabs-2">
-								<p>我的遊記</p>
+							<table>
+							<c:forEach var="journalVO" items="${journalVOs}" end="4"><!-- "4"為顯示5筆  -->
+							<tr>
+								<td><img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${journalVO.journalId}" />" width="88" height="66"></td>
+								<td>${journalVO.journalName}</td>
+								<c:forEach var="MemberVOj" items="${MemberService.all}">
+                             		<c:if test="${MemberVOj.memberId==journalVO.memberId}">
+										<td>${MemberVOj.nickname}</td>
+                             		</c:if>
+								</c:forEach>
+								<td>${journalVO.visitorNum}</td>
+							</tr>
+							</c:forEach>
+							</table>
 							</div>
 							<div id="tabs-3"><!-- tab 留言 -->
 							<table>
 							<c:forEach var="messageVO" items="${messageVOs}">
 								<tr>
 									<td>${messageVO.content}</td>
-									<c:forEach var="MemberVO" items="${MemberService.all}">
-                             		<c:if test="${MemberVO.memberId==messageVO.memberId}">
-										<td>${MemberVO.nickname}</td>
-                             		</c:if>
+									<c:forEach var="MemberVOm" items="${MemberService.all}">
+                             			<c:if test="${MemberVOm.memberId==messageVO.memberId}">
+											<td>${MemberVOm.nickname}</td>
+                             			</c:if>
 									</c:forEach>
 									<td>${messageVO.updateTime}</td>
 								</tr>
@@ -142,7 +177,7 @@ width: 600px;
 						</div>
 						</div>
 						<input type="button" onclick="history.back()" value="上一頁" /> 
-					<a href="/ItravleWeb/_01_Sight/SightIndex.controller">回景點首頁</a>
+					<a href="<c:url value="/_01_Sight/SightIndex.controller?action=selectAll" />">回景點首頁</a>
 		</div><!-- rightside end -->
 
 		<!-- 	 	google map -->
@@ -151,7 +186,7 @@ width: 600px;
 			function initMap() {
 				var myLatLng = new google.maps.LatLng('${sightVO.latitude}','${sightVO.longitude}');
 				var map = new google.maps.Map(document.getElementById('map'), {
-					zoom : 15,
+					zoom : 16,
 					center : myLatLng
 				});
 				var marker = new google.maps.Marker({
