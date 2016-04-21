@@ -4,14 +4,7 @@
 <%@ page import="_02_TripAndJournal.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="_05_Member.model.*"%>
-<%
-	TripService tripService = new TripService();
-	//memberId由session取出
-	MemberVO memberVO = (MemberVO) session.getAttribute("user");
-	int memberId = memberVO.getMemberId();
-	List<TripVO> tripVO = tripService.selectFromMember(memberId);
-	pageContext.setAttribute("tripVO", tripVO);
-%>
+
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -131,33 +124,7 @@ nav {
 <!-- 		<form id="fromTripToJournal" -->
 <%-- 			action="<c:url value="/_02_TripAndJournal/member/FromTripToJournal.controller"/>" --%>
 <!-- 			method="post"></form> -->
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<form id="fromTripToJournal"
-						action="<c:url value="/_02_TripAndJournal/member/FromTripToJournal.controller"/>"
-						method="post">
-						<div class="modal-header" >
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">從行程匯入遊記</h4>
-						</div>
-						<div class="modal-body">
-							<p>
-								<select name="tripId" >
-									<c:forEach var="tripVO" items="${tripVO}" >
-										<option class="btn" value="${tripVO.tripId}" onclick="doJournal(${tripVO.tripId})">${tripVO.tripName}</option>
-									</c:forEach>
-								</select>
-							</p>
-						</div>
-						<div class="modal-footer">
-							<button type="submit" >開始寫遊記吧123456!</button>
-<!-- 							<a href="http://tw.yahoo.com" class="btn btn-primary" data-dismiss="modal" >開始寫遊記吧123!</a>	 -->
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
+		
 	</div>
 	<!-- /.container-fluid -->
 </body>
