@@ -48,12 +48,19 @@ html, body {
 .IntroSight {
 	width: 700px;
 	padding: 10px;
-	margin: 10px;
+	margin: 0px;
+	margin-right:10px;
 	border: solid black;
 	float: left;
 }
 #tabss{
 width: 600px;
+}
+#pageBottom{
+clear: both;
+}
+#pageBottom .bottomInner{
+text-align: center;
 }
 </style>
 </head>
@@ -71,11 +78,11 @@ width: 600px;
 			<a href="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" rel="lightbox" title="${sightVO.sightName}">
 			<img border="0" src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="280" height="210"></a>
 			 <input type="hidden" value="${sightVO.sightId}" name="sightId" id="sightId">
-			<p>地名:${sightVO.sightName}  <!-- 		判斷收藏景點鈕是否出現 寫在SightServlet -->
-																		<c:if test="${flag}">
-																			<input type="button" value="收藏景點" id='collect'>
-																		</c:if></p>
-			<p>簡介:${sightVO.intro}</p>
+			<p><h3>${sightVO.sightName}</h3></p>  <!-- 		判斷收藏景點鈕是否出現 寫在SightServlet -->
+					<c:if test="${flag}">
+					<input type="button" value="收藏景點" id='collect'>
+					</c:if>
+			<p>${sightVO.intro}</p>
 			<p>
 				類型:
 				<c:forEach var="codeVO" items="${codeSvc.all}">
@@ -86,7 +93,7 @@ width: 600px;
 			</p>
 			<p>門票:${sightVO.ticket}</p>
 			<p>營業時間:${openTime}-${closeTime}</p>
-			<p>建議停留時間:${sightVO.spendHour}</p>
+<%-- 			<p>建議停留時間:${sightVO.spendHour}</p> --%>
 			<p>
 				建議旅行時段:
 				<c:forEach var="codeVO" items="${codeSvc.all}">
@@ -96,9 +103,9 @@ width: 600px;
 				</c:forEach>
 			</p>
 			<p>地址:${sightVO.addr}</p>
-			<p>交通方式</p>
-			<p>${trans1}</p>
-			<p>${trans2}</p>
+			<p>交通方式:</p>
+			<p>　　${trans1}</p>
+			<p>　　${trans2}</p>
 						<div id="tabss">
 						<div id="tabs">
 							<ul>
@@ -106,7 +113,7 @@ width: 600px;
 								<li><a href="#tabs-2">相關遊記</a></li>
 								<li><a href="#tabs-3">留言</a></li>
 							</ul>
-							<div id="tabs-1">
+							<div id="tabs-1"><!-- tab 相關行程 -->
 							<table>
 								<c:forEach var="tripVO" items="${tripVOs}" end="4"><!-- "4"為顯示5筆  -->
 								<tr>
@@ -124,13 +131,13 @@ width: 600px;
                              		</c:if>
 								</c:forEach>
 								</td>
-								<td>行程名稱:${tripVO.tripName}</td>
-								<td>瀏覽人次:${tripVO.watchNum}</td>
+								<td>${tripVO.tripName}</td>
+								<td>有${tripVO.watchNum}人瀏覽過</td>
 								</tr>
 								</c:forEach>
 							</table>
 							</div>
-							<div id="tabs-2">
+							<div id="tabs-2"><!-- tab 相關遊記 -->
 							<table>
 							<c:forEach var="journalVO" items="${journalVOs}" end="4"><!-- "4"為顯示5筆  -->
 							<tr>
@@ -141,7 +148,7 @@ width: 600px;
 										<td>${MemberVOj.nickname}</td>
                              		</c:if>
 								</c:forEach>
-								<td>${journalVO.visitorNum}</td>
+								<td>有${journalVO.visitorNum}人瀏覽過</td>
 							</tr>
 							</c:forEach>
 							</table>
@@ -176,8 +183,6 @@ width: 600px;
 							</div><!-- tab 留言 end-->
 						</div>
 						</div>
-						<input type="button" onclick="history.back()" value="上一頁" /> 
-					<a href="<c:url value="/_01_Sight/SightIndex.controller?action=selectAll" />">回景點首頁</a>
 		</div><!-- rightside end -->
 
 		<!-- 	 	google map -->
@@ -202,6 +207,10 @@ width: 600px;
 		</script>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU9JCqlrRPTLXt7fvy9ERvO2EU1QPcO_0&signed_in=true&callback=initMap"></script>
 		<!-- 		google map end -->
+		<div id="pageBottom">
+		<input type="button" onclick="history.back()" value="上一頁" class="bottomInner" /> 
+		<a href="<c:url value="/_01_Sight/SightIndex.controller?action=selectAll" />" class="bottomInner">回景點首頁</a>
+		</div>
 	</article>
 	<footer>
 		<!-- import共同的 -->

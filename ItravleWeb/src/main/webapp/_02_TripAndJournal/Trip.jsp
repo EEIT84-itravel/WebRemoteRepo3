@@ -2,6 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="sightSvc" scope="page" class="_01_Sight.model.SightService" />
+<%@page import="_00_Misc.model.*"%>
+<%@ page import="java.util.*"%>
+<%
+CodeService codeService = new CodeService();
+List<CodeVO> codeVO = codeService.select("region");
+pageContext.setAttribute("regions", codeVO);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +25,17 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_02_TripAndJournal/Trip.css"/>"/>
+<script type="text/javascript">
+	$(function() {
+		$("#tabs").tabs({
+			event : "click"
+		});
+		$("#collect").bind('click', collect);
+	});
+	function collect() {
+		window.location.href = "../_02_TripAndJournal/member/collectiontrip.controller?tripId="+ $("#tripId").val();
+	};
+</script>
 </head>
 <body>
 	<header>
@@ -29,19 +47,26 @@
 		<jsp:include page="/_00_Misc/top.jsp" />		
 	</nav>
 	<article class="center-block">
-		<h1 class="h1">${tripVO.tripName}</h1>
+	<input type="hidden"  id="tripId" value="${tripVO.tripId}">	
+		<h1 class="h1">${tripVO.tripName} <!-- 		判斷收藏景點鈕是否出現 寫在SightServlet -->
+ 																		<c:if test="${flag}"> 
+																			<input type="button" value="收藏行程" id='collect'>
+ 																		</c:if></h1> 
 		<div id="divTrip" class="pull-left">
-			<div id="divTripTop">				
+			<div id="divTripTop">
 				<h5 class="h5">起始日期: ${tripVO.tripStartDate}</h5>
 				<h5 class="h5">結束日期: ${tripVO.tripEndDate}</h5>
-				<h5 class="h5">startTime: ${tripVO.startTime}</h5>
-				<h5 class="h5">總預算: ${tripVO.totalBudget}</h5>
-				<h5 class="h5">regionId: ${tripVO.regionId}</h5>
-				<h5 class="h5">watchNum: ${tripVO.watchNum}</h5>
-				<h5 class="h5">tripIntro: ${tripVO.tripIntro}</h5>
+<%-- 				<h5 class="h5">總預算: ${tripVO.totalBudget}</h5> --%>
+				<c:forEach var="region" items="${regions}">
+						<c:if test="${region.codeId==tripVO.regionId}">
+								<h5 class="h5">地區:${region.codeName}</h5>	
+						</c:if>
+				</c:forEach>	
+				<h5 class="h5">瀏覽人次: ${tripVO.watchNum}</h5>
+				<h5 class="h5">行程簡介: ${tripVO.tripIntro}</h5>
 			</div>	<!-- end divTripTop -->
 			<div id="divTripDetail">
-				<c:forEach var="tripDetailVOs" items="${tripDetailVOs}">
+				<c:forEach var="tripDetailVOs" items="${tripDetailVOs}" varStatus="vs">
 					<div class="table-responsive">
 					<table id="tableTrip" class="table table-bordered">
 						<tr>
@@ -54,7 +79,6 @@
 									<h4 class="text-left h4"><strong>${sightVO2.sightName}</strong></h4>
 	                            </c:if>
 							</c:forEach>
-							停留時間：${tripDetailVOs.stayTime}<br>
 							預算：${tripDetailVOs.sightBudget}元<br>
 							</td>							
 						</tr>
@@ -70,7 +94,12 @@
 							</c:forEach>
 						</tr>						
 					</table>
-					</div>						
+					</div>
+					<c:if test="${not vs.last}">
+						<div id="arrow">
+						<span class="glyphicon glyphicon-chevron-down"></span>  <!-- 圖片來源：http://glyphicons.com/ -->
+						</div>
+					</c:if>				
 				</c:forEach>			
 			</div>	<!-- end divTripDetail -->
 		</div>	<!-- end divTrip -->

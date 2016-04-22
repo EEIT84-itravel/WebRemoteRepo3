@@ -5,6 +5,7 @@
 <%@ page import="_02_TripAndJournal.model.*"%>
 <%@ page import="_05_Member.model.*"%>
 <%@ page import="java.util.*"%>
+<jsp:useBean id="TripDetailService" scope="page" class="_02_TripAndJournal.model.TripDetailService" />
 <%
 TripService tripservice = new TripService();
 CollectionService collectionservice = new CollectionService();
@@ -19,20 +20,22 @@ pageContext.setAttribute("tripVO", tripVO);
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>我的收藏行程</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_05_Member/Member.css"/>" />
+<title>ITravel-我的收藏行程</title>
 </head>
 <body>
-<header>
+	<header>
 		<!-- import共同的 -->
-	</header>
-	<!-- import共同的 -->
+	</header>	
 	<nav class="navbar navbar-inverse" role="navigation">
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-<article>
-<table id="forum" border="1">
-<thead>
+	<article class="center-block">
+	<h3>會員功能>我的收藏行程</h3>
+		<table class="table">
+			<thead>
 				<tr id="forumTitle">
 				    <th>行程照片</th>
 					<th>行程名字</th>
@@ -45,18 +48,20 @@ pageContext.setAttribute("tripVO", tripVO);
 			<tbody>
 			<c:if test="${not empty tripVO}">
 			<c:forEach var="tripVO" items="${tripVO}">
-			<tr>
-			<td><img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?tripId=${tripVO.tripId}" />" width="240" height="180"></td>
-			<td>${tripVO.tripName}</td>
-			<td>${tripVO.tripStartDate}</td>
-			<td>${tripVO.modifyTime}</td>
-			<td>${tripVO.watchNum}</td>
-			<td><a href="<c:url value="/_05_Member/member/deltrip.controller?memberId=${user.memberId}&referenceType=${tripVO.tripId}&typeId=type_id02"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
-			</tr>
+				<tr>
+					<td>
+						<img src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?tripId=${tripVO.tripId}" />" width="160" height="120" class="img-rounded">
+					</td>
+					<td>${tripVO.tripName}</td>
+					<td>${tripVO.tripStartDate}</td>
+					<td>${tripVO.modifyTime}</td>
+					<td>${tripVO.watchNum}</td>
+					<td><a href="<c:url value="/_05_Member/member/deltrip.controller?memberId=${user.memberId}&referenceType=${tripVO.tripId}&typeId=type_id02"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
+				</tr>
 			</c:forEach>
 			</c:if>
 			</tbody>
-</table>
-</article>
+		</table>
+	</article>
 </body>
 </html>

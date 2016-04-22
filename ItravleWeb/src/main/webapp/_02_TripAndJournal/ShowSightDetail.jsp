@@ -15,9 +15,6 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
-#dialog-form{
-color: white;
-}
 #map {
 	height: 250px;
 	width: 480px;
@@ -50,8 +47,9 @@ var sightName;
 	<h3>${error.sightDetail}</h3>	<!--錯誤處理  -->
 	<c:if test="${not empty sightVO}">
     <div id="map"></div>
-	<div id="dialog-form" title="SightDetail">
- 			<form class="sightDetailForm">
+    <br>
+	<div title="SightDetail">
+ 			<form>
 				<fieldset>						
 							<label>名稱：</label><span id="mySight">${sightVO.sightName}</span><br>
 							<label>地區：</label> 

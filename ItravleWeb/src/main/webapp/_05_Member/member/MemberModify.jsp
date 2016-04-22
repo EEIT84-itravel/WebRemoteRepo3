@@ -12,6 +12,7 @@
 <!-- jQuery ui 日期相關-->
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <!-- jQuery -->
 <script type="text/javascript"
 	src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
@@ -43,20 +44,52 @@
 			$("span:eq(6)").empty("");
 		});
 	});
+	var openFile = function(event) {
+	    var input = event.target;
+
+	    var reader = new FileReader();
+	    reader.onload = function(){
+	      var dataURL = reader.result;
+	      var output = document.getElementById('output');
+	      output.src = dataURL;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  };
 </script>
+<style type="text/css">
+#editAccount {
+	width:500px;
+	margin: 0 auto;
+}
+#editAccount{
+	font-size: 20px;	
+}
+
+#memberTable td {
+	width: 200px;
+}
+
+</style>
 
 <title>修改會員資料</title>
 
 </head>
 <body>
-<h3>${user.firstName}的個人資料</h3>
+
+	<nav class="navbar navbar-inverse" role="navigation">
+		<!-- import共同的 -->
+		<jsp:include page="/_00_Misc/top.jsp" />
+	</nav>
+	<article class="center-block">
+	<div id="editAccount">
+	<h3>${user.firstName}的個人資料</h3>
 	<form action="<c:url value="/_05_Member/member/membermodify.controller" />"
 		method="post" enctype="multipart/form-data">
 		<input type="hidden" name="memberId" value="${user.memberId}">
 		<input type="hidden" name="photo" value="${user.photo}">
 		<input type="hidden" name="cellphone1" value="${user.cellphone}"> 
 		<input type="hidden" name="memberAccount" value="${user.memberAccount}">
-		<table>
+		<table id="memberTable">
 			<tr>
 				<td>*姓氏 :</td>
 				<td><input type="text" name="lastName" value="${user.lastName}"></td>
@@ -75,7 +108,7 @@
 			</tr>
 			<tr>
 				<td>*密碼 :</td>
-				<td><input type="text" name="password" value="${user.password}"></td>
+				<td><input type="password" name="password" value="${user.password}"></td>
 				<td><span class="error">${error.password}</span></td>
 			</tr>
 			<tr>
@@ -103,18 +136,21 @@
 			</tr>
 			<tr>
 				<td>現在使用的大頭貼 :</td>
-				<td><img
-					src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${user.memberId}" />"
+				<td><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${user.memberId}" />"
 					width="80" height="60"></td>
 			</tr>
 			<tr>
 				<td>大頭貼 :</td>
-				<td><input type="file" name="photo1"></td>
+				<td><input type='file' accept='image/*' onchange='openFile(event)' name="photo1"><br>
+					<img id='output'></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="修改會員資料"></td>
+				<td></td>
 			</tr>
 		</table>
 	</form>
+	</div>
+	</article>
 </body>
 </html>

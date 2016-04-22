@@ -9,7 +9,38 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 public class JournalDAOHibernate {
-	private static final String FIND_JOURNAL_BY_MEMBERID = "from  JournalVO where memberId=:memberId";
+	// 照最後更新時間排序
+		public List<JournalVO> selectOrderByModifyTime() {
+			List<JournalVO> list = null;
+			Session session = HibernateUtil_H4_Ver1.getSessionFactory().getCurrentSession();
+			try {
+				session.beginTransaction();
+				Query query = session.createQuery("from JournalVO order by modifyTime desc");
+				list = query.list();
+				session.getTransaction().commit();
+			} catch (RuntimeException e) {
+				session.getTransaction().rollback();
+				throw e;
+			}
+			return list;
+		}
+		
+			// 照瀏覽人次排序
+			public List<JournalVO> selectOrderByWatch() {
+				List<JournalVO> list = null;
+				Session session = HibernateUtil_H4_Ver1.getSessionFactory().getCurrentSession();
+				try {
+					session.beginTransaction();
+					Query query = session.createQuery("from JournalVO order by visitorNum desc");
+					list = query.list();
+					session.getTransaction().commit();
+				} catch (RuntimeException e) {
+					session.getTransaction().rollback();
+					throw e;
+				}
+				return list;
+			}
+
 	// 單筆查詢
 	public JournalVO select(int journal_id) {
 		JournalVO vo = null;
@@ -25,6 +56,7 @@ public class JournalDAOHibernate {
 		return vo;
 	}
     //從會員ID查詢相關遊記
+	private static final String FIND_JOURNAL_BY_MEMBERID = "from  JournalVO where memberId=:memberId";
 	public List<JournalVO> selectByMemberId(Integer memberId) {
 		List<JournalVO> result = null;
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()

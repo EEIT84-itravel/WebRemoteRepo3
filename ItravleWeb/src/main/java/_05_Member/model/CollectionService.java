@@ -26,7 +26,10 @@ public class CollectionService {
     public CollectionVO collectionsight(CollectionVO collectionVO){
     	return dao.insert(collectionVO);
     }
-    
+    //會員收藏行程
+    public CollectionVO collectiontrip(CollectionVO collectionVO){
+    	return dao.insert(collectionVO);
+    }
     //某會員搜尋他的收藏景點
 	public List<CollectionVO> selectByMemberId(Integer memberId){
 		List<CollectionVO> result = null;
@@ -41,6 +44,18 @@ public class CollectionService {
 		  	a = result.get(0).getCollectionNo();
 		}
 		return a;
+	}
+	//以參照編號、類型編號尋找收藏
+	public ArrayList<Integer> selectByReferenceTypeAndTypeId(Integer referenceType,String typeId){
+		List<CollectionVO> result = null;
+		ArrayList<Integer> collectionID = new ArrayList<Integer>();
+		result = dao.findByTypeIdAndReferenceType(typeId, referenceType);
+		if(result!=null && result.size()>0){
+			for(int i=0 ; i<result.size();i++){
+				collectionID.add(result.get(i).getCollectionNo());
+			}
+		}
+		return collectionID;
 	}
 	//會員尋找他的收藏遊記
 	public ArrayList<Integer> selectjournalByMemberId(Integer memberId){
@@ -116,5 +131,13 @@ public class CollectionService {
 	//找出所有收藏景點
 	public List<CollectionVO> getSightCollect(){
 		return dao.findByTypeId("type_id01");
+	}
+	//找出所有收藏行程
+	public List<CollectionVO> getTripCollect(){
+		return dao.findByTypeId("type_id02");
+	}
+	//找出所有收藏遊記
+	public List<CollectionVO> getJournalCollect(){
+		return dao.findByTypeId("type_id03");
 	}
 }
