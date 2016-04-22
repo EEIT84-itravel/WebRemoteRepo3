@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="_00_Misc.model.*"%>
 <%@ page import="_02_TripAndJournal.model.*"%>
 <%@ page import="java.util.*"%>
 <% 
 	JournalService journalService = new JournalService();
 	List<JournalVO> journalVOs = journalService.getAllPost();
 	pageContext.setAttribute("journalVOs", journalVOs);
+	CodeService codeService = new CodeService();
+	List<CodeVO> codeVO = codeService.select("region");
+	pageContext.setAttribute("regions", codeVO);
     int rowNumber=0;      //總筆數
     int pageNumber=0;     //總頁數      
     int whichPage=1;      //第幾頁
@@ -15,6 +19,7 @@
     int rowsPerPage;
 %>
 <jsp:useBean id="MemberService" scope="page" class="_05_Member.model.MemberService" />
+<jsp:useBean id="CollectionService" scope="page" class="_05_Member.model.CollectionService" />
 <!DOCTYPE html >
 <html>
 <head>
@@ -34,15 +39,23 @@
 	</nav>
 	<article class="center-block">
 		<h3>首頁>看遊記</h3>
-		<c:if test="${not empty journalVOs}">
 			<div id="divRowsPerPage">
+			<form action="<c:url value="/_02_TripAndJournal/ShowAllJournalServlet.controller" />" method="get">
+				<select name="select">
+					<option value="byWatchNum" ${param.select=="byWatchNum"?'selected':''}>依瀏覽人次排序</option>
+					<option value="byCollectNum" ${param.select=="byCollectNum"?'selected':''}>依收藏人次排序</option>
+					<option value="byModifyTime" ${param.select=="byModifyTime"?'selected':''}>依最後更新時間排序</option>
+				</select>
+				<input type="submit" value="確定">
+			</form>
 			<%  rowsPerPage = 8;  //每頁的筆數 
 				rowNumber=journalVOs.size(); 
 			%>
 			<%@ include file="/_00_Misc/page1.file" %>
 			</div>
-			<c:forEach var="row" items="${journalVOs}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-				<c:if test="${row.post==true}">
+			<c:if test="${empty selectJournalVOs}"><!-- 第一次進入首頁時由上方載入 -->
+				<c:forEach var="row" items="${journalVOs}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+					<c:if test="${row.post==true}"><!-- 狀態是"已發布" -->
 					<div id="journalDiv">
 						<table>
 						<tr>
@@ -54,12 +67,26 @@
 							<td>
 							<h4 class="h4">${row.journalName}</h4>
 							${row.beginTime} ~ ${row.endTime}<br>
+								<c:forEach var="region" items="${regions}">
+									<c:if test="${region.codeId==row.regionId}">
+										地區:${region.codeName}&nbsp;&nbsp;&nbsp;&nbsp;	
+									</c:if>
+								</c:forEach>	
 							<c:forEach var="MemberVO" items="${MemberService.all}">
                              	<c:if test="${MemberVO.memberId==row.memberId}">
 									作者：${MemberVO.nickname}<br>
                              	</c:if>
-							</c:forEach>							
-							${row.visitorNum}
+							</c:forEach>
+							<!-- 瀏覽人次由servlet+1 -->
+							<!-- 收藏人次直接由DB CollectionTable撈資料 -->
+										<%int i = 0;%>
+							<c:forEach var="CollectionVO" items="${CollectionService.tripCollect}">
+								<c:if test="${CollectionVO.referenceType==row.journalId}">
+											<%i++;%>
+								</c:if>
+							</c:forEach>
+								有${row.visitorNum}人瀏覽,<%=i%>人收藏<br>
+								最後更新時間:${row.modifyTime}<br>							
 							</td>
 						</tr>
 						<tr><td>
@@ -72,11 +99,59 @@
 						</div>
 						</c:if>
 					</c:forEach>
+					</c:if>
+				<c:if test="${not empty selectJournalVOs}"><!-- select後由servlet載入 -->
+				<c:forEach var="row" items="${selectJournalVOs}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+					<c:if test="${row.post==true}"><!-- 狀態是"已發布" -->
+					<div id="journalDiv">
+						<table>
+						<tr>
+							<td>
+								<img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${row.journalId}" />" class="img-thumbnail" width="280" height="210">
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<h4 class="h4">${row.journalName}</h4>
+							${row.beginTime} ~ ${row.endTime}<br>
+								<c:forEach var="region" items="${regions}">
+									<c:if test="${region.codeId==row.regionId}">
+										地區:${region.codeName}&nbsp;&nbsp;&nbsp;&nbsp;	
+									</c:if>
+								</c:forEach>	
+							<c:forEach var="MemberVO" items="${MemberService.all}">
+                             	<c:if test="${MemberVO.memberId==row.memberId}">
+									作者：${MemberVO.nickname}<br>
+                             	</c:if>
+							</c:forEach>
+							<!-- 瀏覽人次由servlet+1 -->
+							<!-- 收藏人次直接由DB CollectionTable撈資料 -->
+										<%int i = 0;%>
+							<c:forEach var="CollectionVO" items="${CollectionService.tripCollect}">
+								<c:if test="${CollectionVO.referenceType==row.journalId}">
+											<%i++;%>
+								</c:if>
+							</c:forEach>
+								有${row.visitorNum}人瀏覽,<%=i%>人收藏<br>
+								最後更新時間:${row.modifyTime}<br>							
+							</td>
+						</tr>
+						<tr><td>
+						<div id="btnMore">	
+							<input type="button" value="看更多" onclick="location.href='<c:url value="/_02_TripAndJournal/ShowJournalDetail.controller?journalId=${row.journalId}"/>'" class="btn btn-primary">
+						</div>
+						</td></tr>
+						</table>
+						</div>
+						</c:if>
+					</c:forEach>
+					</c:if>
+					<h3>${error.noneSearch}</h3><!--  查無景點的錯誤訊息 -->
 				<div id="divChangePage">
 			<%@ include file="/_00_Misc/page2.file" %>
 			</div>
 			
-		</c:if>
+	
 	</article>
 	<footer>
 		<!-- import共同的 -->

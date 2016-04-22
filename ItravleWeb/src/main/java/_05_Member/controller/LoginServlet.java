@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
 		
 //根據Model執行結果顯示View
 		if(bean==null) {
-			error.put("password", "登入失敗，請再次輸入ID/PWD");
+			error.put("password", "登入失敗，請再次輸入並確定ID/PWD");
 			request.getRequestDispatcher(
 					"/_05_Member/Login.jsp").forward(request, response);
 		} else {

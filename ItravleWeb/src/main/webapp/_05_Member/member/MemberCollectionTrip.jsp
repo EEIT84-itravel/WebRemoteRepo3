@@ -5,6 +5,7 @@
 <%@ page import="_02_TripAndJournal.model.*"%>
 <%@ page import="_05_Member.model.*"%>
 <%@ page import="java.util.*"%>
+<jsp:useBean id="TripDetailService" scope="page" class="_02_TripAndJournal.model.TripDetailService" />
 <%
 TripService tripservice = new TripService();
 CollectionService collectionservice = new CollectionService();

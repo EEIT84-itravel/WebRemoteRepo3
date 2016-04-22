@@ -90,7 +90,8 @@ $(document).ready(function() {
 	<div id="sightTop">
 		<h3>首頁>看景點</h3>
 		<!-- Button 進階搜尋 -->
-		<button type="button" class="btn btn-primary btn-lg" id="searchBtn" data-toggle="modal" data-target="#myModal">進階搜尋</button></div>
+		<button type="button" class="btn btn-primary btn-lg" id="searchBtn" data-toggle="modal" data-target="#myModal">進階搜尋</button>
+	</div>
 		<br>
 		<!-- 進階搜尋 互動視窗 -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -131,6 +132,7 @@ $(document).ready(function() {
 									</td>
 								</tr>
 							</table>
+							<input type="hidden" name="select" value="byWatchNum">
 							<input type="submit" />
 						</form>
 					</div>
@@ -141,13 +143,14 @@ $(document).ready(function() {
 		<br>
 		<!-- 		景點欄位 -->
 	<div id="sights">
-	<c:if test="${empty sightVOSearch}">
+		<c:if test="${empty sightVOSearch}">
+			<c:if test="${empty error}"><!-- 判斷是否有錯誤訊息 -->
+			<div id="divRowsPerPage">
 			<%
 						rowsPerPage = 8; //每頁的筆數 
 						rowNumber = sightVOs.size();
 			%>
-			<div id="pageTop">
-					<%@ include file="/_00_Misc/page1.file"%>
+			<%@ include file="/_00_Misc/page1.file"%>
 			</div>
 		<c:forEach var="sightVO" items="${sightVOs}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 			<div class="SearchSight">
@@ -160,6 +163,7 @@ $(document).ready(function() {
 				<tr>
 					<td>
 					<h4 class="h4"><a href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />">${sightVO.sightName}</a></h4>
+
 					類型:
 					<c:forEach var="codeVO" items="${codeSvc.all}">
 						<c:if test="${codeVO.codeId==sightVO.sightTypeId}">
@@ -182,6 +186,7 @@ $(document).ready(function() {
 						</c:if>
 					</c:forEach>
 					${sightVO.watchNum}人瀏覽,<%=i%>人收藏<br>
+					最後更新時間:${sightVO.modifyTime}
 					</td>
 				</tr>
 				<tr>
@@ -197,8 +202,23 @@ $(document).ready(function() {
 			<div id="pageBottom">
 			<%@ include file="/_00_Misc/page2.file"%>
 			</div>
+			</c:if>
 		</c:if>
-		<c:if test="${not empty sightVOSearch}">
+		<c:if test="${not empty sightVOSearch}"><!-- 有搜尋結果由servlet回傳 -->
+		<div id="divRowsPerPage">
+			<form action="<c:url value="/_01_Sight/SightIndex.controller" />" method="get">
+				<input type="hidden" name="regionId" value="${param.regionId}">
+				<input type="hidden" name="countyId" value="${param.countyId}">
+				<input type="hidden" name="sightType" value="${param.sightType}">
+				<input type="hidden" name="keyWord" value="${param.keyWord}">
+				<select name="select">
+					<option value="byWatchNum" ${param.select=="byWatchNum"?'selected':''}>依瀏覽人次排序</option>
+					<option value="byCollectNum" ${param.select=="byCollectNum"?'selected':''}>依收藏人次排序</option>
+					<option value="byModifyTime" ${param.select=="byModifyTime"?'selected':''}>依最後更新時間排序</option>
+				</select>
+				<input type="submit" value="確定">
+			</form>
+		</div>
 		<c:forEach var="sightVO" items="${sightVOSearch}">
 			<div class="SearchSight">
 				<table>
@@ -233,7 +253,9 @@ $(document).ready(function() {
 							</c:if>
 						</c:forEach>
 						${sightVO.watchNum}人瀏覽,<%=i%>人收藏<br>
+						最後更新時間:${sightVO.modifyTime}
 						</td>
+						
 					</tr>
 					<tr>
 						<td>
@@ -246,10 +268,8 @@ $(document).ready(function() {
 			</div>
 			</c:forEach>
 		</c:if>
+		<h3>${error.noneSearch}</h3><!--  查無景點的錯誤訊息 -->
 		</div><!-- end of 景點欄位 -->
-		<p>${error.noneSearch}</p>
-		<!-- 		景點欄位 End -->
-		<div id="pagebtn"></div>
 	</article>
 	<footer>
 		<!-- import共同的 -->

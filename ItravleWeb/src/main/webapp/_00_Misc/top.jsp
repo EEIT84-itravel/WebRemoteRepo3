@@ -78,7 +78,7 @@ nav {
 		        <!-- 	<li class="active"><a href="#">看景點<span class="sr-only">(current)</span></a></li> -->
 				<li class="whiteNav"><a href="<c:url value="/_01_Sight/SightIndex.jsp"/>">看景點</a></li>							
         		<li class="whiteNav"><a href="<c:url value="/_02_TripAndJournal/TripIndex.jsp"/>">看行程</a></li>
-        		<li class="whiteNav"><a href="<c:url value="/_02_TripAndJournal/ShowAllJournalServlet.controller"/>">看遊記</a></li>
+        		<li class="whiteNav"><a href="<c:url value="/_02_TripAndJournal/JournalIndex.jsp"/>">看遊記</a></li>
         		<c:choose>
 					<c:when test="${empty user}"><li class="whiteNav"><a href="<c:url value="/_05_Member/Login.jsp"/>">排行程</a></li></c:when>
 					<c:when test="${not empty user}"><li class="whiteNav"><a href="<c:url value="/_02_TripAndJournal/member/NewTrip.jsp" />">排行程</a></li></c:when>

@@ -97,7 +97,7 @@
 					<td>活動內容：${eventVO.eventContent}</td>
 				</tr>
 				<tr>
-					<td><a href="<c:url value="/ItravleWeb/_03_Event/AllEvent.jsp" />">回活動首頁</a></td>
+					<td><a href="<c:url value="/_03_Event/AllEvent.jsp" />">回活動首頁</a></td>
 				</tr>
 			</table>
 		</form>

@@ -20,44 +20,34 @@ import _02_TripAndJournal.model.TripVO;
 @WebServlet("/_02_TripAndJournal/ShowAllJournalServlet.controller")
 public class ShowAllJournalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-//顯示所有遊記至遊記首頁
+//顯示排序後遊記至遊記首頁
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
 		// 接收參數
 		request.setCharacterEncoding("UTF-8");
-		String temp = request.getParameter("journalId");
 		Map<String, String> error = new HashMap<String, String>();
 		request.setAttribute("error", error);
-		// 型態轉換
-		int journalId = 0;
-		if (temp != null && temp.trim().length() != 0) {
-			journalId = Integer.parseInt(temp);
-		} else {
-			error.put("journalId", "遊記ID必須是數字");
+		String select = request.getParameter("select");
+		
+		List<JournalVO> journalVOs=null;
+		JournalService journalService=new JournalService();
+		if ("byWatchNum".equals(select)) {
+			journalVOs = journalService.selectOrderByWatch();
+		} else if ("byCollectNum".equals(select)) {
+			journalVOs=journalService.searchByCollectNum();
+		} else if ("byModifyTime".equals(select)) {
+			journalVOs = journalService.selectOrderByModifyTime();
 		}
-		// 資料驗證-無
-
-		// 呼叫model
-		JournalService journalService = new JournalService();
-
-		List<JournalVO> journalVOs = null;
-		JournalVO journalVO = null;
-		if (journalId == 0) {
-			journalVOs = journalService.getAll();
-		} else {
-			journalVO = journalService.select(journalId);
-		}
+		
 		if (!journalVOs.isEmpty()) {
-			request.setAttribute("journalVOs", journalVOs);
-			request.setAttribute("journalVO", journalVO);
+			request.setAttribute("selectJournalVOs", journalVOs);
 			request.getRequestDispatcher(
 					"/_02_TripAndJournal/JournalIndex.jsp").forward(request,
 					response);
 		} else {
-			error.put("journalId", "查無遊記資料");
+			error.put("noneSearch", "查無遊記資料");
 			request.getRequestDispatcher(
-					"/_02_TripAndJournal/member/NewJournal.jsp").forward(
+					"/_02_TripAndJournal/JournalIndex.jsp").forward(
 					request, response);
 		}
 	}
