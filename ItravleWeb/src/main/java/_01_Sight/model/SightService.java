@@ -8,6 +8,11 @@ import _05_Member.model.dao.CollectionDAOHibernate;
 
 public class SightService {
 	private SightDAOHibernate dao = new SightDAOHibernate();
+	
+	//景點按照景點Id排序 後台用
+	public List<SightVO> selectAllbySightId() {
+		return dao.selectAllbySightId();
+	}
 
 	// 搜尋後按照收藏人次排
 	public List<SightVO> searchByCollectNum(SightVO sightVOp) {

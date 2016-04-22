@@ -113,7 +113,7 @@ nav {
 					<li><a href="<c:url value="/_05_Member/Login.jsp" />">Login</a></li>
 				</c:if>
 				<c:if test="${not empty user}">
-					<li><a href="<c:url value="/_05_Member/member/Logout.jsp" />">Logout</a></li>
+					<li><a href="<c:url value="/_05_Member/Logout.jsp" />">Logout</a></li>
 				</c:if>
 			</ul>
 		</div>

@@ -5,7 +5,7 @@
 <c:remove var="LoginOK" />
 <%
 	session.removeAttribute("user");
-	session.removeAttribute("Admin");
+	session.removeAttribute("admin");
 %>
 <html>
 <head>

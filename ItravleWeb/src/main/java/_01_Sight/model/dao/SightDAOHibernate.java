@@ -174,9 +174,27 @@ public class SightDAOHibernate {
 	}
 
 	// 全部景點(首頁)
-	private static final String GET_ALL_STMT = "from SightVO order by watchNum desc";
+	private static final String GET_ALL_STMT_ORDER_BY_WN = "from SightVO order by watchNum desc";
 
 	public List<SightVO> selectAll() {
+		List<SightVO> sightVOs = null;
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(GET_ALL_STMT_ORDER_BY_WN);
+			sightVOs = query.list();
+			session.getTransaction().commit();
+		} catch (HibernateException e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
+		return sightVOs;
+	}
+	
+	private static final String GET_ALL_STMT = "from SightVO order by sightId";
+
+	public List<SightVO> selectAllbySightId() {
 		List<SightVO> sightVOs = null;
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
 				.getCurrentSession();
