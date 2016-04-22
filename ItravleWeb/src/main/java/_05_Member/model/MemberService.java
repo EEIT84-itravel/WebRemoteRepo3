@@ -1,5 +1,6 @@
 package _05_Member.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import _05_Member.model.dao.MemberDAOHibernate;
@@ -8,14 +9,22 @@ public class MemberService {
 	private MemberDAOHibernate memberDAO = new MemberDAOHibernate();
 
 	public MemberVO login(String memberAccount, String password) {
-		List<MemberVO> bean = memberDAO.findByAccount(memberAccount);
-		MemberVO memberbean = bean.get(0);
-		if (bean != null) {
+		List<MemberVO> bean = new ArrayList<MemberVO>();
+		 bean = memberDAO.findByAccount(memberAccount);
+		 MemberVO memberbean = new MemberVO();
+		 if(bean != null &&bean.size()>0){
+		 memberbean = bean.get(0);
+		 }else{
+			 memberbean = null;
+		 }
+		if (bean != null &&bean.size()>0) {
 			String pass = memberbean.getPassword();
 			if (pass.equals(password)) {
 				System.out.println("Success");
 				return memberbean;
 			}
+			System.out.println("失敗");
+			return memberbean;
 	 }
 	 System.out.println("false");
 	 return null;

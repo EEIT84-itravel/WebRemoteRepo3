@@ -17,6 +17,7 @@ public class CollectionDAOHibernate {
 
 	private static final String FIND_BY_MEMBERID_AND_TYPEID = "from  CollectionVO where type_id =:type_id and memberId=:memberId";
 	private static final String FIND_SIGHT_BY_TYPEID = "from  CollectionVO where type_id =:type_id";
+	private static final String FIND_BY_REFERENCETYPE_AND_TYPEID = "from  CollectionVO where type_id =:type_id and referenceType=:referenceType";
 	
 	
 	CollectionVO collectionVO = null;
@@ -63,6 +64,26 @@ public class CollectionDAOHibernate {
 			session.getTransaction().rollback();
 			return false;
 		}
+	}
+	//從類型與參照編號找出相關收藏
+	public List<CollectionVO> findByTypeIdAndReferenceType(String typeId,Integer referenceType){
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+			List<CollectionVO> list = null;
+			try {
+				session.beginTransaction();
+				Query query = session
+						.createQuery(FIND_BY_REFERENCETYPE_AND_TYPEID);
+				query.setParameter("type_id", typeId);
+				query.setParameter("referenceType", referenceType);
+				list = query.list();
+				session.getTransaction().commit();
+			} catch (RuntimeException e) {
+				session.getTransaction().rollback();
+				throw e;
+			}
+			return list;
+		
 	}
 	//找出同類型的總收藏數
 	public List<CollectionVO> findByTypeId(String typeId){
