@@ -85,7 +85,7 @@ pageContext.setAttribute("journalVO", journalVO);
 			<c:forEach var="journalVO" items="${journalVO}">
 			<tr>
 			<td><img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${journalVO.journalId}" />" width="240" height="180"></td>
-			<td>${journalVO.journalName}</td>
+			<td><a href="<c:url value="/_02_TripAndJournal/ShowJournalDetail.controller?journalId=${journalVO.journalId}"/>">${journalVO.journalName}</a>&nbsp;&nbsp;</td>
 			<td>${journalVO.beginTime}</td>
 			<td>${journalVO.modifyTime}</td>
 			<td>${journalVO.visitorNum}</td>
