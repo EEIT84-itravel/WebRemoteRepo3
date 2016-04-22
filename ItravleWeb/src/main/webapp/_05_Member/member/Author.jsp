@@ -44,7 +44,7 @@
 							<td><img
 								src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?tripId=${tripVO.tripId}" />"
 								width="240" height="180"></td>
-							<td>${tripVO.tripName}</td>
+							<td><a href="<c:url value="/_02_TripAndJournal/ShowTrip.controller?tripId=${tripVO.tripId}" />">${tripVO.tripName}</a>&nbsp;&nbsp;</td>
 							<td>${tripVO.tripStartDate}</td>
 							<td>${tripVO.modifyTime}</td>
 							<td>${tripVO.watchNum}</td>

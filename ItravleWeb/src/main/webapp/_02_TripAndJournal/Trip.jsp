@@ -18,6 +18,17 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_02_TripAndJournal/Trip.css"/>"/>
+<script type="text/javascript">
+	$(function() {
+		$("#tabs").tabs({
+			event : "click"
+		});
+		$("#collect").bind('click', collect);
+	});
+	function collect() {
+		window.location.href = "../_02_TripAndJournal/member/collectiontrip.controller?tripId="+ $("#tripId").val();
+	};
+</script>
 </head>
 <body>
 	<header>
@@ -29,9 +40,13 @@
 		<jsp:include page="/_00_Misc/top.jsp" />		
 	</nav>
 	<article class="center-block">
-		<h1 class="h1">${tripVO.tripName}</h1>
+	<input type="hidden"  id="tripId" value="${tripVO.tripId}">	
+		<h1 class="h1">${tripVO.tripName} <!-- 		判斷收藏景點鈕是否出現 寫在SightServlet -->
+ 																		<c:if test="${flag}"> 
+																			<input type="button" value="收藏行程" id='collect'>
+ 																		</c:if></h1> 
 		<div id="divTrip" class="pull-left">
-			<div id="divTripTop">				
+			<div id="divTripTop">
 				<h5 class="h5">起始日期: ${tripVO.tripStartDate}</h5>
 				<h5 class="h5">結束日期: ${tripVO.tripEndDate}</h5>
 				<h5 class="h5">startTime: ${tripVO.startTime}</h5>

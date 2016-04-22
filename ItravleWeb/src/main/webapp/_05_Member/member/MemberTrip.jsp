@@ -39,6 +39,7 @@ pageContext.setAttribute("tripVO", tripVO);
 					<th>發佈狀態</th>
 					<th></th>
 					<th></th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -52,7 +53,7 @@ pageContext.setAttribute("tripVO", tripVO);
                           </c:if>
 				</c:forEach>
 			</td>
-			<td>${tripVO.tripName}</td>
+			<td><a href="<c:url value="/_02_TripAndJournal/ShowTrip.controller?tripId=${tripVO.tripId}" />">${tripVO.tripName}</a>&nbsp;&nbsp;</td>
 			<td>${tripVO.tripStartDate}</td>
 			<td>${tripVO.modifyTime}</td>
 			<td>${tripVO.watchNum}</td>
@@ -66,6 +67,7 @@ pageContext.setAttribute("tripVO", tripVO);
 			</td>
 			<td><a href="<c:url value="/_05_Member/member/changetriplpost.controller?tripId=${tripVO.tripId}"/>">改變發佈狀態</a>&nbsp;&nbsp;</td>
 			<td><a href="<c:url value="/_05_Member/member/tripfinddetail.controller?tripId=${tripVO.tripId}"/>">修改行程</a>&nbsp;&nbsp;</td>
+			<td><a href="<c:url value="/_05_Member/member/delmytrip.controller?tripId=${tripVO.tripId}"/>">刪除行程</a>&nbsp;&nbsp;</td>
 			</tr>
 			</c:forEach>
 			</c:if>

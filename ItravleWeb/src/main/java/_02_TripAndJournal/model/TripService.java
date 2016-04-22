@@ -64,6 +64,15 @@ public class TripService {
 		}
 		return result;
 	}
+	//會員刪除行程
+	public boolean deleteTrip(Integer tripId){
+		tripDAOHibernate = new TripDAOHibernate();
+		if(tripId!=null){
+			tripDAOHibernate.delete(tripId);
+		return true;
+		}
+		return false;
+	}
 
 	public TripVO select(Integer tripId) {
 		TripVO result = null;

@@ -75,7 +75,7 @@
 			</tr>
 			<tr>
 				<td>*密碼 :</td>
-				<td><input type="text" name="password" value="${user.password}"></td>
+				<td><input type="password" name="password" value="${user.password}"></td>
 				<td><span class="error">${error.password}</span></td>
 			</tr>
 			<tr>

@@ -5,6 +5,7 @@
 <%@ page import="_02_TripAndJournal.model.*"%>
 <%@ page import="_05_Member.model.*"%>
 <%@ page import="java.util.*"%>
+<jsp:useBean id="TripDetailService" scope="page" class="_02_TripAndJournal.model.TripDetailService" />
 <%
 TripService tripservice = new TripService();
 CollectionService collectionservice = new CollectionService();
@@ -46,8 +47,14 @@ pageContext.setAttribute("tripVO", tripVO);
 			<c:if test="${not empty tripVO}">
 			<c:forEach var="tripVO" items="${tripVO}">
 			<tr>
-			<td><img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?tripId=${tripVO.tripId}" />" width="240" height="180"></td>
-			<td>${tripVO.tripName}</td>
+			<td>
+			<c:forEach var="TripDetailVO" items="${TripDetailService.mainPics}">
+               <c:if test="${TripDetailVO.tripId==tripVO.tripId}">
+					<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${TripDetailVO.referenceNo}" />" width="240" height="180">
+               </c:if>
+			</c:forEach>
+			</td>
+			<td><a href="<c:url value="/_02_TripAndJournal/ShowTrip.controller?tripId=${tripVO.tripId}" />">${tripVO.tripName}</a>&nbsp;&nbsp;</td>
 			<td>${tripVO.tripStartDate}</td>
 			<td>${tripVO.modifyTime}</td>
 			<td>${tripVO.watchNum}</td>

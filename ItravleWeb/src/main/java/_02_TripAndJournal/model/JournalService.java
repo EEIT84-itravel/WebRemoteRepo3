@@ -79,6 +79,15 @@ public class JournalService {
 		result = journalDAOHibernate.select(journal_id);
 		return result;
 	}
+	//刪除一筆遊記
+	public boolean deleteJournal(Integer journalId){
+		journalDAOHibernate = new JournalDAOHibernate();
+		if(journalId!=null){
+			journalDAOHibernate.delete(journalId);
+		return true;
+		}
+		return false;
+	}
 	// ELjoin時使用
 	public List<JournalVO> getAll() {
 		journalDAOHibernate = new JournalDAOHibernate();

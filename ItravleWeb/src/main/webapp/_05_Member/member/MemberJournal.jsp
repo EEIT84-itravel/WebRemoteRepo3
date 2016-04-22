@@ -76,6 +76,8 @@ pageContext.setAttribute("journalVO", journalVO);
 					<th>人氣</th>
 					<th>發佈狀態</th>
 					<th></th>
+					<th></th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -96,6 +98,8 @@ pageContext.setAttribute("journalVO", journalVO);
 			</c:if>		
 			</td>
 			<td><a href="<c:url value="/_05_Member/member/changejournalpost.controller?journalId=${journalVO.journalId}"/>">改變發佈狀態</a>&nbsp;&nbsp;</td>
+			<td><a href="<c:url value="/_05_Member/member/.controller?journalId=${journalVO.journalId}"/>">修改遊記</a>&nbsp;&nbsp;</td>
+			<td><a href="<c:url value="/_05_Member/member/delmyjournal.controller?journalId=${journalVO.journalId}"/>">刪除遊記</a>&nbsp;&nbsp;</td>
 			</tr>
 			</c:forEach>
 			</c:if>
