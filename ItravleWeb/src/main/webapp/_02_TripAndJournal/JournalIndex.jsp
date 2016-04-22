@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="_00_Misc.model.*"%>
 <%@ page import="_02_TripAndJournal.model.*"%>
 <%@ page import="java.util.*"%>
 <% 
 	JournalService journalService = new JournalService();
 	List<JournalVO> journalVOs = journalService.getAllPost();
 	pageContext.setAttribute("journalVOs", journalVOs);
+	CodeService codeService = new CodeService();
+	List<CodeVO> codeVO = codeService.select("region");
+	pageContext.setAttribute("regions", codeVO);
     int rowNumber=0;      //總筆數
     int pageNumber=0;     //總頁數      
     int whichPage=1;      //第幾頁
@@ -54,12 +58,17 @@
 							<td>
 							<h4 class="h4">${row.journalName}</h4>
 							${row.beginTime} ~ ${row.endTime}<br>
+								<c:forEach var="region" items="${regions}">
+									<c:if test="${region.codeId==row.regionId}">
+										地區:${region.codeName}<br>	
+									</c:if>
+								</c:forEach>	
 							<c:forEach var="MemberVO" items="${MemberService.all}">
                              	<c:if test="${MemberVO.memberId==row.memberId}">
 									作者：${MemberVO.nickname}<br>
                              	</c:if>
 							</c:forEach>							
-							${row.visitorNum}
+							觀看人次:${row.visitorNum}
 							</td>
 						</tr>
 						<tr><td>

@@ -102,10 +102,8 @@ clear:both;
 #searchBtn{
 float: right;
 }
-#sightTop h5{
-margin: 0;
-font-size: 30px;
-padding: 20px;
+#divRowsPerPage {
+	text-align: right;
 }
 </style>
 </head>
@@ -119,10 +117,9 @@ padding: 20px;
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article class="center-block">
-	<div id="sightTop">
-		<h5>首頁>看景點
+		<h5>首頁>看景點</h5><br>
 		<!-- Button 進階搜尋 -->
-		<button type="button" class="btn btn-primary btn-lg" id="searchBtn" data-toggle="modal" data-target="#myModal">進階搜尋</button></h5></div>
+		<button type="button" class="btn btn-primary btn-lg" id="searchBtn" data-toggle="modal" data-target="#myModal">進階搜尋</button>
 		<br>
 		<!-- 進階搜尋 互動視窗 -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -163,6 +160,7 @@ padding: 20px;
 									</td>
 								</tr>
 							</table>
+							<input type="hidden" name="select" value="byWatchNum">
 							<input type="submit" />
 						</form>
 					</div>
@@ -173,20 +171,19 @@ padding: 20px;
 		<br>
 		<!-- 		景點欄位 -->
 	<div id="sights">
-	<c:if test="${empty sightVOSearch}">
+		<c:if test="${empty sightVOSearch}">
+			<c:if test="${empty error}"><!-- 判斷是否有錯誤訊息 -->
+			<div id="divRowsPerPage">
 			<%
 						rowsPerPage = 8; //每頁的筆數 
 						rowNumber = sightVOs.size();
 			%>
-			<div id="pageTop">
-					<%@ include file="/_00_Misc/page1.file"%>
+			<%@ include file="/_00_Misc/page1.file"%>
 			</div>
 		<c:forEach var="sightVO" items="${sightVOs}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 			<div class="SearchSight">
 				<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="280" height="210">
-				<p>
 					<h3><a href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />">${sightVO.sightName}</a></h3>
-				</p>
 				<p>
 					類型:
 					<c:forEach var="codeVO" items="${codeSvc.all}">
@@ -212,19 +209,33 @@ padding: 20px;
 										</c:if>
 									</c:forEach>
 				<p>${sightVO.watchNum}人瀏覽,<%=i%>人收藏</p>
+				<p>最後更新時間:${sightVO.modifyTime}</p>
 			</div>
 			</c:forEach>
 			<div id="pageBottom">
 			<%@ include file="/_00_Misc/page2.file"%>
 			</div>
+			</c:if>
 		</c:if>
-		<c:if test="${not empty sightVOSearch}">
+		<c:if test="${not empty sightVOSearch}"><!-- 有搜尋結果由servlet回傳 -->
+		<div id="divRowsPerPage">
+			<form action="<c:url value="/_01_Sight/SightIndex.controller" />" method="get">
+			<input type="hidden" name="regionId" value="${param.regionId}">
+			<input type="hidden" name="countyId" value="${param.countyId}">
+			<input type="hidden" name="sightType" value="${param.sightType}">
+			<input type="hidden" name="keyWord" value="${param.keyWord}">
+				<select name="select">
+					<option value="byWatchNum" ${param.select==""?'selected':''}>依瀏覽人次排序</option>
+					<option value="byCollectNum" ${param.select=="byCollectNum"?'selected':''}>依收藏人次排序</option>
+					<option value="byModifyTime" ${param.select=="byModifyTime"?'selected':''}>依最後更新時間排序</option>
+				</select>
+				<input type="submit" value="確定">
+			</form>
+		</div>
 		<c:forEach var="sightVO" items="${sightVOSearch}">
 			<div class="SearchSight">
 				<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="280" height="210">
-				<p>
-					<h3><a href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />">${sightVO.sightName}</a></h3>
-				</p>
+				<h3><a href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />">${sightVO.sightName}</a></h3>
 				<p>
 					類型:
 					<c:forEach var="codeVO" items="${codeSvc.all}">
@@ -250,13 +261,12 @@ padding: 20px;
 										</c:if>
 									</c:forEach>
 				<p>${sightVO.watchNum}人瀏覽,<%=i%>人收藏</p>
+				<p>最後更新時間:${sightVO.modifyTime}</p>
 			</div>
 			</c:forEach>
 		</c:if>
+		<h3>${error.noneSearch}</h3><!--  查無景點的錯誤訊息 -->
 		</div><!-- end of 景點欄位 -->
-		<p>${error.noneSearch}</p>
-		<!-- 		景點欄位 End -->
-		<div id="pagebtn"></div>
 	</article>
 	<footer>
 		<!-- import共同的 -->

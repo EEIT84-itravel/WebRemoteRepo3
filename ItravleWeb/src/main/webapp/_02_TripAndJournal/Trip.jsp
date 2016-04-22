@@ -2,6 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="sightSvc" scope="page" class="_01_Sight.model.SightService" />
+<%@page import="_00_Misc.model.*"%>
+<%@ page import="java.util.*"%>
+<%
+CodeService codeService = new CodeService();
+List<CodeVO> codeVO = codeService.select("region");
+pageContext.setAttribute("regions", codeVO);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,11 +41,14 @@
 			<div id="divTripTop">				
 				<h5 class="h5">起始日期: ${tripVO.tripStartDate}</h5>
 				<h5 class="h5">結束日期: ${tripVO.tripEndDate}</h5>
-				<h5 class="h5">startTime: ${tripVO.startTime}</h5>
-				<h5 class="h5">總預算: ${tripVO.totalBudget}</h5>
-				<h5 class="h5">regionId: ${tripVO.regionId}</h5>
-				<h5 class="h5">watchNum: ${tripVO.watchNum}</h5>
-				<h5 class="h5">tripIntro: ${tripVO.tripIntro}</h5>
+<%-- 				<h5 class="h5">總預算: ${tripVO.totalBudget}</h5> --%>
+				<c:forEach var="region" items="${regions}">
+						<c:if test="${region.codeId==tripVO.regionId}">
+								<h5 class="h5">地區:${region.codeName}</h5>	
+						</c:if>
+				</c:forEach>	
+				<h5 class="h5">瀏覽人次: ${tripVO.watchNum}</h5>
+				<h5 class="h5">行程簡介: ${tripVO.tripIntro}</h5>
 			</div>	<!-- end divTripTop -->
 			<div id="divTripDetail">
 				<c:forEach var="tripDetailVOs" items="${tripDetailVOs}">
@@ -54,7 +64,6 @@
 									<h4 class="text-left h4"><strong>${sightVO2.sightName}</strong></h4>
 	                            </c:if>
 							</c:forEach>
-							停留時間：${tripDetailVOs.stayTime}<br>
 							預算：${tripDetailVOs.sightBudget}元<br>
 							</td>							
 						</tr>

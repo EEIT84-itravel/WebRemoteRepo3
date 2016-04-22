@@ -1,6 +1,7 @@
 package _05_Member.model.dao;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 import java.util.*;
@@ -23,7 +24,6 @@ public class CollectionDAOHibernate {
 	public CollectionVO insert(CollectionVO collectionVO) {
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
 				.getCurrentSession();
-
 		try {
 			session.beginTransaction();
 			session.save(collectionVO);
@@ -31,7 +31,6 @@ public class CollectionDAOHibernate {
 		} catch (RuntimeException e) {
 			session.getTransaction();
 			throw e;
-
 		}
 		return collectionVO;
 	}
@@ -46,10 +45,8 @@ public class CollectionDAOHibernate {
 		} catch (RuntimeException e) {
 			session.getTransaction().rollback();
 			throw e;
-
 		}
 		return collectionVO;
-
 	}
 
 	public Boolean delete(Integer CollectionNo) {
@@ -207,6 +204,24 @@ public class CollectionDAOHibernate {
 			query.setParameter("memberId", memberId);
 			list = query.list();
 			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return list;
+	}
+	
+	//收藏依照"收藏景點總人數"排序的景點ID List
+	public List<Integer> selectCountSight(){
+		List<Integer> list=null;
+		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
+				.getCurrentSession();
+		try {
+			session.beginTransaction();
+		String sql = "select reference_type from collection where type_id='type_id01' group by reference_type order by count(*) desc";
+		SQLQuery sqlQuery = session.createSQLQuery(sql);
+		list  = sqlQuery.list();
+		session.getTransaction().commit();
 		} catch (RuntimeException e) {
 			session.getTransaction().rollback();
 			throw e;

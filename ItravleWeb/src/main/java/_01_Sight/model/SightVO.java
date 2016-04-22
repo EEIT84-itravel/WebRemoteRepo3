@@ -34,6 +34,16 @@ public class SightVO implements Serializable {
 	private boolean del;		 //刪除
 	
 	@Override
+	public boolean equals(Object obj) {
+	        if (obj instanceof SightVO) {   
+	        	SightVO u = (SightVO) obj;   
+	            return this.sightId.equals(u.sightId)   
+	                    && this.sightName.equals(sightName);   
+	        }   
+		return super.equals(obj);
+	}
+	
+	@Override
 	public String toString() {
 		return "SightVO [sightId=" + sightId + ", sightName=" + sightName
 				+ ", intro=" + intro + ", regionId=" + regionId + ", countyId="

@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:useBean id="MemberService" scope="page"
-	class="_05_Member.model.MemberService" />
-<jsp:useBean id="SightService" scope="page"
-	class="_01_Sight.model.SightService" />
+<jsp:useBean id="MemberService" scope="page" class="_05_Member.model.MemberService" />
+<jsp:useBean id="SightService" scope="page" class="_01_Sight.model.SightService" />
+<%@page import="_00_Misc.model.*"%>
+<%@ page import="java.util.*"%>
+<%
+CodeService codeService = new CodeService();
+List<CodeVO> codeVO = codeService.select("region");
+pageContext.setAttribute("regions", codeVO);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,18 +17,13 @@
 <title>${showJournalVO.journalName}</title>
 
 <!-- jQuery -->
-<script type="text/javascript"
-	src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
 <!-- jQuery ui -->
-<script type="text/javascript"
-	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
 <!-- jQuery ui -->
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/css/_00_Misc/main.css"/>" />
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/css/_02_TripAndJournal/Journal.css"/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_02_TripAndJournal/Journal.css"/>" />
 </head>
 <body>
 	<header>
@@ -39,8 +39,7 @@
 		<div id="divMember">
 			<table id="member" class="table table-bordered">
 				<tr>
-					<td class="memberPic"><img
-						src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${showJournalVO.memberId}" />"
+					<td class="memberPic"><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${showJournalVO.memberId}" />"
 						width="100px" height="100px">
 					<td>
 
@@ -51,6 +50,13 @@
 									</c:if>
 								</c:forEach></li>
 							<li>遊玩日期：${showJournalVO.beginTime}~${showJournalVO.endTime}</li>
+							<c:forEach var="region" items="${regions}">
+								<c:if test="${region.codeId==showJournalVO.regionId}">
+									<li>地區:${region.codeName}</li>	
+								</c:if>
+							</c:forEach>	
+							<li>瀏覽人次: ${showJournalVO.visitorNum}</li>
+							<li>遊記簡介: ${showJournalVO.journalIntro}</li>
 						</ul>
 				</tr>
 			</table>

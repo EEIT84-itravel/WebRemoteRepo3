@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="_00_Misc.model.*"%>
 <%@ page import="_02_TripAndJournal.model.*"%>
 <%@ page import="java.util.*"%>
 <% 
 	TripService tripService = new TripService();
 	List<TripVO> tripVOs = tripService.getAllPost();
 	pageContext.setAttribute("tripVOs", tripVOs);
+	CodeService codeService = new CodeService();
+	List<CodeVO> codeVO = codeService.select("region");
+	pageContext.setAttribute("regions", codeVO);
     int rowNumber=0;      //總筆數
     int pageNumber=0;     //總頁數      
     int whichPage=1;      //第幾頁
@@ -37,6 +41,9 @@
 	<h3>首頁>看行程</h3>	
 		<c:if test="${not empty tripVOs}">
 			<div id="divRowsPerPage">
+				<select>
+					<option value="">依瀏覽人次排序</option>
+				</select>
 			<%  rowsPerPage = 8;  //每頁的筆數 
 				rowNumber=tripVOs.size(); 
 			%>
@@ -61,7 +68,12 @@
 						<tr>
 							<td>
 								<h4 class="h4">${row.tripName}</h4>
-								${row.tripStartDate} ~ ${row.tripEndDate}<br>							
+								${row.tripStartDate} ~ ${row.tripEndDate}<br>	
+								<c:forEach var="region" items="${regions}">
+									<c:if test="${region.codeId==row.regionId}">
+										地區:${region.codeName}<br>	
+									</c:if>
+								</c:forEach>						
 								<c:forEach var="MemberVO" items="${MemberService.all}">
                              		<c:if test="${MemberVO.memberId==row.memberId}">
 										作者：${MemberVO.nickname}<br>

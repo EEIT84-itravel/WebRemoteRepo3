@@ -23,6 +23,7 @@ public class SightIndexServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		Map<String, String> error = new HashMap<String, String>();
 		request.setAttribute("error", error);
+		String select = request.getParameter("select");
 
 		// 接收HTML Form資料
 		String region = request.getParameter("regionId");// 地區
@@ -40,7 +41,13 @@ public class SightIndexServlet extends HttpServlet {
 		// 呼叫model
 		SightService sightService = new SightService();
 
-		sightVOs = sightService.search(sightVO2);
+		if ("byWatchNum".equals(select)) {
+			sightVOs = sightService.search(sightVO2);
+		} else if ("byCollectNum".equals(select)) {
+			sightVOs=sightService.searchByCollectNum(sightVO2);
+		} else if ("byModifyTime".equals(select)) {
+			sightVOs = sightService.searchByModifyTime(sightVO2);
+		}
 		if (sightVOs.isEmpty()) {
 			error.put("noneSearch", "查無此筆資訊");
 		}
@@ -49,11 +56,12 @@ public class SightIndexServlet extends HttpServlet {
 					request, response);
 			return;
 		}
-		
+
 		request.setAttribute("sightVOSearch", sightVOs);
 		// 根據Model執行結果顯示View
 		request.getRequestDispatcher("/_01_Sight/SightIndex.jsp").forward(
 				request, response);
+
 	}
 
 	protected void doPost(HttpServletRequest request,

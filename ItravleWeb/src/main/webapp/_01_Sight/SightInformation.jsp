@@ -93,7 +93,7 @@ text-align: center;
 			</p>
 			<p>門票:${sightVO.ticket}</p>
 			<p>營業時間:${openTime}-${closeTime}</p>
-			<p>建議停留時間:${sightVO.spendHour}</p>
+<%-- 			<p>建議停留時間:${sightVO.spendHour}</p> --%>
 			<p>
 				建議旅行時段:
 				<c:forEach var="codeVO" items="${codeSvc.all}">
@@ -104,8 +104,8 @@ text-align: center;
 			</p>
 			<p>地址:${sightVO.addr}</p>
 			<p>交通方式:</p>
-			<p>${trans1}</p>
-			<p>${trans2}</p>
+			<p>　　${trans1}</p>
+			<p>　　${trans2}</p>
 						<div id="tabss">
 						<div id="tabs">
 							<ul>
@@ -113,7 +113,7 @@ text-align: center;
 								<li><a href="#tabs-2">相關遊記</a></li>
 								<li><a href="#tabs-3">留言</a></li>
 							</ul>
-							<div id="tabs-1">
+							<div id="tabs-1"><!-- tab 相關行程 -->
 							<table>
 								<c:forEach var="tripVO" items="${tripVOs}" end="4"><!-- "4"為顯示5筆  -->
 								<tr>
@@ -137,7 +137,7 @@ text-align: center;
 								</c:forEach>
 							</table>
 							</div>
-							<div id="tabs-2">
+							<div id="tabs-2"><!-- tab 相關遊記 -->
 							<table>
 							<c:forEach var="journalVO" items="${journalVOs}" end="4"><!-- "4"為顯示5筆  -->
 							<tr>
