@@ -120,6 +120,17 @@
 					$('#sel3').append('<option value="'+sightIds[k]+'">'+sightNames[k]+'</option>');
 				}
 	}
+	var openFile = function(event) {
+	    var input = event.target;
+
+	    var reader = new FileReader();
+	    reader.onload = function(){
+	      var dataURL = reader.result;
+	      var output = document.getElementById('output');
+	      output.src = dataURL;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  };
 </script>
 </head>
 <body>
@@ -177,8 +188,8 @@
 				</tr>
 				<tr>
 					<td>活動圖片：</td>
-					<td><input type="file" name="eventPhoto"></td>
-					<td><span class="error">${error.eventPhoto}</span></td>
+					<td><input type='file' accept='image/*' onchange='openFile(event)' name="eventPhoto"><br>
+					<img id='output'></td>
 				</tr>
 				<tr>
 					<td><input type="hidden" name="action" value="insert"></td>

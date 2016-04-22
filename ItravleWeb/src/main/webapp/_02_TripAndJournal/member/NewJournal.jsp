@@ -13,6 +13,7 @@
 	List<CodeVO> region = service.select("region");
 	pageContext.setAttribute("region", region);
 %>
+
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
@@ -70,11 +71,11 @@ article {
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
+	<article class="center-block">
 	<div id="tabs">
   		<ul>
    			 <li><a href="#tabs-1">建立新的遊記</a></li>
-  			  <li><a href="<c:url value="/_02_TripAndJournal/member/FromTripToJournal.jsp"/>">從我的遊記載入</a></li>
+  			  <li><a href="<c:url value="/_02_TripAndJournal/member/FromTripToJournal.jsp"/>">從我的行程載入</a></li>
    	   </ul>
  	 <div id="tabs-1">
 		<h3>建立新的遊記</h3>

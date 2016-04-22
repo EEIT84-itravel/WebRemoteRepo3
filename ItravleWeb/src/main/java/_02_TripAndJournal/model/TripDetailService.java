@@ -7,6 +7,11 @@ import _02_TripAndJournal.model.dao.TripDetailDAOHibernate;
 
 public class TripDetailService {
 	private TripDetailDAOHibernate tripDetailDAOHibernate;
+	
+	public List<TripDetailVO> getAll(){
+		tripDetailDAOHibernate =new TripDetailDAOHibernate();
+		return tripDetailDAOHibernate.select();
+	}
 
 	public TripDetailVO insert(TripDetailVO tripDetailVO) {
 		TripDetailVO result = null;

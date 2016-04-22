@@ -82,9 +82,23 @@ public class TripService {
 		}
 		return result;
 	}
-
+	
+	//取得所有行程
 	public List<TripVO> getAll() {
 		tripDAOHibernate = new TripDAOHibernate();
 		return tripDAOHibernate.select();
+	}
+	
+	//取得所有狀態為"已發佈"的行程
+	public List<TripVO> getAllPost() {
+		List<TripVO> result = new ArrayList<TripVO>();
+		tripDAOHibernate = new TripDAOHibernate();
+		List<TripVO> all =tripDAOHibernate.select();
+		for(TripVO vo: all){
+			if(vo.getPost()==true) {
+				result.add(vo);
+			}
+		}
+		return result;
 	}
 }

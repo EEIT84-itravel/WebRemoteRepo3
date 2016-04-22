@@ -12,14 +12,12 @@
         <td><A href="<%=request.getRequestURI()%>?whichPage=<%=pageNumber%>">至最後一頁</A>&nbsp;</td>
     <%}%>
   <%}%>  
- </tr>
-</table>    
+ 
+
 <%if ( pageNumber > 1) {%>
-<table border="0">   
- <tr> 
-        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </td>
+  
+ 
+        
    <FORM METHOD="post" ACTION="<%=request.getRequestURI()%>">   
         <td>
            <select style="color:black" size="1" name="whichPage">
