@@ -9,9 +9,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${forumVO.forumTopic}</title>
-<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
-<link rel="stylesheet" type="text/css" href="../css/_04_Forum/Forum.css" />
 
+<script type="text/javascript"
+	src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
+<!-- 最新編譯和最佳化的 JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<!-- jQuery ui -->
+<script type="text/javascript"
+	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
 <script type="text/javascript">
 function confirmDeleteArticle(n,m) {
 	if (confirm("確定刪除這篇文章 ? ") ) {		                           
@@ -52,11 +58,11 @@ function doAlertBtn() {
 				<table  id="forumBody">
 					<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
 
-					<tr>
-						<td>文章主題：${forumVO.forumTopic} <span class="error">${error.forumTopic}</span></td>
+					<tr class="success">
+						<td><h4 style="color:blue">●${forumVO.forumTopic}</h4> <span class="error">${error.forumTopic}</span></td>
 					</tr>
-					<HR color="#00FF00" size="10" width="50%">
-					<tr>
+
+					<tr class="success">
 						<td>最後修改日期：<fmt:formatDate value="${forumVO.forumTime}" timeStyle="short" type="both"/></td>						
 					</tr>				
 					<tr>
@@ -83,15 +89,16 @@ function doAlertBtn() {
 							
 					</tr>
 					<tr>
-						<td><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${forumVO.memberId}" />" width="100px" height="100px"><br>作者：<c:forEach
+						<td><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${forumVO.memberId}" />" width="100px" height="100px"><br>
+						作者：<c:forEach
 								var="MemberVO" items="${MemberService.all}">
 								<c:if test="${MemberVO.memberId==forumVO.memberId}">
 										${MemberVO.nickname}
                              		</c:if>
 							</c:forEach></td>
 					</tr>
-					<tr>
-						<td>文章內容：${forumVO.forumContent}</td>
+					<tr class="danger">
+						<td style="color:red">文章內容：${forumVO.forumContent}</td>
 					</tr>
 					<tr>
 						<td><input type="button" onclick="history.back()" value="上一頁" />

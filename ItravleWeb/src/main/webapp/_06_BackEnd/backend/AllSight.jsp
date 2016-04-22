@@ -247,11 +247,11 @@
 			<!-- tabs-1 end tag -->
 			<div id="tabs-2">
 				<h2>I-Travel後台:管理會員</h2>
-				<%
+			<%-- 	<%
 					rowsPerPage = 20; //每頁的筆數
 					rowNumber = memberVO.size();
 				%>
-				<%@ include file="/_00_Misc/page1.file"%>
+				<%@ include file="/_00_Misc/page1.file"%> --%>
 				<table border="1" class="backendTable">
 					<thead>
 						<tr>
@@ -298,7 +298,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<%@ include file="/_00_Misc/page2.file"%>
+<%-- 				<%@ include file="/_00_Misc/page2.file"%> --%>
 			</div><!-- tabs-2 end tag -->
 			<div id="tabs-3">
 				<h2>I-Travel後台:管理景點</h2>

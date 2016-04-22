@@ -157,31 +157,32 @@ nav {
 							href="<c:url value="/_05_Member/member/MemberModify.jsp " />">修改會員資料</a></li>
 					</ul></li>
 				<c:if test="${not empty admin}">
-					<li><a
+					<li class="whiteNav"><a
 						href="<c:url value="/_06_BackEnd/backend/AllSight.jsp" />">後台</a></li>
 				</c:if>
 
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<!-- 視session是否登入登出顯示 login/註冊 或 logout -->
-				<div class="pull-left">
+				
 					<c:if test="${not empty user}">
-						<li style="color: white; font-size: 24px;"><img
+						<li class="whiteNav" style="color: white; font-size: 24px;" > ${user.nickname}<img
 							src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${user.memberId}" />"
-							width="50px" height="50px"> ${user.nickname}</li>
+							width="50px" height="50px"></li >
 					</c:if>
-				</div>
+				
 				<c:if test="${empty user}">
-					<li><a id="myReg">註冊</a></li>
+					<li class="whiteNav"><a id="myReg">註冊</a></li>
 				</c:if>
 				<c:if test="${empty user}">
-					<li><a id="myBtn">Login</a></li>
+					<li class="whiteNav"><a id="myBtn">Login</a></li>
 					<!-- 					<li><button type="button"  class="btn btn-info btn-lg" id="myBtn3">Login</button></li> -->
 				</c:if>
 				<c:if test="${not empty user}">
-					<li class="pull-right"><a
+					<li class="pull-right whiteNav"><a
 						href="<c:url value="/_05_Member/member/Logout.jsp" />">Logout</a></li>
 				</c:if>
+			
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->

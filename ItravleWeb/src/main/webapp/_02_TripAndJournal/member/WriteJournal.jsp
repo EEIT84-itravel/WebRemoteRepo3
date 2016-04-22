@@ -59,28 +59,6 @@ textarea{/* Text Area 固定大小*/
 		}).attr("readonly", "readonly");
 		//選時間的要再加上其他自己寫的jQuery UI plugin
 	});
-// 	$(function() {
-// 		// 儲存時的確認對話框
-// 		var dialog = $( "#dialog-confirm" ).dialog({
-// 			resizable: false,
-// 			autoOpen: false,
-// 			height:150,
-// 			modal: true,
-// 			buttons: {
-// 				"確認": function() {
-// 					saveTripDetailCart();
-// 					$( this ).dialog( "close" );					
-// 				},
-// 		        "取消": function() {
-// 		        	$( this ).dialog( "close" );
-// 		        }
-// 		 	}			
-// 		 });
-// 		// 按鈕觸發對話框
-// 		$("#saveJournal").button().on( "click", function() {
-// 		      dialog.dialog( "open" );
-// 	    });
-// 	});
 	  //選圖立即顯示
 	  var openFile = function(event) {
 	    var input = event.target;
@@ -135,9 +113,7 @@ textarea{/* Text Area 固定大小*/
 				<td colspan="4"><textarea name="journalIntro" rows="4"
 						cols="40">${journalVO.journalIntro}</textarea></td>
 			</tr>
-			<tr>
-				<td>詳細遊記</td>
-			</tr>
+			
 		</table>
 <!-- 		判斷暫存的車裡是否有東西 -->
 <form action="<c:url value="/_02_TripAndJournal/member/JournalDetail.controller"/>" method="post" enctype="multipart/form-data">
@@ -148,7 +124,9 @@ textarea{/* Text Area 固定大小*/
 		  <div><img id='output'></div>
 
 	   </tr>
-	
+	    <tr>
+			<td>詳細遊記</td>
+     	</tr>
 		<c:if test="${not empty sessionScope.journalDetailCart}">
 			<c:forEach var="journalDetailVO" items="${sessionScope.journalDetailCart}">			
 				<c:forEach var="SightVO" items="${SightService.all}">
@@ -161,9 +139,10 @@ textarea{/* Text Area 固定大小*/
 						<input type="hidden" name="whichDay" value="${journalDetailVO.whichDay}">
 						<input type="hidden" name="journalId" value="${journalDetailVO.journalId}">
 						<input type="hidden" name="JournalPhotoId" value="${JournalPhotoVO.JournalPhotoId}">					
+						<input type="hidden" name="crud" value="Insert">
 						<tr>				
 							<td>${SightVO.sightName}</td>
-							<td><textarea name="sightJournal" class=""></textarea><span class="error">${error.sightJournal}</span></td>
+							<td><textarea name="sightJournal" >${showJournalDetailVO.sightJournal}</textarea><span class="error">${error.sightJournal}</span></td>
 						</tr>
 						
 					</c:if>				

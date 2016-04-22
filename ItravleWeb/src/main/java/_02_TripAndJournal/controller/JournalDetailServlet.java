@@ -44,6 +44,8 @@ public class JournalDetailServlet extends HttpServlet {
 		String[] journalDetailIds = request
 				.getParameterValues("journalDetailId");
 		String[] sightJournals = request.getParameterValues("sightJournal");
+		String temp = request.getParameter("JournalPhotoId");
+		String crud = request.getParameter("crud");
 
 		Map<String, String> error = new HashMap<String, String>();
 		request.setAttribute("error", error);
@@ -52,6 +54,17 @@ public class JournalDetailServlet extends HttpServlet {
 		JournalDetailVO journalDetailVO = new JournalDetailVO();
 
 		int x = 0;
+
+		int journalPhotoId = 0;
+		if ("Update".equals(crud)) {
+			if (temp != null && temp.trim().length() != 0) {
+				try {
+					journalPhotoId = Integer.parseInt(temp);
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
 		int sightOrder = 0;
 		int whichDay = 0;
@@ -79,7 +92,7 @@ public class JournalDetailServlet extends HttpServlet {
 				}
 			}
 			journalDetailVO.setSightOrder(sightOrder);
-			
+
 			String obj3 = whichDays[x];
 			if (obj3 != null && obj3.trim().length() != 0) {
 				try {
@@ -99,7 +112,7 @@ public class JournalDetailServlet extends HttpServlet {
 				}
 			}
 			journalDetailVO.setSightId(sightId);
-			
+
 			String obj5 = journalIds[x];
 			if (obj5 != null && obj5.trim().length() != 0) {
 				try {
@@ -114,43 +127,50 @@ public class JournalDetailServlet extends HttpServlet {
 				error.put("sightJournal", "請輸入您在此景點的遊記");
 			}
 			if (error != null && !error.isEmpty()) {
-				request.getRequestDispatcher("/_02_TripAndJournal/member/WriteJournal.jsp")
-						.forward(request, response);
+				request.getRequestDispatcher(
+						"/_02_TripAndJournal/member/WriteJournal.jsp").forward(
+						request, response);
 				return;
 			}
 			journalDetailVO.setSightJournal(sightJournal);
 			jds.insert(journalDetailVO);
 		}
-		
-			Part filePart = request.getPart("journalPic");// 抓出圖片
-			String fileName = filePart.getSubmittedFileName();
-			InputStream is = filePart.getInputStream();
-			JournalPhotoVO journalPhotoVO = new JournalPhotoVO();
-			JournalPhotoService journalPhotoService = new JournalPhotoService();		
-			// 寫入圖片
-			byte[] p = new byte[is.available()];
-			is.read(p);
-			is.close();
-			journalPhotoVO.setJournalPhoto(p);
-			
-			String obj1 = journalDetailIds[0];
-			if (obj1 != null && obj1.trim().length() != 0) {
-				try {
-					journalDetailId = Integer.parseInt(obj1);
-				} catch (NumberFormatException e) {
-					e.printStackTrace();
-				}
+
+		Part filePart = request.getPart("journalPic");// 抓出圖片
+		String fileName = filePart.getSubmittedFileName();
+		InputStream is = filePart.getInputStream();
+		JournalPhotoVO journalPhotoVO = new JournalPhotoVO();
+		JournalPhotoService journalPhotoService = new JournalPhotoService();
+		// 寫入圖片
+		byte[] p = new byte[is.available()];
+		is.read(p);
+		is.close();
+		journalPhotoVO.setJournalPhoto(p);
+
+		String obj1 = journalDetailIds[0];
+		if (obj1 != null && obj1.trim().length() != 0) {
+			try {
+				journalDetailId = Integer.parseInt(obj1);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
 			}
-			journalPhotoVO.setJournalDetailId(journalDetailId);
-			journalPhotoVO.setCover(true);
+		}
+		journalPhotoVO.setJournalDetailId(journalDetailId);
+		journalPhotoVO.setCover(true);
+		if ("Update".equals(crud)) {
+			if(journalPhotoId!=0){
+			journalPhotoVO.setJournalPhotoId(journalPhotoId);
+			journalPhotoService.update(journalPhotoVO);
+			}else{
+				journalPhotoService.update(journalPhotoVO);
+			}
+		} else if ("Insert".equals(crud)) {
 			journalPhotoService.insert(journalPhotoVO);
-			
-			response.sendRedirect(path
-					+ "/_02_TripAndJournal/ShowJournalDetail.controller?journalId=" + journalId);
-		}		
-	
-		
-	
+		}
+		response.sendRedirect(path
+				+ "/_02_TripAndJournal/ShowJournalDetail.controller?journalId="
+				+ journalId);
+	}
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {

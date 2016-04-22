@@ -104,7 +104,7 @@ function doAlert() {
 				<div id="divChangePage">
 			<%@ include file="/_00_Misc/page2.file" %>
 			</div>
-			<div class="modal fade" id="myModalJournal" role="dialog">
+		<div class="modal fade" id="myModalJournal" role="dialog">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<form id="fromTripToJournal"
