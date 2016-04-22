@@ -11,6 +11,7 @@
 <title>${forumVO.forumTopic}</title>
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <link rel="stylesheet" type="text/css" href="../css/_04_Forum/Forum.css" />
+
 <script type="text/javascript">
 function confirmDeleteArticle(n,m) {
 	if (confirm("確定刪除這篇文章 ? ") ) {		                           
@@ -29,6 +30,9 @@ function confirmDeleteMessage(n,m) {
 	} else {
 	
 	}
+}
+function doAlertBtn() {
+	alertify.alert('此功能僅限會員使用，請先登入!!')
 }
 </script>
 
@@ -64,7 +68,7 @@ function confirmDeleteMessage(n,m) {
 						</c:url>
 						<!-- 用choose判斷，user是否登入，登入才可以進行某些功能，並且自己只能對自己的文章及留言進行刪跟修 -->
 							<td><c:choose>		
-								<c:when test="${empty user}"><input type="button" value="回覆文章" onclick="location.href='<c:url value="/_05_Member/Login.jsp"/>'"></c:when>
+								<c:when test="${empty user}"><button type="button" class="btn btn-info btn-lg" >回覆文章</button></c:when>
 								<c:when test="${not empty user}"><input type="button" value="回覆文章"  onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&memberId=${user.memberId}&crud=NewReply"/>'"></c:when>
 							</c:choose>
 							<c:choose>		
@@ -76,6 +80,7 @@ function confirmDeleteMessage(n,m) {
 								<c:when test="${user.memberId==forumVO.memberId}"><a href="javascript:if(confirm('確定要删除此文章嗎?'))location='<c:url value='/_04_Forum/member/WritingsServlet.controller?crud=Delete&forumId=${forumVO.forumId}&memberId=${user.memberId}'/>'">删除文章</a>
 								</c:when>
 							</c:choose></td>
+							
 					</tr>
 					<tr>
 						<td><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${forumVO.memberId}" />" width="100px" height="100px"><br>作者：<c:forEach

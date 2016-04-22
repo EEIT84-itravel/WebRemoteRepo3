@@ -23,6 +23,11 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_02_TripAndJournal/TripIndex.css"/>"/>
 <title>ITravel-行程首頁</title>
+<script type="text/javascript">
+function doAlert() {
+	alertify.alert('此功能僅限會員使用，請先登入!!')
+}
+</script>
 </head>
 <body>
 	<header>
@@ -35,6 +40,14 @@
 	</nav>
 	<article class="center-block">
 	<h3>首頁>看行程</h3>	
+
+    <div id="writeTripBtn">
+<!-- 		<button type="button" id="myBtn2" class="btn btn-info btn-lg" >排行程</button> -->
+		<c:choose>
+			<c:when test="${empty user}"><button type="button" class="btn btn-info btn-lg" onclick="doAlert()">排行程</button></c:when>
+			<c:when test="${not empty user}"><button type="button"  class="btn btn-info btn-lg" onclick="location.href='<c:url value="/_02_TripAndJournal/member/NewTrip.jsp"/>'">排行程</button></c:when>
+		</c:choose>
+	</div>
 		<c:if test="${not empty tripVOs}">
 			<div id="divRowsPerPage">
 			<%  rowsPerPage = 8;  //每頁的筆數 

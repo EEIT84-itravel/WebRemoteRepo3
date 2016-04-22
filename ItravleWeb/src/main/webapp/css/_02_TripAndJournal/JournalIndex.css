@@ -11,7 +11,9 @@
 	box-shadow: 4px 4px 1pt 0pt #a7a7a7;
 	background-color: #ffe6cc;
 }
-
+#writeBtn{
+	text-align: right;
+}
 #journalDiv table {
 	width: 280px;
 	height: 350px;

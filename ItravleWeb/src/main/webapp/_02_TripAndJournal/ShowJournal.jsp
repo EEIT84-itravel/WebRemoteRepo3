@@ -52,6 +52,13 @@
 								</c:forEach></li>
 							<li>遊玩日期：${showJournalVO.beginTime}~${showJournalVO.endTime}</li>
 						</ul>
+						
+				</tr>
+				<tr>
+					<td><h4>遊記簡介：</h4></td>
+					<c:if test="${showJournalVO.journalIntro==null}"><td><h4>無</h4></td></c:if>
+					<td><h4>${showJournalVO.journalIntro}</h4></td>
+					
 				</tr>
 			</table>
         </div><!-- 結束divMember  -->
@@ -70,10 +77,8 @@
 					<td class="journalPic"><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${showJournalDetailVO.sightId}" />" width="300" height="220"></td>
 					
 					    <td><h4 class="fMargin">景點遊記：</h4><br>
-					    ${showJournalDetailVO.sightJournal}</td>
-					    
-					</tr>
-				
+					    ${showJournalDetailVO.sightJournal}</td>					    
+					</tr>			
 				        <tr hidden="true">						
 							<c:forEach var="sightVO3" items="${SightService.all}">
                             	<c:if test="${sightVO3.sightId==showJournalDetailVO.sightId}">
@@ -179,6 +184,7 @@
 				async defer></script>
 		</div>
 		<!-- end divTripMap -->
+		<div id="backURL"><h4 class="h4"><a href="<c:url value="/_02_TripAndJournal/JournalIndex.jsp" />">回上一頁</a></h4></div>
 
 
 	</article>

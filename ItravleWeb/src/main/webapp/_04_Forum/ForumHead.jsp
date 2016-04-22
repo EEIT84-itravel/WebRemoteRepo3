@@ -8,11 +8,9 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_04_Forum/tabs.css"/>" />
 <link rel="stylesheet" type="text/css"	href="<c:url value="/css/_04_Forum/Forum.css"/>" />
 <link rel="stylesheet" type="text/css"	href="../css/_04_Forum/datatable.css" />
-<link rel="stylesheet" type="text/css"	href="../jquery-ui-1.11.4.custom/jquery-ui.min.css" />
 <link rel="stylesheet" type="text/css"	href="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.css" />
 
-<script type="text/javascript" src="../js/jquery-2.2.1.min.js"></script>
-<script type="text/javascript"	src="../jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+
 <script type="text/javascript"	src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
 </head>
 <body>

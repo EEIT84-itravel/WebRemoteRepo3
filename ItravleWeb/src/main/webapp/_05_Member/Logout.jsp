@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 </head>
 <body>
+
 	<header>
 		<!-- import共同的 -->
 	</header>
@@ -21,11 +22,12 @@
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
-		您已經登出
+	<article  class="center-block">
+		<h1>您已經登出</h1>
 		<P />
 		<a href="../index.jsp">回首頁</a>
 	</article>
+	<script type="text/javascript"> setTimeout("location.href='http://www.vedfolnir.com'",1000); </script>
 	<footer>
 		<!-- import共同的 -->
 	</footer>

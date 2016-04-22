@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="_02_TripAndJournal.model.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="_05_Member.model.*"%>
 <% 
 	JournalService journalService = new JournalService();
 	List<JournalVO> journalVOs = journalService.getAllPost();
@@ -14,6 +15,16 @@
     int pageIndex=0; 
     int rowsPerPage;
 %>
+<%
+	TripService tripService = new TripService();
+	//memberId由session取出
+	if(session.getAttribute("user")!=null){
+	MemberVO memberVO = (MemberVO) session.getAttribute("user");
+	int memberId = memberVO.getMemberId();
+	List<TripVO> tripVO = tripService.selectFromMember(memberId);
+	pageContext.setAttribute("tripVO", tripVO);
+	}
+%>
 <jsp:useBean id="MemberService" scope="page" class="_05_Member.model.MemberService" />
 <!DOCTYPE html >
 <html>
@@ -22,6 +33,11 @@
 <title>ITravel-遊記首頁</title>
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_02_TripAndJournal/JournalIndex.css"/>"/>
+<script type="text/javascript">
+function doAlert() {
+	alertify.alert('此功能僅限會員使用，請先登入!!')
+}
+</script>
 </head>
 <body>
 	<header>
@@ -34,6 +50,19 @@
 	</nav>
 	<article class="center-block">
 		<h3>首頁>看遊記</h3>
+		<div id="writeBtn">
+<!-- 		寫遊記前先判斷是否有登入 -->
+<%-- 		<c:choose> --%>
+<%-- 			<c:when test="${empty user}"><button type="button" class="btn btn-info btn-lg" onclick="doAlert()">寫遊記</button></c:when> --%>
+<%-- 			<c:when test="${not empty user}"><button type="button"  class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">寫遊記</button></c:when> --%>
+<%-- 		</c:choose> --%>
+	<c:choose>
+			<c:when test="${empty user}"><button type="button" class="btn btn-info btn-lg" onclick="doAlert()">寫遊記</button></c:when>
+			<c:when test="${not empty user}"><button type="submit"  class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalJournal">寫遊記</button></c:when>
+		</c:choose>
+
+		</div>
+		
 		<c:if test="${not empty journalVOs}">
 			<div id="divRowsPerPage">
 			<%  rowsPerPage = 8;  //每頁的筆數 
@@ -75,7 +104,30 @@
 				<div id="divChangePage">
 			<%@ include file="/_00_Misc/page2.file" %>
 			</div>
-			
+			<div class="modal fade" id="myModalJournal" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<form id="fromTripToJournal"
+						action="<c:url value="/_02_TripAndJournal/member/FromTripToJournal.controller"/>"
+						method="post">
+						<div class="modal-header" >
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">從行程匯入遊記</h4>
+						</div>
+						<div class="modal-body">			
+								<select name="tripId" >					  
+									<c:forEach var="tripVO" items="${tripVO}" >							  
+										<option value="${tripVO.tripId}" >${tripVO.tripName}</option>						   
+									</c:forEach>					
+								</select>	
+						</div>
+						<div class="modal-footer">
+							<button type="submit" >開始寫遊記吧!</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>		
 		</c:if>
 	</article>
 	<footer>

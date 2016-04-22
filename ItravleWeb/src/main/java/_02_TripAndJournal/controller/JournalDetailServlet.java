@@ -23,6 +23,7 @@ import org.apache.tomcat.util.http.fileupload.UploadContext;
 
 import _02_TripAndJournal.model.JournalDetailService;
 import _02_TripAndJournal.model.JournalDetailVO;
+import _02_TripAndJournal.model.JournalPhotoService;
 import _02_TripAndJournal.model.JournalPhotoVO;
 
 @WebServlet("/_02_TripAndJournal/member/JournalDetail.controller")
@@ -108,58 +109,46 @@ public class JournalDetailServlet extends HttpServlet {
 				}
 			}
 			journalDetailVO.setJournalId(journalId);
-
 			sightJournal = sightJournals[x];
+			if (sightJournal == null || sightJournal.trim().length() == 0) {
+				error.put("sightJournal", "請輸入您在此景點的遊記");
+			}
+			if (error != null && !error.isEmpty()) {
+				request.getRequestDispatcher("/_02_TripAndJournal/member/WriteJournal.jsp")
+						.forward(request, response);
+				return;
+			}
 			journalDetailVO.setSightJournal(sightJournal);
 			jds.insert(journalDetailVO);
 		}
 		
-		
-		
-		Collection<Part> parts= request.getParts();
-		JournalPhotoVO journalPhotoVO = new JournalPhotoVO();
-		for(Part part : parts){
-			System.out.println(part.getContentType());
-			InputStream is = part.getInputStream();
-			System.out.println(part.getInputStream());
+			Part filePart = request.getPart("journalPic");// 抓出圖片
+			String fileName = filePart.getSubmittedFileName();
+			InputStream is = filePart.getInputStream();
+			JournalPhotoVO journalPhotoVO = new JournalPhotoVO();
+			JournalPhotoService journalPhotoService = new JournalPhotoService();		
+			// 寫入圖片
 			byte[] p = new byte[is.available()];
 			is.read(p);
+			is.close();
 			journalPhotoVO.setJournalPhoto(p);
-			System.out.println("P:"+p);
-			is.close();		
 			
-		}
-		
-		
-
-//		for (x = 0; x < journalDetailIds.length; x++) {
-//
-//			Part filePart = request.getPart("journalPic");// 抓出圖片
-//
-//			String fileName = filePart.getSubmittedFileName();
-//			InputStream is = filePart.getInputStream();
-//			JournalPhotoVO journalPhotoVO = new JournalPhotoVO();
-//			JournalPhotoService journalPhotoService = new JournalPhotoService();		
-//			// 寫入圖片
-//			byte[] p = new byte[is.available()];
-//			is.read(p);
-//			is.close();
-//			journalPhotoVO.setJournalPhoto(p);
-//			
-//			String obj1 = journalDetailIds[x];
-//			if (obj1 != null && obj1.trim().length() != 0) {
-//				try {
-//					journalDetailId = Integer.parseInt(obj1);
-//				} catch (NumberFormatException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//			journalPhotoVO.setJournalDetailId(journalDetailId);
-//			journalPhotoService.insert(journalPhotoVO);
-		}
-
-		// jds.insert(journalDetailVO);
-
+			String obj1 = journalDetailIds[0];
+			if (obj1 != null && obj1.trim().length() != 0) {
+				try {
+					journalDetailId = Integer.parseInt(obj1);
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				}
+			}
+			journalPhotoVO.setJournalDetailId(journalDetailId);
+			journalPhotoVO.setCover(true);
+			journalPhotoService.insert(journalPhotoVO);
+			
+			response.sendRedirect(path
+					+ "/_02_TripAndJournal/ShowJournalDetail.controller?journalId=" + journalId);
+		}		
+	
 		
 	
 
