@@ -43,6 +43,17 @@
 			$("span:eq(6)").empty("");
 		});
 	});
+	var openFile = function(event) {
+	    var input = event.target;
+
+	    var reader = new FileReader();
+	    reader.onload = function(){
+	      var dataURL = reader.result;
+	      var output = document.getElementById('output');
+	      output.src = dataURL;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  };
 </script>
 
 <title>修改會員資料</title>
@@ -103,13 +114,13 @@
 			</tr>
 			<tr>
 				<td>現在使用的大頭貼 :</td>
-				<td><img
-					src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${user.memberId}" />"
+				<td><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${user.memberId}" />"
 					width="80" height="60"></td>
 			</tr>
 			<tr>
 				<td>大頭貼 :</td>
-				<td><input type="file" name="photo1"></td>
+				<td><input type='file' accept='image/*' onchange='openFile(event)' name="photo1"><br>
+					<img id='output'></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="修改會員資料"></td>

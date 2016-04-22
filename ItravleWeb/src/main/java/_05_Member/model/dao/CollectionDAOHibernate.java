@@ -212,14 +212,15 @@ public class CollectionDAOHibernate {
 	}
 	
 	//收藏依照"收藏景點總人數"排序的景點ID List
-	public List<Integer> selectCountSight(){
+	public List<Integer> selectCountSight(String typeId){
 		List<Integer> list=null;
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
 				.getCurrentSession();
 		try {
 			session.beginTransaction();
-		String sql = "select reference_type from collection where type_id='type_id01' group by reference_type order by count(*) desc";
+		String sql = "select reference_type from collection where type_id=? group by reference_type order by count(*) desc";
 		SQLQuery sqlQuery = session.createSQLQuery(sql);
+		sqlQuery.setParameter(0, typeId);
 		list  = sqlQuery.list();
 		session.getTransaction().commit();
 		} catch (RuntimeException e) {

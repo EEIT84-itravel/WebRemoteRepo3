@@ -18,6 +18,16 @@ public class TripVO implements Serializable{
 	private String tripIntro;
 
 	@Override
+	public boolean equals(Object obj) {
+		   if (obj instanceof TripVO) {   
+	        	TripVO u = (TripVO) obj;   
+	            return this.tripId.equals(u.tripId)   
+	                    && this.modifyTime.equals(modifyTime);   
+	        }   
+		return super.equals(obj);
+	}
+
+	@Override
 	public String toString() {
 		return "TripVO [tripId=" + tripId + ", post=" + post + ", modifyTime="
 				+ modifyTime + ", memberId=" + memberId + ", tripName="

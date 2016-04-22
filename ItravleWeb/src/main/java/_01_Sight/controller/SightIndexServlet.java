@@ -17,7 +17,7 @@ import _01_Sight.model.SightVO;
 @WebServlet("/_01_Sight/SightIndex.controller")
 public class SightIndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	//接收景點首頁搜尋後,選擇排列方式
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -61,7 +61,6 @@ public class SightIndexServlet extends HttpServlet {
 		// 根據Model執行結果顯示View
 		request.getRequestDispatcher("/_01_Sight/SightIndex.jsp").forward(
 				request, response);
-
 	}
 
 	protected void doPost(HttpServletRequest request,

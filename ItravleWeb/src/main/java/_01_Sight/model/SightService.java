@@ -15,7 +15,7 @@ public class SightService {
 		sightVOs = dao.search(sightVOp);// 由進階查詢撈出的景點
 		List<SightVO> result = new ArrayList<SightVO>();// 要放排序結果的List
 		CollectionDAOHibernate collectionDAOHibernate = new CollectionDAOHibernate();
-		List<Integer> list = collectionDAOHibernate.selectCountSight();
+		List<Integer> list = collectionDAOHibernate.selectCountSight("type_id01");
 		for (Integer sightId : list) { // 把景點ID List照順序拿出來
 			for (SightVO sightVO : sightVOs) {
 				if (sightVO.getSightId() == sightId) {// 如果景點ID在搜尋出的景點中

@@ -117,4 +117,12 @@ public class CollectionService {
 	public List<CollectionVO> getSightCollect(){
 		return dao.findByTypeId("type_id01");
 	}
+	//找出所有收藏行程
+	public List<CollectionVO> getTripCollect(){
+		return dao.findByTypeId("type_id02");
+	}
+	//找出所有收藏遊記
+	public List<CollectionVO> getJournalCollect(){
+		return dao.findByTypeId("type_id03");
+	}
 }

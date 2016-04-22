@@ -208,7 +208,7 @@ float: right;
 											<%i++;%>
 										</c:if>
 									</c:forEach>
-				<p>${sightVO.watchNum}人瀏覽,<%=i%>人收藏</p>
+				<p>有${sightVO.watchNum}人瀏覽,<%=i%>人收藏</p>
 				<p>最後更新時間:${sightVO.modifyTime}</p>
 			</div>
 			</c:forEach>
@@ -220,12 +220,12 @@ float: right;
 		<c:if test="${not empty sightVOSearch}"><!-- 有搜尋結果由servlet回傳 -->
 		<div id="divRowsPerPage">
 			<form action="<c:url value="/_01_Sight/SightIndex.controller" />" method="get">
-			<input type="hidden" name="regionId" value="${param.regionId}">
-			<input type="hidden" name="countyId" value="${param.countyId}">
-			<input type="hidden" name="sightType" value="${param.sightType}">
-			<input type="hidden" name="keyWord" value="${param.keyWord}">
+				<input type="hidden" name="regionId" value="${param.regionId}">
+				<input type="hidden" name="countyId" value="${param.countyId}">
+				<input type="hidden" name="sightType" value="${param.sightType}">
+				<input type="hidden" name="keyWord" value="${param.keyWord}">
 				<select name="select">
-					<option value="byWatchNum" ${param.select==""?'selected':''}>依瀏覽人次排序</option>
+					<option value="byWatchNum" ${param.select=="byWatchNum"?'selected':''}>依瀏覽人次排序</option>
 					<option value="byCollectNum" ${param.select=="byCollectNum"?'selected':''}>依收藏人次排序</option>
 					<option value="byModifyTime" ${param.select=="byModifyTime"?'selected':''}>依最後更新時間排序</option>
 				</select>
@@ -260,7 +260,7 @@ float: right;
 											<%i++;%>
 										</c:if>
 									</c:forEach>
-				<p>${sightVO.watchNum}人瀏覽,<%=i%>人收藏</p>
+				<p>有${sightVO.watchNum}人瀏覽,<%=i%>人收藏</p>
 				<p>最後更新時間:${sightVO.modifyTime}</p>
 			</div>
 			</c:forEach>
