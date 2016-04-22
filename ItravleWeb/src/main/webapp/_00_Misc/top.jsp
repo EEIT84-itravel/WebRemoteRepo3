@@ -129,7 +129,7 @@ nav {
 				<li class="whiteNav"><a
 					href="<c:url value="/_02_TripAndJournal/TripIndex.jsp"/>">看行程</a></li>
 				<li class="whiteNav"><a
-					href="<c:url value="/_02_TripAndJournal/ShowAllJournalServlet.controller"/>">看遊記</a></li>
+					href="<c:url value="/_02_TripAndJournal/JournalIndex.jsp"/>">看遊記</a></li>
 				<li class="whiteNav"><a
 					href="<c:url value="/_04_Forum/ForumIndex.jsp" />">討論區</a></li>
 				<li class="whiteNav">

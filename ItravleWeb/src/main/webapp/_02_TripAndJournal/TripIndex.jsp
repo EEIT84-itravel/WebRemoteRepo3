@@ -54,7 +54,7 @@ function doAlert() {
 			<c:when test="${not empty user}"><button type="button"  class="btn btn-info btn-lg" onclick="location.href='<c:url value="/_02_TripAndJournal/member/NewTrip.jsp"/>'">排行程</button></c:when>
 		</c:choose>
 	</div>
-		<c:if test="${not empty tripVOs}">
+		
 			<div id="divRowsPerPage">
 			<form action="<c:url value="/_02_TripAndJournal/ShowAllTripServlet.controller" />" method="get">
 				<select name="select">

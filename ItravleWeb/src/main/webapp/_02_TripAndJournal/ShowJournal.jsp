@@ -65,40 +65,6 @@ pageContext.setAttribute("regions", codeVO);
 				</tr>
 			</table>
         </div><!-- 結束divMember  -->
-        <div id="divJournalDetail">
-				<c:forEach var="showJournalDetailVO" items="${showJournalDetailVO}">
-				<div class="table-responsive">
-				<table id="journalTable" class="table table-bordered">
-
-					<tr>
-					
-						<td class="memberPic"><img
-							src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${showJournalVO.memberId}" />"
-							width="100px" height="100px">
-						<td>
-						<td>
-							<ul style="list-style-type: none;">
-								<li><c:forEach var="MemberVO" items="${MemberService.all}">
-										<c:if test="${MemberVO.memberId==showJournalVO.memberId}">
-											<h3 style="color: green">作者：${MemberVO.nickname}</h3>
-										</c:if>
-									</c:forEach></li>
-								<li>遊玩日期：${showJournalVO.beginTime}~${showJournalVO.endTime}</li>
-							</ul>
-						</td>
-					</tr>
-					<tr >
-						<td><h4>遊記簡介：</h4></td>
-						<c:if test="${showJournalVO.journalIntro==null}">
-							<td><h4>無</h4></td>
-						</c:if>
-						<td><h4>${showJournalVO.journalIntro}</h4></td>
-
-					</tr>
-				</table>
-			</div>
-			</form>
-			<!-- 結束divMember  -->
 			<div id="divJournalDetail">
 				<c:forEach var="showJournalDetailVO" items="${showJournalDetailVO}">
 					<div class="table-responsive">
