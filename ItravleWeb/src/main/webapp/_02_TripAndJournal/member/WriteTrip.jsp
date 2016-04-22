@@ -84,7 +84,7 @@ var spendHour;
  				});
  			}
 		});	
-		
+				
 		//讓左邊行程可被放下
 		$(".day").droppable({
 			appendTo: "#day1",  //要黏到的目標				
@@ -94,8 +94,9 @@ var spendHour;
 				//form黏上去前取得div tripDetail有幾個小孩
 				var iii = $( ".tripDetail" ).children().length;	
 				var order = ( iii+1 ) * 2 - 1;
- 				console.log("order="+order);
+ 				console.log("order="+order); 			
 				$(this).find(".placeholder").remove();	//移除Add your items here
+// 				$(".day").css("background-color","white");
 				//放下的時候黏form上去，一個tirpDetail是一個form
 				$(".tripDetail").append('<form class="tripDetailForm'+sightId+'" action="<c:url value="/_02_TripAndJournal/member/TripDetail.controller" />" method="post"></form>');
 				//把table黏上去
@@ -142,6 +143,12 @@ var spendHour;
 				
 			}		
 		});
+		var test =$( ".tripDetail" ).children().length;
+		console.log(test+"test");
+		if(test>1) {
+			$(".placeholder").remove();
+// 			$(".day").css("background-color","white");
+		}
 		//讓tripDetail可排序
 		$(".tripDetail").sortable({
 			revert: true,
@@ -339,6 +346,7 @@ var spendHour;
 				</div>	<!-- end div tripBut -->						
 				<div class="day">
 					<div class="tripDetail">
+						<div class="placeholder">請將景點拖曳到此</div>						
 						<!-- 拖過來的tripDetail長會在這裡 -->	
 						<!-- 如果是舊的行程拿出來改，要從session取出tripDetailCart -->
 						<c:if test="${not empty sessionScope.tripDetailCart}">										

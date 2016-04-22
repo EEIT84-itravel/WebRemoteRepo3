@@ -41,7 +41,7 @@
 				<h5 class="h5">tripIntro: ${tripVO.tripIntro}</h5>
 			</div>	<!-- end divTripTop -->
 			<div id="divTripDetail">
-				<c:forEach var="tripDetailVOs" items="${tripDetailVOs}">
+				<c:forEach var="tripDetailVOs" items="${tripDetailVOs}" varStatus="vs">
 					<div class="table-responsive">
 					<table id="tableTrip" class="table table-bordered">
 						<tr>
@@ -70,7 +70,12 @@
 							</c:forEach>
 						</tr>						
 					</table>
-					</div>						
+					</div>
+					<c:if test="${not vs.last}">
+						<div id="arrow">
+						<span class="glyphicon glyphicon-chevron-down"></span>  <!-- 圖片來源：http://glyphicons.com/ -->
+						</div>
+					</c:if>				
 				</c:forEach>			
 			</div>	<!-- end divTripDetail -->
 		</div>	<!-- end divTrip -->

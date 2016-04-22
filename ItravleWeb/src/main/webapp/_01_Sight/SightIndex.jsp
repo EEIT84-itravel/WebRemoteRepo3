@@ -29,7 +29,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>景點首頁</title>
+<title>ITravel-景點首頁</title>
 
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
@@ -75,54 +75,22 @@ $(document).ready(function() {
 		});
 });
 </script>
-<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>" /> 
-
-<style type="text/css">
-.SearchSight {
-	height: 400px;
-	width: 320px;
-	border: 2px solid black;
-	margin: 15px;
-	padding: 10px;
-	float: left;
-	border-radius: 10px;
-}
-#pagebtn{
-clear: both;
-}
-#pageBottom{
-clear:both;
-}
-#pageBottom table{
-margin: 0 auto;
-}
-#pageTop{
-clear:both;
-}
-#searchBtn{
-float: right;
-}
-#sightTop h5{
-margin: 0;
-font-size: 30px;
-padding: 20px;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_01_Sight/SightIndex.css"/>" /> 
 </head>
 <body>
 	<header>
 		<!-- import共同的 -->
-	</header>
-	<!-- import共同的 -->
+	</header>	
 	<nav class="navbar navbar-inverse" role="navigation">
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article class="center-block">
 	<div id="sightTop">
-		<h5>首頁>看景點
+		<h3>首頁>看景點</h3>
 		<!-- Button 進階搜尋 -->
-		<button type="button" class="btn btn-primary btn-lg" id="searchBtn" data-toggle="modal" data-target="#myModal">進階搜尋</button></h5></div>
+		<button type="button" class="btn btn-primary btn-lg" id="searchBtn" data-toggle="modal" data-target="#myModal">進階搜尋</button></div>
 		<br>
 		<!-- 進階搜尋 互動視窗 -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -183,35 +151,47 @@ padding: 20px;
 			</div>
 		<c:forEach var="sightVO" items="${sightVOs}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 			<div class="SearchSight">
-				<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="280" height="210">
-				<p>
-					<h3><a href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />">${sightVO.sightName}</a></h3>
-				</p>
-				<p>
+				<table>
+				<tr>
+					<td>
+						<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" class="img-thumbnail" width="280" height="210" onclick="location.href='<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />'">
+					</td>
+				</tr>
+				<tr>
+					<td>
+					<h4 class="h4"><a href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />">${sightVO.sightName}</a></h4>
 					類型:
 					<c:forEach var="codeVO" items="${codeSvc.all}">
 						<c:if test="${codeVO.codeId==sightVO.sightTypeId}">
-								${codeVO.codeName}
+								${codeVO.codeName}<br>
                              </c:if>
-					</c:forEach>
-				</p>
-				<p>
+					</c:forEach>				
 					縣市:
 					<c:forEach var="codeVO" items="${codeSvc.all}">
 						<c:if test="${codeVO.codeId==sightVO.countyId}">
-								${codeVO.codeName}
+								${codeVO.codeName}<br>
                              </c:if>
 					</c:forEach>
-				</p>
-				<!-- 瀏覽人次由servlet+1 -->
-				<!-- 收藏人次直接由DB CollectionTable撈資料 -->
-										<%int i = 0;%>
-									<c:forEach var="CollectionVO" items="${CollectionService.sightCollect}">
-										<c:if test="${CollectionVO.referenceType==sightVO.sightId}">
-											<%i++;%>
-										</c:if>
-									</c:forEach>
-				<p>${sightVO.watchNum}人瀏覽,<%=i%>人收藏</p>
+				
+					<!-- 瀏覽人次由servlet+1 -->
+					<!-- 收藏人次直接由DB CollectionTable撈資料 -->
+					<%int i = 0;%>
+					<c:forEach var="CollectionVO" items="${CollectionService.sightCollect}">
+						<c:if test="${CollectionVO.referenceType==sightVO.sightId}">
+							<%i++;%>
+						</c:if>
+					</c:forEach>
+					${sightVO.watchNum}人瀏覽,<%=i%>人收藏<br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					<div class="btnMore">
+						<input type="button" value="看更多" class="btn btn-primary" onclick="location.href='<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />'" />
+					</div>
+					</td>
+				</tr>
+				</table>
 			</div>
 			</c:forEach>
 			<div id="pageBottom">
@@ -221,35 +201,48 @@ padding: 20px;
 		<c:if test="${not empty sightVOSearch}">
 		<c:forEach var="sightVO" items="${sightVOSearch}">
 			<div class="SearchSight">
-				<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="280" height="210">
-				<p>
-					<h3><a href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />">${sightVO.sightName}</a></h3>
-				</p>
-				<p>
-					類型:
-					<c:forEach var="codeVO" items="${codeSvc.all}">
-						<c:if test="${codeVO.codeId==sightVO.sightTypeId}">
-								${codeVO.codeName}
-                             </c:if>
-					</c:forEach>
-				</p>
-				<p>
-					縣市:
-					<c:forEach var="codeVO" items="${codeSvc.all}">
-						<c:if test="${codeVO.codeId==sightVO.countyId}">
-								${codeVO.codeName}
-                             </c:if>
-					</c:forEach>
-				</p>
-				<!-- 瀏覽人次由servlet+1 -->
-				<!-- 收藏人次直接由DB CollectionTable撈資料 -->
-										<%int i = 0;%>
-									<c:forEach var="CollectionVO" items="${CollectionService.sightCollect}">
-										<c:if test="${CollectionVO.referenceType==sightVO.sightId}">
-											<%i++;%>
-										</c:if>
-									</c:forEach>
-				<p>${sightVO.watchNum}人瀏覽,<%=i%>人收藏</p>
+				<table>
+					<tr>
+						<td>
+							<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" class="img-thumbnail" width="280" height="210" onclick="location.href='<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />'">
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<h4 class="h4"><a href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />">${sightVO.sightName}</a></h4>
+						類型:
+						<c:forEach var="codeVO" items="${codeSvc.all}">
+							<c:if test="${codeVO.codeId==sightVO.sightTypeId}">
+									${codeVO.codeName}<br>
+	                             </c:if>
+						</c:forEach>
+						
+						縣市:
+						<c:forEach var="codeVO" items="${codeSvc.all}">
+							<c:if test="${codeVO.codeId==sightVO.countyId}">
+									${codeVO.codeName}<br>
+	                             </c:if>
+						</c:forEach>
+						
+						<!-- 瀏覽人次由servlet+1 -->
+						<!-- 收藏人次直接由DB CollectionTable撈資料 -->
+						<%int i = 0;%>
+						<c:forEach var="CollectionVO" items="${CollectionService.sightCollect}">
+							<c:if test="${CollectionVO.referenceType==sightVO.sightId}">
+								<%i++;%>
+							</c:if>
+						</c:forEach>
+						${sightVO.watchNum}人瀏覽,<%=i%>人收藏<br>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<div class="btnMore">
+							<input type="button" value="看更多" onclick="location.href='<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}" />'" class="btn btn-primary">
+						</div>
+						</td>
+					</tr>
+				</table>
 			</div>
 			</c:forEach>
 		</c:if>

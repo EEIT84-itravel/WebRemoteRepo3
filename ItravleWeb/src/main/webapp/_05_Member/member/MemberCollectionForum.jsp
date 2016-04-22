@@ -24,21 +24,23 @@ pageContext.setAttribute("forumVO", forumVO);
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>我的收藏討論區</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_05_Member/Member.css"/>" />
+<title>ITravel-我的收藏討論區</title>
 </head>
 <body>
-<header>
+	<header>
 		<!-- import共同的 -->
-	</header>
-	<!-- import共同的 -->
+	</header>	
 	<nav class="navbar navbar-inverse" role="navigation">
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
-		<table id="forum" border="1">
+	<article class="center-block">
+	<h3>會員功能>我的收藏討論區</h3>
+		<table class="table">
 			<thead>
-				<tr id="forumTitle">
+				<tr>
 					<th>類型</th>
 					<th>主題</th>
 					<th>發表時間</th>

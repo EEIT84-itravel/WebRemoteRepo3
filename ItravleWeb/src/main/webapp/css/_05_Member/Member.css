@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+
+.sightId .h3 {
+	margin-top: 10px;
+	
+}
+.table th {
+	font-size: 20px;
+/* 	font-weight: 300;	 */
+}
+.table td {
+	font-size: 20px;
+	vertical-align: middle;
+/* 	font-weight: 200; */	
+}
+
+.img-rounded {	
+	width:160;
+	height:120;
+}
+

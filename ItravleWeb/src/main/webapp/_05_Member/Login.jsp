@@ -25,12 +25,12 @@
 				<tr>
 					<td>ID :</td>
 					<td><input type="text" name="username" value="${param.username}"></td>
-					<td>${error.username}</td>
+					<td class="errorMsg">${error.username}</td>
 				</tr>
 				<tr>
 					<td>PWD :</td>
 					<td><input type="text" name="password" value="${param.password}"></td>
-					<td>${error.password}</td>
+					<td class="errorMsg">${error.password}</td>
 				</tr>
 				<tr>
 					<td></td>
