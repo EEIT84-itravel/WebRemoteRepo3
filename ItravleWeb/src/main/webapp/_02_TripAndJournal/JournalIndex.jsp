@@ -19,7 +19,7 @@
     int pageIndex=0; 
     int rowsPerPage;
 %>
-<%
+ <% 
 	TripService tripService = new TripService();
 	//memberId由session取出
 	if(session.getAttribute("user")!=null){
@@ -61,7 +61,7 @@ function doAlert() {
 <%-- 			<c:when test="${empty user}"><button type="button" class="btn btn-info btn-lg" onclick="doAlert()">寫遊記</button></c:when> --%>
 <%-- 			<c:when test="${not empty user}"><button type="button"  class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">寫遊記</button></c:when> --%>
 <%-- 		</c:choose> --%>
-	<c:choose>
+		<c:choose>
 			<c:when test="${empty user}"><button type="button" class="btn btn-info btn-lg" onclick="doAlert()">寫遊記</button></c:when>
 			<c:when test="${not empty user}"><button type="submit"  class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalJournal">寫遊記</button></c:when>
 		</c:choose>

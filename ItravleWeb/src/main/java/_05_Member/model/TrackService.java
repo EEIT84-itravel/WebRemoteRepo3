@@ -8,7 +8,7 @@ import _05_Member.model.dao.TrackDAOHibernate;
 public class TrackService {
 	private TrackDAOHibernate trackDAO = new TrackDAOHibernate();;
 
-	public boolean newTrack(int memberId, int followMember) {// 新增追蹤
+	public boolean newTrack(Integer memberId, Integer followMember) {// 新增追蹤
 		trackDAO = new TrackDAOHibernate();
 		TrackVO track = new TrackVO();
 		List<TrackVO> list = null;
@@ -26,7 +26,7 @@ public class TrackService {
 
 	}
 
-	public boolean deleteTrack(int memberId, int followMember) {// 取消追蹤
+	public boolean deleteTrack(Integer memberId, Integer followMember) {// 取消追蹤
 		trackDAO = new TrackDAOHibernate();
 		List<TrackVO> list = null;
 		list = trackDAO.findByMemberIdAndFollowMember(memberId, followMember);
@@ -40,7 +40,7 @@ public class TrackService {
 		return false;
 	}
 
-	public List<Integer> findTrack(int memberId) {// 查看個人追蹤一覽
+	public List<Integer> findTrack(Integer memberId) {// 查看個人追蹤一覽
 		List<TrackVO> list = trackDAO.findByMemberId(memberId);
 		List<Integer> listname = new ArrayList<Integer>();
 		if (list != null) {

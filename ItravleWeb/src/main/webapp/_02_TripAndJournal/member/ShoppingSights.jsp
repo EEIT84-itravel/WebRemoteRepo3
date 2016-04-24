@@ -26,9 +26,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>HotelSights</title>
 <script>
+var sightId;
+var spendHour;
+var sightName;
+var latitude;	//緯度
+var longitude;  //經度
+
 $(function(){
-	var latitude;	//緯度
-	var longitude;  //經度
 	
 	//讓右邊景點可以被拖曳
 	$(".sight").draggable({
@@ -40,14 +44,14 @@ $(function(){
 				$("tr.sightId>td:nth-child(3):last").each(function(){	//取得正在拖曳的物件的sightName
 					sightName =$(this).text(); 					
 				});
-				$("tr.sightId>td:nth-child(6):last").each(function(){	//取得正在拖曳的物件的spendHour
+				$("tr.sightId>td:nth-child(5):last").each(function(){	//取得正在拖曳的物件的spendHour
 					spendHour =$(this).text(); 					
 				});
-				$("tr.sightId>td:nth-child(10):last").each(function(){	//取得正在拖曳的物件的latitude(緯度)
+				$("tr.sightId>td:nth-child(7):last").each(function(){	//取得正在拖曳的物件的latitude(緯度)
 					latitude =$(this).text(); 	
 					console.log("latitude"+latitude);
 				});
-				$("tr.sightId>td:nth-child(11):last").each(function(){	//取得正在拖曳的物件的longitude(經度)
+				$("tr.sightId>td:nth-child(8):last").each(function(){	//取得正在拖曳的物件的longitude(經度)
 					longitude =$(this).text(); 	
 					console.log("longitude"+longitude);
 				});
@@ -71,9 +75,9 @@ $(function(){
         close: function() { 
             $(document).unbind('click'); }
     });
-	$("tr.sightId>td:nth-child(9)").each(function(){
+	$("tr.sightId>td:nth-child(6)").each(function(){
  		$(this).click(function(){
- 				var sightId=$(this).prev().prev().prev().prev().prev().prev().prev().prev().text();	
+ 				var sightId=$(this).prev().prev().prev().prev().prev().text();
  				console.log(sightId);
 				var stylei=' width="98%" height="98%"  frameborder="0" scrolling="auto"';
  				$("#dialog-shopping").html('<iframe src="'+uri+sightId+'"'+stylei+'></iframe>');
@@ -104,18 +108,17 @@ $(function(){
 					<td><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
 							 width="80" height="60">
 					</td>					
-					<td>${sightVO.sightName}</td>
-					<td>建議旅行時段:
+					<td><h4 class="h4">${sightVO.sightName}</h4>
+					</td>
+					<td>${sightVO.score}分<br>
+						建議旅行時段：
 						<c:forEach var="codeVO" items="${codeSvc.all}">
                              <c:if test="${codeVO.codeId==sightVO.playPeriod}">
 								${codeVO.codeName}
                              </c:if>
 						</c:forEach>
-					</td>
-					<td>${sightVO.score}分</td>
- 					<td hidden="true">${sightVO.spendHour}</td>	<%-- 給jQuery抓每個景點預設的建議停留時間 --%>
-					<td hidden="true">評論</td>
-					<td hidden="true">最愛</td>
+					</td>					
+ 					<td hidden="true">${sightVO.spendHour}</td>	<%-- 給jQuery抓每個景點預設的建議停留時間 --%>					
 					<!-- 景點彈出視窗功能 -->
 					<td><button class="label label-primary">詳情</button></td>
 					<td hidden="true">${sightVO.latitude}</td>	<%-- 給jQuery抓每個景點預設的緯度 --%>

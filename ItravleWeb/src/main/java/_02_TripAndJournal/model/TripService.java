@@ -45,7 +45,7 @@ public class TripService {
 	}
 	
 	//查詢行程中包含特定景點的行程 傳回tripVO的List
-	public List<TripVO> getSightTrip(int sightId){
+	public List<TripVO> getSightTrip(Integer sightId){
 		List<TripVO> result=new ArrayList<TripVO>();
 		TripDetailDAOHibernate tripDetailDAOHibernate =new TripDetailDAOHibernate();
 		TripDAOHibernate tripDAOHibernate=new TripDAOHibernate();
@@ -81,7 +81,7 @@ public class TripService {
 		return result;
 	}
 
-	public int selectDateDiff(int tripId) {
+	public int selectDateDiff(Integer tripId) {
 		int result = 0;
 		if (tripId > 0) {
 			tripDAOHibernate = new TripDAOHibernate();
@@ -90,7 +90,7 @@ public class TripService {
 		return result;
 	}
     //從會員找行程
-	public List<TripVO> selectFromMember(int memberId) {
+	public List<TripVO> selectFromMember(Integer memberId) {
 		List<TripVO> result = null;
 		if (memberId >= 0) {
 			tripDAOHibernate = new TripDAOHibernate();
@@ -108,7 +108,7 @@ public class TripService {
 		return false;
 	}
 
-	public TripVO select(int tripId) {
+	public TripVO select(Integer tripId) {
 		TripVO result = null;
 		if (tripId >= 0) {
 			tripDAOHibernate = new TripDAOHibernate();

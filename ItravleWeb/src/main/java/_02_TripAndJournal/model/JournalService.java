@@ -46,7 +46,7 @@ public class JournalService {
 	}
 
 	// 查詢遊記中包含特定景點的遊記 傳回JournalVO的List
-	public List<JournalVO> getSightJournal(int sightId) {
+	public List<JournalVO> getSightJournal(Integer sightId) {
 		List<JournalVO> result = new ArrayList<JournalVO>();
 		JournalDetailService journalDetailService = new JournalDetailService();
 		JournalService journalService = new JournalService();
@@ -82,7 +82,7 @@ public class JournalService {
 
 	}
 
-	public JournalVO select(int journalId) {
+	public JournalVO select(Integer journalId) {
 		JournalVO result = null;
 		if (journalId >= 0) {
 			journalDAOHibernate = new JournalDAOHibernate();
@@ -92,7 +92,7 @@ public class JournalService {
 	}
 
 	// 會員尋找他寫的遊記
-	public List<JournalVO> selectMemberJournal(int memberId) {
+	public List<JournalVO> selectMemberJournal(Integer memberId) {
 		List<JournalVO> result = null;
 		journalDAOHibernate = new JournalDAOHibernate();
 		result = journalDAOHibernate.selectByMemberId(memberId);
@@ -100,7 +100,7 @@ public class JournalService {
 	}
 
 	// 查詢遊記相關明細編號
-	public ArrayList<Integer> selectDetail(int journalId) {
+	public ArrayList<Integer> selectDetail(Integer journalId) {
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		JournalDetailService journaldetailservice = new JournalDetailService();
 		List<JournalDetailVO> journaldetailVO = journaldetailservice
@@ -114,7 +114,7 @@ public class JournalService {
 	}
 
 	// 從遊記ID查出遊記
-	public JournalVO selectMemberCollectionJournal(int journal_id) {
+	public JournalVO selectMemberCollectionJournal(Integer journal_id) {
 		JournalVO result = null;
 		journalDAOHibernate = new JournalDAOHibernate();
 		result = journalDAOHibernate.select(journal_id);

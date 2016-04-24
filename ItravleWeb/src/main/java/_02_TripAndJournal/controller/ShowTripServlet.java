@@ -70,26 +70,23 @@ public class ShowTripServlet extends HttpServlet {
 				tripDetailVOs.add(tripDetailVO);
 			}
 		}
+		request.setAttribute("tripDetailVOs", tripDetailVOs);
 		
 		//搜尋行程相關留言
 		MessageService messageService=new MessageService();
 		List<MessageVO> messageVOs=messageService.selectTripMessage(tripId);
 		request.setAttribute("messageVOs", messageVOs);
 		
-		request.setAttribute("tripDetailVOs", tripDetailVOs);
-		
+		// 會員已登入且景點未收藏過會顯示景點收藏鈕
 		boolean flag = false;
 		CollectionService collectionService = new CollectionService();
 		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
-		// 會員已登入且景點未收藏過會顯示景點收藏鈕
 		if (user != null&& collectionService.selectCollection(tripVO.getTripId(),user.getMemberId(), "type_id02") == null) {
 			flag = true;
 			}
 		request.setAttribute("flag", flag);
+		
 		// 根據結果選擇veiw
 		request.getRequestDispatcher("/_02_TripAndJournal/Trip.jsp").forward(request, response);
-
-		
 	}
-
 }

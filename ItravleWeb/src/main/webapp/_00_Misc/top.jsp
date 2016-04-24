@@ -180,7 +180,8 @@ nav {
 					<!-- 					<li><button type="button"  class="btn btn-info btn-lg" id="myBtn3">Login</button></li> -->
 				</c:if>
 				<c:if test="${not empty user}">
-					<li><a href="<c:url value="/_05_Member/Logout.jsp" />">Logout</a></li>
+					<li class="pull-right whiteNav"><a
+						href="<c:url value="/_05_Member/member/Logout.jsp" />">Logout</a></li>
 				</c:if>
 			
 			</ul>

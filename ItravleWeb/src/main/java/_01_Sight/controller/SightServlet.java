@@ -52,7 +52,7 @@ public class SightServlet extends HttpServlet {
 		SightService sightService = new SightService();
 		SightVO sightVO = sightService.findByPrimaryKey(sightId);
 		//將瀏覽人次加1
-		sightVO.setWatchNum((sightVO.getWatchNum()+1));
+		sightVO.setWatchNum(sightVO.getWatchNum()+1);
 		SightVO result=sightService.update(sightVO);
 		//查詢景點相關留言
 		MessageService messageService=new MessageService();

@@ -47,7 +47,7 @@ public class SightService {
 	}
 
 	// 景點資訊超連結
-	public SightVO findByPrimaryKey(int sightId) {
+	public SightVO findByPrimaryKey(Integer sightId) {
 		return dao.findByPrimaryKey(sightId);
 	}
 
@@ -72,7 +72,7 @@ public class SightService {
 		return result;
 	}
 
-	public SightVO selectById(int sightId) {
+	public SightVO selectById(Integer sightId) {
 		SightVO result = null;
 		result = dao.findByPrimaryKey(sightId);
 		return result;

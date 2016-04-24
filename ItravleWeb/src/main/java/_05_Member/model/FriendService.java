@@ -11,7 +11,7 @@ import _05_Member.model.dao.FriendDAOHibernate;
 public class FriendService {
 	private FriendDAOHibernate friendDAO = new FriendDAOHibernate();
 
-	public ArrayList<Integer> findFriend(int memberId){  //找朋友名單
+	public ArrayList<Integer> findFriend(Integer memberId){  //找朋友名單
 		List<FriendVO> list = new ArrayList<FriendVO>();
 		 list = friendDAO.selectbyMemberId(memberId);
 		 for(FriendVO VO: list){
@@ -29,7 +29,7 @@ public class FriendService {
 		 return listname;
 	 }
 
-	public ArrayList<Integer> findNotFriend(int memberId) { // 找黑名單名單
+	public ArrayList<Integer> findNotFriend(Integer memberId) { // 找黑名單名單
 		List<FriendVO> list = friendDAO.selectbyMemberId(memberId);
 		ArrayList<Integer> listname = new ArrayList<Integer>();
 		if (list != null) {
@@ -46,7 +46,7 @@ public class FriendService {
 		return null;
 	}
 
-	public Boolean newFriend(int memberId, int friendId) { // 增加好友
+	public Boolean newFriend(Integer memberId, Integer friendId) { // 增加好友
 		FriendVO newfriendVo = new FriendVO();
 		ArrayList<Integer> list = this.findFriend(memberId);
 		ArrayList<Integer> listbad = this.findNotFriend(memberId);
@@ -70,7 +70,7 @@ public class FriendService {
 		return true;
 	}
 
-	public Boolean newBadFriend(int memberId, int friendId) { // 增加黑名單
+	public Boolean newBadFriend(Integer memberId, Integer friendId) { // 增加黑名單
 		FriendVO newfriendVo = new FriendVO();
 		ArrayList<Integer> list = this.findFriend(memberId);
 		ArrayList<Integer> listbad = this.findNotFriend(memberId);
@@ -94,7 +94,7 @@ public class FriendService {
 		return true;
 	}
 
-	public Boolean updateBadFriendToNew(int memberId, int friendId) { // 將黑名單改為好友
+	public Boolean updateBadFriendToNew(Integer memberId, Integer friendId) { // 將黑名單改為好友
 		FriendVO upfriendVo = new FriendVO();
 		List<FriendVO> list = friendDAO.selectbyMemberIdAndFriendId(memberId,
 				friendId);
@@ -137,7 +137,7 @@ public class FriendService {
 	}
 
 	// 尋找對方尚未確認好友FindNotyetFriend
-	public Set<Integer> findNotyetFriend(int memberId) {
+	public Set<Integer> findNotyetFriend(Integer memberId) {
 		Set<Integer> result = new HashSet<Integer>();// 待確認名單
 		List<Integer> EachOtherlist = this.findEachOtherFriend(memberId); // 互相是好友
 		// System.out.println("互相是好友"+EachOtherlist);
@@ -160,7 +160,7 @@ public class FriendService {
 	}
 
 	// 尋找對方加你為好友但你尚未確認FindNotyetFriendByMe
-	public Set<Integer> findNotyetFriendByMe(int memberId) {
+	public Set<Integer> findNotyetFriendByMe(Integer memberId) {
 		Set<Integer> result = new HashSet<Integer>();// 待確認名單
 		List<Integer> Myfriendlist = this.findFriend(memberId);// 自己的好友
 		// System.out.println(Myfriendlist+"自己的好友");
@@ -183,7 +183,7 @@ public class FriendService {
 	}
 
 	// 互相是好友
-	public ArrayList<Integer> findEachOtherFriend(int memberId) {
+	public ArrayList<Integer> findEachOtherFriend(Integer memberId) {
 		ArrayList<Integer> friendlist = this.findFriend(memberId);// 自己的好友名單
 		List<FriendVO> friendIdlist = friendDAO.selectbyFriendId(memberId);
 		ArrayList<Integer> friendlist2 = new ArrayList<Integer>(); // 自己被加好友的名單
@@ -216,7 +216,7 @@ public class FriendService {
 		return list3;
 	}
 
-	public boolean delFriend(int memberId, int friendId) { // 刪除好友
+	public boolean delFriend(Integer memberId, Integer friendId) { // 刪除好友
 		FriendVO newfriendVo = new FriendVO();
 		List<FriendVO> list = friendDAO.selectbyMemberIdAndFriendId(memberId,
 				friendId);
@@ -232,7 +232,7 @@ public class FriendService {
 		return false;
 	}
 
-	public boolean delBadFriend(int memberId, int friendId) { // 刪除黑名單
+	public boolean delBadFriend(Integer memberId, Integer friendId) { // 刪除黑名單
 		FriendVO newfriendVo = new FriendVO();
 		List<FriendVO> list = friendDAO.selectbyMemberIdAndFriendId(memberId,
 				friendId);

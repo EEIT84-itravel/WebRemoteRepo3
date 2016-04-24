@@ -31,7 +31,7 @@ public class CollectionService {
     	return dao.insert(collectionVO);
     }
     //某會員搜尋他的收藏景點
-	public List<CollectionVO> selectByMemberId(int memberId){
+	public List<CollectionVO> selectByMemberId(Integer memberId){
 		List<CollectionVO> result = null;
 		result = dao.findSightByMemberId(memberId);
 		return result;
@@ -46,7 +46,7 @@ public class CollectionService {
 		return a;
 	}
 	//以參照編號、類型編號尋找收藏
-	public ArrayList<Integer> selectByReferenceTypeAndTypeId(int referenceType,String typeId){
+	public ArrayList<Integer> selectByReferenceTypeAndTypeId(Integer referenceType,String typeId){
 		List<CollectionVO> result = null;
 		ArrayList<Integer> collectionID = new ArrayList<Integer>();
 		result = dao.findByTypeIdAndReferenceType(typeId, referenceType);
@@ -58,7 +58,7 @@ public class CollectionService {
 		return collectionID;
 	}
 	//會員尋找他的收藏遊記
-	public ArrayList<Integer> selectjournalByMemberId(int memberId){
+	public ArrayList<Integer> selectjournalByMemberId(Integer memberId){
 		List<CollectionVO> result = null;//所有收藏遊記
 		ArrayList<Integer> journalID = new ArrayList<Integer>();
 		result = dao.findJournalBymemberId(memberId);
@@ -71,7 +71,7 @@ public class CollectionService {
 		return journalID;
 	}
 	//會員找他的收藏行程  並且是找已經發布狀態的
-	public ArrayList<TripVO> selectTripCollectionByMemberId(int memberId){
+	public ArrayList<TripVO> selectTripCollectionByMemberId(Integer memberId){
 		List<CollectionVO> result = null;//所有收藏行程
 		ArrayList<Integer> tripID = new ArrayList<Integer>();
 		result = dao.findTriplBymemberId(memberId);
@@ -98,7 +98,7 @@ public class CollectionService {
 		return tripVO;
 	}
 	//會員尋找他的收藏討論區
-	public ArrayList<ForumVO> selectFourmCollectionByMemberId(int memberId){
+	public ArrayList<ForumVO> selectFourmCollectionByMemberId(Integer memberId){
 		List<CollectionVO> result = null;//所有收藏討論區
 		ArrayList<Integer> fourmID = new ArrayList<Integer>();
 		result = dao.findForumlBymemberId(memberId);
@@ -119,7 +119,7 @@ public class CollectionService {
 	}
 	
 	//刪除收藏
-	public boolean delSightCollection(int collectionNo){
+	public boolean delSightCollection(Integer collectionNo){
 		CollectionVO result = dao.findByPrimaryKey(collectionNo);
 		if(result != null){
 			dao.delete(collectionNo);

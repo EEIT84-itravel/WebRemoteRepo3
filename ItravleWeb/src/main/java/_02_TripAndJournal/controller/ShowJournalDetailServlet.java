@@ -44,7 +44,9 @@ public class ShowJournalDetailServlet extends HttpServlet {
 			}
 		}
 		// 驗證資料-無
+		
 		// 呼叫Model
+		
 		//根據遊記ID搜尋出該篇遊記所有的遊記detail
 		JournalDetailService journalDetailService = new JournalDetailService();
 		List<JournalDetailVO> journalDetailVO = journalDetailService.selectByJournalId(journalId);
@@ -59,7 +61,6 @@ public class ShowJournalDetailServlet extends HttpServlet {
 		MessageService messageService=new MessageService();
 		List<MessageVO> messageVOs=messageService.selectJournalMessage(journalId);
 		
-		
 		request.setAttribute("showJournalVO", journalVO);
 		request.setAttribute("showJournalDetailVO", journalDetailVO);
 		request.setAttribute("messageVOs", messageVOs);
@@ -72,13 +73,7 @@ public class ShowJournalDetailServlet extends HttpServlet {
 			flag = true;
 		}
 		request.setAttribute("flag", flag);
-		
-		 request.getRequestDispatcher("/_02_TripAndJournal/ShowJournal.jsp").forward(request, response);
-
-//		MessageService ms = new MessageService();
-//		List<MessageVO> messageVO = ms.getForumMessage(forumId);
-//		long count = ms.getForumMessageNum(forumId);
-
+		request.getRequestDispatcher("/_02_TripAndJournal/ShowJournal.jsp").forward(request, response);
 	}
 
 	protected void doGet(HttpServletRequest request,

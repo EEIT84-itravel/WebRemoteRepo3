@@ -192,6 +192,7 @@ public class SightDAOHibernate {
 		return sightVOs;
 	}
 	
+	//全部景點依照景點ID排序(後台用
 	private static final String GET_ALL_STMT = "from SightVO order by sightId";
 
 	public List<SightVO> selectAllbySightId() {

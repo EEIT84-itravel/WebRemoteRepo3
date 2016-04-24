@@ -39,7 +39,7 @@ public class EventService {
 	 return result;
 	 }
 	//查詢單一活動
-	 public EventVO selectOne(int eventId){
+	 public EventVO selectOne(Integer eventId){
 		 return eDAO.select(eventId);
 	 }
 	 

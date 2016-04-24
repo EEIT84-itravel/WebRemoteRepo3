@@ -54,7 +54,7 @@ public List<MemberVO> getAll() {
  public List<MemberVO> selectAllByCellphone(String cellphone){
 	 return memberDAO.findByCellphone(cellphone);
  }
- public MemberVO selectById(int memberId){
+ public MemberVO selectById(Integer memberId){
 	 return memberDAO.findByPrimaryKey(memberId);
  }
 
