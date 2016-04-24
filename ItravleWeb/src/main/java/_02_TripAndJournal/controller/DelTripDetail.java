@@ -16,6 +16,7 @@ import _02_TripAndJournal.model.TripDetailVO;
 
 @WebServlet("/_02_TripAndJournal/member/DelTripDetail.controller")
 public class DelTripDetail extends HttpServlet {
+	//報廢中，改成用畫面接值就不用這隻了
 	// 本Servlet功能：由WriteTrip.jsp按刪除時呼叫，利用tripOrder把單一筆tripOrder刪除
 	private static final long serialVersionUID = 1L;
 

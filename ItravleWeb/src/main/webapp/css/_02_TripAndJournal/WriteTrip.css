@@ -41,8 +41,7 @@ img {
 	height: 734.2px;
 	overflow-y: auto;
 	overflow-x:hidden;
-	border: 1.5px solid silver;		
-/* 	background-color: silver; */
+	border: 1.5px solid silver;
 }
 div .sight {
 	height: 30px;
@@ -66,7 +65,11 @@ div .sight {
 	margin-bottom: 10px;
 	box-shadow: 4px 4px 2pt 0pt silver;
 }
-
+.placeholder {
+	text-align: center;
+	color: #3333ff;
+	font-weight: bold;
+}
 .tripDetailTable td {
 	padding: 6px 6px 6px 10px;
 }
@@ -74,8 +77,12 @@ div .sight {
 .tripDetailTable h3 {
 	margin-top: 10px;
 }
-#divsaveTrip {	
+#divsaveTrip {
+	height:32.22px;
 	text-align: right;
 	margin-bottom: 10px;
 	margin-top: 10px;
+}
+#btnBudget {
+	margin-bottom: 10px;
 }

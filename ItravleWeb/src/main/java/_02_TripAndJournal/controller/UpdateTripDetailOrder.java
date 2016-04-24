@@ -16,6 +16,7 @@ import _02_TripAndJournal.model.TripDetailVO;
 
 @WebServlet("/_02_TripAndJournal/member/UpdateTripDetailOrder.controller")
 public class UpdateTripDetailOrder extends HttpServlet {
+	//報廢中，改成用畫面接值就不用這隻了
 	// 本Servlet功能：由WriteTrip.jsp交換tripDetail順序時呼叫，把session裡的Cart叫出來，交換順序
 	private static final long serialVersionUID = 1L;
 

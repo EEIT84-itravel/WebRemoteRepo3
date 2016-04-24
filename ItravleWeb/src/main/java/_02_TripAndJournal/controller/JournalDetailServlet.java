@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import org.apache.tomcat.util.http.fileupload.UploadContext;
+//import org.apache.tomcat.util.http.fileupload.UploadContext;
 
 import _02_TripAndJournal.model.JournalDetailService;
 import _02_TripAndJournal.model.JournalDetailVO;
