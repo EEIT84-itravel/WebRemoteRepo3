@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+#divTrip {
+	width: 700px;
+	margin: 5px;
+}
+
+#tripMap {
+	width: 690px;
+	height: 700px;
+}
+
+#tableTrip {
+	width: 690px;
+	margin: 0 0 5px 0;
+}
+#backURL {
+	text-align: center;
+	clear:both;
+}
+img {
+	vertical-align:middle;
+}
+#arrow {
+	text-align:center;
+}
+.glyphicon.glyphicon-chevron-down {	
+	font-size: 50px;
+	color: silver;
+}

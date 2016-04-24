@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+/* 調整看文章頁面的文章及留言格式 */
+#forumHead ,#forumBody ,#messageBody {
+	width: 1000px;
+	height: auto;
+	margin: auto;
+}
+#forumBody{
+	border:1px solid #C9C9C9;
+}
+
+#forum {
+	width: 1000px;
+	border: 2px solid red;
+	text-align: left;
+}
+.error{
+	color:red;
+}

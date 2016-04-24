@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/25 ?U?? 08:38:02 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="_05_Member.model.CollectionVO" table="collection">
+        <id name="collectionNo" type="java.lang.Integer">
+            <column name="collection_no" />
+            <generator class="identity" />
+        </id>
+        <property name="memberId" type="java.lang.Integer">
+            <column name="member_id" />
+        </property>
+                <property name="typeId" type="java.lang.String">
+            <column name="type_id" />
+            
+        </property>
+        <property name="referenceType" type="java.lang.Integer">
+            <column name="reference_type" />
+        </property>
+    </class>
+</hibernate-mapping>

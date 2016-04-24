@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+.journalTable{
+	font-size: 20px;
+}
+#divMember,#divJournal {
+	width: 790px;
+	margin: 5px;
+}
+
+#tripMap {
+	width: 600px;
+	height: 700px;
+}
+#journalTable,#member{
+	width:740px;
+}
+img {
+
+	vertical-align:middle;
+}
+#backURL {
+	text-align: center;
+	clear:both;
+}
+.journalPic{
+	width:300px;
+	height:220px;
+}
+.memberPic{
+	width:100px;
+	height:100px;
+}
+.fMargin{
+	margin:5px;
+}

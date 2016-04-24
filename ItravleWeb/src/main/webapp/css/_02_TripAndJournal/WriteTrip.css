@@ -1,0 +1,81 @@
+@CHARSET "UTF-8";
+
+h4 {
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+img {
+	vertical-align:middle;
+}
+#tripName{
+	float: left;
+}
+#topButton {
+	float: right;
+}
+#left {
+	width:57%;	
+	float: left;
+	height: 800px;
+}
+#right {
+	width:42%;
+	float: right;
+	height: 800px;
+}
+#days {
+	width: 20%;
+	height:auto;
+	float: left;
+	overflow: hidden;
+}
+#trip {
+	width: 79%;
+	height:800px;
+	float: right;	
+}
+#tripBut{
+	align-content: right;
+}
+.day {
+	height: 734.2px;
+	overflow-y: auto;
+	overflow-x:hidden;
+	border: 1.5px solid silver;		
+/* 	background-color: silver; */
+}
+div .sight {
+	height: 30px;
+	width: 100%;
+	margin: auto;
+}
+#sightsTabs ul li a{
+	font-size:16px;
+}
+.noteTextarea {
+	max-width:300px;
+ 	max-height:50px;
+ 	width:300px;
+ 	height:50px;
+}
+.tripDetailTable {
+	border-radius: 10px;	
+	width: 99%;	
+	background-color: #D6F8D6;	
+	margin-top: 10px;
+	margin-bottom: 10px;
+	box-shadow: 4px 4px 2pt 0pt silver;
+}
+
+.tripDetailTable td {
+	padding: 6px 6px 6px 10px;
+}
+
+.tripDetailTable h3 {
+	margin-top: 10px;
+}
+#divsaveTrip {	
+	text-align: right;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}

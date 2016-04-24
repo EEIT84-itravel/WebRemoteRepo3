@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="_00_Misc.model.CodeVO" table="codes">
+		<id name="codeId" type="java.lang.String">
+			<column name="code_id" />
+		</id>
+		<property name="codeName" type="java.lang.String">
+			<column name="code_name" />
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+*	{
+	font-family: "Microsoft JhengHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+article {
+	width:1400px;
+	font-family: "Microsoft JhengHei", "Helvetica Neue", Helvetica, Arial, sans-serif;	
+}
+
+.errorMsg {
+	color: red;
+}

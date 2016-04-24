@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+#tripDiv {
+	margin: 10px 20px;
+	width: 310px;
+	height: 380px;
+	float: left;
+	display: table-cell; 	
+	vertical-align: middle;
+	border-radius: 8px;
+	border-width: 1px;
+	box-shadow: 4px 4px 1pt 0pt #a7a7a7;
+	background-color: #e6e6ff;
+}
+#writeTripBtn{
+	text-align: right;
+}
+#tripDiv table {
+	width: 280px;
+	height: 350px;
+	margin: 10px auto;	
+}
+img {
+	cursor: pointer;
+}
+#btnMore {
+	text-align: right;
+}
+#divRowsPerPage {
+	text-align: right;
+}
+#divChangePage {
+	clear:both;
+	text-align: center;
+}
+
+#divChangePage table {
+	margin: 0 auto;
+}
+#tripDiv .img-thumbnail {
+	width:280px;
+	height:210px;
+}
