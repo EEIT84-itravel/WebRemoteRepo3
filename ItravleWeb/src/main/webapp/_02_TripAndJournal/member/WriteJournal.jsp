@@ -122,7 +122,7 @@ textarea{/* Text Area 固定大小*/
 	      <td>選擇遊記主圖：</td>		
 		  <td><input type="file" name="journalPic"  onchange='openFile(event)' class="btn btn-info btn-lg">
 		  <div><img id='output'></div>
-
+		  <div><span>${error.journalPic}</span></div>
 	   </tr>
 	    <tr>
 			<td>詳細遊記</td>
