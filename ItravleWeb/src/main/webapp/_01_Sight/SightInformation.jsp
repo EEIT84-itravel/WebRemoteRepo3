@@ -124,14 +124,14 @@ text-align: center;
                              		</c:if>
 								</c:forEach>
 								</td>
+								<td><a href="<c:url value="/_02_TripAndJournal/ShowTrip.controller?tripId=${tripVO.tripId}" />" >${tripVO.tripName}</a></td>
 								<td>
 									<c:forEach var="MemberVOt" items="${MemberService.all}">
-                             		<c:if test="${MemberVOt.memberId==journalVO.memberId}">
-										${MemberVOt.nickname}
-                             		</c:if>
-								</c:forEach>
+                             			<c:if test="${MemberVOt.memberId==tripVO.memberId}">
+											${MemberVOt.nickname}
+                             			</c:if>
+									</c:forEach>
 								</td>
-								<td>${tripVO.tripName}</td>
 								<td>有${tripVO.watchNum}人瀏覽過</td>
 								</tr>
 								</c:forEach>
@@ -142,7 +142,7 @@ text-align: center;
 							<c:forEach var="journalVO" items="${journalVOs}" end="4"><!-- "4"為顯示5筆  -->
 							<tr>
 								<td><img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${journalVO.journalId}" />" width="88" height="66"></td>
-								<td>${journalVO.journalName}</td>
+								<td><a href="<c:url value="/_02_TripAndJournal/ShowJournalDetail.controller?journalId=${journalVO.journalId}" />">${journalVO.journalName}</a></td>
 								<c:forEach var="MemberVOj" items="${MemberService.all}">
                              		<c:if test="${MemberVOj.memberId==journalVO.memberId}">
 										<td>${MemberVOj.nickname}</td>

@@ -54,7 +54,7 @@ pageContext.setAttribute("tripVO", tripVO);
                         </c:if>
 					</c:forEach>
 				</td>
-				<td>${tripVO.tripName}</td>
+				<td><a href="<c:url value="/_02_TripAndJournal/ShowTrip.controller?tripId=${tripVO.tripId}" />" >${tripVO.tripName}</a></td>
 				<td>${tripVO.tripStartDate}</td>
 				<td>${tripVO.modifyTime}</td>
 				<td>${tripVO.watchNum}</td>

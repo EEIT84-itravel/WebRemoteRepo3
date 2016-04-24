@@ -67,7 +67,7 @@ pageContext.setAttribute("journalVO", journalVO);
 				<td>
 					<img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${journalVO.journalId}" />" width="160" height="120" class="img-rounded">
 				</td>
-				<td>${journalVO.journalName}</td>
+				<td><a href="<c:url value="/_02_TripAndJournal/ShowJournalDetail.controller?journalId=${journalVO.journalId}" />">${journalVO.journalName}</a></td>
 				<td>${journalVO.beginTime}</td>
 				<td>${journalVO.modifyTime}</td>
 				<td>${journalVO.visitorNum}</td>

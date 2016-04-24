@@ -47,7 +47,7 @@
 								src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?tripId=${tripVO.tripId}" />"
 								width="160" height="120" class="img-rounded">
 							</td>
-							<td>${tripVO.tripName}</td>
+							<td><a href="<c:url value="/_02_TripAndJournal/ShowTrip.controller?tripId=${tripVO.tripId}" />" >${tripVO.tripName}</a></td>
 							<td>${tripVO.tripStartDate}</td>
 							<td>${tripVO.modifyTime}</td>
 							<td>${tripVO.watchNum}</td>
@@ -78,7 +78,7 @@
 								src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${journalVO.journalId}" />"
 								width="160" height="120" class="img-rounded">
 							</td>
-							<td>${journalVO.journalName}</td>
+							<td><a href="<c:url value="/_02_TripAndJournal/ShowJournalDetail.controller?journalId=${journalVO.journalId}" />">${journalVO.journalName}</a></td>
 							<td>${journalVO.beginTime}</td>
 							<td>${journalVO.modifyTime}</td>
 							<td>${journalVO.visitorNum}</td>

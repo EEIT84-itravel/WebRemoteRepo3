@@ -142,7 +142,7 @@
 			<tr>
 				<td>大頭貼 :</td>
 				<td><input type='file' accept='image/*' onchange='openFile(event)' name="photo1"><br>
-					<img id='output'></td>
+					<img id='output' width="160" height="240"></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="修改會員資料"></td>
