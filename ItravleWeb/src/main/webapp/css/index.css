@@ -4,60 +4,129 @@
 	width: 300px;
 	height: 300px;
 	margin: auto;
-	border-radius:5px ;
+	border-radius: 5px;
 	padding: 10px;
-	background-color: #EAEFB1;
+	background-color: #e6e6ff;
 }
 
 #hotJournal {
 	width: 300px;
 	height: 300px;
 	margin: auto;
-	border-radius:5px ;
+	border-radius: 5px;
 	padding: 10px;
-	background-color: #F7F6C5;
+	background-color: #ffe6cc;
 }
+
 #event {
 	width: 280px;
 	height: 300px;
 	margin: auto;
-	border-radius:5px ;
-    padding: 10px;
-    background-color: #F3FAE1;
-}
-#container{
-	padding:10px;
-	 width: 900px;
-	height: 350px;
-	  margin: auto;	
-}
-#skippr{
-	border-radius:5px ;
+	border-radius: 5px;
+	padding: 10px;
+	background-color: #f2e5ff;
 }
 
-.hrL{
-	color: #4062BB;
-	margin:0;
+#hotTrip a:link, #hotJournal a:link, #event a:link {
+	color: #4d2600;
 }
-.info{
-	margin:5px;
+
+#container {
+	padding: 10px;
+	width: 900px;
+	height: 350px;
+	margin: auto;
+}
+
+#skippr {
+	border-radius: 5px;
+}
+
+.hrL {
+	color: #4062BB;
+	margin: 0;
+}
+
+.info {
+	margin: 5px;
 	margin-bottom: 2px;
 }
-ul{
-		padding-left: 20px;;
+
+ul {
+	padding-left: 20px;;
 }
-li{
+
+li {
 	list-style-type: square;
 }
-.wrap { position: relative; width:880px; margin:0 auto;}
-#dowebok { overflow: hidden;}
-.box-slider .box-slider-seta-left { float: left; width: 25px; height: 150px;border-top-left-radius:5px 5px;border-bottom-left-radius:5px 5px; background: url(../img/seta-left.png) no-repeat center center #800040;}
-.box-slider .box-slider-seta-right { float: right; width: 25px; height: 150px;border-top-right-radius:5px 5px;border-bottom-right-radius:5px 5px; background: url(../img/seta-right.png) no-repeat center center #800040;}
-.box-slider .box-slider-content { position: absolute; left: 42px; width: 795px; overflow: hidden;}
-.box-slider .box-slider-move { position: relative; top: 0; left: 0; width: 10000px;}
-.box-slider .item { float: left; width: 160px; margin-left: 5px;cursor: pointer;}
-.box-slider .item.first { margin-left: 0;cursor: pointer;}
-.box-slider .item span { display: block; height: 150px;}
-.box-slider .last-item span {cursor: pointer; text-align: center; font-family: Arial, Helvetica, sans-serif; color: #fff;}
-.box-slider-move { overflow: hidden; *zoom:1;}
 
+.wrap {
+	position: relative;
+	width: 880px;
+	margin: 0 auto;
+}
+
+#dowebok {
+	overflow: hidden;
+}
+
+.box-slider .box-slider-seta-left {
+	float: left;
+	width: 25px;
+	height: 150px;
+	border-top-left-radius: 5px 5px;
+	border-bottom-left-radius: 5px 5px;
+	background: url(../img/seta-left.png) no-repeat center center #800040;
+}
+
+.box-slider .box-slider-seta-right {
+	float: right;
+	width: 25px;
+	height: 150px;
+	border-top-right-radius: 5px 5px;
+	border-bottom-right-radius: 5px 5px;
+	background: url(../img/seta-right.png) no-repeat center center #800040;
+}
+
+.box-slider .box-slider-content {
+	position: absolute;
+	left: 42px;
+	width: 795px;
+	overflow: hidden;
+}
+
+.box-slider .box-slider-move {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 10000px;
+}
+
+.box-slider .item {
+	float: left;
+	width: 160px;
+	margin-left: 5px;
+	cursor: pointer;
+}
+
+.box-slider .item.first {
+	margin-left: 0;
+	cursor: pointer;
+}
+
+.box-slider .item span {
+	display: block;
+	height: 150px;
+}
+
+.box-slider .last-item span {
+	cursor: pointer;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #fff;
+}
+
+.box-slider-move {
+	overflow: hidden;
+	*zoom: 1;
+}

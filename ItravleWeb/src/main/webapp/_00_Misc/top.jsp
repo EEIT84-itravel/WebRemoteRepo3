@@ -225,10 +225,12 @@ nav {
 							<button type="submit" class="btn btn-success btn-block">
 								<span class="glyphicon glyphicon-off"></span> 登入
 							</button>
+							<button type="button" class="btn btn-danger btn-default pull-left btn-block" data-dismiss="modal">
+								<span class="glyphicon glyphicon-remove"></span> 取消
+							</button>
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">取消</button>
 					</div>
 				</div>
 			</div>
