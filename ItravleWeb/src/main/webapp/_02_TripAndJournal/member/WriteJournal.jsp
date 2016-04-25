@@ -28,13 +28,16 @@ textarea { /* Text Area 固定大小*/
 	margin: 5px;
 }
 </style>
-<script type="text/javascript"
-	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/css/_00_Misc/main.css"/>" />
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/css/_02_TripAndJournal/WriteJournal.css"/>" />
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
+
+<script type="text/javascript"
+	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
 <!-- jQuery -->
 <script type="text/javascript"
 	src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
@@ -73,8 +76,6 @@ textarea { /* Text Area 固定大小*/
 		reader.readAsDataURL(input.files[0]);
 	};
 </script>
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/css/_00_Misc/main.css"/>" />
 <title>ITravel-建立新遊記</title>
 </head>
 <body>
@@ -96,8 +97,9 @@ textarea { /* Text Area 固定大小*/
 		<input type="hidden" name="memberId" value="${user.memberId}">		
 			<div class="form-group">
 				<h4><label class="control-label col-sm-3">遊記名稱：</label></h4>
-				<div class="col-sm-9">
+				<div class="col-sm-6">
 					<input class="form-control" type="text" name="journalName" value="${journalVO.journalName}"/><span class="error">${error.journalName}</span>				    
+				    <span class="errorMsg">${error.journalName}</span>
 				</div>
 			</div>
 			<div class="form-group">
@@ -118,8 +120,9 @@ textarea { /* Text Area 固定大小*/
 			</div>
 			<div class="form-group">
 				<h4><label class="control-label col-sm-3">遊記簡介：</label></h4>
-				<div class="col-sm-9">
-				<textarea name="journalIntro" rows="4" class="textBody form-control"	cols="40">${journalVO.journalIntro}</textarea>
+				<div class="col-sm-6">
+				<textarea name="journalIntro" rows="4" id="jBody" class="textBody form-control"	cols="40">${journalVO.journalIntro}</textarea>
+					<span class="errorMsg">${error.journalIntro}</span>
 				</div>
 			</div>
 			<div class="form-group"  style="text-align: center;">
@@ -159,9 +162,9 @@ textarea { /* Text Area 固定大小*/
 								<input type="hidden" name="crud" value="Insert">
 								<div class="form-group">
 									<h4><label class="control-label col-sm-3">${SightVO.sightName}：</label></h4>
-									<div class="col-sm-9">
-									<textarea name="sightJournal" rows="5" cols="50" class="textBody form-control">${showJournalDetailVO.sightJournal}</textarea><span
-										class="error">${error.sightJournal}</span>
+									<div class="col-sm-6">
+									<textarea name="sightJournal" id="jBody" rows="5" cols="50" class="textBody form-control">${showJournalDetailVO.sightJournal}</textarea><span
+										class="errorMsg">${error.sightJournal}</span>
 									</div>
 								</div>
 								

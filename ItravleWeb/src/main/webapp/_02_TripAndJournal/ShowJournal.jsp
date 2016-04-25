@@ -46,13 +46,16 @@ pageContext.setAttribute("regions", codeVO);
 		</h1>
 		<h1 class="h1">
 			<input type="hidden"  id="referenceType" value="${showJournalVO.journalId}">	
-			<c:if test="${flag}"> <!-- 		判斷收藏景點鈕是否出現 寫在ShowJournalDetailServlet -->
+			<c:if test="${flag&&showJournalVO.memberId!=user.memberId}"> <!-- 		判斷收藏景點鈕是否出現 寫在ShowJournalDetailServlet -->		
 				<input type="button" value="收藏遊記" id='collect'>
  			</c:if>
 		</h1>
 		<div id="divJournal" class="pull-left">
 		<form action="<c:url value="/_02_TripAndJournal/member/ModifyJournal.controller?crud=Update&journalId=${showJournalVO.journalId}"/>" method="post">
-			<input type="submit" name="modifyJournal" value="修改遊記">
+			<c:choose>		
+				<c:when test="${empty user}"></c:when>
+				<c:when test="${user.memberId==showJournalVO.memberId}"><input type="submit" name="modifyJournal" value="修改遊記"></c:when>
+			</c:choose>
 			<div id="divMember">
 				<table id="member" class="table table-bordered">
 				<tr>

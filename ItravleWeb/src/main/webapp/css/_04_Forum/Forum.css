@@ -5,15 +5,35 @@
 	height: auto;
 	margin: auto;
 }
+
 #forumBody{
 	border:1px solid #C9C9C9;
 }
-
 #forum {
-	width: 1000px;
-	border: 2px solid red;
+	width: 1000px;	
 	text-align: left;
+}
+.table th {
+	font-size: 20px;
+/* 	font-weight: 300;	 */
+}
+.table td {
+	font-size: 20px;
+	vertical-align: middle;
+/* 	font-weight: 200; */	
 }
 .error{
 	color:red;
+}
+.textBody{
+	max-width:500px;
+ 	max-height:100px;
+ 	width:500px;
+ 	height:100px;
+}
+#jBody{
+		max-width:500px;
+ 	max-height:100px;
+ 	width:500px;
+ 	height:100px;
 }
