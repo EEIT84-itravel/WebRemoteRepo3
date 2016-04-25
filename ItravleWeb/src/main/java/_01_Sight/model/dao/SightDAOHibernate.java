@@ -138,25 +138,6 @@ public class SightDAOHibernate {
 		return sightVO;
 	}
 
-	// 景點按瀏覽人次排列(首頁)
-	private static final String GET_ALL_WATCHNUM = "from SightVO order by watchNum desc";
-
-	public List<SightVO> selectByWatchNum() {
-		List<SightVO> sightVOs = null;
-		Session session = HibernateUtil_H4_Ver1.getSessionFactory()
-				.getCurrentSession();
-		try {
-			session.beginTransaction();
-			Query query = session.createQuery(GET_ALL_WATCHNUM);
-			sightVOs = query.list();
-			session.getTransaction().commit();
-		} catch (HibernateException e) {
-			session.getTransaction().rollback();
-			e.printStackTrace();
-		}
-		return sightVOs;
-	}
-
 	// 景點資訊超連結
 	public SightVO findByPrimaryKey(Integer sightId) {
 		SightVO sightVO = null;
@@ -193,7 +174,7 @@ public class SightDAOHibernate {
 	}
 	
 	//全部景點依照景點ID排序(後台用
-	private static final String GET_ALL_STMT = "from SightVO order by sightId";
+	private static final String GET_ALL_STMT = "from SightVO order by sightId desc";
 
 	public List<SightVO> selectAllbySightId() {
 		List<SightVO> sightVOs = null;
