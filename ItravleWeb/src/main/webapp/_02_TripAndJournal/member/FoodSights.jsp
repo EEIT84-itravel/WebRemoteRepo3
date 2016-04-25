@@ -105,7 +105,7 @@ $(function(){
 				<c:forEach var="sightVO" items="${sightVO}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 				<table class="sight table">
 				<tr class="sightId">	
-					<td>${sightVO.sightId}</td>
+					<td hidden="true">${sightVO.sightId}</td>
 					<td><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />"
 							 width="80" height="60">
 					</td>					
