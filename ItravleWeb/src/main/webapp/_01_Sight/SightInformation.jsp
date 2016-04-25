@@ -103,9 +103,7 @@ text-align: center;
 				</c:forEach>
 			</p>
 			<p>地址:${sightVO.addr}</p>
-			<p>交通方式:</p>
-			<p>　　${trans1}</p>
-			<p>　　${trans2}</p>
+			<p>交通方式　-　${trans}</p>
 						<div id="tabss">
 						<div id="tabs">
 							<ul>

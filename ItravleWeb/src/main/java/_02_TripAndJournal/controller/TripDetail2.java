@@ -32,17 +32,8 @@ public class TripDetail2 extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// 接收資料
 		request.setCharacterEncoding("UTF-8");// 編碼
-
-		HttpSession session = request.getSession(false);
-		int tripId=0;
-		TripVO tripVO=null;
-		if (session != null) {
-			tripVO = (TripVO) session.getAttribute("tripVO");
-			tripId = tripVO.getTripId();
-		} else {
-			//回登入
-		}
 		
+		String temp4 = request.getParameter("tripId");
 		String[] temp1 = request.getParameterValues("stayTime");
 		String[] temp2 = request.getParameterValues("sightId");
 		String[] notes = request.getParameterValues("notes");
@@ -66,6 +57,15 @@ public class TripDetail2 extends HttpServlet {
 		// 驗證資料
 
 		// 轉換資料
+		int tripId = 0;
+		if (temp4 != null && temp4.trim().length() != 0) {
+			try {
+				tripId = Integer.parseInt(temp4);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		// 用sightId決定有幾個tripDetail
 		int tripDetailLen = temp2.length;
 		java.sql.Time[] stayTime = new java.sql.Time[tripDetailLen];
@@ -92,8 +92,8 @@ public class TripDetail2 extends HttpServlet {
 		java.math.BigDecimal[] sightBudget = new java.math.BigDecimal[tripDetailLen];
 		for (int i = 0; i < tripDetailLen; i++) {			
 			if (temp3[i] != null && temp3[i].trim().length() != 0) {
-				double temp4 = Double.parseDouble(temp3[i]);
-				sightBudget[i] = java.math.BigDecimal.valueOf(temp4);
+				double temp5 = Double.parseDouble(temp3[i]);
+				sightBudget[i] = java.math.BigDecimal.valueOf(temp5);
 			}
 		}
 
@@ -113,6 +113,7 @@ public class TripDetail2 extends HttpServlet {
 			tripDetailVOs.add(tripDetailVO);
 			tripOrder= tripOrder+2;			
 		}	
+		
 		//抓出資料庫中同一個tripId的detail，刪除
 		TripDetailService service = new TripDetailService();
 		List<TripDetailVO> TripDetailVOFromDB = service.select(tripId);
@@ -121,8 +122,10 @@ public class TripDetail2 extends HttpServlet {
 			service.delete(tempTdetailId);
 		}
 		boolean result =service.insert(tripDetailVOs);
+		
 		//修改trip的modifyTime
 		TripService tripService = new TripService();
+		TripVO tripVO = tripService.select(tripId);
 		java.util.Date now = new Date();
 		long nowLong = now.getTime();
 		java.sql.Timestamp sqlDate = new Timestamp(nowLong);

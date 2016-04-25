@@ -29,11 +29,15 @@
 <!-- 最新編譯和最佳化的 JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
 <!-- jQuery ui -->
 <script type="text/javascript"
 	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+
 <script type="text/javascript" src="<c:url value="/js/account.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/js/cellphone.js"/>"></script>
+	<script type="text/javascript"	src="<c:url value="/js/jquery.skippr.min.js"/>"></script>
+<script type="text/javascript"	src="<c:url value="/js/jquery-boxSlider.js"/>"></script>
 <style type="text/css">
 nav {
 	font-family: "Microsoft JhengHei", "Helvetica Neue", Helvetica, Arial,
@@ -176,8 +180,12 @@ nav {
 					<li class="whiteNav"><a id="myReg">註冊</a></li>
 				</c:if>
 				<c:if test="${empty user}">
-					<li class="whiteNav"><a id="myBtn">Login</a></li>
+					<li class="whiteNav"><a id="myBtn" style="cursor: pointer">Login</a></li>
 					<!-- 					<li><button type="button"  class="btn btn-info btn-lg" id="myBtn3">Login</button></li> -->
+				</c:if>
+				<c:if test="${not empty user}">
+					<li class="pull-right whiteNav"><a
+						href="<c:url value="/_05_Member/member/Logout.jsp" />">Logout</a></li>
 				</c:if>
 				<c:if test="${not empty user}">
 					<li><a href="<c:url value="/_05_Member/Logout.jsp" />">Logout</a></li>
@@ -308,4 +316,3 @@ nav {
 	<!-- /.container-fluid -->
 </body>
 </html>
-
