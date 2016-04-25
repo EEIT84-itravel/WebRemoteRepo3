@@ -114,7 +114,7 @@ text-align: center;
 								<li><a href="#tabs-3">留言</a></li>
 							</ul>
 							<div id="tabs-1"><!-- tab 相關行程 -->
-							<table>
+							<table class="table">
 								<c:forEach var="tripVO" items="${tripVOs}" end="4"><!-- "4"為顯示5筆  -->
 								<tr>
 								<td>
@@ -124,25 +124,25 @@ text-align: center;
                              		</c:if>
 								</c:forEach>
 								</td>
+								<td><a href="<c:url value="/_02_TripAndJournal/ShowTrip.controller?tripId=${tripVO.tripId}" />" >${tripVO.tripName}</a></td>
 								<td>
 									<c:forEach var="MemberVOt" items="${MemberService.all}">
-                             		<c:if test="${MemberVOt.memberId==journalVO.memberId}">
-										${MemberVOt.nickname}
-                             		</c:if>
-								</c:forEach>
+                             			<c:if test="${MemberVOt.memberId==tripVO.memberId}">
+											${MemberVOt.nickname}
+                             			</c:if>
+									</c:forEach>
 								</td>
-								<td>${tripVO.tripName}</td>
 								<td>有${tripVO.watchNum}人瀏覽過</td>
 								</tr>
 								</c:forEach>
 							</table>
 							</div>
 							<div id="tabs-2"><!-- tab 相關遊記 -->
-							<table>
+							<table class="table">
 							<c:forEach var="journalVO" items="${journalVOs}" end="4"><!-- "4"為顯示5筆  -->
 							<tr>
 								<td><img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${journalVO.journalId}" />" width="88" height="66"></td>
-								<td>${journalVO.journalName}</td>
+								<td><a href="<c:url value="/_02_TripAndJournal/ShowJournalDetail.controller?journalId=${journalVO.journalId}" />">${journalVO.journalName}</a></td>
 								<c:forEach var="MemberVOj" items="${MemberService.all}">
                              		<c:if test="${MemberVOj.memberId==journalVO.memberId}">
 										<td>${MemberVOj.nickname}</td>
@@ -154,7 +154,7 @@ text-align: center;
 							</table>
 							</div>
 							<div id="tabs-3"><!-- tab 留言 -->
-							<table>
+							<table class="table">
 							<c:forEach var="messageVO" items="${messageVOs}">
 								<tr>
 									<td>${messageVO.content}</td>
@@ -169,15 +169,27 @@ text-align: center;
 							</table>
 							<form action="<c:url value="/_01_Sight/member/SightReplyServlet.controller" />" method="post">
 								<table>
-								<tr><td>
-								<input type="hidden" name="sightID" value="${sightVO.sightId}"></td></tr>
-								<tr><td>
-								<textarea rows="5" cols="40" name="reply" style="color:black">${param.reply}</textarea>
-								</td></tr>
-								<tr><td>
-								<span>${error.reply}</span></td></tr>
-								<tr><td>
-								<input type="submit" value="確定送出" style="color:black"></td></tr>
+									<tr>
+										<td>
+											<input type="hidden" name="referenceNo" value="${sightVO.sightId}">
+											<input type="hidden" name="type" value="type_id01">
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<textarea rows="5" cols="40" name="reply" style="color:black">${param.reply}</textarea>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<span>${error.reply}</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input type="submit" value="確定送出" style="color:black">
+										</td>
+									</tr>
 								</table>
 							</form>	
 							</div><!-- tab 留言 end-->
@@ -209,7 +221,7 @@ text-align: center;
 		<!-- 		google map end -->
 		<div id="pageBottom">
 		<input type="button" onclick="history.back()" value="上一頁" class="bottomInner" /> 
-		<a href="<c:url value="/_01_Sight/SightIndex.controller?action=selectAll" />" class="bottomInner">回景點首頁</a>
+		<a href="<c:url value="/_01_Sight/SightIndex.jsp" />" class="bottomInner">回景點首頁</a>
 		</div>
 	</article>
 	<footer>

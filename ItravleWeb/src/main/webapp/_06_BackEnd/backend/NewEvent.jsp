@@ -189,7 +189,7 @@
 				<tr>
 					<td>活動圖片：</td>
 					<td><input type='file' accept='image/*' onchange='openFile(event)' name="eventPhoto"><br>
-					<img id='output'></td>
+					<img id='output' width="240" height="180"></td>
 				</tr>
 				<tr>
 					<td><input type="hidden" name="action" value="insert"></td>

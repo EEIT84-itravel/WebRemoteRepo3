@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<<<<<<< HEAD
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 外接程式碼 -->
 <%@ page import="_01_Sight.model.*"%>
@@ -8,7 +8,7 @@
 <%@ page import="java.util.*"%>
 <%
 	SightService sightService = new SightService();
- 	List<SightVO> sightVO = sightService.select();
+ 	List<SightVO> sightVO = sightService.selectAllbySightId();
  	pageContext.setAttribute("sightVO", sightVO);
 	MemberService memberService = new MemberService();
  	List<MemberVO> memberVO = memberService.getAll();
@@ -33,6 +33,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>I-Travel後台:管理景點</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <!-- jQuery ui css -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
 <!-- jQuery -->
@@ -44,7 +45,7 @@
 		$("#tabs").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
 		$("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
 		//景點詳情dialog功能
-		var uri = "${pageContext.request.contextPath}/_02_TripAndJournal/ShowSightDetail.controller?sightId=";
+	 	var uri = "${pageContext.request.contextPath}/_02_TripAndJournal/ShowSightDetail.controller?sightId=";
 		var dialog;
 		dialog = $("#dialog-form").dialog({
 			autoOpen : false,
@@ -84,44 +85,21 @@
 			}
 			closedialog = 1;//set to one because click on dialog box sets to zero   
 		}
-	});
+	}); 
 </script>
 <style type="text/css">
-.ui-tabs-vertical {
-	width: 100%;
+  .ui-tabs-vertical { width: 55em; }
+  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
+  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+  .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+  .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
+  .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
+
+.ui-widget-content{
+width: 100%;
 }
 
-.ui-tabs-vertical .ui-tabs-nav {
-	padding: .2em .1em .2em .2em;
-	float: left;
-	width: 12em;
-}
-
-.ui-tabs-vertical .ui-tabs-nav li {
-	clear: left;
-	width: 100%;
-	border-bottom-width: 1px !important;
-	border-right-width: 0 !important;
-	margin: 0 -1px .2em 0;
-}
-
-.ui-tabs-vertical .ui-tabs-nav li a {
-	display: block;
-}
-
-.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
-	padding-bottom: 0;
-	padding-right: .1em;
-	border-right-width: 1px;
-}
-
-.ui-tabs-vertical .ui-tabs-panel {
-	padding: 1em;
-	float: right;
-	width: 40em;
-}
-
-#tabs-1 {
+ #tabs-1 {
 	float: left;
 	width: 82%;
 	padding: 0;
@@ -132,31 +110,31 @@
 	margin: 5px;
 }
 
-#tabs-2 {
-	float: left;
-	width: 82%;
-	padding: 0;
-	margin: 5px;
-}
+ #tabs-2 { 
+ 	float: left; 
+ 	width: 82%; 
+ 	padding: 0; 
+ 	margin: 5px; 
+ } 
 
-#tabs-2 h2 {
-	margin: 5px;
-}
+ #tabs-2 h2 { 
+	margin: 5px; 
+ } 
 
-#tabs-3 {
-	float: left;
-	width: 82%;
-	padding: 0;
-	margin: 5px;
-}
+ #tabs-3 { 
+ 	float: left;
+ 	width: 82%; 
+ 	padding: 0; 
+ 	margin: 5px; 
+ } 
 
-#tabs-3 h2 {
-	margin: 5px;
-}
+ #tabs-3 h2 { 
+ 	margin: 5px; 
+ } 
 
 .backendTable thead tr th {
 	text-align: center
-}
+} 
 </style>
 </head>
 <body>
@@ -179,13 +157,12 @@
 			<div id="tabs-1">
 				<h2>I-Travel後台:管理景點</h2>
 				<a href="<c:url value="/_06_BackEnd/backend/NewSight.jsp" />">新增景點</a>
-				<div>
 					<%
 						rowsPerPage = 20; //每頁的筆數 
 						rowNumber = sightVO.size();
 					%>
 					<%@ include file="/_00_Misc/page1.file"%>
-					<table border="1" class="backendTable">
+					<table class="backendTable table">
 						<thead>
 							<tr>
 								<th>景點編號</th>
@@ -242,7 +219,6 @@
 						</tbody>
 					</table>
 					<%@ include file="/_00_Misc/page2.file"%>
-				</div>
 			</div>
 			<!-- tabs-1 end tag -->
 			<div id="tabs-2">
@@ -252,7 +228,7 @@
 					rowNumber = memberVO.size();
 				%>
 				<%@ include file="/_00_Misc/page1.file"%> --%>
-				<table border="1" class="backendTable">
+				<table border="1" class="backendTable table">
 					<thead>
 						<tr>
 							<th>會員帳號</th>
@@ -278,6 +254,9 @@
 								<td>${memberVO.email}</td>
 								<td>${memberVO.birth}</td>
 								<td>${memberVO.cellphone}</td>
+								<c:if test="${memberVO.modifier==null}">
+									<td>此會員尚未修改過資料</td>
+								</c:if>
 								<c:forEach var="MemberVO" items="${MemberService.all}">
 									<c:if test="${MemberVO.memberId==memberVO.modifier}">
 										<td>${MemberVO.nickname}</td>
@@ -301,15 +280,14 @@
 <%-- 				<%@ include file="/_00_Misc/page2.file"%> --%>
 			</div><!-- tabs-2 end tag -->
 			<div id="tabs-3">
-				<h2>I-Travel後台:管理景點</h2>
+				<h2>I-Travel後台:管理活動</h2>
 				<a href="<c:url value="/_06_BackEnd/backend/NewEvent.jsp" />">新增活動</a>
-				<div>
 					<%
 						rowsPerPage = 20; //每頁的筆數 
 						rowNumber = eventVO.size();
 					%>
 					<%@ include file="/_00_Misc/page1.file"%>
-					<table border="1" class="backendTable">
+					<table class="backendTable table">
 						<thead>
 							<tr>
 								<th>活動主題</th>
@@ -317,6 +295,7 @@
 								<th>結束時間</th>
 								<th>相關景點</th>
 								<th>是否下架</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -346,10 +325,8 @@
 						</tbody>
 					</table>
 					<%@ include file="/_00_Misc/page2.file"%>
-				</div>
-			</div>
-			<!-- tabs-3 end tag -->
-		</div>
+			</div><!-- tabs-3 end tag -->
+		</div><!-- tabs end tag -->
 	</article>
 	<footer>
 		<!-- import共同的 -->

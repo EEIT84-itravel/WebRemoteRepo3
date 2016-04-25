@@ -23,6 +23,7 @@ import _02_TripAndJournal.model.TripVO;
 
 @WebServlet("/_02_TripAndJournal/member/SaveTripDetailCart.controller")
 public class SaveTripDetailCart extends HttpServlet {
+	// 報廢中，改成用畫面接值就不用這隻了
 	// 本Servlet功能：由WriteTrip.jsp的"儲存行程"呼叫，把session裡的tripDetailCart存到DB
 	private static final long serialVersionUID = 1L;
        

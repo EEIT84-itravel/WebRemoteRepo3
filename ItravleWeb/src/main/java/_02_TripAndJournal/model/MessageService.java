@@ -7,10 +7,33 @@ import _02_TripAndJournal.model.dao.MessageDAOHibernate;
 
 public class MessageService {
 	private MessageDAOHibernate messageDAOHibernate = new MessageDAOHibernate();
-	public List<MessageVO> selectSightMessage(Integer referenceNo) {
+	public List<MessageVO> selectSightMessage(int referenceNo) {
 		List<MessageVO> list = null;
 		List<MessageVO> result = new ArrayList<MessageVO>();
 		list=messageDAOHibernate.getTypeMessage("type_id01");
+		for(MessageVO vo:list){
+			if(vo.getReferenceNo()==referenceNo){
+				result.add(vo);
+			}
+		}
+		return result;
+	}
+	public List<MessageVO> selectTripMessage(int referenceNo) {
+		List<MessageVO> list = null;
+		List<MessageVO> result = new ArrayList<MessageVO>();
+		list=messageDAOHibernate.getTypeMessage("type_id02");
+		for(MessageVO vo:list){
+			if(vo.getReferenceNo()==referenceNo){
+				result.add(vo);
+			}
+		}
+		return result;
+	}
+	
+	public List<MessageVO> selectJournalMessage(int referenceNo) {
+		List<MessageVO> list = null;
+		List<MessageVO> result = new ArrayList<MessageVO>();
+		list=messageDAOHibernate.getTypeMessage("type_id03");
 		for(MessageVO vo:list){
 			if(vo.getReferenceNo()==referenceNo){
 				result.add(vo);
@@ -29,10 +52,11 @@ public class MessageService {
 	public List<MessageVO> getAllNum() {		
 		return messageDAOHibernate.getAllNum("type_id05");
 	}
-
+	
 	public List<MessageVO> getForumMessage(Integer referenceNo){
 		return messageDAOHibernate.getForumMessage(referenceNo);	    
 	}
+
 	//抓出某篇文章的回復人數
 	public long getForumMessageNum(Integer referenceNo){
 		return messageDAOHibernate.getForumMessageNum(referenceNo);	

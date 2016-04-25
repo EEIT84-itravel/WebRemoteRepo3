@@ -26,16 +26,22 @@ public class AdminFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
-
-		HttpSession session = request.getSession();
+		// 先取出session物件
+		HttpSession session = request.getSession(false);
+		// 紀錄目前請求的RequestURI,以便使用者登入成功後能夠回到原本的畫面
+		String path = request.getContextPath();
+		String uri = request.getRequestURI();
+		// 如果session物件不存在
+		if (session == null) {
+			// 請使用者登入
+			response.sendRedirect(response.encodeRedirectURL(path + "/_05_Member/Login.jsp"));
+			return;
+		}
 		MemberVO bean = (MemberVO) session.getAttribute("admin");
-		if (bean != null) {
+		if (bean != null &&bean.getAdmin()==true) {
 			chain.doFilter(request, response);
 		} else {
-			String uri = request.getRequestURI();
 			session.setAttribute("dest", uri);
-
-			String path = request.getContextPath();
 			response.sendRedirect(path + "/_05_Member/Login.jsp");
 		}
 	}
