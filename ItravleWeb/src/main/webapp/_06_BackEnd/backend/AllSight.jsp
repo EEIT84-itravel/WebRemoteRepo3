@@ -227,7 +227,7 @@ width: 100%;
 					rowNumber = memberVO.size();
 				%>
 				<%@ include file="/_00_Misc/page1.file"%> --%>
-				<table border="1" class="backendTable">
+				<table border="1" class="backendTable table">
 					<thead>
 						<tr>
 							<th>會員帳號</th>

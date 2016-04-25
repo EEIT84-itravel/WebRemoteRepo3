@@ -182,7 +182,6 @@ nav {
 				<c:if test="${not empty user}">
 					<li><a href="<c:url value="/_05_Member/Logout.jsp" />">Logout</a></li>
 				</c:if>
-			
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->

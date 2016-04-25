@@ -112,7 +112,7 @@
 				<tr>
 					<td>大頭貼 :</td>
 					<td><input type='file' accept='image/*' onchange='openFile(event)' name="photo"><br>
-					<img id='output'></td>
+					<img id='output' width="160" height="240"></td>
 				</tr>
 				<tr>
 					<td><input type="submit" value="註冊"></td>

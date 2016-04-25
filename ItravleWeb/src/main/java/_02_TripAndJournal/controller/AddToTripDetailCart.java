@@ -3,7 +3,6 @@ package _02_TripAndJournal.controller;
 import java.io.IOException;
 import java.sql.Time;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +18,7 @@ import _02_TripAndJournal.model.TripDetailVO;
 
 @WebServlet("/_02_TripAndJournal/member/AddToTripDetailCart.controller")
 public class AddToTripDetailCart extends HttpServlet {
+	//報廢中，改成用畫面接值就不用這隻了
 	private static final long serialVersionUID = 1L;
 	HttpSession session;
 

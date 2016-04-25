@@ -38,7 +38,8 @@ var directionsDisplay;
 			lat: parseFloat(latArray[l]),
 			lng: parseFloat(lngArray[l])
 		});
-	};		
+	};
+	console.log(latLngs);
 		
 	//第一組當起點
 	var start= latLngs[0];
