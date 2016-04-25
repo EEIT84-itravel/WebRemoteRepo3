@@ -31,10 +31,10 @@ public class CellphoneModifyServlet extends HttpServlet {
 		response.setContentType("text/plain; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		//String cellphone1 = request.getParameter("cellphone1");
-		String cellphone1 = request.getParameter("cellphone1");
+		String cellphone1 = request.getParameter("cellphone1");//抓取修改前，使用者原本的電話資料
 		System.out.println(cellphone1);
 		StringBuilder output = new StringBuilder();
-		String cellphone = request.getParameter("cellphone");
+		String cellphone = request.getParameter("cellphone2");//抓取使用者想要修改成後的電話資料
 		System.out.println(cellphone);
 		if(cellphone==null || cellphone.trim().length()==0) {
 			output.append("電話是必要欄位");
@@ -52,11 +52,14 @@ public class CellphoneModifyServlet extends HttpServlet {
 			if(!cellphone.matches("^(?=.*\\d).{9,10}$"))
 			{
 			output.append("格式錯誤!");
+			System.out.println("格式錯誤!");
 			}else{
 			output.append("此電話可使用");
+			System.out.println("此電話可使用");
 			}
 		}else {
 			output.append("此電話已有人使用,或是您原本的電話");
+			System.out.println("此電話已有人使用,或是您原本的電話");
 		}
 		
 		out.print(output);

@@ -19,6 +19,7 @@ import _02_TripAndJournal.model.TripDetailVO;
 import _02_TripAndJournal.model.TripService;
 import _02_TripAndJournal.model.TripVO;
 import _05_Member.model.CollectionService;
+import _05_Member.model.FriendService;
 import _05_Member.model.MemberVO;
 
 @WebServlet("/_02_TripAndJournal/ShowTrip.controller")
@@ -77,7 +78,7 @@ public class ShowTripServlet extends HttpServlet {
 		List<MessageVO> messageVOs=messageService.selectTripMessage(tripId);
 		request.setAttribute("messageVOs", messageVOs);
 		
-		// 會員已登入且景點未收藏過會顯示景點收藏鈕
+		// 會員已登入且行程未收藏過會顯示行程收藏鈕
 		boolean flag = false;
 		CollectionService collectionService = new CollectionService();
 		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
@@ -85,7 +86,13 @@ public class ShowTripServlet extends HttpServlet {
 			flag = true;
 			}
 		request.setAttribute("flag", flag);
-		
+		//會員已登入且作者未收藏過會顯示作者收藏鈕
+		boolean flagmember = false;
+		FriendService friendservice= new FriendService();
+		if(user != null && user.getMemberId()!=tripVO.getMemberId() && friendservice.isfriend(user.getMemberId(), tripVO.getMemberId())==false){
+			flagmember = true;
+		}
+		request.setAttribute("flagmember", flagmember);
 		// 根據結果選擇veiw
 		request.getRequestDispatcher("/_02_TripAndJournal/Trip.jsp").forward(request, response);
 	}

@@ -63,15 +63,16 @@ pageContext.setAttribute("journalVO", journalVO);
 		<tbody>
 		<c:if test="${not empty journalVO}">
 		<c:forEach var="journalVO" items="${journalVO}">
-			<tr>
+			<tr class="journalTr">
 				<td>
 					<img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${journalVO.journalId}" />" width="160" height="120" class="img-rounded">
 				</td>
 				<td><a href="<c:url value="/_02_TripAndJournal/ShowJournalDetail.controller?journalId=${journalVO.journalId}" />">${journalVO.journalName}</a></td>
 				<td>${journalVO.beginTime}</td>
 				<td>${journalVO.modifyTime}</td>
-				<td>${journalVO.visitorNum}</td>
-				<td><a href="<c:url value="/_05_Member/member/deljournal.controller?memberId=${user.memberId}&referenceType=${journalVO.journalId}&typeId=type_id03"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
+				<td>${journalVO.visitorNum}</td>				
+				<td><button type="button" class="btn-danger btn-lg" onclick="location.href='<c:url value="/_05_Member/member/deljournal.controller?memberId=${user.memberId}&referenceType=${journalVO.journalId}&typeId=type_id03"/>'">移出收藏夾</button></td>
+			
 			</tr>
 		</c:forEach>
 		</c:if>

@@ -33,15 +33,15 @@
 			changeYear : true,
 			showButtonPanel : true,
 		}).attr("readonly", "readonly");
-		$('input[name="cellphone"]').blur(function() {
+		$('input[name="cellphone2"]').blur(function() {
 			$("img:eq(1)").show();
 			var url3 = path + "/_05_Member/member/cellphonemodify.controller";
 			var cellphone1 = $('input[name="cellphone1"]').val();
-			var id3 = $('input[name="cellphone"]').val();
-			sendRequest3("GET", url3, id3, cellphone1);
+			var cellphone2 = $('input[name="cellphone2"]').val();
+			sendRequest3("GET", url3, cellphone1, cellphone2);
 		});
-		$('input[name="cellphone"]').focus(function() {
-			$("span:eq(6)").empty("");
+		$('input[name="cellphone2"]').focus(function() {
+			$("#cellphone5").empty("");
 		});
 	});
 	var openFile = function(event) {
@@ -68,7 +68,9 @@
 #memberTable td {
 	width: 200px;
 }
-
+#modifymessage {
+color: red;
+}
 </style>
 
 <title>修改會員資料</title>
@@ -129,9 +131,9 @@
 			</tr>
 			<tr>
 				<td>電話 :</td>
-				<td><input type="text" name="cellphone"
+				<td><input type="text" name="cellphone2"
 					value="${user.cellphone}"></td>
-				<td><span class="error">${error.cellphone}</span><img
+				<td><span class="error" id="cellphone5">${error.cellphone}</span><img
 					src="<c:url value="/img/ajax-loader.gif"/>" style="display: none" /></td>
 			</tr>
 			<tr>
@@ -150,6 +152,11 @@
 			</tr>
 		</table>
 	</form>
+	<div>
+		<span id="modifymessage">
+		${modify.message}
+		</span>
+		</div>
 	</div>
 	</article>
 </body>

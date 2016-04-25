@@ -41,12 +41,14 @@ public class MemberModifyServlet extends HttpServlet {
 				String nickname = request.getParameter("nickname");
 				String email = request.getParameter("email");
 				String birth = request.getParameter("birth");
-				String cellphone = request.getParameter("cellphone");
+				String cellphone = request.getParameter("cellphone2");
 				Part filePart = request.getPart("photo1"); // Retrieves <input type="file" name="file">
 				String fileName = filePart.getSubmittedFileName();
 				InputStream is = filePart.getInputStream();
 				Map<String, String> error = new HashMap<String, String>();
+				Map<String, String> modify = new HashMap<String, String>();
 				request.setAttribute("error", error);
+				request.setAttribute("modify", modify);
 				System.out.println(memberId+lastName +","+ firstName+","+password+","+email+","+cellphone+","+filePart);//測試有沒有抓到東西	
 				java.sql.Date birthday = null;
 				if (birth != null && birth.trim().length() != 0) {
@@ -82,6 +84,8 @@ public class MemberModifyServlet extends HttpServlet {
 					error.put("cellphone","電話欄必須輸入");
 				}
 				if (error != null && !error.isEmpty()) {
+					modify.put("message", "修改失敗");
+					session.setAttribute("modify", modify);
 					request.getRequestDispatcher(
 							"/_05_Member/member/MemberModify.jsp").forward(request,
 							response);
@@ -116,7 +120,8 @@ public class MemberModifyServlet extends HttpServlet {
 				if(result == true){
 					session.removeAttribute("user");
 					session.setAttribute("user", member);
-					
+					modify.put("message", "修改成功");
+					session.setAttribute("modify", modify);
 					String path = request.getContextPath();
 					response.sendRedirect(path+"/_05_Member/member/MemberModify.jsp");
 				}

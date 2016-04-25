@@ -25,6 +25,8 @@ import _02_TripAndJournal.model.MessageService;
 import _02_TripAndJournal.model.MessageVO;
 import _02_TripAndJournal.model.TripService;
 import _02_TripAndJournal.model.TripVO;
+import _03_Event.model.EventService;
+import _03_Event.model.EventVO;
 import _05_Member.model.CollectionService;
 import _05_Member.model.MemberService;
 import _05_Member.model.MemberVO;
@@ -63,7 +65,9 @@ public class SightServlet extends HttpServlet {
 		//查詢景點相關遊記
 		JournalService journalService=new JournalService();
 		List<JournalVO> journalVOs=journalService.getSightJournal(sightId);
-		
+		//查詢景點相關活動
+		EventService eventService=new EventService();
+		List<EventVO> eventVOs=eventService.selectEventBySightId(sightId);
 
 		// 根據Model執行結果顯示View
 		if (result == null) {
@@ -83,10 +87,10 @@ public class SightServlet extends HttpServlet {
 			request.setAttribute("messageVOs", messageVOs);
 			request.setAttribute("tripVOs", tripVOs);
 			request.setAttribute("journalVOs", journalVOs);
+			request.setAttribute("eventVOs", eventVOs);
 			request.setAttribute("openTime", result.getOpenTime().toString().substring(0, 5));
 			request.setAttribute("closeTime", result.getCloseIime().toString().substring(0, 5));
-			request.setAttribute("trans1",result.getTrans().substring(0,result.getTrans().indexOf(",")));
-			request.setAttribute("trans2",result.getTrans().substring(result.getTrans().indexOf(",") + 1));
+			request.setAttribute("trans",result.getTrans());
 			request.getRequestDispatcher("/_01_Sight/SightInformation.jsp").forward(request, response);
 		}
 	}

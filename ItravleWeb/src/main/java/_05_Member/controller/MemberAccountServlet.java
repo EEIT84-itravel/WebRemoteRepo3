@@ -34,7 +34,7 @@ public class MemberAccountServlet extends HttpServlet {
 		
 		StringBuilder output = new StringBuilder();
 		String memberAccount = request.getParameter("memberAccount");
-		
+		System.out.println(memberAccount);
 		if(memberAccount==null || memberAccount.trim().length()==0) {
 			output.append("帳號是必要欄位");
 		}

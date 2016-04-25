@@ -104,7 +104,7 @@ var longitude;  //經度
 				$(".day").css("background-color","transparent");	//放下後移除背景色
 				$(".tripDetail").append('<div class="tripDetailForm'+sightId+'"></div>');
 				//把table黏上去
-				$(".tripDetailForm"+sightId).html('<table class="tripDetailTable"><tr class="delTripDetail"><td rowspan="2" class="tripDetailPic'+sightId+'"></td><td rowspan="2" class="sightName"><span class="tripDetailSightName'+sightId+'"></span><label>預算：</label><input type="number" name="sightBudget" placeholder="請輸入數字" pattern="[0-9]*" />元<br><label>筆記：</label><textarea class="noteTextarea" name="notes"></textarea></td><td><input type="button" value="刪除" onclick="delADetail('+sightId+')"></td></tr><tr hidden="true"><td hidden="true"><label>停留時間：</label><input type="text" name="stayTime" value="' + spendHour + '" size="10" /></td><td hidden="true"><input type="hidden" name="sightId" value="'+sightId+'"/></td><td hidden="true"><input type="hidden" name="tripId" value="${tripVO.tripId}" /></td><td hidden="true"><input type="hidden" name="whichDay" value=1 /><P/></td><td hidden="true"><input type="hidden" name="referenceType" value="type_id01" /></td><td class="lat'+sightId+'" hidden="true"></td><td class="lng'+sightId+'" hidden="true"></td></tr></table>');
+				$(".tripDetailForm"+sightId).html('<table class="tripDetailTable"><tr class="delTripDetail"><td rowspan="2" class="tripDetailPic'+sightId+'"></td><td rowspan="2" class="sightName"><span class="tripDetailSightName'+sightId+'"></span><label>預算：</label><input type="number" name="sightBudget" placeholder="請輸入數字" pattern="[0-9]*" />元<br><label>筆記：</label><textarea class="noteTextarea" name="notes"></textarea></td><td><input type="button" value="刪除" onclick="delADetail('+sightId+')"></td></tr><tr hidden="true"><td hidden="true"><label>停留時間：</label><input type="text" name="stayTime" value="' + spendHour + '" size="10" /></td><td hidden="true"><input type="hidden" name="sightId" value="'+sightId+'"/></td><td hidden="true"><td hidden="true"><input type="hidden" name="whichDay" value=1 /><P/></td><td hidden="true"><input type="hidden" name="referenceType" value="type_id01" /></td><td class="lat'+sightId+'" hidden="true"></td><td class="lng'+sightId+'" hidden="true"></td></tr></table>');
 				//依照sightId抓到圖片，黏到剛剛的tr裡面
 				$(".tripDetailPic"+sightId).html('<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=' + sightId + '" />" width="160" height="120">');
 				//抓到sightId，黏到剛剛的tr裡面
@@ -136,6 +136,13 @@ var longitude;  //經度
 		$("#sightsTabs").tabs({
 			heightStyle : "fill"
 		});
+// 		$("#sightsTabs").click(function() {
+// 			var current_index = $("#sightsTabs").tabs("option","active");
+// 			alert(current_index);
+// 			$("#sightsTabs").tabs("refresh");
+			
+// 		});
+
 		
 		//景點詳情dialog功能
 		var uri="${pageContext.request.contextPath}/_02_TripAndJournal/ShowSightDetail.controller?sightId=";
@@ -193,13 +200,10 @@ var longitude;  //經度
 		// 按鈕觸發對話框
 		$("#saveTrip").button().on( "click", function() {
 		      dialog2.dialog( "open" );
-	    });
-		
+	    });	
 		
 
-	});  /* onload function end */
-
-	
+	});  /* onload function end */	
 
 	
 //移除單一景點(html黏上時在form加景點編號當參數)
@@ -221,7 +225,6 @@ function delADetail(referenceNo) {
 		<jsp:include page="/_00_Misc/top.jsp" />		
 	</nav>
 	<article class="center-block">
-<%-- 	<form method="post" action="<c:url value="/_02_TripAndJournal/member/TripDetail2.controller" />"> --%>
 		<!-- 景點dialog顯示頁面 平時隱藏 -->
 		<!-- tab由左往右開dialog正常，但往左回來會怪怪 -->
 		<div id="mysight" title="景點明細"></div>	
@@ -231,6 +234,7 @@ function delADetail(referenceNo) {
 			<h2 class="h2">行程名稱：${tripVO.tripName}</h2>					
 			<div id="days">
 				<p>tripId：${tripVO.tripId}</p>
+				<input type="hidden" name="tripId" value="${tripVO.tripId}">
 				<p>行程開始日期：<br>${tripVO.tripStartDate}</p>
 <%-- 				<p>本行程共<%=dateDiff%>天</p> --%>				
 				<button id="btnBudget" class="btn btn-info btn-lg">預算一覽</button><br>
@@ -241,15 +245,15 @@ function delADetail(referenceNo) {
 				</div>	<!-- end div tripBut -->						
 				<div class="day">
 					<div class="tripDetail">
-						<c:if test="${empty sessionScope.tripDetailCart}">
+						<c:if test="${empty tripDetailCart}">
 						<div class="placeholder">
 							<h2 class="h2">請將景點拖曳到此</h2>
 						</div>
 						</c:if>					
 						<!-- 拖過來的tripDetail長會在這裡 -->						
-						<!-- 如果是舊的行程拿出來改，要從session取出tripDetailCart -->
-						<c:if test="${not empty sessionScope.tripDetailCart}">										
-						<c:forEach var="tripDetailVO" items="${sessionScope.tripDetailCart}">
+						<!-- 如果是舊的行程拿出來改，要從request取出tripDetailCart -->
+						<c:if test="${not empty tripDetailCart}">										
+						<c:forEach var="tripDetailVO" items="${tripDetailCart}">
 <%-- 						<c:if test="${tripDetailVO.tripId==tripVO.tripId}"> --%>
 							<div class="tripDetailForm${tripDetailVO.referenceNo}">
 							<table class="tripDetailTable">
@@ -274,7 +278,7 @@ function delADetail(referenceNo) {
 								<td hidden="true"><label>停留時間：</label><input type="hidden" name="stayTime" value="${tripDetailVO.stayTime}" size="10"/></td>
 								<td hidden="true"><input type="hidden" name="tripOrder" value="${tripDetailVO.tripOrder}" size="5" /></td>
 								<td rowspan="2" hidden="true"><input type="hidden" name="sightId" value="${tripDetailVO.referenceNo}"/></td>
-								<td hidden="true"><input type="hidden" name="tripId" value="${tripVO.tripId}" /><P/></td>							
+<%-- 								<td hidden="true"><input type="hidden" name="tripId" value="${tripVO.tripId}" /><P/></td>							 --%>
 								<td hidden="true"><input type="hidden" name="whichDay" value="${tripDetailVO.whichDay}" /><P/></td>
 								<td hidden="true"><input type="hidden" name="referenceType" value="${tripDetailVO.referenceType}" /><P/></td>
 								<td hidden="true">
@@ -370,7 +374,6 @@ function delADetail(referenceNo) {
 		<div id="divSaveSuccess" title="儲存成功" hidden="true">
 			<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>儲存成功</p>
 		</div>	<!-- end div divUpdateSuccess -->
-<!-- 		</form>end 儲存行程form -->
 	</article>
 	<footer>
 		<!-- import共同的 -->

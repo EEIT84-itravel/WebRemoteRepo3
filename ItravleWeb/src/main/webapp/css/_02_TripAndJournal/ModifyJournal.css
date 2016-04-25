@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+#output{
+	width: 375px;
+	height: 300px;
+}
+#introDiv,#journalDetailDiv{
+	width:800px;
+	margin:auto;
+}
+
+.textBody{
+	max-width:500px;
+ 	max-height:100px;
+ 	width:500px;
+ 	height:100px;
+}
+#jBody{
+		max-width:500px;
+ 	max-height:100px;
+ 	width:500px;
+ 	height:100px;
+}

@@ -45,13 +45,15 @@ public class TripFindDetailServlet extends HttpServlet {
 					   } 
 					  }
 				if(tripdetailVO != null && tripdetailVO.size()>0){
-					HttpSession session = request.getSession();
-					session.setAttribute("tripDetailCart", tripdetailVO);
-					session.setAttribute("tripVO", tripVO);
+//					HttpSession session = request.getSession();
+					request.setAttribute("tripDetailCart", tripdetailVO);
+					request.setAttribute("tripVO", tripVO);
 				}
 				
-				String path = request.getContextPath();
-				response.sendRedirect(path+"/_02_TripAndJournal/member/WriteTrip.jsp");
+				request.getRequestDispatcher("/_02_TripAndJournal/member/WriteTrip.jsp").forward(request, response);
+				
+//				String path = request.getContextPath();
+//				response.sendRedirect(path+"/_02_TripAndJournal/member/WriteTrip.jsp");
 	}
 
 
