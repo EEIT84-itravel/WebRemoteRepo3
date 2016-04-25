@@ -328,6 +328,8 @@ public class BackendSightServlet extends HttpServlet {
 			sightVO.setAddr(addr);
 			sightVO.setDel(del);
 			sightVO.setTrans(trans);
+			sightVO.setCollectNum(0);//放棄欄位 寫死
+			sightVO.setWatchNum(0);//從0開始累計
 			result = sightService.insert(sightVO);
 
 			java.util.List<SightVO> sightVOs = new ArrayList<SightVO>();

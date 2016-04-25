@@ -1,5 +1,6 @@
 package _03_Event.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import _03_Event.model.dao.EventDAOHibernate;
@@ -43,5 +44,16 @@ public class EventService {
 		 return eDAO.select(eventId);
 	 }
 	 
+	 //查詢與單一景點相關活動
+	 public List<EventVO> selectEventBySightId(int sightId) {
+		 List<EventVO> result = new ArrayList<>();
+		 List<EventVO> eventVOs = eDAO.select();
+		 for(EventVO eventVO:eventVOs){
+			 if(eventVO.getSightId()==sightId){
+				 result.add(eventVO);
+			 }
+		 }
+		 return result;
+	 }
 
 }

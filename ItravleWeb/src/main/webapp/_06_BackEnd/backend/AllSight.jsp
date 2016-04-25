@@ -41,8 +41,7 @@
 <script type="text/javascript" src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
 <script type="text/javascript">
 	$(function() {
-		$("#tabs").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
-		$("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
+			    $( "#tabs" ).tabs();
 		//景點詳情dialog功能
 	 	var uri = "${pageContext.request.contextPath}/_02_TripAndJournal/ShowSightDetail.controller?sightId=";
 		var dialog;
@@ -85,53 +84,22 @@
 			closedialog = 1;//set to one because click on dialog box sets to zero   
 		}
 	}); 
+	function doNewSight() {
+		window.location.href = "<c:url value='/_06_BackEnd/backend/NewSight.jsp' />";
+	};
+	function doNewEvent() {
+		window.location.href = "<c:url value='/_06_BackEnd/backend/NewEvent.jsp' />";
+	};
 </script>
 <style type="text/css">
-  .ui-tabs-vertical { width: 55em; }
-  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
-  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
-  .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
-  .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
-  .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
-
 .ui-widget-content{
 width: 100%;
 }
 
- #tabs-1 {
-	float: left;
-	width: 82%;
-	padding: 0;
-	margin: 5px;
-}
-
-#tabs-1 h2 {
-	margin: 5px;
-}
-
- #tabs-2 { 
- 	float: left; 
- 	width: 82%; 
- 	padding: 0; 
- 	margin: 5px; 
- } 
-
- #tabs-2 h2 { 
-	margin: 5px; 
- } 
-
- #tabs-3 { 
- 	float: left;
- 	width: 82%; 
- 	padding: 0; 
- 	margin: 5px; 
- } 
-
- #tabs-3 h2 { 
- 	margin: 5px; 
- } 
-
-.backendTable thead tr th {
+.backendTable thead th{
+	text-align: center
+} 
+.backendTable tbody{
 	text-align: center
 } 
 </style>
@@ -145,7 +113,7 @@ width: 100%;
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
+	<article class="center-block">
 		<div id="dialog-form"></div>
 		<div id="tabs">
 			<ul>
@@ -155,7 +123,7 @@ width: 100%;
 			</ul>
 			<div id="tabs-1">
 				<h2>I-Travel後台:管理景點</h2>
-				<a href="<c:url value="/_06_BackEnd/backend/NewSight.jsp" />">新增景點</a>
+				<button type="button" class="btn btn-info btn-lg" onclick="doNewSight()">新增景點</button>
 					<%
 						rowsPerPage = 20; //每頁的筆數 
 						rowNumber = sightVO.size();
@@ -227,7 +195,7 @@ width: 100%;
 					rowNumber = memberVO.size();
 				%>
 				<%@ include file="/_00_Misc/page1.file"%> --%>
-				<table border="1" class="backendTable table">
+				<table class="backendTable table">
 					<thead>
 						<tr>
 							<th>會員帳號</th>
@@ -280,7 +248,7 @@ width: 100%;
 			</div><!-- tabs-2 end tag -->
 			<div id="tabs-3">
 				<h2>I-Travel後台:管理活動</h2>
-				<a href="<c:url value="/_06_BackEnd/backend/NewEvent.jsp" />">新增活動</a>
+				<button type="button" class="btn btn-info btn-lg" onclick="doNewEvent()">新增活動</button>
 					<%
 						rowsPerPage = 20; //每頁的筆數 
 						rowNumber = eventVO.size();

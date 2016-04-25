@@ -47,10 +47,10 @@
 			sendRequest2("GET", url2, id2);
 		});
 		$('input[name="memberAccount"]').focus(function() {
-			$("span:eq(2)").empty("");
+			$("#memberAccount").empty("");
 		});
 		$('input[name="cellphone"]').focus(function() {
-			$("span:eq(6)").empty("");
+			$("#cellphone5").empty("");
 		});
 	});
 	var openFile = function(event) {
@@ -102,7 +102,7 @@
 						<div class="form-group">
 							<label class="control-label col-sm-3">*帳號 :</label>
 							<div class="col-sm-9">
-								<input class="form-control" type="text" name="memberAccount" value="${param.memberAccount}"/><span class="error">${error.memberAccount}</span>				    
+								<input class="form-control" type="text" name="memberAccount" value="${param.memberAccount}"/><span class="error" id="memberAccount">${error.memberAccount}</span>				    
 							<img>
 							</div>
 						</div>
@@ -133,7 +133,7 @@
 						<div class="form-group">
 							<label class="control-label col-sm-3">*電話  :</label>
 							<div class="col-sm-9">
-								<input class="form-control" type="text" name="cellphone" value="${param.cellphone}"/><span class="error">${error.cellphone}</span>				    
+								<input class="form-control" type="text" name="cellphone" value="${param.cellphone}"/><span class="error" id="cellphone5">${error.cellphone}</span>				    
 							<img>
 							</div>
 						</div>

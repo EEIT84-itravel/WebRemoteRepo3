@@ -5,8 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>I-Travel:Login</title>
+<title>I-Travel:Login-Failure</title>
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
+<script type="text/javascript">
+	setTimeout("location.href='<c:url value="/index.jsp"/>'", 3000);
+</script>
 </head>
 <body>
 	<header>
@@ -53,7 +56,6 @@
 							data-dismiss="modal">取消</button>
 					</div>
 				</div>
-			
 	</article>
 	<footer>
 		<!-- import共同的 -->

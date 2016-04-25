@@ -20,6 +20,7 @@
 	pageContext.setAttribute("sightTime", sightTime);
 %>
 <title>I-Travel後台:新增景點</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
 <!-- jQuery -->
@@ -69,6 +70,7 @@ $("#sel").change(function(){
 		}
 	});
 });
+//預覽圖片功能
 var openFile = function(event) {
     var input = event.target;
 
@@ -81,14 +83,31 @@ var openFile = function(event) {
     reader.readAsDataURL(input.files[0]);
   };
 </script>
+<style type="text/css">
+.backendtable tr td:FIRST-CHILD{
+text-align: right;
+}
+.table.backendtable{
+width: 700px;
+}
+</style>
 </head>
 <body>
+	<header>
+	<!-- import共同的 -->
+	</header>
+	<!-- import共同的 -->
+	<nav class="navbar navbar-inverse" role="navigation">
+		<!-- import共同的 -->
+		<jsp:include page="/_00_Misc/top.jsp" />
+	</nav>
+	<article class="center-block">
 	<h2>I-Travel後台:新增景點</h2>
 		<form action="<c:url value="/_06_BackEnd/backEnd/BackendSight.controller" />" method="post" enctype="multipart/form-data">
-			<table>
+			<table class="table backendtable">
 				<tr>
 					<td>景點名稱：</td>
-					<td><input type="text" name="sightName" value="${param.sightName}"></td>
+					<td><input type="text" name="sightName" value="${param.sightName}" size="75"></td>
 					<td><span class="error">${error.sightName}</span></td>
 				</tr>
 				<tr>
@@ -126,7 +145,7 @@ var openFile = function(event) {
 				</tr>
 				<tr>
 					<td>門票：</td>
-					<td><input type="text" name="ticket" value="${param.ticket}" size="45"></td>
+					<td><input type="text" name="ticket" value="${param.ticket}" size="75"></td>
 					<td><span class="error">${error.ticket}</span></td>
 				</tr>
 				<tr>
@@ -167,7 +186,7 @@ var openFile = function(event) {
 				</tr>
 				<tr>
 					<td>地址：</td>
-					<td><input type="text" name="addr" value="${param.addr}" size="45"></td>
+					<td><input type="text" name="addr" value="${param.addr}" size="75"></td>
 					<td><span class="error">${error.addr}</span></td>
 				</tr>
 				<tr>
@@ -175,28 +194,35 @@ var openFile = function(event) {
 					<td>
 					<input type="radio" name="del" value="true" checked="checked">是
 					<input type="radio" name="del" value="false">否</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>交通方式：</td>
-					<td><textarea rows="8" cols="50" name="trans" style="resize: none">${param.trans}</textarea>
+					<td><textarea rows="8" cols="75" name="trans" style="resize: none">${param.trans}</textarea>
 					</td>
 					<td><span class="error">${error.trans}</span></td>
 				</tr>
 				<tr>
 					<td>簡介：</td>
-					<td><textarea rows="8" cols="50" name="intro" style="resize: none">${param.intro}</textarea></td>
+					<td><textarea rows="8" cols="75" name="intro" style="resize: none">${param.intro}</textarea></td>
 					<td><span class="error">${error.intro}</span></td>
 				</tr>
 				<tr>
 					<td>景點照片：</td>
 					<td><input type='file' accept='image/*' onchange='openFile(event)' name="pic"><br>
 					<img id='output'width="240" height="180"></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td><input type="hidden" name="action" value="insert"></td>
 					<td><input type="submit" value="新增景點" /></td>
+					<td></td>
 				</tr>
 			</table>
 		</form>
+	</article>
+	<footer>
+		<!-- import共同的 -->
+	</footer>
 </body>
 </html>
