@@ -85,7 +85,7 @@ public class RegisteredServlet extends HttpServlet {
 		}
 		if (error != null && !error.isEmpty()) {
 			request.getRequestDispatcher(
-					"/index.jsp#myModalReg").forward(request,
+					"/index.jsp").forward(request,
 					response);
 			return;
 		}

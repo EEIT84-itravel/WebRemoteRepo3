@@ -22,6 +22,6 @@ function processText3(data) {
 		var array3 = temp3.split(",");
 		$('input[name="cellphone2"]').val(array3[0]);
 	}
-	$("#cellphone").text(show3);
+	$("#cellphone5").text(show3);
 }
 
