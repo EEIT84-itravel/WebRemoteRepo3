@@ -42,10 +42,8 @@ pageContext.setAttribute("regions", codeVO);
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article class="center-block">
-		<h1 style="color: red;">${showJournalVO.journalName}
-		</h1>
-		<h1 class="h1">
-			<input type="hidden"  id="referenceType" value="${showJournalVO.journalId}">	
+		<h1 class="h1">${showJournalVO.journalName}
+		<input type="hidden"  id="referenceType" value="${showJournalVO.journalId}">	
 			<c:if test="${flag}"> <!-- 		判斷收藏景點鈕是否出現 寫在ShowJournalDetailServlet -->
 				<input type="button" value="收藏遊記" id='collect'>
  			</c:if>
@@ -59,7 +57,6 @@ pageContext.setAttribute("regions", codeVO);
 					<td class="memberPic"><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${showJournalVO.memberId}" />"
 						width="100px" height="100px">
 					<td>
-
 						<ul style="list-style-type: none;">
 							<li><c:forEach var="MemberVO" items="${MemberService.all}">
 									<c:if test="${MemberVO.memberId==showJournalVO.memberId}">
@@ -86,7 +83,7 @@ pageContext.setAttribute("regions", codeVO);
 								<c:forEach var="sightVO" items="${SightService.all}">
 									<c:if test="${showJournalDetailVO.sightId==sightVO.sightId}">
 										<td><h3 style="color: blue" class="fMargin">
-												<strong>${sightVO.sightName}</strong>
+												<strong><a href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}"/>">${sightVO.sightName}</a></strong>
 											</h3></td>
 									</c:if>
 								</c:forEach>

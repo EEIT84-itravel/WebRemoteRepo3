@@ -38,13 +38,11 @@ html, body {
 	margin: 0 auto;
 	padding: 0;
 }
-
 #map {
 	height: 400px;
 	width: 600px;
 	border: solid black;
 }
-
 .IntroSight {
 	width: 700px;
 	padding: 10px;
@@ -78,9 +76,9 @@ text-align: center;
 			<a href="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" rel="lightbox" title="${sightVO.sightName}">
 			<img border="0" src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="280" height="210"></a>
 			 <input type="hidden" value="${sightVO.sightId}" name="sightId" id="sightId">
-			<p><h3>${sightVO.sightName}</h3></p>  <!-- 		判斷收藏景點鈕是否出現 寫在SightServlet -->
+			<h3>${sightVO.sightName}</h3>  <!-- 		判斷收藏景點鈕是否出現 寫在SightServlet -->
 					<c:if test="${flag}">
-					<input type="button" value="收藏景點" id='collect'>
+						<input type="button" value="收藏景點" id='collect'>
 					</c:if>
 			<p>${sightVO.intro}</p>
 			<p>
@@ -88,7 +86,7 @@ text-align: center;
 				<c:forEach var="codeVO" items="${codeSvc.all}">
 					<c:if test="${codeVO.codeId==sightVO.sightTypeId}">
 								${codeVO.codeName}
-                             </c:if>
+                    </c:if>
 				</c:forEach>
 			</p>
 			<p>門票:${sightVO.ticket}</p>
@@ -99,7 +97,7 @@ text-align: center;
 				<c:forEach var="codeVO" items="${codeSvc.all}">
 					<c:if test="${codeVO.codeId==sightVO.playPeriod}">
 								${codeVO.codeName}
-                             </c:if>
+                     </c:if>
 				</c:forEach>
 			</p>
 			<p>地址:${sightVO.addr}</p>
@@ -109,11 +107,13 @@ text-align: center;
 							<ul>
 								<li><a href="#tabs-1">相關行程</a></li>
 								<li><a href="#tabs-2">相關遊記</a></li>
-								<li><a href="#tabs-3">留言</a></li>
+								<li><a href="#tabs-3">相關活動</a></li>
+								<li><a href="#tabs-4">留言</a></li>
 							</ul>
 							<div id="tabs-1"><!-- tab 相關行程 -->
 							<table class="table">
 								<c:forEach var="tripVO" items="${tripVOs}" end="4"><!-- "4"為顯示5筆  -->
+								<c:if test="${tripVO.post==true}">
 								<tr>
 								<td>
 								<c:forEach var="TripDetailVO" items="${TripDetailService.mainPics}" >
@@ -132,12 +132,14 @@ text-align: center;
 								</td>
 								<td>有${tripVO.watchNum}人瀏覽過</td>
 								</tr>
+								</c:if>
 								</c:forEach>
 							</table>
 							</div>
 							<div id="tabs-2"><!-- tab 相關遊記 -->
 							<table class="table">
 							<c:forEach var="journalVO" items="${journalVOs}" end="4"><!-- "4"為顯示5筆  -->
+							<c:if test="${journalVO.post==true}">
 							<tr>
 								<td><img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${journalVO.journalId}" />" width="88" height="66"></td>
 								<td><a href="<c:url value="/_02_TripAndJournal/ShowJournalDetail.controller?journalId=${journalVO.journalId}" />">${journalVO.journalName}</a></td>
@@ -148,10 +150,23 @@ text-align: center;
 								</c:forEach>
 								<td>有${journalVO.visitorNum}人瀏覽過</td>
 							</tr>
+							</c:if>
 							</c:forEach>
 							</table>
 							</div>
-							<div id="tabs-3"><!-- tab 留言 -->
+							<div id="tabs-3"><!-- tab 相關活動 -->
+								<table class="table">
+							<c:forEach var="eventVO" items="${eventVOs}">
+								<c:if test="${eventVO.eventRemoved==false}">
+								<tr>
+									<td><a href="<c:url value='/_03_Event/ShowEvent.controller?eventId=${eventVO.eventId}' />">${eventVO.eventTopic}</a></td>
+									<td>由${eventVO.eventStartDate}至${eventVO.eventEndDate}</td>
+								</tr>
+								</c:if>
+							</c:forEach>
+							</table>
+							</div>
+							<div id="tabs-4"><!-- tab 留言 -->
 							<table class="table">
 							<c:forEach var="messageVO" items="${messageVOs}">
 								<tr>
