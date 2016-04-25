@@ -26,6 +26,8 @@ pageContext.setAttribute("regions", codeVO);
 	});
 	function collect() {
 		window.location.href = "../_02_TripAndJournal/member/collectiontrip.controller?referenceType="+ $("#referenceType").val()+"&typeId=type_id03";
+	
+	
 	};
 </script>
 <!-- jQuery ui -->
@@ -67,6 +69,9 @@ pageContext.setAttribute("regions", codeVO);
 							<li><c:forEach var="MemberVO" items="${MemberService.all}">
 									<c:if test="${MemberVO.memberId==showJournalVO.memberId}">
 										<h3 style="color: green">作者：${MemberVO.nickname}</h3>
+										
+							            <input type="button" value="收藏作者" id='collectmember'><!-- 		判斷收藏作者鈕是否出現 寫在ShowJournalServlet -->
+								       
 									</c:if>
 								</c:forEach></li>
 							<li>遊玩日期：${showJournalVO.beginTime}~${showJournalVO.endTime}</li>

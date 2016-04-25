@@ -29,9 +29,13 @@ pageContext.setAttribute("regions", codeVO);
 <script type="text/javascript">
 	$(function() {
 		$("#collect").bind('click', collect);
+		$("#collectmember").bind('click', collectmember);
 	});
 	function collect() {
 		window.location.href = "../_02_TripAndJournal/member/collectiontrip.controller?referenceType="+ $("#referenceType").val()+"&typeId=type_id02";
+	};	
+	function collectmember() {
+		window.location.href = "../_05_Member/member/collectionauthor.controller?friendId="+${tripVO.memberId}+"&tripId="+${tripVO.tripId};
 	};
 </script>
 </head>
@@ -55,6 +59,14 @@ pageContext.setAttribute("regions", codeVO);
 			<div id="divTripTop">
 				<h5 class="h5">起始日期: ${tripVO.tripStartDate}</h5>
 				<h5 class="h5">結束日期: ${tripVO.tripEndDate}</h5>
+				<c:forEach var="MemberVO" items="${MemberService.all}">
+				<c:if test="${MemberVO.memberId==tripVO.memberId}">
+								<h5 class="h5">作者:${MemberVO.nickname}</h5>
+								<c:if test="${flagmember}"> 
+							<input type="button" value="收藏作者" id='collectmember'><!-- 		判斷收藏作者鈕是否出現 寫在ShowTripServlet -->
+								</c:if>
+				</c:if>
+				</c:forEach>
 <%-- 				<h5 class="h5">總預算: ${tripVO.totalBudget}</h5> --%>
 				<c:forEach var="region" items="${regions}">
 						<c:if test="${region.codeId==tripVO.regionId}">

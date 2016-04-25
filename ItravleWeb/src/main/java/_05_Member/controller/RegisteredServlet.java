@@ -85,7 +85,7 @@ public class RegisteredServlet extends HttpServlet {
 		}
 		if (error != null && !error.isEmpty()) {
 			request.getRequestDispatcher(
-					"/index.jsp").forward(request,
+					"/_05_Member/Registered.jsp").forward(request,
 					response);
 			return;
 		}

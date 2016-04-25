@@ -28,7 +28,15 @@ public class FriendService {
 		 }
 		 return listname;
 	 }
-
+    //某個繪員是否是你的好友
+	public boolean isfriend(Integer memberId,Integer memberId2){
+		List<FriendVO> list = new ArrayList<FriendVO>();
+		 list = friendDAO.selectbyMemberIdAndFriendId(memberId,memberId2);
+		 if(!list.isEmpty()){
+			 return true;
+		 }
+		return false; 
+	}
 	public ArrayList<Integer> findNotFriend(Integer memberId) { // 找黑名單名單
 		List<FriendVO> list = friendDAO.selectbyMemberId(memberId);
 		ArrayList<Integer> listname = new ArrayList<Integer>();

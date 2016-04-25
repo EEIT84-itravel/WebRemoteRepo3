@@ -5,8 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>I-Travel:Login</title>
+<title>I-Travel:Login-Failure</title>
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
+<script type="text/javascript">
+	setTimeout("location.href='<c:url value="/index.jsp"/>'", 3000);
+</script>
 </head>
 <body>
 	<header>
@@ -17,27 +20,17 @@
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
-		<h3>Login</h3>
-		<form action="<c:url value="/_05_Member/login.controller" />"
-			method="get">
-			<table>
-				<tr>
-					<td>ID :</td>
-					<td><input type="text" name="username" value="${param.username}"></td>
-					<td class="errorMsg">${error.username}</td>
-				</tr>
-				<tr>
-					<td>PWD :</td>
-					<td><input type="text" name="password" value="${param.password}"></td>
-					<td class="errorMsg">${error.password}</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td align="right"><input type="submit" value="Login"></td>
-				</tr>
-			</table>
-		</form>
+	<article class="center-block">
+	<div style="text-align: center;">
+		<h3>登入失敗：</h3>
+		<div style="text-align: center;">
+				
+					<span style="color:red">${error.username}</span><br>
+					<span style="color:red">${error.password}</span><br>			
+					<span>請重新登入</span><br>
+			
+		</div>
+		</div>
 	</article>
 	<footer>
 		<!-- import共同的 -->
