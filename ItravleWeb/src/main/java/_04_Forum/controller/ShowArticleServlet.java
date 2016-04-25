@@ -55,9 +55,6 @@ public class ShowArticleServlet extends HttpServlet {
 				
 				
 			    long count = ms.getForumMessageNum(forumId);
-			
-		
-			
 				if(forumVO != null ) {					
 					request.setAttribute("forumVO", forumVO);	
 					request.setAttribute("messageVO1", messageVO);

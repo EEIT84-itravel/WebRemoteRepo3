@@ -95,6 +95,9 @@ function collectmember() {
 								<c:when test="${empty user}"><button type="button" class="btn btn-default" >回覆文章</button></c:when>
 								<c:when test="${not empty user}"><input type="button" class="btn btn-default" value="回覆文章"  onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&memberId=${user.memberId}&crud=NewReply"/>'"></c:when>
 							</c:choose>
+							<c:if test="${flag}"> 
+			                    <input type="button" class="btn btn-default" value="收藏文章" onclick="location.href='<c:url value="/_04_Forum/member/CollectionForum.controller?referenceType=${forumVO.forumId}&typeId=type_id05"/>'">
+ 		                    </c:if>
 							<c:choose>		
 								<c:when test="${empty user}"></c:when>
 								<c:when test="${user.memberId==forumVO.memberId}"><a href="${forum}" class="btn btn-default">編輯文章</a></c:when>

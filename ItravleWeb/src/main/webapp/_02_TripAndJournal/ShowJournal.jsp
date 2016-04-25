@@ -76,6 +76,7 @@ pageContext.setAttribute("regions", codeVO);
 							            <input type="button" value="收藏作者" id='collectmember'><!-- 		判斷收藏作者鈕是否出現 寫在ShowJournalServlet -->
 							    </c:if>
 									</c:if>
+									
 								</c:forEach></li>
 							<li>遊玩日期：${showJournalVO.beginTime}~${showJournalVO.endTime}</li>
 							<c:forEach var="region" items="${regions}">

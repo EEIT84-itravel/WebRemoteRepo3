@@ -50,7 +50,7 @@ pageContext.setAttribute("journalVO", journalVO);
 		<tbody>
 		<c:if test="${not empty journalVO}">
 		<c:forEach var="journalVO" items="${journalVO}">
-			<tr class="warning">
+			<tr class="journalTr">
 				<td><img src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${journalVO.journalId}" />" width="160" height="120" class="img-rounded"></td>
 				<td><a href="<c:url value="/_02_TripAndJournal/ShowJournalDetail.controller?journalId=${journalVO.journalId}" />">${journalVO.journalName}</a></td>
 				<td>${journalVO.beginTime}</td>
@@ -64,10 +64,17 @@ pageContext.setAttribute("journalVO", journalVO);
 					已發佈
 					</c:if>		
 				</td>
+					<td>
+					<button type="button" class="btn-info btn" onclick="location.href='<c:url value="/_05_Member/member/changejournalpost.controller?journalId=${journalVO.journalId}"/>'">改變發佈狀態</button>
+				</td>			
 				<td>
-					<a href="<c:url value="/_05_Member/member/changejournalpost.controller?journalId=${journalVO.journalId}"/>">改變發佈狀態</a>&nbsp;&nbsp;
+					<button type="button" class="btn-warning btn" onclick="location.href='<c:url value="/_02_TripAndJournal/member/ModifyJournal.controller?crud=Update&journalId=${journalVO.journalId}"/>'">修&nbsp;改&nbsp;遊&nbsp;記</button>				
 				</td>
+				
 			</tr>
+		    
+		     
+		
 		</c:forEach>
 		</c:if>
 		</tbody>

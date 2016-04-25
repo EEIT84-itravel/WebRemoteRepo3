@@ -61,7 +61,9 @@ ArrayList<MemberVO> friendVO = new ArrayList<MemberVO>();  //好友(追蹤作者
 					<td>
 						<a href="<c:url value="/_05_Member/member/findauthor.controller?memberId=${friendVO.memberId}"/>">${friendVO.firstName}  <span class="glyphicon glyphicon-folder-open"></span></a>&nbsp;&nbsp;</td>
 					<td>${friendVO.nickname}</td>
-					<td><a href="<c:url value="/_05_Member/member/deletefriend.controller?memberId=${user.memberId}&friendId=${friendVO.memberId}"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
+			
+									<td><button type="button" class="btn-danger btn-lg" onclick="location.href='<c:url value="/_05_Member/member/deletefriend.controller?memberId=${user.memberId}&friendId=${friendVO.memberId}"/>'">移出收藏夾</button></td>
+					
 					<td></td>
 				</tr>
 			</c:forEach>

@@ -46,7 +46,7 @@ pageContext.setAttribute("tripVO", tripVO);
 		<tbody>
 			<c:if test="${not empty tripVO}">
 			<c:forEach var="tripVO" items="${tripVO}">
-			<tr class="info">
+			<tr class="tripTr">
 				<td>
 					<c:forEach var="TripDetailVO" items="${TripDetailService.mainPics}">
                     	<c:if test="${TripDetailVO.tripId==tripVO.tripId}">
@@ -66,8 +66,14 @@ pageContext.setAttribute("tripVO", tripVO);
 					已發佈
 					</c:if>		
 				</td>
-				<td><a href="<c:url value="/_05_Member/member/changetriplpost.controller?tripId=${tripVO.tripId}"/>">改變發佈狀態</a>&nbsp;&nbsp;</td>
-				<td><a href="<c:url value="/_05_Member/member/tripfinddetail.controller?tripId=${tripVO.tripId}"/>">修改行程</a>&nbsp;&nbsp;</td>
+			
+				<td>
+					<button type="button" class="btn-info btn" onclick="location.href='<c:url value="/_05_Member/member/changetriplpost.controller?tripId=${tripVO.tripId}"/>'">改變發佈狀態</button>
+				</td>			
+				<td>
+					<button type="button" class="btn-warning btn" onclick="location.href='<c:url value="/_05_Member/member/tripfinddetail.controller?tripId=${tripVO.tripId}"/>'">修&nbsp;改&nbsp;行&nbsp;程</button>				
+				</td>
+			
 			</tr>
 			</c:forEach>
 			</c:if>
