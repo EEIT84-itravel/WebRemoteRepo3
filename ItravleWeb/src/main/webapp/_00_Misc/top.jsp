@@ -95,10 +95,10 @@ nav {
 			sendRequest2("GET", url2, id2);
 		});
 		$('input[name="memberAccount"]').focus(function() {
-			$("span:eq(2)").empty("");
+			$("#memberAccount").empty("");
 		});
 		$('input[name="cellphone"]').focus(function() {
-			$("span:eq(6)").empty("");
+			$("#cellphone").empty("");
 		});
 	});
 	function doAlertMessage() {
@@ -190,7 +190,9 @@ nav {
 					<li class="pull-right whiteNav"><a
 						href="<c:url value="/_05_Member/member/Logout.jsp" />">Logout</a></li>
 				</c:if>
-			
+				<c:if test="${not empty user}">
+					<li><a href="<c:url value="/_05_Member/Logout.jsp" />">Logout</a></li>
+				</c:if>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -239,16 +241,11 @@ nav {
 				</div>
 			</div>
 		</div><!-- 登入DIV結束 -->
-		
-		
 		<script>
 			//呼叫登入modal
 			$(document).ready(function() {
 				$("#myBtn").click(function() {
 					$("#myModal").modal();
-				});
-				$("#myReg").click(function() {
-					$("#myModalReg").modal();
 				});
 			});
 			//呼叫註冊modal

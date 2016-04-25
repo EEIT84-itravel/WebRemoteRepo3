@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="sightSvc" scope="page" class="_01_Sight.model.SightService" />
+<jsp:useBean id="MemberService" scope="page" class="_05_Member.model.MemberService" />
 <%@page import="_00_Misc.model.*"%>
 <%@ page import="java.util.*"%>
 <%
@@ -100,7 +101,8 @@ pageContext.setAttribute("regions", codeVO);
 					</c:if>				
 				</c:forEach>			
 			</div>	<!-- end divTripDetail -->
-			<div><!-- 留言 -->
+			<div id="messageDiv"><!-- 留言 -->
+			<h3 class="h3"><span class="glyphicon glyphicon-comment"></span> 留言</h3>
 				<table class="table">
 					<c:forEach var="messageVO" items="${messageVOs}">
 						<tr>
@@ -115,12 +117,12 @@ pageContext.setAttribute("regions", codeVO);
 					</c:forEach>
 				</table>
 				<form action="<c:url value="/_01_Sight/member/SightReplyServlet.controller" />" method="post">
-					<table>
+					<table id="replyTable">
 						<tr><td>
 							<input type="hidden" name="referenceNo" value="${tripVO.tripId}">
 							<input type="hidden" name="type" value="type_id02"></td></tr>
 						<tr><td>
-							<textarea rows="5" cols="40" name="reply" style="color:black">${param.reply}</textarea>
+							<textarea class="replyTextarea" name="reply" placeholder="請留言">${param.reply}</textarea>
 						</td></tr>
 						<tr><td>
 							<span>${error.reply}</span></td></tr>

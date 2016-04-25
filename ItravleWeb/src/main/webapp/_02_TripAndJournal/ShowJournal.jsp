@@ -117,7 +117,8 @@ pageContext.setAttribute("regions", codeVO);
 				</c:forEach>
 			</div><!-- end of divJournalDetail -->
 			</form>
-			<div><!-- 留言 -->
+			<div id="messageDiv"><!-- 留言 -->
+			<h3 class="h3"><span class="glyphicon glyphicon-comment"></span> 留言</h3>
 				<table class="table">
 					<c:forEach var="messageVO" items="${messageVOs}">
 						<tr>
@@ -132,12 +133,12 @@ pageContext.setAttribute("regions", codeVO);
 					</c:forEach>
 				</table>
 				<form action="<c:url value="/_01_Sight/member/SightReplyServlet.controller" />" method="post">
-					<table>
+					<table id="replyTable">
 						<tr><td>
 							<input type="hidden" name="referenceNo" value="${showJournalVO.journalId}">
 							<input type="hidden" name="type" value="type_id03"></td></tr>
 						<tr><td>
-							<textarea rows="5" cols="40" name="reply" style="color:black">${param.reply}</textarea>
+							<textarea class="replyTextarea" name="reply" placeholder="請留言">${param.reply}</textarea>
 						</td></tr>
 						<tr><td>
 							<span>${error.reply}</span></td></tr>

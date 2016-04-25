@@ -85,8 +85,7 @@ public class SightServlet extends HttpServlet {
 			request.setAttribute("journalVOs", journalVOs);
 			request.setAttribute("openTime", result.getOpenTime().toString().substring(0, 5));
 			request.setAttribute("closeTime", result.getCloseIime().toString().substring(0, 5));
-			request.setAttribute("trans1",result.getTrans().substring(0,result.getTrans().indexOf(",")));
-			request.setAttribute("trans2",result.getTrans().substring(result.getTrans().indexOf(",") + 1));
+			request.setAttribute("trans",result.getTrans());
 			request.getRequestDispatcher("/_01_Sight/SightInformation.jsp").forward(request, response);
 		}
 	}
