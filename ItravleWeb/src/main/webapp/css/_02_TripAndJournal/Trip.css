@@ -27,3 +27,14 @@ img {
 	font-size: 50px;
 	color: silver;
 }
+.replyTextarea {
+	max-width:690px;
+ 	max-height:100px;
+ 	width:690px;
+ 	height:100px;
+ 	color:black;
+}
+#replyTable {
+	width: 690px;
+	margin: 0 auto;
+}
