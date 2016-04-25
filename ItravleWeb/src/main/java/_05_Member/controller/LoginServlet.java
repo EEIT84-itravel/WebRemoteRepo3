@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 		
 		if(error!=null && !error.isEmpty()) {
 			request.getRequestDispatcher(
-					"/_05_Member/Login.jsp").forward(request, response);
+					"/_05_Member/index.jsp").forward(request, response);
 			return;
 		}
 		

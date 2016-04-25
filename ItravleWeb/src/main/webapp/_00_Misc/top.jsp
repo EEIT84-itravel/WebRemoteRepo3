@@ -174,7 +174,7 @@ nav {
 				<!-- 視session是否登入登出顯示 login/註冊 或 logout -->
 				
 					<c:if test="${not empty user}">
-						<li class="whiteNav" style="color: white; font-size: 24px;" > ${user.nickname}<img
+						<li class="whiteNav" style="color: white; font-size: 24px;" > ${user.nickname}<img class="img-circle"
 							src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${user.memberId}" />"
 							width="50px" height="50px"></li >
 					</c:if>
@@ -226,9 +226,6 @@ nav {
 									type="text" class="form-control" name="password"
 									value="${param.password}" placeholder="請輸入密碼">
 							</div>
-							<!--             <div class="checkbox"> -->
-							<!--               <label><input type="checkbox" value="" checked>Remember me</label> -->
-							<!--             </div> -->
 							<button type="submit" class="btn btn-success btn-block">
 								<span class="glyphicon glyphicon-off"></span> 登入
 							</button>
