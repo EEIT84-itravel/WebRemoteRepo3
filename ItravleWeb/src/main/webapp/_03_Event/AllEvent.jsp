@@ -59,9 +59,10 @@
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
-		<form action="">
-			<table border='1' id="event">
+
+	<article class="center-block" style="width:1000px;">
+		<h2>全部活動</h2>
+			<table border='1' id="event" class="table">
 				<thead>
 					<tr>
 						<th>活動主題</th>
@@ -81,7 +82,6 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		</form>
 	</article>
 	<footer>
 		<!-- import共同的 -->

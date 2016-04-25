@@ -56,7 +56,8 @@ pageContext.setAttribute("tripVO", tripVO);
 					<td>${tripVO.tripStartDate}</td>
 					<td>${tripVO.modifyTime}</td>
 					<td>${tripVO.watchNum}</td>
-					<td><a href="<c:url value="/_05_Member/member/deltrip.controller?memberId=${user.memberId}&referenceType=${tripVO.tripId}&typeId=type_id02"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
+					<td><button type="button" class="btn-danger btn-lg" onclick="location.href='<c:url value="/_05_Member/member/deltrip.controller?memberId=${user.memberId}&referenceType=${tripVO.tripId}&typeId=type_id02"/>'">移出收藏夾</button></td>
+				
 				</tr>
 			</c:forEach>
 			</c:if>
