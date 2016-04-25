@@ -46,7 +46,7 @@ pageContext.setAttribute("tripVO", tripVO);
 		<tbody>
 			<c:if test="${not empty tripVO}">
 			<c:forEach var="tripVO" items="${tripVO}">
-			<tr class="info">
+			<tr class="tripTr">
 				<td>
 					<c:forEach var="TripDetailVO" items="${TripDetailService.mainPics}">
                     	<c:if test="${TripDetailVO.tripId==tripVO.tripId}">

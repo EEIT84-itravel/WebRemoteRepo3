@@ -40,7 +40,7 @@
 <title>ITravel討論區</title>
 </head>
 <body style="background-image: url('../css/img/go.jpg')">
-<div class="bg">
+
 	<header>
 		<!-- import共同的 -->
 	</header>
@@ -128,7 +128,7 @@
 			</div>
 		</form>
 	</article>
-	</div>
+
 	<script type="text/javascript">
 	//DataTable設定
 	var opt = {

@@ -48,7 +48,7 @@ pageContext.setAttribute("tripVO", tripVO);
 			<tbody>
 			<c:if test="${not empty tripVO}">
 			<c:forEach var="tripVO" items="${tripVO}">
-				<tr>
+				<tr class="tripTr">
 					<td>
 						<img src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?tripId=${tripVO.tripId}" />" width="160" height="120" class="img-rounded">
 					</td>
