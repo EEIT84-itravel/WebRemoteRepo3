@@ -104,7 +104,6 @@ nav {
 		alertify.alert('發表文章請先登入！')
 	}
 </script>
-
 </head>
 <body>
 	<div class="container-fluid">
@@ -118,16 +117,13 @@ nav {
 			</button>
 			<a class="navbar-brand" href="<c:url value="/index.jsp"/>">ITravel</a>
 		</div>
-
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
 			<ul class="nav navbar-nav">
 				<!--  正在被選取的物件-->
-
 				<!-- 	<li class="active"><a href="#">看景點<span class="sr-only">(current)</span></a></li> -->
 				<li class="whiteNav">
-					<a href="<c:url value="/_01_Sight/SightIndex.jsp"/>">看景點<span class="sr-only">(current)</span></a>
+					<a href="<c:url value="/_01_Sight/SightIndex.jsp"/>">看景點</a>
 				</li>
 				<li class="whiteNav">
 					<a href="<c:url value="/_02_TripAndJournal/TripIndex.jsp"/>">看行程</a>
@@ -178,11 +174,9 @@ nav {
 						<a href="<c:url value="/_06_BackEnd/backend/AllSight.jsp" />">後台</a>
 					</li>
 				</c:if>
-
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<!-- 視session是否登入登出顯示 login/註冊 或 logout -->
-				
 					<c:if test="${not empty user}">
 						<li class="whiteNav" style="color: white; font-size: 24px;" > ${user.nickname}<img
 							src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${user.memberId}" />"
@@ -197,18 +191,13 @@ nav {
 					<!-- 					<li><button type="button"  class="btn btn-info btn-lg" id="myBtn3">Login</button></li> -->
 				</c:if>
 				<c:if test="${not empty user}">
-					<li class="pull-right whiteNav"><a
-						href="<c:url value="/_05_Member/member/Logout.jsp" />">Logout</a></li>
-				</c:if>
-				<c:if test="${not empty user}">
-					<li><a href="<c:url value="/_05_Member/Logout.jsp" />">Logout</a></li>
+					<li class="pull-right whiteNav"><a href="<c:url value="/_05_Member/Logout.jsp" />">Logout</a></li>
 				</c:if>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
 
 		<!-- LoginDIV -->
-		
      	<div class="modal fade" id="myModal" role="dialog">
 			<div class="modal-dialog">
 				<!-- Modal content-->
@@ -220,21 +209,18 @@ nav {
 						</h4>
 					</div>
 					<div class="modal-body" style="padding: 40px 50px;">
-						<form role="form"
-							action="<c:url value="/_05_Member/login.controller" />"
-							method="get">
+						<form role="form" action="<c:url value="/_05_Member/login.controller" />" method="get">
 							<div class="form-group">
-								<label for="usrname"><span
-									class="glyphicon glyphicon-user"></span> 帳號</label> <input
-									type="text" class="form-control" name="username"
-									value="${param.username}" placeholder="請輸入帳號"><span
-									class="error">${error.username}</span>
+								<label for="usrname">
+								<span class="glyphicon glyphicon-user"></span> 帳號</label> 
+								<input type="text" class="form-control" name="username" value="${param.username}" placeholder="請輸入帳號">
+								<span class="error">${error.username}</span>
 							</div>
 							<div class="form-group">
-								<label for="psw"><span
-									class="glyphicon glyphicon-eye-open"></span> 密碼</label> <input
-									type="text" class="form-control" name="password"
-									value="${param.password}" placeholder="請輸入密碼">
+								<label for="psw">
+								<span class="glyphicon glyphicon-eye-open">
+								</span> 密碼</label>
+								<input type="password" class="form-control" name="password" value="${param.password}" placeholder="請輸入密碼">
 							</div>
 							<!--             <div class="checkbox"> -->
 							<!--               <label><input type="checkbox" value="" checked>Remember me</label> -->
@@ -245,8 +231,7 @@ nav {
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-danger btn-default pull-left"
-							data-dismiss="modal">取消</button>
+						<button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">取消</button>
 					</div>
 				</div>
 			</div>

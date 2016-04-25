@@ -41,7 +41,7 @@
 			sendRequest3("GET", url3, cellphone1, cellphone2);
 		});
 		$('input[name="cellphone2"]').focus(function() {
-			$("#cellphone").empty("");
+			$("#cellphone5").empty("");
 		});
 	});
 	var openFile = function(event) {
@@ -68,7 +68,9 @@
 #memberTable td {
 	width: 200px;
 }
-
+#modifymessage {
+color: red;
+}
 </style>
 
 <title>修改會員資料</title>
@@ -131,7 +133,7 @@
 				<td>電話 :</td>
 				<td><input type="text" name="cellphone2"
 					value="${user.cellphone}"></td>
-				<td><span class="error" id="cellphone">${error.cellphone}</span><img
+				<td><span class="error" id="cellphone5">${error.cellphone}</span><img
 					src="<c:url value="/img/ajax-loader.gif"/>" style="display: none" /></td>
 			</tr>
 			<tr>
@@ -150,6 +152,11 @@
 			</tr>
 		</table>
 	</form>
+	<div>
+		<span id="modifymessage">
+		${modify.message}
+		</span>
+		</div>
 	</div>
 	</article>
 </body>

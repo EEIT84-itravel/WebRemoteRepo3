@@ -26,6 +26,8 @@ pageContext.setAttribute("regions", codeVO);
 	});
 	function collect() {
 		window.location.href = "../_02_TripAndJournal/member/collectiontrip.controller?referenceType="+ $("#referenceType").val()+"&typeId=type_id03";
+	
+	
 	};
 </script>
 <!-- jQuery ui -->
@@ -54,7 +56,9 @@ pageContext.setAttribute("regions", codeVO);
 		<form action="<c:url value="/_02_TripAndJournal/member/ModifyJournal.controller?crud=Update&journalId=${showJournalVO.journalId}"/>" method="post">
 			<c:choose>		
 				<c:when test="${empty user}"></c:when>
-				<c:when test="${user.memberId==showJournalVO.memberId}"><input type="submit" name="modifyJournal" value="修改遊記"></c:when>
+				<c:when test="${user.memberId==showJournalVO.memberId}">
+					<input type="submit" name="modifyJournal" value="修改遊記">
+				</c:when>
 			</c:choose>
 			<div id="divMember">
 				<table id="member" class="table table-bordered">
@@ -62,11 +66,13 @@ pageContext.setAttribute("regions", codeVO);
 					<td class="memberPic"><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${showJournalVO.memberId}" />"
 						width="100px" height="100px">
 					<td>
-
 						<ul style="list-style-type: none;">
 							<li><c:forEach var="MemberVO" items="${MemberService.all}">
 									<c:if test="${MemberVO.memberId==showJournalVO.memberId}">
 										<h3 style="color: green">作者：${MemberVO.nickname}</h3>
+										
+							            <input type="button" value="收藏作者" id='collectmember'><!-- 		判斷收藏作者鈕是否出現 寫在ShowJournalServlet -->
+								       
 									</c:if>
 								</c:forEach></li>
 							<li>遊玩日期：${showJournalVO.beginTime}~${showJournalVO.endTime}</li>
@@ -89,7 +95,7 @@ pageContext.setAttribute("regions", codeVO);
 								<c:forEach var="sightVO" items="${SightService.all}">
 									<c:if test="${showJournalDetailVO.sightId==sightVO.sightId}">
 										<td><h3 style="color: blue" class="fMargin">
-												<strong>${sightVO.sightName}</strong>
+												<strong><a href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO.sightId}"/>">${sightVO.sightName}</a></strong>
 											</h3></td>
 									</c:if>
 								</c:forEach>

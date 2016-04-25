@@ -52,11 +52,14 @@ public class CellphoneModifyServlet extends HttpServlet {
 			if(!cellphone.matches("^(?=.*\\d).{9,10}$"))
 			{
 			output.append("格式錯誤!");
+			System.out.println("格式錯誤!");
 			}else{
 			output.append("此電話可使用");
+			System.out.println("此電話可使用");
 			}
 		}else {
 			output.append("此電話已有人使用,或是您原本的電話");
+			System.out.println("此電話已有人使用,或是您原本的電話");
 		}
 		
 		out.print(output);

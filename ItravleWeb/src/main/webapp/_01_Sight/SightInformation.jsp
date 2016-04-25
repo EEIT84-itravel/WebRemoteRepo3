@@ -75,19 +75,21 @@
 			</p>
 			<p>地址：${sightVO.addr}</p>
 			<p>交通方式　-　${trans}</p>
-			<div id="tabss">
-				<div id="tabs">
-					<ul>
-						<li><a href="#tabs-1">相關行程</a></li>
-						<li><a href="#tabs-2">相關遊記</a></li>
-						<li><a href="#tabs-3">留言</a></li>
-					</ul>
-					<div id="tabs-1"><!-- tab 相關行程 -->
-						<c:if test="${empty tripVOs}">
-							目前尚無相關行程
-						</c:if>
-						<table class="table">
-							<c:forEach var="tripVO" items="${tripVOs}" end="4"><!-- "4"為顯示5筆  -->
+						<div id="tabss">
+						<div id="tabs">
+							<ul>
+								<li><a href="#tabs-1">相關行程</a></li>
+								<li><a href="#tabs-2">相關遊記</a></li>
+								<li><a href="#tabs-3">相關活動</a></li>
+								<li><a href="#tabs-4">留言</a></li>
+							</ul>
+							<div id="tabs-1"><!-- tab 相關行程 -->
+									<c:if test="${empty tripVOs}">
+										目前尚無相關行程
+									</c:if>
+							<table class="table">
+								<c:forEach var="tripVO" items="${tripVOs}" end="4"><!-- "4"為顯示5筆  -->
+								<c:if test="${tripVO.post==true}"><!-- 狀態是已發布 -->
 								<tr>
 								<td>
 									<c:forEach var="TripDetailVO" items="${TripDetailService.mainPics}" >
@@ -106,15 +108,17 @@
 								</td>
 								<td>有${tripVO.watchNum}人瀏覽過</td>
 								</tr>
-							</c:forEach>
-						</table>
-					</div>
-					<div id="tabs-2"><!-- tab 相關遊記 -->
-						<c:if test="${empty journalVOs}">
+								</c:if>
+								</c:forEach>
+							</table>
+						</div>
+						<div id="tabs-2"><!-- tab 相關遊記 -->
+							<c:if test="${empty journalVOs}">
 							目前尚無相關遊記
-						</c:if>
-						<table class="table">
+							</c:if>
+							<table class="table">
 							<c:forEach var="journalVO" items="${journalVOs}" end="4"><!-- "4"為顯示5筆  -->
+							<c:if test="${journalVO.post==true}"><!-- 狀態是已發布 -->
 							<tr>
 								<td><img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${journalVO.journalId}" />" width="88" height="66"></td>
 								<td><a href="<c:url value="/_02_TripAndJournal/ShowJournalDetail.controller?journalId=${journalVO.journalId}" />">${journalVO.journalName}</a></td>
@@ -125,14 +129,30 @@
 									</c:forEach>
 								<td>有${journalVO.visitorNum}人瀏覽過</td>
 							</tr>
+							</c:if>
 							</c:forEach>
-						</table>
-					</div>
-					<div id="tabs-3"><!-- tab 留言 -->
-						<c:if test="${empty messageVOs}">
-							目前尚無相關留言
-						</c:if>
-						<table class="table">
+							</table>
+							</div>
+							<div id="tabs-3"><!-- tab 相關活動 -->
+								<c:if test="${empty eventVOs}">
+									目前尚無相關活動
+								</c:if>
+							<table class="table">
+							<c:forEach var="eventVO" items="${eventVOs}">
+								<c:if test="${eventVO.eventRemoved==false}"><!-- 狀態是未下架 -->
+								<tr>
+									<td><a href="<c:url value='/_03_Event/ShowEvent.controller?eventId=${eventVO.eventId}' />">${eventVO.eventTopic}</a></td>
+									<td>由${eventVO.eventStartDate}至${eventVO.eventEndDate}</td>
+								</tr>
+								</c:if>
+							</c:forEach>
+							</table>
+							</div>
+							<div id="tabs-4"><!-- tab 留言 -->
+								<c:if test="${empty messageVOs}">
+									目前尚無相關留言
+								</c:if>
+							<table class="table">
 							<c:forEach var="messageVO" items="${messageVOs}">
 								<tr>
 									<td>${messageVO.content}</td>
@@ -174,7 +194,6 @@
 				</div><!-- tabs 留言 end-->
 			</div><!-- tabss 留言 end-->
 		</div><!-- rightside end -->
-
 		<!-- 	 	google map -->
 		<div id="map"></div>
 		<script>
