@@ -102,7 +102,10 @@ nav {
 		});
 	});
 	function doAlertMessage() {
-		alertify.alert('欲使用會員功能請先登入!!')
+		alertify.alert('欲使用會員功能請先登入！')
+	}
+	function doArticleMessage() {
+		alertify.alert('發表文章請先登入！')
 	}
 </script>
 
@@ -177,7 +180,7 @@ nav {
 					</c:if>
 				
 				<c:if test="${empty user}">
-					<li class="whiteNav"><a id="myReg">註冊</a></li>
+					<li class="whiteNav"><a href="<c:url value="/_05_Member/Registered.jsp"/>">註冊</a></li>
 				</c:if>
 				<c:if test="${empty user}">
 					<li class="whiteNav"><a id="myBtn" style="cursor: pointer">Login</a></li>
@@ -237,67 +240,7 @@ nav {
 			</div>
 		</div><!-- 登入DIV結束 -->
 		
-		<!-- 註冊DIV -->
-		<div class="modal fade" id="myModalReg" role="dialog">
-			<div class="modal-dialog">
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header" style="padding: 35px 50px;">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4><span class="glyphicon glyphicon-user"></span>會員註冊</h4>
-					</div>
-					<div class="modal-body" style="padding: 40px 50px;">
-						<form role="form"	action="<c:url value="/_05_Member/registered.controller" />"
-							method="post" enctype="multipart/form-data">
-							<div class="form-group">							
-								*姓氏：<input type="text" name="lastName" value="${param.lastName}" class="form-control">
-								<span class="error">${error.lastName}</span>			
-							</div>
-							<div class="form-group">
-								 *名字：<input type="text" name="firstName" value="${param.firstName}" class="form-control" >
-							     <span class="error">${error.firstName}</span>	 
-							</div>						
-							<div class="form-group">							
-								*帳號 : <input type="text" name="memberAccount" value="${param.memberAccount}" class="form-control">
-								<span class="error">${error.memberAccount}</span>			
-							</div>
-							<div class="form-group">							
-								*密碼 : <input type="text" name="password" value="${param.password}" class="form-control">
-								<span class="error">${error.password}</span>			
-							</div>
-							<div class="form-group">							
-								*暱稱 : <input type="text" name="nickname" value="${param.nickname}" class="form-control">
-									<span class="error">${error.nickname}</span>			
-							</div>
-							<div class="form-group">							
-								*信箱 : <input type="text" name="email" value="${param.email}" class="form-control">
-									<span class="error">${error.email}</span>			
-							</div>
-							<div class="form-group">							
-								*生日 : <input type="text" name="birth" value="${param.birth}" class="form-control">
-									<span class="error">${error.birth}</span>			
-							</div>
-							<div class="form-group">							
-								*電話 : <input type="text" name="cellphone" value="${param.cellphone}" class="form-control">
-									<span class="error">${error.cellphone}</span>			
-							</div>
-							<div class="form-group">							
-								*大頭貼 : <input type="file" name="photo">
-							</div>
-							
-							<button type="submit" class="btn btn-success btn-block">
-								<span class="glyphicon glyphicon-off"></span> 註冊新會員
-							</button>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-danger btn-default pull-left"
-							data-dismiss="modal">取消</button>				
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- 註冊DIV結束 -->
+		
 		<script>
 			//呼叫登入modal
 			$(document).ready(function() {

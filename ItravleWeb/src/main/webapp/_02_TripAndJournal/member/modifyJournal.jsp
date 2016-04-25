@@ -20,6 +20,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>I-Travel修改遊記</title>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/css/_00_Misc/main.css"/>" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/css/_02_TripAndJournal/ModifyJournal.css"/>" />
+
 <script type="text/javascript">
 	$(document).ready(function() {
 // 		$('input[type="file"]').css('background-color','red');
@@ -63,47 +68,67 @@
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article class="center-block">
-		<h3>修改遊記</h3>
-
-		<table>
-			<tr>
-				<td>遊記名稱:</td>
-				<td colspan="2"><input type="text" name="journalName"
-					value="${modifyVO.journalName}"></td>
-				<td>地區:</td>
-				<td><select name="regionId">
-						<c:forEach var="region" items="${region}">
-							<option value="${region.codeId}">${region.codeName}</option>
-						</c:forEach>
-				</select></td>
-			</tr>
-			<tr>
-				<td>旅行日期：</td>
-				<td>開始日期:</td>
-				<td><input name="journalStartDate" type="text"
-					value="${modifyVO.beginTime}" placeholder="${modifyVO.beginTime}"></td>
-				<td>結束日期:</td>
-				<td><input name="journalEndDate" type="text"
-					value="${modifyVO.endTime}" placeholder="${modifyVO.endTime}"></td>
-			</tr>
-			<tr>
-				<td>遊記簡介</td>
-				<td colspan="4"><textarea name="journalIntro" rows="4"
-						cols="40">${modifyVO.journalIntro}</textarea></td>
-			</tr>
-			
-		</table>
-    <form action="<c:url value="/_02_TripAndJournal/member/JournalDetail.controller"/>" method="post" enctype="multipart/form-data">
-        <table>
-         <tr>		
-	      <td>選擇遊記主圖：</td>		
-		  <td><input type="file" name="journalPic"  onchange='openFile(event)' class="btn btn-info btn-lg">
-		  <div><img id='output'></div>
-         </tr>
-         <tr>
-				<td>詳細遊記</td>
-			</tr>
-			<c:forEach var="modifyDetailVO" items="${modifyDetailVO}">			
+		<h1>修改遊記</h1>
+		<fieldset id="introDiv">
+		<legend><mark>遊記基本資訊</mark></legend>
+		<div class="form-horizontal">
+		<form action="<c:url value="/_02_TripAndJournal/member/ModifyJournalIntro.controller"/>" method="post">
+		<input type="hidden" name="journalId" value="${journalVO.journalId}">
+		<input type="hidden" name="visitorNum" value="${journalVO.visitorNum}">
+		<input type="hidden" name="memberId" value="${user.memberId}">		
+			<div class="form-group">
+				<h4><label class="control-label col-sm-3">遊記名稱：</label></h4>
+				<div class="col-sm-6">
+					<input class="form-control" type="text" name="journalName" value="${modifyVO.journalName}"/><span class="error">${error.journalName}</span>				    
+				    <span class="errorMsg">${error.journalName}</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<h4><label class="control-label col-sm-3">遊玩地區：</label></h4>
+				<div class="col-sm-3">
+					<select name="regionId">
+							<c:forEach var="region" items="${region}">
+								<option value="${region.codeId}">${region.codeName}</option>
+							</c:forEach>
+					</select>			    
+				</div>
+			</div>
+			<div class="form-group">
+				<h4><label class="control-label col-sm-3">旅行日期：</label></h4>
+				<div class="col-sm-3">
+				<input name="journalStartDate" type="text" value="${modifyVO.beginTime}"	placeholder="${modifyVO.beginTime}">至<input name="journalEndDate" type="text" value="${modifyVO.endTime}" placeholder="${modifyVO.endTime}">
+				</div>
+			</div>
+			<div class="form-group">
+				<h4><label class="control-label col-sm-3">遊記簡介：</label></h4>
+				<div class="col-sm-6">
+				<textarea name="journalIntro" rows="4" id="jBody" class="textBody form-control" cols="40">${modifyVO.journalIntro}</textarea>
+				<span class="errorMsg">${error.journalIntro}</span>
+				</div>
+			</div>
+			<div class="form-group"  style="text-align: center;">
+			<input type="submit" value="儲存基本資訊" class="btn-success btn-lg">
+		    </div>
+		</form>
+		</div>				
+		</fieldset>
+		<!-- 詳細遊記   -->
+		<fieldset id="journalDetailDiv">
+		<legend><mark>景點遊記</mark></legend>
+		<div class="form-horizontal">
+		<form	action="<c:url value="/_02_TripAndJournal/member/JournalDetail.controller"/>"	method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<h4><label class="control-label col-sm-3">選擇遊記主圖：</label></h4>
+				<div class="col-sm-9">
+				<input type="file" name="journalPic"
+						onchange='openFile(event)' class="btn btn-info btn-lg">
+						<div>
+							<img id='output'>
+						</div>
+				</div>
+			</div>
+						
+				<c:forEach var="modifyDetailVO" items="${modifyDetailVO}">			
 				<c:forEach var="SightVO" items="${SightService.all}">          
 					<c:if test="${SightVO.sightId==modifyDetailVO.sightId}">							    
 						<input type="hidden" name="journalDetailId" value="${modifyDetailVO.journalDetailId}">
@@ -112,17 +137,28 @@
 						<input type="hidden" name="whichDay" value="${modifyDetailVO.whichDay}">
 						<input type="hidden" name="journalId" value="${modifyDetailVO.journalId}">	
 						<input type="hidden" name="JournalPhotoId" value="${modifyPhotoVO.journalPhotoId}">									
-						<input type="hidden" name="crud" value="Update">									
-						<tr>				
-							<td>${SightVO.sightName}</td>
-							<td><textarea name="sightJournal" >${modifyDetailVO.sightJournal}</textarea><span class="error">${error.sightJournal}</span></td>
-						</tr>		
-					</c:if>				
-				</c:forEach>
-		  </c:forEach>
-		  		<tr><td><input type="submit" value="修改" id="saveJournal" class="btn btn-info btn-lg"/></td>	</tr>
-		 </table>
-    </form>
+						<input type="hidden" name="crud" value="Update">
+								
+								<div class="form-group">
+									<h4><label class="control-label col-sm-3">${SightVO.sightName}：</label></h4>
+									<div class="col-sm-6" id="jBody">
+									<textarea name="sightJournal" rows="5" cols="50" class="textBody form-control">${modifyDetailVO.sightJournal}</textarea><span
+										class="errorMsg">${error.sightJournal}</span>
+									</div>
+								</div>
+								
+
+							</c:if>
+						</c:forEach>
+					</c:forEach>
+				
+				<div class="form-group"  style="text-align: center;">
+					<input type="submit" value="儲存遊記" id="saveJournal"
+						class="btn btn-success btn-lg" />
+		   		 </div>			
+		</form>
+		</div>
+		</fieldset>
 	</article>
 	<footer>
 		<!-- import共同的 -->

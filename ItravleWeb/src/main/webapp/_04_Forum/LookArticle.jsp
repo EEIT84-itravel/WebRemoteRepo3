@@ -74,16 +74,16 @@ function doAlertBtn() {
 						</c:url>
 						<!-- 用choose判斷，user是否登入，登入才可以進行某些功能，並且自己只能對自己的文章及留言進行刪跟修 -->
 							<td><c:choose>		
-								<c:when test="${empty user}"><button type="button" class="btn btn-info btn-lg" >回覆文章</button></c:when>
-								<c:when test="${not empty user}"><input type="button" value="回覆文章"  onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&memberId=${user.memberId}&crud=NewReply"/>'"></c:when>
+								<c:when test="${empty user}"><button type="button" class="btn btn-default" >回覆文章</button></c:when>
+								<c:when test="${not empty user}"><input type="button" class="btn btn-default" value="回覆文章"  onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&memberId=${user.memberId}&crud=NewReply"/>'"></c:when>
 							</c:choose>
 							<c:choose>		
 								<c:when test="${empty user}"></c:when>
-								<c:when test="${user.memberId==forumVO.memberId}"><a href="${forum}">編輯文章</a></c:when>
+								<c:when test="${user.memberId==forumVO.memberId}"><a href="${forum}" class="btn btn-default">編輯文章</a></c:when>
 							</c:choose>
 							<c:choose>		
 								<c:when test="${empty user}"></c:when>
-								<c:when test="${user.memberId==forumVO.memberId}"><a href="javascript:if(confirm('確定要删除此文章嗎?'))location='<c:url value='/_04_Forum/member/WritingsServlet.controller?crud=Delete&forumId=${forumVO.forumId}&memberId=${user.memberId}'/>'">删除文章</a>
+								<c:when test="${user.memberId==forumVO.memberId}"><a href="javascript:if(confirm('確定要删除此文章嗎?'))location='<c:url value='/_04_Forum/member/WritingsServlet.controller?crud=Delete&forumId=${forumVO.forumId}&memberId=${user.memberId}'/>'" class="btn btn-default">删除文章</a>
 								</c:when>
 							</c:choose></td>
 							
@@ -106,7 +106,7 @@ function doAlertBtn() {
 					</tr>
 				</table>
 
-				<table border='1' id="messageBody">
+				<table border='1' id="messageBody" class="table">
 
 					<c:forEach var="messageVO" items="${messageVO1}">
 						<tr>
@@ -121,16 +121,16 @@ function doAlertBtn() {
 							<td>
 							<!-- 用choose判斷，user是否登入，登入才可以進行某些功能，並且自己只能對自己的文章及留言進行刪跟修 -->
 							<c:choose>		
-								<c:when test="${empty user}"><input type="button" value="回覆文章" onclick="location.href='<c:url value="/_05_Member/Login.jsp"/>'"></c:when>
-								<c:when test="${not empty user}"><input type="button" value="回覆文章"  onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&memberId=${user.memberId}&crud=NewReply"/>'"></c:when>
+								<c:when test="${empty user}"><input type="button" value="回覆文章" class="btn btn-default" onclick="location.href='<c:url value="/_05_Member/Login.jsp"/>'"></c:when>
+								<c:when test="${not empty user}"><input type="button" value="回覆文章" class="btn btn-default" onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&memberId=${user.memberId}&crud=NewReply"/>'"></c:when>
 							</c:choose>
 								<c:choose>		
 								<c:when test="${empty user}"></c:when>
-								<c:when test="${user.memberId==messageVO.memberId}"><a href="${reply}">編輯留言</a></c:when>
+								<c:when test="${user.memberId==messageVO.memberId}"><a href="${reply}" class="btn btn-default">編輯留言</a></c:when>
 							</c:choose>
 							<c:choose>		
 								<c:when test="${empty user}"></c:when>
-								<c:when test="${user.memberId==messageVO.memberId}"><a href="javascript:if(confirm('確定要删除此留言嗎?'))location='<c:url value='/_04_Forum/member/MessageServlet.controller?crud=Delete&messageId=${messageVO.messageId}&referenceNo=${forumVO.forumId}&memberId=${user.memberId}'/>'">删除留言</a></c:when>
+								<c:when test="${user.memberId==messageVO.memberId}"><a class="btn btn-default" href="javascript:if(confirm('確定要删除此留言嗎?'))location='<c:url value='/_04_Forum/member/MessageServlet.controller?crud=Delete&messageId=${messageVO.messageId}&referenceNo=${forumVO.forumId}&memberId=${user.memberId}' />'">删除留言</a></c:when>
 							</c:choose></td>
 							
 						</tr>
