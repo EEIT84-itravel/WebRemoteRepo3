@@ -136,12 +136,12 @@ var longitude;  //經度
 		$("#sightsTabs").tabs({
 			heightStyle : "fill"
 		});
-		$("#sightsTabs").click(function() {
-			var current_index = $("#sightsTabs").tabs("option","active");
-			alert(current_index);
-			$("#sightsTabs").tabs('load',current_index);
+// 		$("#sightsTabs").click(function() {
+// 			var current_index = $("#sightsTabs").tabs("option","active");
+// 			alert(current_index);
+// 			$("#sightsTabs").tabs("refresh");
 			
-		});
+// 		});
 
 		
 		//景點詳情dialog功能
@@ -200,13 +200,10 @@ var longitude;  //經度
 		// 按鈕觸發對話框
 		$("#saveTrip").button().on( "click", function() {
 		      dialog2.dialog( "open" );
-	    });
-		
+	    });	
 		
 
-	});  /* onload function end */
-
-	
+	});  /* onload function end */	
 
 	
 //移除單一景點(html黏上時在form加景點編號當參數)

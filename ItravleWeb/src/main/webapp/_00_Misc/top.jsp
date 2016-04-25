@@ -17,10 +17,8 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 
-<link href="	<c:url value="/css/_00_Misc/alertify.core.css"/>"
-	rel="stylesheet">
-<link href="	<c:url value="/css/_00_Misc/alertify.default.css"/>"
-	rel="stylesheet">
+<link href="<c:url value="/css/_00_Misc/alertify.core.css"/>" rel="stylesheet">
+<link href="<c:url value="/css/_00_Misc/alertify.default.css"/>" rel="stylesheet">
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.10/alertify.min.js"></script>
 <!-- jQuery -->
@@ -60,13 +58,11 @@ nav {
 	height: 60px;
 	line-height: 30px;
 }
-/* .dropdown a { */
-/* 	color: white;  */
-/* 	font-weight: 500; */
-/* 	font-size: 24px; */
-/* 	height: 60px; */
-/* 	line-height: 30px; */
-/* } */
+
+.dropdown-menu {
+	background-color: black;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -113,11 +109,11 @@ nav {
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="<c:url value="/index.jsp"/>">ITravel</a>
 		</div>
@@ -126,35 +122,63 @@ nav {
 			<ul class="nav navbar-nav">
 				<!--  正在被選取的物件-->
 				<!-- 	<li class="active"><a href="#">看景點<span class="sr-only">(current)</span></a></li> -->
-				<li class="whiteNav"><a href="<c:url value="/_01_Sight/SightIndex.jsp"/>">看景點</a></li>
-				<li class="whiteNav"><a href="<c:url value="/_02_TripAndJournal/TripIndex.jsp"/>">看行程</a></li>
-				<li class="whiteNav"><a href="<c:url value="/_02_TripAndJournal/JournalIndex.jsp"/>">看遊記</a></li>
-				<li class="whiteNav"><a href="<c:url value="/_04_Forum/ForumIndex.jsp" />">討論區</a></li>
 				<li class="whiteNav">
-				<c:choose>
-				<c:when test="${empty user}"><a onclick="doAlertMessage()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">會員功能<span class="caret"></span></a></c:when>
-				<c:when test="${not empty user}"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">會員功能<span class="caret"></span></a></c:when>
-				</c:choose>
+					<a href="<c:url value="/_01_Sight/SightIndex.jsp"/>">看景點</a>
+				</li>
+				<li class="whiteNav">
+					<a href="<c:url value="/_02_TripAndJournal/TripIndex.jsp"/>">看行程</a>
+				</li>
+				<li class="whiteNav">
+					<a href="<c:url value="/_02_TripAndJournal/JournalIndex.jsp"/>">看遊記</a>
+				</li>
+				<li class="whiteNav">
+					<a href="<c:url value="/_04_Forum/ForumIndex.jsp" />">討論區</a>
+				</li>
+				<li class="whiteNav">
+					<c:choose>
+						<c:when test="${empty user}"><a onclick="doAlertMessage()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">會員功能<span class="caret"></span></a></c:when>
+						<c:when test="${not empty user}"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">會員功能<span class="caret"></span></a></c:when>
+					</c:choose>
 					<ul class="dropdown-menu navbar-nav" role="menu">
-						<li class="whiteNav"><a href="<c:url value="/_05_Member/member/MemberTrip.jsp" />">我的行程</a></li>
-						<li class="whiteNav"><a href="<c:url value="/_05_Member/member/MemberJournal.jsp" />">我的遊記</a></li>
-						<li class="whiteNav"><a href="<c:url value="/_05_Member/member/MemberForum.jsp" />">我的討論區</a></li>
-						<li class="whiteNav"><a href="<c:url value="/_05_Member/member/MemberSight.jsp" />">我的收藏景點</a></li>
-						<li class="whiteNav"><a href="<c:url value="/_05_Member/member/MemberCollectionTrip.jsp" />">我的收藏行程</a></li>
-						<li class="whiteNav"><a href="<c:url value="/_05_Member/member/MemberCollectionJournal.jsp" />">我的收藏遊記</a></li>
-						<li class="whiteNav"><a href="<c:url value="/_05_Member/member/MemberCollectionForum.jsp" />">我的收藏討論區</a></li>
-						<li class="whiteNav"><a href="<c:url value="/_05_Member/member/MemberCollectionMember.jsp" />">我的追蹤作者</a></li>
-						<li class="whiteNav"><a href="<c:url value="/_05_Member/member/MemberModify.jsp " />">修改會員資料</a></li>
-					</ul></li>
+						<li class="whiteNav">
+							<a href="<c:url value="/_05_Member/member/MemberTrip.jsp" />">我的行程</a>
+						</li>
+						<li class="whiteNav">
+							<a href="<c:url value="/_05_Member/member/MemberJournal.jsp" />">我的遊記</a>
+						</li>
+						<li class="whiteNav">
+							<a href="<c:url value="/_05_Member/member/MemberForum.jsp" />">我的討論區</a>
+						</li>
+						<li class="whiteNav">
+							<a href="<c:url value="/_05_Member/member/MemberSight.jsp" />">我的收藏景點</a>
+						</li>
+						<li class="whiteNav">
+							<a href="<c:url value="/_05_Member/member/MemberCollectionTrip.jsp" />">我的收藏行程</a>
+						</li>
+						<li class="whiteNav">
+							<a href="<c:url value="/_05_Member/member/MemberCollectionJournal.jsp" />">我的收藏遊記</a>
+						</li>
+						<li class="whiteNav">
+							<a href="<c:url value="/_05_Member/member/MemberCollectionForum.jsp" />">我的收藏討論區</a>
+						</li>
+						<li class="whiteNav">
+							<a href="<c:url value="/_05_Member/member/MemberCollectionMember.jsp" />">我的追蹤作者</a>
+						</li>
+						<li class="whiteNav">
+							<a href="<c:url value="/_05_Member/member/MemberModify.jsp " />">修改會員資料</a>
+						</li>
+					</ul>
+				</li>
 				<c:if test="${not empty admin}">
-					<li class="whiteNav"><a
-						href="<c:url value="/_06_BackEnd/backend/AllSight.jsp" />">後台</a></li>
+					<li class="whiteNav">
+						<a href="<c:url value="/_06_BackEnd/backend/AllSight.jsp" />">後台</a>
+					</li>
 				</c:if>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<!-- 視session是否登入登出顯示 login/註冊 或 logout -->
 					<c:if test="${not empty user}">
-						<li class="whiteNav" style="color: white; font-size: 24px;" > ${user.nickname}<img
+						<li class="whiteNav" style="color: white; font-size: 24px;" > ${user.nickname}<img class="img-circle"
 							src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${user.memberId}" />"
 							width="50px" height="50px"></li >
 					</c:if>
@@ -198,16 +222,15 @@ nav {
 								</span> 密碼</label>
 								<input type="password" class="form-control" name="password" value="${param.password}" placeholder="請輸入密碼">
 							</div>
-							<!--             <div class="checkbox"> -->
-							<!--               <label><input type="checkbox" value="" checked>Remember me</label> -->
-							<!--             </div> -->
 							<button type="submit" class="btn btn-success btn-block">
 								<span class="glyphicon glyphicon-off"></span> 登入
+							</button>
+							<button type="button" class="btn btn-danger btn-default pull-left btn-block" data-dismiss="modal">
+								<span class="glyphicon glyphicon-remove"></span> 取消
 							</button>
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">取消</button>
 					</div>
 				</div>
 			</div>

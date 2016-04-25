@@ -69,7 +69,7 @@ pageContext.setAttribute("forumVO", forumVO);
 										</c:if>
 									</c:forEach>
 									<td><%=i%></td>
-									<td><a href="<c:url value="/_05_Member/member/delforum.controller?memberId=${user.memberId}&referenceType=${forumVO.forumId}"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
+									<td><button type="button" class="btn-danger btn-lg" onclick="location.href='<c:url value="/_05_Member/member/delforum.controller?memberId=${user.memberId}&referenceType=${forumVO.forumId}"/>'">移出收藏夾</button></td>					
 						</tr>
 					</c:forEach>
 				</c:if>

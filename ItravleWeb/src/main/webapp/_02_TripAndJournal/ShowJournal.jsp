@@ -69,11 +69,13 @@ pageContext.setAttribute("regions", codeVO);
 						<ul style="list-style-type: none;">
 							<li><c:forEach var="MemberVO" items="${MemberService.all}">
 									<c:if test="${MemberVO.memberId==showJournalVO.memberId}">
-										<h3 style="color: green">作者：${MemberVO.nickname}</h3>
+										<h3 style="color: green">作者：${MemberVO.nickname}
 										
-							            <input type="button" value="收藏作者" id='collectmember'><!-- 		判斷收藏作者鈕是否出現 寫在ShowJournalServlet -->
+							            <span><input type="button" value="追蹤作者" id='collectmember'></span><!-- 判斷收藏作者鈕是否出現 寫在ShowJournalServlet -->
 								       
+								       </h3>
 									</c:if>
+									
 								</c:forEach></li>
 							<li>遊玩日期：${showJournalVO.beginTime}~${showJournalVO.endTime}</li>
 							<c:forEach var="region" items="${regions}">

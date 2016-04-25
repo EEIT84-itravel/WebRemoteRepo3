@@ -51,7 +51,7 @@ function doAlertBtn() {
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article class="center-block">
+	<article class="center-block">	
 		<form action="<c:url value="/_04_Forum/member/Reply.controller"/>"
 			method="post">
 			<div id="forumHead">
@@ -59,7 +59,7 @@ function doAlertBtn() {
 					<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
 
 					<tr class="success">
-						<td><h4 style="color:blue">●${forumVO.forumTopic}</h4> <span class="error">${error.forumTopic}</span></td>
+						<td><h3 style="color:blue">●${forumVO.forumTopic}</h3> <span class="error">${error.forumTopic}</span></td>
 					</tr>
 
 					<tr class="success">
@@ -77,6 +77,9 @@ function doAlertBtn() {
 								<c:when test="${empty user}"><button type="button" class="btn btn-default" >回覆文章</button></c:when>
 								<c:when test="${not empty user}"><input type="button" class="btn btn-default" value="回覆文章"  onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&memberId=${user.memberId}&crud=NewReply"/>'"></c:when>
 							</c:choose>
+							<c:if test="${flag}"> 
+			                    <input type="button" class="btn btn-default" value="收藏文章" onclick="location.href='<c:url value="/_04_Forum/member/CollectionForum.controller?referenceType=${forumVO.forumId}&typeId=type_id05"/>'">
+ 		                    </c:if>
 							<c:choose>		
 								<c:when test="${empty user}"></c:when>
 								<c:when test="${user.memberId==forumVO.memberId}"><a href="${forum}" class="btn btn-default">編輯文章</a></c:when>
