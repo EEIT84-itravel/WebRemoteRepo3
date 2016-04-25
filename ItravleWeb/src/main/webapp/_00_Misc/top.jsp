@@ -95,10 +95,10 @@ nav {
 			sendRequest2("GET", url2, id2);
 		});
 		$('input[name="memberAccount"]').focus(function() {
-			$("span:eq(2)").empty("");
+			$("#memberAccount").empty("");
 		});
 		$('input[name="cellphone"]').focus(function() {
-			$("span:eq(6)").empty("");
+			$("#cellphone").empty("");
 		});
 	});
 	function doAlertMessage() {
@@ -261,7 +261,7 @@ nav {
 							</div>						
 							<div class="form-group">							
 								*帳號 : <input type="text" name="memberAccount" value="${param.memberAccount}" class="form-control">
-								<span class="error">${error.memberAccount}</span>			
+								<span class="error" id="memberAccount">${error.memberAccount}</span>			
 							</div>
 							<div class="form-group">							
 								*密碼 : <input type="text" name="password" value="${param.password}" class="form-control">
@@ -281,7 +281,7 @@ nav {
 							</div>
 							<div class="form-group">							
 								*電話 : <input type="text" name="cellphone" value="${param.cellphone}" class="form-control">
-									<span class="error">${error.cellphone}</span>			
+									<span class="error" id="cellphone">${error.cellphone}</span>			
 							</div>
 							<div class="form-group">							
 								*大頭貼 : <input type="file" name="photo">
