@@ -90,11 +90,11 @@ $(document).ready(function() {
 	<div id="sightTop">
 		<h3>首頁>看景點</h3>
 		<!-- Button 進階搜尋 -->
-		<button type="button" class="btn btn-primary btn-lg" id="searchBtn" data-toggle="modal" data-target="#myModal">進階搜尋</button>
+		<button type="button" class="btn btn-primary btn-lg" id="searchBtn" data-toggle="modal" data-target="#mySearch">進階搜尋</button>
 	</div>
 		<br>
 		<!-- 進階搜尋 互動視窗 -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="mySearch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">

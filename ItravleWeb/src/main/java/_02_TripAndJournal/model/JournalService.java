@@ -71,6 +71,14 @@ public class JournalService {
 		}
 		return result;
 	}
+	public JournalVO updateIntro(JournalVO journalVO) {
+		JournalVO result = null;
+		if (journalVO != null) {
+			journalDAOHibernate = new JournalDAOHibernate();
+			result = journalDAOHibernate.update(journalVO);
+		}
+		return result;
+	}
 
 	public boolean update(JournalVO journalVO) {
 		journalDAOHibernate = new JournalDAOHibernate();
