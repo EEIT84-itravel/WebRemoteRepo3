@@ -27,13 +27,10 @@ pageContext.setAttribute("regions", codeVO);
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_02_TripAndJournal/Trip.css"/>"/>
 <script type="text/javascript">
 	$(function() {
-		$("#tabs").tabs({
-			event : "click"
-		});
 		$("#collect").bind('click', collect);
 	});
 	function collect() {
-		window.location.href = "../_02_TripAndJournal/member/collectiontrip.controller?tripId="+ $("#tripId").val();
+		window.location.href = "../_02_TripAndJournal/member/collectiontrip.controller?referenceType="+ $("#referenceType").val()+"&typeId=type_id02";
 	};
 </script>
 </head>
@@ -47,11 +44,12 @@ pageContext.setAttribute("regions", codeVO);
 		<jsp:include page="/_00_Misc/top.jsp" />		
 	</nav>
 	<article class="center-block">
-	<input type="hidden"  id="tripId" value="${tripVO.tripId}">	
-		<h1 class="h1">${tripVO.tripName} <!-- 		判斷收藏景點鈕是否出現 寫在SightServlet -->
- 																		<c:if test="${flag}"> 
-																			<input type="button" value="收藏行程" id='collect'>
- 																		</c:if></h1> 
+	<input type="hidden"  id="referenceType" value="${tripVO.tripId}">	
+		<h1 class="h1">${tripVO.tripName} <!-- 		判斷收藏景點鈕是否出現 寫在ShowTripServlet -->
+ 			<c:if test="${flag}"> 
+				<input type="button" value="收藏行程" id='collect'>
+ 			</c:if>
+ 		</h1> 
 		<div id="divTrip" class="pull-left">
 			<div id="divTripTop">
 				<h5 class="h5">起始日期: ${tripVO.tripStartDate}</h5>
@@ -66,7 +64,7 @@ pageContext.setAttribute("regions", codeVO);
 				<h5 class="h5">行程簡介: ${tripVO.tripIntro}</h5>
 			</div>	<!-- end divTripTop -->
 			<div id="divTripDetail">
-				<c:forEach var="tripDetailVOs" items="${tripDetailVOs}">
+				<c:forEach var="tripDetailVOs" items="${tripDetailVOs}" varStatus="vs">
 					<div class="table-responsive">
 					<table id="tableTrip" class="table table-bordered">
 						<tr>
@@ -94,9 +92,43 @@ pageContext.setAttribute("regions", codeVO);
 							</c:forEach>
 						</tr>						
 					</table>
-					</div>						
+					</div>
+					<c:if test="${not vs.last}">
+						<div id="arrow">
+						<span class="glyphicon glyphicon-chevron-down"></span>  <!-- 圖片來源：http://glyphicons.com/ -->
+						</div>
+					</c:if>				
 				</c:forEach>			
 			</div>	<!-- end divTripDetail -->
+			<div><!-- 留言 -->
+				<table class="table">
+					<c:forEach var="messageVO" items="${messageVOs}">
+						<tr>
+							<td>${messageVO.content}</td>
+								<c:forEach var="MemberVOm" items="${MemberService.all}">
+                             			<c:if test="${MemberVOm.memberId==messageVO.memberId}">
+											<td>${MemberVOm.nickname}</td>
+                             			</c:if>
+								</c:forEach>
+							<td>${messageVO.updateTime}</td>
+						</tr>
+					</c:forEach>
+				</table>
+				<form action="<c:url value="/_01_Sight/member/SightReplyServlet.controller" />" method="post">
+					<table>
+						<tr><td>
+							<input type="hidden" name="referenceNo" value="${tripVO.tripId}">
+							<input type="hidden" name="type" value="type_id02"></td></tr>
+						<tr><td>
+							<textarea rows="5" cols="40" name="reply" style="color:black">${param.reply}</textarea>
+						</td></tr>
+						<tr><td>
+							<span>${error.reply}</span></td></tr>
+						<tr><td>
+						<input type="submit" value="確定送出" style="color:black"></td></tr>
+					</table>
+				</form>	
+			</div><!-- end 留言 -->
 		</div>	<!-- end divTrip -->
 		<div id="divTripMap" class="pull-right">
 			<div id="tripMap"></div>

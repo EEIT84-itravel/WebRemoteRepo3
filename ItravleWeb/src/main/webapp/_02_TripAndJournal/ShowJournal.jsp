@@ -20,6 +20,14 @@ pageContext.setAttribute("regions", codeVO);
 <script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
 <!-- jQuery ui -->
 <script type="text/javascript" src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#collect").bind('click', collect);
+	});
+	function collect() {
+		window.location.href = "../_02_TripAndJournal/member/collectiontrip.controller?referenceType="+ $("#referenceType").val()+"&typeId=type_id03";
+	};
+</script>
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>" />
@@ -34,10 +42,19 @@ pageContext.setAttribute("regions", codeVO);
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article class="center-block">
-		<h1 style="color: red;">${showJournalVO.journalName}</h1>
-		<div id="divJournal"  class="pull-left">
-		<div id="divMember">
-			<table id="member" class="table table-bordered">
+		<h1 style="color: red;">${showJournalVO.journalName}
+		</h1>
+		<h1 class="h1">
+			<input type="hidden"  id="referenceType" value="${showJournalVO.journalId}">	
+			<c:if test="${flag}"> <!-- 		判斷收藏景點鈕是否出現 寫在ShowJournalDetailServlet -->
+				<input type="button" value="收藏遊記" id='collect'>
+ 			</c:if>
+		</h1>
+		<div id="divJournal" class="pull-left">
+		<form action="<c:url value="/_02_TripAndJournal/member/ModifyJournal.controller?crud=Update&journalId=${showJournalVO.journalId}"/>" method="post">
+			<input type="submit" name="modifyJournal" value="修改遊記">
+			<div id="divMember">
+				<table id="member" class="table table-bordered">
 				<tr>
 					<td class="memberPic"><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${showJournalVO.memberId}" />"
 						width="100px" height="100px">
@@ -61,38 +78,73 @@ pageContext.setAttribute("regions", codeVO);
 				</tr>
 			</table>
         </div><!-- 結束divMember  -->
-        <div id="divJournalDetail">
+			<div id="divJournalDetail">
 				<c:forEach var="showJournalDetailVO" items="${showJournalDetailVO}">
-				<div class="table-responsive">
-				<table id="journalTable" class="table table-bordered">
-					<tr>
-						<c:forEach var="sightVO" items="${SightService.all}">
-							<c:if test="${showJournalDetailVO.sightId==sightVO.sightId}">
-								<td><h3 style="color:blue" class="fMargin"><strong>${sightVO.sightName}</strong></h3></td>
-							</c:if>
-						</c:forEach>
-					</tr>
-					<tr>
-					<td class="journalPic"><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${showJournalDetailVO.sightId}" />" width="300" height="220"></td>
-					
-					    <td><h4 class="fMargin">景點遊記：</h4><br>
-					    ${showJournalDetailVO.sightJournal}</td>
-					    
-					</tr>
-				
-				        <tr hidden="true">						
-							<c:forEach var="sightVO3" items="${SightService.all}">
-                            	<c:if test="${sightVO3.sightId==showJournalDetailVO.sightId}">
-									<td><input type="hidden" name="lat" value="${sightVO3.latitude}"/></td>
-									<td><input type="hidden" name="lng" value="${sightVO3.longitude}"/></td>
-                             	</c:if>
-							</c:forEach>
-						</tr>	
-							</table>
-							</div>
-				</c:forEach>	
+					<div class="table-responsive">
+						<table id="journalTable" class="table table-bordered">
+							<tr>
+								<c:forEach var="sightVO" items="${SightService.all}">
+									<c:if test="${showJournalDetailVO.sightId==sightVO.sightId}">
+										<td><h3 style="color: blue" class="fMargin">
+												<strong>${sightVO.sightName}</strong>
+											</h3></td>
+									</c:if>
+								</c:forEach>
+							</tr>
+							<tr>
+								<td class="journalPic"><img
+									src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${showJournalDetailVO.sightId}" />"
+									width="300" height="220"></td>
+
+								<td><h4 class="fMargin">景點遊記：</h4>
+									<br> ${showJournalDetailVO.sightJournal}</td>
+							</tr>
+							<tr hidden="true">
+								<c:forEach var="sightVO3" items="${SightService.all}">
+									<c:if test="${sightVO3.sightId==showJournalDetailVO.sightId}">
+										<td><input type="hidden" name="lat"
+											value="${sightVO3.latitude}" /></td>
+										<td><input type="hidden" name="lng"
+											value="${sightVO3.longitude}" /></td>
+									</c:if>
+								</c:forEach>
+							</tr>
+						</table>
+					</div>
+				</c:forEach>
+			</div><!-- end of divJournalDetail -->
+			</form>
+			<div><!-- 留言 -->
+				<table class="table">
+					<c:forEach var="messageVO" items="${messageVOs}">
+						<tr>
+							<td>${messageVO.content}</td>
+								<c:forEach var="MemberVOm" items="${MemberService.all}">
+                             			<c:if test="${MemberVOm.memberId==messageVO.memberId}">
+											<td>${MemberVOm.nickname}</td>
+                             			</c:if>
+								</c:forEach>
+							<td>${messageVO.updateTime}</td>
+						</tr>
+					</c:forEach>
+				</table>
+				<form action="<c:url value="/_01_Sight/member/SightReplyServlet.controller" />" method="post">
+					<table>
+						<tr><td>
+							<input type="hidden" name="referenceNo" value="${showJournalVO.journalId}">
+							<input type="hidden" name="type" value="type_id03"></td></tr>
+						<tr><td>
+							<textarea rows="5" cols="40" name="reply" style="color:black">${param.reply}</textarea>
+						</td></tr>
+						<tr><td>
+							<span>${error.reply}</span></td></tr>
+						<tr><td>
+						<input type="submit" value="確定送出" style="color:black"></td></tr>
+					</table>
+				</form>	
+			</div><!-- end 留言 -->
 		</div>
-		</div><!-- End  DivJournal -->
+		<!-- End  DivJournal -->
 		<div id="divTripMap">
 			<div id="tripMap"></div>
 			<script type="text/javascript">
@@ -179,14 +231,17 @@ pageContext.setAttribute("regions", codeVO);
 						}
 					});
 				}
-			</script>   
+			</script>
 			<script
 				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0Mlo6dd_r3AJczvlGoV0a3MjLTuirePg&callback=initMap"
 				async defer></script>
 		</div>
 		<!-- end divTripMap -->
-
-
+		<div id="backURL">
+			<h4 class="h4">
+				<a href="<c:url value="/_02_TripAndJournal/JournalIndex.jsp" />">回上一頁</a>
+			</h4>
+		</div>
 	</article>
 	<footer>
 		<!-- import共同的 -->

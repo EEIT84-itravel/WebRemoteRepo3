@@ -190,7 +190,7 @@ var openFile = function(event) {
 				<tr>
 					<td>景點照片：</td>
 					<td><input type='file' accept='image/*' onchange='openFile(event)' name="pic"><br>
-					<img id='output'></td>
+					<img id='output'width="240" height="180"></td>
 				</tr>
 				<tr>
 					<td><input type="hidden" name="action" value="insert"></td>

@@ -32,7 +32,7 @@ import _05_Member.model.MemberVO;
 @WebServlet("/_01_Sight/Sight.controller")
 public class SightServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+//查詢單一景點資料
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");

@@ -5,7 +5,7 @@
 <c:remove var="LoginOK" />
 <%
 	session.removeAttribute("user");
-	session.removeAttribute("Admin");
+	session.removeAttribute("admin");
 %>
 <html>
 <head>
@@ -21,10 +21,13 @@
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
-		您已經登出
+	<article class="center-block">
+		<div style="text-align: center;"><h4>您已經登出</h4>
 		<P />
 		<a href="/ItravleWeb/index.jsp">回首頁</a>
+		
+			<script type="text/javascript"> setTimeout("location.href='<c:url value="/index.jsp"/>'",1000); </script>
+		</div>
 	</article>
 	<footer>
 		<!-- import共同的 -->

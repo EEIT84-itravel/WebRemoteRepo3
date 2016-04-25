@@ -17,10 +17,13 @@ import _02_TripAndJournal.model.JournalService;
 import _02_TripAndJournal.model.JournalVO;
 import _02_TripAndJournal.model.MessageService;
 import _02_TripAndJournal.model.MessageVO;
+import _05_Member.model.CollectionService;
+import _05_Member.model.MemberVO;
 
 @WebServlet("/_02_TripAndJournal/ShowJournalDetail.controller")
 public class ShowJournalDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	//顯示單一遊記的servlet
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -41,7 +44,9 @@ public class ShowJournalDetailServlet extends HttpServlet {
 			}
 		}
 		// 驗證資料-無
+		
 		// 呼叫Model
+		
 		//根據遊記ID搜尋出該篇遊記所有的遊記detail
 		JournalDetailService journalDetailService = new JournalDetailService();
 		List<JournalDetailVO> journalDetailVO = journalDetailService.selectByJournalId(journalId);
@@ -49,17 +54,26 @@ public class ShowJournalDetailServlet extends HttpServlet {
 		JournalService journalService = new JournalService();
 		JournalVO journalVO = journalService.select(journalId);
 		// 將瀏覽人次加1
-		journalVO.setJournalId(journalId);
 		journalVO.setVisitorNum(journalVO.getVisitorNum() + 1);
 		journalService.update(journalVO);
+		
+		//搜尋遊記相關留言
+		MessageService messageService=new MessageService();
+		List<MessageVO> messageVOs=messageService.selectJournalMessage(journalId);
+		
 		request.setAttribute("showJournalVO", journalVO);
 		request.setAttribute("showJournalDetailVO", journalDetailVO);
-		 request.getRequestDispatcher("/_02_TripAndJournal/ShowJournal.jsp").forward(request, response);
-
-//		MessageService ms = new MessageService();
-//		List<MessageVO> messageVO = ms.getForumMessage(forumId);
-//		long count = ms.getForumMessageNum(forumId);
-
+		request.setAttribute("messageVOs", messageVOs);
+		
+		// 會員已登入且景點未收藏過會顯示景點收藏鈕
+		boolean flag = false;
+		CollectionService collectionService = new CollectionService();
+		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
+		if (user != null&& collectionService.selectCollection(journalVO.getJournalId(),user.getMemberId(), "type_id03") == null) {
+			flag = true;
+		}
+		request.setAttribute("flag", flag);
+		request.getRequestDispatcher("/_02_TripAndJournal/ShowJournal.jsp").forward(request, response);
 	}
 
 	protected void doGet(HttpServletRequest request,

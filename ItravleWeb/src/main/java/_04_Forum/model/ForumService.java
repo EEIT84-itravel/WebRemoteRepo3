@@ -1,8 +1,6 @@
 package _04_Forum.model;
 
 import java.util.List;
-
-import _02_TripAndJournal.model.JournalVO;
 import _04_Forum.model.dao.ForumDAOHibernate;
 
 public class ForumService {

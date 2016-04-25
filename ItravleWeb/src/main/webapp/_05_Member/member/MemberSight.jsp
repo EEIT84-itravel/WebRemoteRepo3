@@ -35,7 +35,7 @@
 <style>
 </style>
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/css/_04_Forum/Forum.css"/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_05_Member/Member.css"/>" />
 <!-- jQuery ui css -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
 <!-- jQuery -->
@@ -66,17 +66,16 @@ $(function() {
 		}
 	});
 
-	$("tr.sightId>td:nth-child(3)")
-			.each(function() {
-						$(this).click(function() {
-											var sightId = $(this).prev().prev().text();
-											console.log(sightId);
-											var stylei = ' width="98%" height="98%"  frameborder="0" scrolling="auto"';
-											$("#dialog-form").html('<iframe src="'+uri+sightId+'"'+stylei+'></iframe>');
-											dialog.dialog("open");
-											closedialog = 0;
-										});
-					});
+	$("tr.sightId>td:nth-child(3)").each(function() {
+		$(this).click(function() {
+			var sightId = $(this).prev().prev().text();
+			console.log(sightId);
+			var stylei = ' width="98%" height="98%"  frameborder="0" scrolling="auto"';
+			$("#dialog-form").html('<iframe src="'+uri+sightId+'"'+stylei+'></iframe>');
+			dialog.dialog("open");
+			closedialog = 0;
+		});
+	});
 	var closedialog;
 	function overlayclickclose() {
 		if (closedialog) {
@@ -86,29 +85,29 @@ $(function() {
 	}
 });
 </script>
-<title>${user.firstName}的收藏景點</title>
+<title>ITravel-${user.nickname}的收藏景點</title>
 </head>
 <body>
 	<header>
 		<!-- import共同的 -->
-	</header>
-	<!-- import共同的 -->
+	</header>	
 	<nav class="navbar navbar-inverse" role="navigation">
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article class="center-block">
+	<h3>會員功能>我的景點</h3>
 	<div id="dialog-form"></div>
 	<div id="header">
 	<c:import url="/_05_Member/member/SightHead.jsp"></c:import>
-		<table id="forum" border="1">
+		<table class="table">
 			<thead>
-				<tr id="forumTitle">
+				<tr>
 					<th>景點圖片</th>
 					<th>景點名稱</th>
 					<th>景點所在縣市</th>
 					<th>景點類型</th>
-					<th>景點評分</th>
+<!-- 					<th>景點評分</th> -->
 					<th></th>
 				</tr>
 			</thead>
@@ -116,31 +115,31 @@ $(function() {
 				<c:if test="${empty sightVO1}">
 				<c:if test="${empty noSightVO}">
 					<c:forEach var="sightVO" items="${sightVO}">
-						<tr class="sightId">
+						<tr class="sightId success">
 							<td hidden="true">${sightVO.sightId}</td>
-							<td><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="100" height="50"></td>
-							<td>${sightVO.sightName}</td>
+							<td><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="160" height="120" class="img-rounded"></td>
+							<td>${sightVO.sightName}  <span class="glyphicon glyphicon-info-sign"></span></td>
 							<c:forEach var="codeVO" items="${codeSvc.all}">
 								<c:if test="${codeVO.codeId==sightVO.countyId}">
 									<td>${codeVO.codeName}</td>
 								</c:if>
 							</c:forEach>
 							<c:forEach var="codeVO" items="${codeSvc.all}">
-										<c:if test="${codeVO.codeId==sightVO.sightTypeId}">
-								             	<td>${codeVO.codeName}</td>
-                                	    </c:if>
+								<c:if test="${codeVO.codeId==sightVO.sightTypeId}">
+									<td>${codeVO.codeName}</td>
+                               	</c:if>
 							</c:forEach>
-							<td>${sightVO.score}</td>  
+<%-- 							<td>${sightVO.score}</td>   --%>
 							<td><a href="<c:url value="/_05_Member/member/delsight.controller?referenceType=${sightVO.sightId}&typeId=type_id01&regionId=region00"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
 						</tr>
 					</c:forEach>
 				</c:if>
 				</c:if>
 				<c:forEach var="sightVO1" items="${sightVO1}">
-					<tr class="sightId">
+					<tr class="sightId success">
 						<td hidden="true">${sightVO1.sightId}</td>
-						<td><img alt="" src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO1.sightId}" />" width="100" height="50"></td>
-						<td>${sightVO1.sightName}</td>
+						<td><img alt="" src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO1.sightId}" />" width="160" height="120" class="img-rounded"></td>
+						<td><h3 class="h3">${sightVO1.sightName}  <span class="glyphicon glyphicon-info-sign"></span></h3></td>
 						<c:forEach var="codeVO" items="${codeSvc.all}">
 							<c:if test="${codeVO.codeId==sightVO1.countyId}">
 								<td>${codeVO.codeName}</td>
@@ -149,9 +148,9 @@ $(function() {
 						<c:forEach var="codeVO" items="${codeSvc.all}">
 							<c:if test="${codeVO.codeId==sightVO1.sightTypeId}">
 								      <td>${codeVO.codeName}</td>
-                             </c:if>
+                            </c:if>
 							</c:forEach>
-						<td>${sightVO1.score}</td>
+<%-- 						<td>${sightVO1.score}</td> --%>
 						<td><a href="<c:url value="/_05_Member/member/delsight.controller?memberId=${user.memberId}&referenceType=${sightVO1.sightId}&typeId=type_id01&regionId=${param.regionId}"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
 					</tr>
 				</c:forEach>

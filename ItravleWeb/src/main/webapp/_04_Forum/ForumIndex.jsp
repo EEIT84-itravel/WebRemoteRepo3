@@ -22,41 +22,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
 </style>
-<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
-<link rel="stylesheet" type="text/css"	href="<c:url value="/css/_04_Forum/Forum.css"/>" />
-<link rel="stylesheet" type="text/css"	href="../css/_04_Forum/datatable.css" />
-<link rel="stylesheet" type="text/css"	href="../jquery-ui-1.11.4.custom/jquery-ui.min.css" />
-<link rel="stylesheet" type="text/css"	href="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.css" />
+<%-- <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/> --%>
+<%-- <link rel="stylesheet" type="text/css"	href="<c:url value="/css/_04_Forum/Forum.css"/>" /> --%>
+<%-- <link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/jquery-ui-1.11.4.custom/jquery-ui.min.css" /> --%>
+<%-- <link rel="stylesheet" type="text/css"	href="<c:url value="/css/_04_Forum/datatable.css"/>" /> --%>
+<!-- <link rel="stylesheet" type="text/css"  href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css"/> -->
+ <link href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables_themeroller.css" rel="stylesheet">
 
-<script type="text/javascript" src="../js/jquery-2.2.1.min.js"></script>
-<script type="text/javascript"	src="../jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
-<script type="text/javascript"	src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript">
-	//DataTable設定
-	var opt = {
-		"iDisplayLength" : 15,
-		"sDom" : '<"top"fp><"bottom"><"clear">',
-		"oLanguage" : {
-			"sProcessing" : "處理中...",
-			"sLengthMenu" : "顯示 _MENU_ 項結果",
-			"sZeroRecords" : "沒有匹配結果",
-			"sInfo" : "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
-			"sInfoEmpty" : "顯示第 0 至 0 項結果，共 0 項",
-			"sInfoFiltered" : "(從 _MAX_ 項結果過濾)",
-			"sSearch" : "關鍵字搜尋:",
-			"oPaginate" : {
-				"sFirst" : "首頁",
-				"sPrevious" : "上一頁",
-				"sNext" : "下一頁",
-				"sLast" : "最末頁"
-			}
-		}
-	};
-	//datatable
-	$(document).ready(function() {
-		$("#forum").DataTable(opt);		
-	})
-</script>
+
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-2.2.1.min.js"></script>
+<script type="text/javascript"	src="<%=request.getContextPath()%>/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+<script type="text/javascript"	src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
 	var str = document.getElementById("topic");
@@ -154,6 +131,32 @@
 			</div>
 		</form>
 	</article>
+	<script type="text/javascript">
+	//DataTable設定
+	var opt = {
+		"iDisplayLength" : 15,
+		"sDom" : '<"top"fp><"bottom"><"clear">',
+		"oLanguage" : {
+			"sProcessing" : "處理中...",
+			"sLengthMenu" : "顯示 _MENU_ 項結果",
+			"sZeroRecords" : "沒有匹配結果",
+			"sInfo" : "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+			"sInfoEmpty" : "顯示第 0 至 0 項結果，共 0 項",
+			"sInfoFiltered" : "(從 _MAX_ 項結果過濾)",
+			"sSearch" : "關鍵字搜尋:",
+			"oPaginate" : {
+				"sFirst" : "首頁",
+				"sPrevious" : "上一頁",
+				"sNext" : "下一頁",
+				"sLast" : "最末頁"
+			}
+		}
+	};
+	//datatable
+	$(document).ready(function() {
+		$("#forum").DataTable(opt);		
+	})
+</script>
 	<footer>
 		<!-- import共同的 -->
 	</footer>

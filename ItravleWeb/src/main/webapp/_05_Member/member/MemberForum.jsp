@@ -22,7 +22,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>我的討論區</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_05_Member/Member.css"/>" />
+<title>ITravel-我的討論區</title>
+<style type="text/css">
+
+</style>
 </head>
 <body>
 	<header>
@@ -33,10 +38,11 @@
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
-		<table id="forum" border="1">
+	<article class="center-block">
+	<h3>會員功能>我的討論區</h3>
+		<table class="table">
 			<thead>
-				<tr id="forumTitle">
+				<tr>
 					<th>類型</th>
 					<th>主題</th>
 					<th>發表時間</th>
@@ -49,21 +55,20 @@
 					<c:forEach var="forumVO" items="${forumVO}">
 						<tr>
 							<c:forEach var="CodeVO" items="${codeSvc.all}">
-											<c:if test="${CodeVO.codeId==forumVO.forumTypeId}">
-										<td>${CodeVO.codeName}</td>
-                             		</c:if>
-										</c:forEach>
+								<c:if test="${CodeVO.codeId==forumVO.forumTypeId}">
+									<td>${CodeVO.codeName}</td>
+                             	</c:if>
+							</c:forEach>
 							<td><a href="<c:url value="/_04_Forum/ShowArticle.controller?forumId=${forumVO.forumId}"/>">${forumVO.forumTopic}</a>&nbsp;&nbsp;</td>
 							<td>${forumVO.forumTime}</td>
 							<td>${forumVO.visitorNum}</td>
 							<%int i = 0;%>
-									<c:forEach var="MessageVO" items="${MessageService.allNum}"
-										varStatus="vs">
-										<c:if test="${MessageVO.referenceNo==forumVO.forumId}">
-											<%i++;%>
-										</c:if>
-									</c:forEach>
-									<td><%=i%></td>
+							<c:forEach var="MessageVO" items="${MessageService.allNum}"	varStatus="vs">
+								<c:if test="${MessageVO.referenceNo==forumVO.forumId}">
+									<%i++;%>
+								</c:if>
+							</c:forEach>
+							<td><%=i%></td>
 						</tr>
 					</c:forEach>
 				</c:if>
