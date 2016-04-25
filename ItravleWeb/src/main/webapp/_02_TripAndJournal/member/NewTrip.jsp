@@ -49,6 +49,24 @@
 	});
 </script>
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
+<style type="text/css">
+#divNewTrip {
+	width: 500px;
+	margin: 0 auto;
+}
+#intro {
+	max-width:400px;
+ 	max-height:100px;
+ 	width:400px;
+ 	height:100px;
+}
+table {
+	width: 500px;
+}
+#startBtn {
+	text-align: right;
+}
+</style>
 </head>
 <body>
 	<header>
@@ -59,7 +77,8 @@
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article class="center-block">
-		<h3>建立新的行程</h3>
+		<div id="divNewTrip">
+		<h3>建立新行程</h3>
 		<form action="<c:url value="/_02_TripAndJournal/member/NewTrip.controller" />" method="post">
 			<table>
 				<tr>
@@ -105,15 +124,18 @@
 <!-- 				</tr> -->
 				<tr>
 					<td>行程簡介:</td>
-					<td><textarea name="tripIntro" rows="4" cols="50">${param.tripIntro}</textarea></td>
+					<td><textarea name="tripIntro" id="intro">${param.tripIntro}</textarea></td>
 					<td><span class="error">${error.tripIntro}</span></td>
 
 				</tr>
 				<tr>
-					<td><input type="submit" value="開始排行程吧"></td>
+					<td rowspan="2">
+					<div id="startBtn"><input type="submit" value="開始排行程吧" class="btn btn-primary"></div>				
+					</td>
 				</tr>
 			</table>
 		</form>
+		</div>
 	</article>
 	<footer>
 		<!-- import共同的 -->

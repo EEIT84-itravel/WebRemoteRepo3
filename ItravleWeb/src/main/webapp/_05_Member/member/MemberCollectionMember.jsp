@@ -27,21 +27,23 @@ ArrayList<MemberVO> friendVO = new ArrayList<MemberVO>();  //好友(追蹤作者
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>我的追蹤作者</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_05_Member/Member.css"/>" />
+<title>ITravel-我的追蹤作者</title>
 </head>
 <body>
-<header>
+	<header>
 		<!-- import共同的 -->
-	</header>
-	<!-- import共同的 -->
+	</header>	
 	<nav class="navbar navbar-inverse" role="navigation">
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-<article>
-<table id="forum" border="1">
-<thead>
-				<tr id="forumTitle">
+	<article class="center-block">
+		<h3>會員功能>我的追蹤作者</h3>
+		<table class="table">
+			<thead>
+				<tr>
 				    <th>作者照片</th>
 					<th>作者帳號</th>
 					<th>作者暱稱</th>
@@ -52,16 +54,20 @@ ArrayList<MemberVO> friendVO = new ArrayList<MemberVO>();  //好友(追蹤作者
 			<tbody>
 			<c:if test="${not empty friendVO}">
 			<c:forEach var="friendVO" items="${friendVO}">
-			<tr>
-			<td><img  src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${friendVO.memberId}" />" width="240" height="180"></td>
-			<td><a href="<c:url value="/_05_Member/member/findauthor.controller?memberId=${friendVO.memberId}"/>">${friendVO.firstName}</a>&nbsp;&nbsp;</td>
-			<td>${friendVO.nickname}</td>
-			<td><a href="<c:url value="/_05_Member/member/deletefriend.controller?memberId=${user.memberId}&friendId=${friendVO.memberId}"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
-			</tr>
+				<tr>
+					<td>
+						<img  src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${friendVO.memberId}" />" width="80" height="60" class="img-rounded">
+					</td>
+					<td>
+						<a href="<c:url value="/_05_Member/member/findauthor.controller?memberId=${friendVO.memberId}"/>">${friendVO.firstName}  <span class="glyphicon glyphicon-folder-open"></span></a>&nbsp;&nbsp;</td>
+					<td>${friendVO.nickname}</td>
+					<td><a href="<c:url value="/_05_Member/member/deletefriend.controller?memberId=${user.memberId}&friendId=${friendVO.memberId}"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
+					<td></td>
+				</tr>
 			</c:forEach>
 			</c:if>
 			</tbody>
-</table>
-</article>
+		</table>
+	</article>
 </body>
 </html>

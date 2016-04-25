@@ -222,12 +222,12 @@ width: 100%;
 			<!-- tabs-1 end tag -->
 			<div id="tabs-2">
 				<h2>I-Travel後台:管理會員</h2>
-				<%-- <%
+			<%-- 	<%
 					rowsPerPage = 20; //每頁的筆數
 					rowNumber = memberVO.size();
 				%>
 				<%@ include file="/_00_Misc/page1.file"%> --%>
-				<table class="backendTable table">
+				<table border="1" class="backendTable">
 					<thead>
 						<tr>
 							<th>會員帳號</th>

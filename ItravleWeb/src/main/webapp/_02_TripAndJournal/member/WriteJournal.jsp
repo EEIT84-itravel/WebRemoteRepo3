@@ -30,7 +30,7 @@ textarea{/* Text Area 固定大小*/
 </style>
 <script type="text/javascript"
 	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
-
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_02_TripAndJournal/writeJournal.css"/>" />
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
@@ -42,7 +42,7 @@ textarea{/* Text Area 固定大小*/
 	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('input[type="file"]').css('background-color','red');
+// 		$('input[type="file"]').css('background-color','red');
 		//起始日期用jQuery UI
 		$('input[name="journalStartDate"]').datepicker({
 			dateFormat : "yy-mm-dd",
@@ -59,29 +59,18 @@ textarea{/* Text Area 固定大小*/
 		}).attr("readonly", "readonly");
 		//選時間的要再加上其他自己寫的jQuery UI plugin
 	});
-	$(function() {
-		// 儲存時的確認對話框
-		var dialog = $( "#dialog-confirm" ).dialog({
-			resizable: false,
-			autoOpen: false,
-			height:150,
-			modal: true,
-			buttons: {
-				"確認": function() {
-					saveTripDetailCart();
-					$( this ).dialog( "close" );					
-				},
-		        "取消": function() {
-		        	$( this ).dialog( "close" );
-		        }
-		 	}			
-		 });
-		// 按鈕觸發對話框
-		$("#saveJournal").button().on( "click", function() {
-		      dialog.dialog( "open" );
-	    });
-	});
-	
+	  //選圖立即顯示
+	  var openFile = function(event) {
+	    var input = event.target;
+
+	    var reader = new FileReader();
+	    reader.onload = function(){
+	      var dataURL = reader.result;
+	      var output = document.getElementById('output');
+	      output.src = dataURL;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  };
 
 </script>
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
@@ -95,7 +84,7 @@ textarea{/* Text Area 固定大小*/
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
+	<article class="center-block">
 		<h3>撰寫新遊記</h3>
 
 		<table>
@@ -124,13 +113,20 @@ textarea{/* Text Area 固定大小*/
 				<td colspan="4"><textarea name="journalIntro" rows="4"
 						cols="40">${journalVO.journalIntro}</textarea></td>
 			</tr>
-			<tr>
-				<td>詳細遊記</td>
-			</tr>
+			
 		</table>
 <!-- 		判斷暫存的車裡是否有東西 -->
 <form action="<c:url value="/_02_TripAndJournal/member/JournalDetail.controller"/>" method="post" enctype="multipart/form-data">
 	<table>
+	   <tr>		
+	      <td>選擇遊記主圖：</td>		
+		  <td><input type="file" name="journalPic"  onchange='openFile(event)' class="btn btn-info btn-lg">
+		  <div><img id='output'></div>
+
+	   </tr>
+	    <tr>
+			<td>詳細遊記</td>
+     	</tr>
 		<c:if test="${not empty sessionScope.journalDetailCart}">
 			<c:forEach var="journalDetailVO" items="${sessionScope.journalDetailCart}">			
 				<c:forEach var="SightVO" items="${SightService.all}">
@@ -143,24 +139,24 @@ textarea{/* Text Area 固定大小*/
 						<input type="hidden" name="whichDay" value="${journalDetailVO.whichDay}">
 						<input type="hidden" name="journalId" value="${journalDetailVO.journalId}">
 						<input type="hidden" name="JournalPhotoId" value="${JournalPhotoVO.JournalPhotoId}">					
+						<input type="hidden" name="crud" value="Insert">
 						<tr>				
 							<td>${SightVO.sightName}</td>
-							<td><textarea name="sightJournal"></textarea></td>
+							<td><textarea name="sightJournal" >${showJournalDetailVO.sightJournal}</textarea><span class="error">${error.sightJournal}</span></td>
 						</tr>
-						<tr>				
-			             	<td><input type="file" name="journalPic" >
-						</tr>
+						
 					</c:if>				
 				</c:forEach>
 		  </c:forEach>
 		</c:if>
-				<tr><td><input type="submit" value="修改" id="saveJournal"/></td>	</tr>
+				<tr><td><input type="submit" value="修改" id="saveJournal" class="btn btn-info btn-lg"/></td>	</tr>
 		 </table>
     </form>
     	<!-- 儲存行程觸發的對話框 -->
-		<div id="dialog-confirm" title="確認儲存?" >
- 			<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>確定要儲存嗎?</p>
-		</div>	<!-- end div dialog-confirm -->
+<!-- 		<div id="dialog-confirm" title="確認儲存?" > -->
+<!--  			<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>確定要儲存嗎?</p> -->
+<!-- 		</div>	 -->
+
 		
 	</article>
 	<footer>

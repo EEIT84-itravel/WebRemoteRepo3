@@ -113,6 +113,7 @@ public class NewTripServlet extends HttpServlet {
 		tripVO.setRegionId(regionId);
 		tripVO.setTransFormId("trans_form01");
 		tripVO.setTripIntro(tripIntro);
+		tripVO.setPost(false);
 		tripVO.setWatchNum(1);
 		TripVO result = ts.insert(tripVO);
 		if (result == null) {

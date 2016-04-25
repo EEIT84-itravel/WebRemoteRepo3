@@ -3,20 +3,24 @@
 	font-size: 20px;
 }
 #divMember,#divJournal {
-	width: 900px;
+	width: 790px;
 	margin: 5px;
 }
 
 #tripMap {
-	width: 490px;
+	width: 600px;
 	height: 700px;
 }
 #journalTable,#member{
-	width:850px;
+	width:740px;
 }
 img {
 
 	vertical-align:middle;
+}
+#backURL {
+	text-align: center;
+	clear:both;
 }
 .journalPic{
 	width:300px;

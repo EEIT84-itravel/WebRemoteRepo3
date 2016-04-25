@@ -40,7 +40,9 @@ img {
 .day {
 	height: 734.2px;
 	overflow-y: auto;
-	overflow-x:hidden;	
+	overflow-x:hidden;
+	border: 1.5px solid silver;		
+/* 	background-color: silver; */
 }
 div .sight {
 	height: 30px;

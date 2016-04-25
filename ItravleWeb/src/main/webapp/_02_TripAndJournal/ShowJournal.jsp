@@ -35,9 +35,13 @@ pageContext.setAttribute("regions", codeVO);
 	</nav>
 	<article class="center-block">
 		<h1 style="color: red;">${showJournalVO.journalName}</h1>
-		<div id="divJournal"  class="pull-left">
-		<div id="divMember">
-			<table id="member" class="table table-bordered">
+
+			
+		<div id="divJournal" class="pull-left">
+		<form action="<c:url value="/_02_TripAndJournal/member/ModifyJournal.controller?crud=Update&journalId=${showJournalVO.journalId}"/>" method="post">
+			<input type="submit" name="modifyJournal" value="修改遊記">
+			<div id="divMember">
+				<table id="member" class="table table-bordered">
 				<tr>
 					<td class="memberPic"><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${showJournalVO.memberId}" />"
 						width="100px" height="100px">
@@ -61,38 +65,43 @@ pageContext.setAttribute("regions", codeVO);
 				</tr>
 			</table>
         </div><!-- 結束divMember  -->
-        <div id="divJournalDetail">
+			<div id="divJournalDetail">
 				<c:forEach var="showJournalDetailVO" items="${showJournalDetailVO}">
-				<div class="table-responsive">
-				<table id="journalTable" class="table table-bordered">
-					<tr>
-						<c:forEach var="sightVO" items="${SightService.all}">
-							<c:if test="${showJournalDetailVO.sightId==sightVO.sightId}">
-								<td><h3 style="color:blue" class="fMargin"><strong>${sightVO.sightName}</strong></h3></td>
-							</c:if>
-						</c:forEach>
-					</tr>
-					<tr>
-					<td class="journalPic"><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${showJournalDetailVO.sightId}" />" width="300" height="220"></td>
-					
-					    <td><h4 class="fMargin">景點遊記：</h4><br>
-					    ${showJournalDetailVO.sightJournal}</td>
-					    
-					</tr>
-				
-				        <tr hidden="true">						
-							<c:forEach var="sightVO3" items="${SightService.all}">
-                            	<c:if test="${sightVO3.sightId==showJournalDetailVO.sightId}">
-									<td><input type="hidden" name="lat" value="${sightVO3.latitude}"/></td>
-									<td><input type="hidden" name="lng" value="${sightVO3.longitude}"/></td>
-                             	</c:if>
-							</c:forEach>
-						</tr>	
-							</table>
-							</div>
-				</c:forEach>	
+					<div class="table-responsive">
+						<table id="journalTable" class="table table-bordered">
+							<tr>
+								<c:forEach var="sightVO" items="${SightService.all}">
+									<c:if test="${showJournalDetailVO.sightId==sightVO.sightId}">
+										<td><h3 style="color: blue" class="fMargin">
+												<strong>${sightVO.sightName}</strong>
+											</h3></td>
+									</c:if>
+								</c:forEach>
+							</tr>
+							<tr>
+								<td class="journalPic"><img
+									src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${showJournalDetailVO.sightId}" />"
+									width="300" height="220"></td>
+
+								<td><h4 class="fMargin">景點遊記：</h4>
+									<br> ${showJournalDetailVO.sightJournal}</td>
+							</tr>
+							<tr hidden="true">
+								<c:forEach var="sightVO3" items="${SightService.all}">
+									<c:if test="${sightVO3.sightId==showJournalDetailVO.sightId}">
+										<td><input type="hidden" name="lat"
+											value="${sightVO3.latitude}" /></td>
+										<td><input type="hidden" name="lng"
+											value="${sightVO3.longitude}" /></td>
+									</c:if>
+								</c:forEach>
+							</tr>
+						</table>
+					</div>
+				</c:forEach>
+			</div>
 		</div>
-		</div><!-- End  DivJournal -->
+		<!-- End  DivJournal -->
 		<div id="divTripMap">
 			<div id="tripMap"></div>
 			<script type="text/javascript">
@@ -179,14 +188,17 @@ pageContext.setAttribute("regions", codeVO);
 						}
 					});
 				}
-			</script>   
+			</script>
 			<script
 				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0Mlo6dd_r3AJczvlGoV0a3MjLTuirePg&callback=initMap"
 				async defer></script>
 		</div>
 		<!-- end divTripMap -->
-
-
+		<div id="backURL">
+			<h4 class="h4">
+				<a href="<c:url value="/_02_TripAndJournal/JournalIndex.jsp" />">回上一頁</a>
+			</h4>
+		</div>
 	</article>
 	<footer>
 		<!-- import共同的 -->
