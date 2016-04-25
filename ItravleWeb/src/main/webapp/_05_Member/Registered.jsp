@@ -79,9 +79,8 @@
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
-	<div  style="center">
-		<div id="regForm" style="margin:auto">
+	<article class="center-block">
+		<div id="regForm" style="margin:0 auto;border:1px dotted #d0d0d0;">
 			<form action="<c:url value="/_05_Member/registered.controller" />"
 				method="post" enctype="multipart/form-data">
 				<fieldset id="reg">
@@ -155,7 +154,7 @@
 				</fieldset>
 			</form>
 		</div>
-		</div>
+		
 	</article>
 	<footer>
 		<!-- import共同的 -->

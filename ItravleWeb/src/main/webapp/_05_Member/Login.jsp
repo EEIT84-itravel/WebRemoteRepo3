@@ -17,8 +17,8 @@
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
-			<div style="text-align: center">
+	<article class="center-block">
+			<div style="text-align: center; width:600px;margin:0 auto;border:1px dotted green;">
 					<div class="modal-header" style="padding: 35px 50px;">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4>
@@ -34,13 +34,14 @@
 									class="glyphicon glyphicon-user"></span> 帳號</label> <input
 									type="text" class="form-control" name="username"
 									value="${param.username}" placeholder="請輸入帳號"><span
-									class="error">${error.username}</span>
+									class="errorMsg">${error.username}</span>
 							</div>
 							<div class="form-group">
 								<label for="psw"><span
 									class="glyphicon glyphicon-eye-open"></span> 密碼</label> <input
 									type="text" class="form-control" name="password"
 									value="${param.password}" placeholder="請輸入密碼">
+									<span class="errorMsg">${error.password}</span>
 							</div>
 							<button type="submit" class="btn btn-success btn-block">
 								<span class="glyphicon glyphicon-off"></span> 登入
