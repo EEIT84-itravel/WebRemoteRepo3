@@ -87,7 +87,7 @@ pageContext.setAttribute("regions", codeVO);
 							<td>
 							<c:forEach var="sightVO2" items="${sightSvc.all}">
 	                            <c:if test="${sightVO2.sightId==tripDetailVOs.referenceNo}">
-									<h4 class="text-left h4"><strong>${sightVO2.sightName}</strong></h4>
+									<h4 class="text-left h4"><strong><a href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO2.sightId}"/>">${sightVO2.sightName}</a></strong></h4>
 	                            </c:if>
 							</c:forEach>
 							預算：${tripDetailVOs.sightBudget}元<br>

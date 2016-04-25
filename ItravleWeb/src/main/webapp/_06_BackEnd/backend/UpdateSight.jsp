@@ -22,6 +22,7 @@
 	pageContext.setAttribute("transForm", transForm);
 %>
 <title>I-Travel後台:修改景點</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
 <!-- jQuery -->
@@ -71,19 +72,46 @@ $("#sel").change(function(){
 		}
 	});
 });
+//預覽圖片功能
+var openFile = function(event) {
+    var input = event.target;
+
+    var reader = new FileReader();
+    reader.onload = function(){
+      var dataURL = reader.result;
+      var output = document.getElementById('output');
+      output.src = dataURL;
+    };
+    reader.readAsDataURL(input.files[0]);
+  };
 </script>
+<style type="text/css">
+.backendtable tr td:FIRST-CHILD{
+text-align: right;
+}
+.table.backendtable{
+width: 700px;
+}
+</style>
 </head>
 <body>
+	<header>
+	<!-- import共同的 -->
+	</header>
+	<!-- import共同的 -->
+	<nav class="navbar navbar-inverse" role="navigation">
+		<!-- import共同的 -->
+		<jsp:include page="/_00_Misc/top.jsp" />
+	</nav>
+	<article class="center-block">
 	<h2>I-Travel後台:修改景點</h2>
 		<form action="<c:url value="/_06_BackEnd/backEnd/BackendSight.controller" />" method="post" enctype="multipart/form-data">
-			<table>
+			<table class="table backendtable">
 			<c:if test="${not empty sightVO}">
-				<tr hidden="true">
-					<td><input type="text" name="sightId" value="${sightVO.sightId}"></td>
-				</tr>
+					<input type="hidden" name="sightId" value="${sightVO.sightId}">
 				<tr>
 					<td>景點名稱：</td>
-					<td><input type="text" name="sightName" value="${sightVO.sightName}"></td>
+					<td><input type="text" name="sightName" value="${sightVO.sightName}" size="75"></td>
 					<td><span class="error">${error.sightName}</span></td>
 				</tr>
 				<tr>
@@ -121,7 +149,7 @@ $("#sel").change(function(){
 				</tr>
 				<tr>
 					<td>門票：</td>
-					<td><input type="text" name="ticket" value="${sightVO.ticket}" size="45"></td>
+					<td><input type="text" name="ticket" value="${sightVO.ticket}" size="75"></td>
 					<td><span class="error">${error.ticket}</span></td>
 				</tr>
 				<tr>
@@ -150,7 +178,7 @@ $("#sel").change(function(){
 					<td><input type="text" name="longitude" value="${sightVO.longitude}"></td>
 					<td><span class="error">${error.longitude}</span></td>
 				</tr>
-						<tr>
+				<tr>
 					<td>緯度：</td>
 					<td><input type="text" name="latitude" value="${sightVO.latitude}"></td>
 					<td><span class="error">${error.latitude}</span></td>
@@ -162,39 +190,40 @@ $("#sel").change(function(){
 				</tr>
 				<tr>
 					<td>地址：</td>
-					<td><input type="text" name="addr" value="${sightVO.addr}" size="45"></td>
+					<td><input type="text" name="addr" value="${sightVO.addr}" size="75"></td>
 					<td><span class="error">${error.addr}</span></td>
 				</tr>
 				<tr>
 					<td>是否顯示：</td>
 					<td><input type="radio" name="del" value="true" checked="checked">是
 					<input type="radio" name="del" value="false">否</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>交通方式：</td>
-					<td><textarea rows="8" cols="50" name="trans" style="resize: none">${sightVO.trans}</textarea>
+					<td>
+						<textarea rows="8" cols="75" name="trans" style="resize: none">${sightVO.trans}</textarea>
 					</td>
 					<td><span class="error">${error.trans}</span></td>
 				</tr>
 				<tr>
 					<td>簡介：</td>
-					<td><textarea rows="8" cols="50" name="intro" style="resize: none">${sightVO.intro}</textarea></td>
+					<td><textarea rows="8" cols="75" name="intro" style="resize: none">${sightVO.intro}</textarea></td>
 					<td><span class="error">${error.intro}</span></td>
 				</tr>
 				<tr>
 					<td>景點照片：</td>
-					<td><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="80" height="60"><input type="file" name="pic"></td>
+					<td><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="80" height="60">
+					<input type='file' accept='image/*' onchange='openFile(event)' name="pic"><img id='output'width="240" height="180"></td>
 					<td><span class="error">${error.pic}</span></td>
 				</tr>
 			</c:if>
 			<!-- 錯誤處理由request參數回填 -->
 			<c:if test="${empty sightVO}">
-				<tr hidden="true">
-					<td><input type="text" name="sightId" value="${param.sightId}"></td>
-				</tr>
+					<input type="hidden" name="sightId" value="${param.sightId}">
 				<tr>
 					<td>景點名稱：</td>
-					<td><input type="text" name="sightName" value="${param.sightName}"></td>
+					<td><input type="text" name="sightName" value="${param.sightName}" size="75"></td>
 					<td><span class="error">${error.sightName}</span></td>
 				</tr>
 				<tr>
@@ -232,7 +261,7 @@ $("#sel").change(function(){
 				</tr>
 				<tr>
 					<td>門票：</td>
-					<td><input type="text" name="ticket" value="${param.ticket}" size="45"></td>
+					<td><input type="text" name="ticket" value="${param.ticket}" size="75"></td>
 					<td><span class="error">${error.ticket}</span></td>
 				</tr>
 				<tr>
@@ -273,7 +302,7 @@ $("#sel").change(function(){
 				</tr>
 				<tr>
 					<td>地址：</td>
-					<td><input type="text" name="addr" value="${param.addr}" size="45"></td>
+					<td><input type="text" name="addr" value="${param.addr}" size="75"></td>
 					<td><span class="error">${error.addr}</span></td>
 				</tr>
 				<tr>
@@ -283,18 +312,19 @@ $("#sel").change(function(){
 				</tr>
 				<tr>
 					<td>交通方式：</td>
-					<td><textarea rows="8" cols="50" name="trans" style="resize: none">${param.trans}</textarea>
+					<td><textarea rows="8" cols="75" name="trans" style="resize: none">${param.trans}</textarea>
 					</td>
 					<td><span class="error">${error.trans}</span></td>
 				</tr>
 				<tr>
 					<td>簡介：</td>
-					<td><textarea rows="8" cols="50" name="intro" style="resize: none">${param.intro}</textarea></td>
+					<td><textarea rows="8" cols="75" name="intro" style="resize: none">${param.intro}</textarea></td>
 					<td><span class="error">${error.intro}</span></td>
 				</tr>
 				<tr>
 					<td>景點照片：</td>
-					<td><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${param.sightId}" />" width="80" height="60"><input type="file" name="pic"></td>
+					<td><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${param.sightId}" />" width="80" height="60">
+					<input type='file' accept='image/*' onchange='openFile(event)' name="pic"></td>
 					<td><span class="error">${error.pic}</span></td>
 				</tr>
 			</c:if>
@@ -304,5 +334,9 @@ $("#sel").change(function(){
 				</tr>
 			</table>
 		</form>
+	</article>
+	<footer>
+		<!-- import共同的 -->
+	</footer>
 </body>
 </html>
