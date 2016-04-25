@@ -63,7 +63,7 @@ pageContext.setAttribute("journalVO", journalVO);
 		<tbody>
 		<c:if test="${not empty journalVO}">
 		<c:forEach var="journalVO" items="${journalVO}">
-			<tr>
+			<tr class="journalTr">
 				<td>
 					<img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${journalVO.journalId}" />" width="160" height="120" class="img-rounded">
 				</td>
