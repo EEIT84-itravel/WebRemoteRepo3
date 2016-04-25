@@ -40,8 +40,21 @@ function confirmDeleteMessage(n,m) {
 function doAlertBtn() {
 	alertify.alert('此功能僅限會員使用，請先登入!!')
 }
-</script>
 
+                     
+</script>
+<script type="text/javascript">
+$(function() {
+	$("#collect").bind('click', collect);
+	$("#collectmember").bind('click', collectmember);
+});
+function collect() {
+	window.location.href = "../_02_TripAndJournal/member/collectiontrip.controller?referenceType="+ $("#referenceType").val()+"&typeId=type_id05";
+};	
+function collectmember() {
+	window.location.href = "../_05_Member/member/collectionauthor.controller?friendId="+${forumVO.memberId}+"&tripId="+${forumVO.forumId}+"&type=forum";
+};    
+</script>
 </head>
 <body>
 	<header>
@@ -52,6 +65,7 @@ function doAlertBtn() {
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article class="center-block">
+	<input type="hidden"  id="referenceType" value="${forumVO.forumId}">	
 		<form action="<c:url value="/_04_Forum/member/Reply.controller"/>"
 			method="post">
 			<div id="forumHead">
@@ -59,7 +73,11 @@ function doAlertBtn() {
 					<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
 
 					<tr class="success">
-						<td><h4 style="color:blue">●${forumVO.forumTopic}</h4> <span class="error">${error.forumTopic}</span></td>
+						<td><h4 style="color:blue">●${forumVO.forumTopic}</h4> <span class="error">${error.forumTopic}</span>
+						<c:if test="${flag}"> 
+				<input type="button" value="收藏文章" id='collect'>
+ 			</c:if>
+						</td>
 					</tr>
 
 					<tr class="success">
@@ -95,7 +113,11 @@ function doAlertBtn() {
 								<c:if test="${MemberVO.memberId==forumVO.memberId}">
 										${MemberVO.nickname}
                              		</c:if>
-							</c:forEach></td>
+							</c:forEach>
+							<c:if test="${flagmember}"> 
+							<input type="button" value="收藏作者" id='collectmember'><!-- 		判斷收藏作者鈕是否出現 寫在ShowArticleServlet -->
+							</c:if>
+							</td>
 					</tr>
 					<tr class="danger">
 						<td style="color:red">文章內容：${forumVO.forumContent}</td>

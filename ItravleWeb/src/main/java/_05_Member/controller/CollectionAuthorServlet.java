@@ -23,6 +23,7 @@ public class CollectionAuthorServlet extends HttpServlet {
 				.getMemberId();
 		String temp1 = request.getParameter("friendId");//加入的好友Id
 		String temp2 = request.getParameter("tripId");//參照編號
+		String type = request.getParameter("type");//從何頁面按收藏作者
 		Integer tripId = 0;
 		Integer friendId = null;
 		// 轉換HTML Form資料
@@ -34,17 +35,33 @@ public class CollectionAuthorServlet extends HttpServlet {
 				if(temp2 != null && temp2.trim().length()!=0){
 					tripId = Integer.parseInt(temp2);
 				}else{
-					System.out.println("缺少行程編號");
+					System.out.println("缺少參照編號");
 				}
 		//處理資料
+				System.out.println(friendId+","+friendId+","+type);
 				if(friendId != null ){
 				friendservice.newFriend(memberId,friendId);
 				}
-				 //秀回畫面
+				
+				//秀回畫面
+				if(type.equals("trip")){
 				 String path = request.getContextPath();
 					response.sendRedirect(path
 							+ "/_02_TripAndJournal/ShowTrip.controller?tripId="
 							+ tripId);
+				}
+				if(type.equals("journal")){
+					 String path = request.getContextPath();
+						response.sendRedirect(path
+								+ "/_02_TripAndJournal/ShowJournalDetail.controller?journalId="
+								+ tripId);
+					}
+				if(type.equals("forum")){
+					 String path = request.getContextPath();
+						response.sendRedirect(path
+								+ "/_04_Forum/ShowArticle.controller?forumId="
+								+ tripId);
+					}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

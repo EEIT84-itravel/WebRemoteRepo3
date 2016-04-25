@@ -35,7 +35,7 @@ pageContext.setAttribute("regions", codeVO);
 		window.location.href = "../_02_TripAndJournal/member/collectiontrip.controller?referenceType="+ $("#referenceType").val()+"&typeId=type_id02";
 	};	
 	function collectmember() {
-		window.location.href = "../_05_Member/member/collectionauthor.controller?friendId="+${tripVO.memberId}+"&tripId="+${tripVO.tripId};
+		window.location.href = "../_05_Member/member/collectionauthor.controller?friendId="+${tripVO.memberId}+"&tripId="+${tripVO.tripId}+"&type=trip";
 	};
 </script>
 </head>

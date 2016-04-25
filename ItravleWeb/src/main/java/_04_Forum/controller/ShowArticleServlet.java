@@ -17,6 +17,9 @@ import _02_TripAndJournal.model.MessageService;
 import _02_TripAndJournal.model.MessageVO;
 import _04_Forum.model.ForumService;
 import _04_Forum.model.ForumVO;
+import _05_Member.model.CollectionService;
+import _05_Member.model.FriendService;
+import _05_Member.model.MemberVO;
 
 @WebServlet("/_04_Forum/ShowArticle.controller")
 public class ShowArticleServlet extends HttpServlet {
@@ -53,11 +56,30 @@ public class ShowArticleServlet extends HttpServlet {
 				
 			    long count = ms.getForumMessageNum(forumId);
 			
+		
 			
 				if(forumVO != null ) {					
 					request.setAttribute("forumVO", forumVO);	
 					request.setAttribute("messageVO1", messageVO);
 					request.setAttribute("count", count);
+					// 會員已登入且景點未收藏過會顯示景點收藏鈕
+					boolean flag = false;
+					CollectionService collectionService = new CollectionService();
+					MemberVO user = (MemberVO) request.getSession().getAttribute("user");
+					if (user != null&& collectionService.selectCollection(forumVO.getForumId(),user.getMemberId(), "type_id05") == null) {
+						flag = true;
+					}
+					request.setAttribute("flag", flag);
+					  //會員已登入且作者未收藏過會顯示作者收藏鈕
+					boolean flagmember = false;
+					FriendService friendservice= new FriendService();
+					System.out.println(user.getMemberId());
+					System.out.println(forumVO.getMemberId());
+					if(user != null && user.getMemberId()!=forumVO.getMemberId() && friendservice.isfriend(user.getMemberId(), forumVO.getMemberId())==false){
+						flagmember = true;
+					}
+					System.out.println(flagmember);
+					request.setAttribute("flagmember", flagmember);
 				    request.getRequestDispatcher("/_04_Forum/LookArticle.jsp").forward(request, response);
 				}
 	}

@@ -23,11 +23,13 @@ pageContext.setAttribute("regions", codeVO);
 <script type="text/javascript">
 	$(function() {
 		$("#collect").bind('click', collect);
+		$("#collectmember").bind('click', collectmember);
 	});
 	function collect() {
 		window.location.href = "../_02_TripAndJournal/member/collectiontrip.controller?referenceType="+ $("#referenceType").val()+"&typeId=type_id03";
-	
-	
+	};
+	function collectmember() {
+		window.location.href = "../_05_Member/member/collectionauthor.controller?friendId="+${showJournalVO.memberId}+"&tripId="+${showJournalVO.journalId}+"&type=journal";
 	};
 </script>
 <!-- jQuery ui -->
@@ -70,9 +72,9 @@ pageContext.setAttribute("regions", codeVO);
 							<li><c:forEach var="MemberVO" items="${MemberService.all}">
 									<c:if test="${MemberVO.memberId==showJournalVO.memberId}">
 										<h3 style="color: green">作者：${MemberVO.nickname}</h3>
-										
+										<c:if test="${flagmember}"> 
 							            <input type="button" value="收藏作者" id='collectmember'><!-- 		判斷收藏作者鈕是否出現 寫在ShowJournalServlet -->
-								       
+							    </c:if>
 									</c:if>
 								</c:forEach></li>
 							<li>遊玩日期：${showJournalVO.beginTime}~${showJournalVO.endTime}</li>
