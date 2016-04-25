@@ -70,12 +70,9 @@ public class ShowArticleServlet extends HttpServlet {
 					  //會員已登入且作者未收藏過會顯示作者收藏鈕
 					boolean flagmember = false;
 					FriendService friendservice= new FriendService();
-					System.out.println(user.getMemberId());
-					System.out.println(forumVO.getMemberId());
 					if(user != null && user.getMemberId()!=forumVO.getMemberId() && friendservice.isfriend(user.getMemberId(), forumVO.getMemberId())==false){
 						flagmember = true;
 					}
-					System.out.println(flagmember);
 					request.setAttribute("flagmember", flagmember);
 				    request.getRequestDispatcher("/_04_Forum/LookArticle.jsp").forward(request, response);
 				}

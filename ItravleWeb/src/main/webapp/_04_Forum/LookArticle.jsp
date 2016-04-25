@@ -45,12 +45,8 @@ function doAlertBtn() {
 </script>
 <script type="text/javascript">
 $(function() {
-	$("#collect").bind('click', collect);
 	$("#collectmember").bind('click', collectmember);
 });
-function collect() {
-	window.location.href = "../_02_TripAndJournal/member/collectiontrip.controller?referenceType="+ $("#referenceType").val()+"&typeId=type_id05";
-};	
 function collectmember() {
 	window.location.href = "../_05_Member/member/collectionauthor.controller?friendId="+${forumVO.memberId}+"&tripId="+${forumVO.forumId}+"&type=forum";
 };    
@@ -71,12 +67,8 @@ function collectmember() {
 			<div id="forumHead">
 				<table  id="forumBody">
 					<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
-
 					<tr class="success">
 						<td><h4 style="color:blue">●${forumVO.forumTopic}</h4> <span class="error">${error.forumTopic}</span>
-						<c:if test="${flag}"> 
-				<input type="button" value="收藏文章" id='collect'>
- 			</c:if>
 						</td>
 					</tr>
 
@@ -118,7 +110,7 @@ function collectmember() {
                              		</c:if>
 							</c:forEach>
 							<c:if test="${flagmember}"> 
-							<input type="button" value="收藏作者" id='collectmember'><!-- 		判斷收藏作者鈕是否出現 寫在ShowArticleServlet -->
+							<input type="button" value="追蹤作者" id='collectmember'><!-- 		判斷收藏作者鈕是否出現 寫在ShowArticleServlet -->
 							</c:if>
 							</td>
 					</tr>

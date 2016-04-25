@@ -77,8 +77,6 @@ public class ShowJournalDetailServlet extends HttpServlet {
 		//會員已登入且作者未收藏過會顯示作者收藏鈕
 		boolean flagmember = false;
 		FriendService friendservice= new FriendService();
-		System.out.println(user.getMemberId());
-		System.out.println(journalVO.getMemberId());
 		if(user != null && user.getMemberId()!=journalVO.getMemberId() && friendservice.isfriend(user.getMemberId(), journalVO.getMemberId())==false){
 			flagmember = true;
 		}
