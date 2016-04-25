@@ -11,10 +11,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>景點資訊</title>
+<title>ITravel-景點資訊</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <!-- lightbox -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_01_Sight/lightbox.min.css" />" />
-<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_01_Sight/SightInformation.css"/>"/>
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
 <!-- jQuery -->
@@ -32,75 +33,47 @@
 		window.location.href = "../_01_Sight/member/CollectSight.controller?sightId="+ $("#sightId").val();
 	};
 </script>
-<style>
-html, body {
-	height: 100%;
-	margin: 0 auto;
-	padding: 0;
-}
-#map {
-	height: 400px;
-	width: 600px;
-	border: solid black;
-}
-.IntroSight {
-	width: 700px;
-	padding: 10px;
-	margin: 0px;
-	margin-right:10px;
-	border: solid black;
-	float: left;
-}
-#tabss{
-width: 600px;
-}
-#pageBottom{
-clear: both;
-}
-#pageBottom .bottomInner{
-text-align: center;
-}
-</style>
 </head>
 <body>
 	<header>
 		<!-- import共同的 -->
 	</header>
-	<!-- import共同的 -->
 	<nav class="navbar navbar-inverse" role="navigation">
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article class="center-block">
-		<div class="IntroSight"><!-- rightside end -->
+		<div id="IntroSight">
 			<a href="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" rel="lightbox" title="${sightVO.sightName}">
 			<img border="0" src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${sightVO.sightId}" />" width="280" height="210"></a>
-			 <input type="hidden" value="${sightVO.sightId}" name="sightId" id="sightId">
-			<h3>${sightVO.sightName}</h3>  <!-- 		判斷收藏景點鈕是否出現 寫在SightServlet -->
-					<c:if test="${flag}">
-						<input type="button" value="收藏景點" id='collect'>
-					</c:if>
-			<p>${sightVO.intro}</p>
+			<input type="hidden" value="${sightVO.sightId}" name="sightId" id="sightId">
+			
+			<h2>${sightVO.sightName}	<!-- 判斷收藏景點鈕是否出現 寫在SightServlet -->
+				<c:if test="${flag}">
+					<span><input type="button" value="收藏景點" id='collect'></span>
+				</c:if>
+			</h2>
+			<p>　　${sightVO.intro}</p>
 			<p>
-				類型:
+				類型：
 				<c:forEach var="codeVO" items="${codeSvc.all}">
 					<c:if test="${codeVO.codeId==sightVO.sightTypeId}">
 								${codeVO.codeName}
                     </c:if>
 				</c:forEach>
 			</p>
-			<p>門票:${sightVO.ticket}</p>
-			<p>營業時間:${openTime}-${closeTime}</p>
-<%-- 			<p>建議停留時間:${sightVO.spendHour}</p> --%>
+			<p>門票：${sightVO.ticket}</p>
+			<p>營業時間：${openTime}-${closeTime}</p>
+<%-- 			<p>建議停留時間：${sightVO.spendHour}</p> --%>
 			<p>
-				建議旅行時段:
+				建議旅行時段：
 				<c:forEach var="codeVO" items="${codeSvc.all}">
 					<c:if test="${codeVO.codeId==sightVO.playPeriod}">
-								${codeVO.codeName}
-                     </c:if>
+						${codeVO.codeName}
+                    </c:if>
 				</c:forEach>
 			</p>
-			<p>地址:${sightVO.addr}</p>
+			<p>地址：${sightVO.addr}</p>
 			<p>交通方式　-　${trans}</p>
 						<div id="tabss">
 						<div id="tabs">
@@ -111,16 +84,19 @@ text-align: center;
 								<li><a href="#tabs-4">留言</a></li>
 							</ul>
 							<div id="tabs-1"><!-- tab 相關行程 -->
+									<c:if test="${empty tripVOs}">
+										目前尚無相關行程
+									</c:if>
 							<table class="table">
 								<c:forEach var="tripVO" items="${tripVOs}" end="4"><!-- "4"為顯示5筆  -->
-								<c:if test="${tripVO.post==true}">
+								<c:if test="${tripVO.post==true}"><!-- 狀態是已發布 -->
 								<tr>
 								<td>
-								<c:forEach var="TripDetailVO" items="${TripDetailService.mainPics}" >
-                             		<c:if test="${TripDetailVO.tripId==tripVO.tripId}">
-										<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${TripDetailVO.referenceNo}" />" width="88" height="66">
-                             		</c:if>
-								</c:forEach>
+									<c:forEach var="TripDetailVO" items="${TripDetailService.mainPics}" >
+	                             		<c:if test="${TripDetailVO.tripId==tripVO.tripId}">
+											<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${TripDetailVO.referenceNo}" />" width="88" height="66">
+	                             		</c:if>
+									</c:forEach>
 								</td>
 								<td><a href="<c:url value="/_02_TripAndJournal/ShowTrip.controller?tripId=${tripVO.tripId}" />" >${tripVO.tripName}</a></td>
 								<td>
@@ -135,19 +111,22 @@ text-align: center;
 								</c:if>
 								</c:forEach>
 							</table>
-							</div>
-							<div id="tabs-2"><!-- tab 相關遊記 -->
+						</div>
+						<div id="tabs-2"><!-- tab 相關遊記 -->
+							<c:if test="${empty journalVOs}">
+							目前尚無相關遊記
+							</c:if>
 							<table class="table">
 							<c:forEach var="journalVO" items="${journalVOs}" end="4"><!-- "4"為顯示5筆  -->
-							<c:if test="${journalVO.post==true}">
+							<c:if test="${journalVO.post==true}"><!-- 狀態是已發布 -->
 							<tr>
 								<td><img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${journalVO.journalId}" />" width="88" height="66"></td>
 								<td><a href="<c:url value="/_02_TripAndJournal/ShowJournalDetail.controller?journalId=${journalVO.journalId}" />">${journalVO.journalName}</a></td>
-								<c:forEach var="MemberVOj" items="${MemberService.all}">
-                             		<c:if test="${MemberVOj.memberId==journalVO.memberId}">
-										<td>${MemberVOj.nickname}</td>
-                             		</c:if>
-								</c:forEach>
+									<c:forEach var="MemberVOj" items="${MemberService.all}">
+	                             		<c:if test="${MemberVOj.memberId==journalVO.memberId}">
+											<td>${MemberVOj.nickname}</td>
+	                             		</c:if>
+									</c:forEach>
 								<td>有${journalVO.visitorNum}人瀏覽過</td>
 							</tr>
 							</c:if>
@@ -155,9 +134,12 @@ text-align: center;
 							</table>
 							</div>
 							<div id="tabs-3"><!-- tab 相關活動 -->
-								<table class="table">
+								<c:if test="${empty eventVOs}">
+									目前尚無相關活動
+								</c:if>
+							<table class="table">
 							<c:forEach var="eventVO" items="${eventVOs}">
-								<c:if test="${eventVO.eventRemoved==false}">
+								<c:if test="${eventVO.eventRemoved==false}"><!-- 狀態是未下架 -->
 								<tr>
 									<td><a href="<c:url value='/_03_Event/ShowEvent.controller?eventId=${eventVO.eventId}' />">${eventVO.eventTopic}</a></td>
 									<td>由${eventVO.eventStartDate}至${eventVO.eventEndDate}</td>
@@ -167,49 +149,51 @@ text-align: center;
 							</table>
 							</div>
 							<div id="tabs-4"><!-- tab 留言 -->
+								<c:if test="${empty messageVOs}">
+									目前尚無相關留言
+								</c:if>
 							<table class="table">
 							<c:forEach var="messageVO" items="${messageVOs}">
 								<tr>
 									<td>${messageVO.content}</td>
-									<c:forEach var="MemberVOm" items="${MemberService.all}">
-                             			<c:if test="${MemberVOm.memberId==messageVO.memberId}">
-											<td>${MemberVOm.nickname}</td>
-                             			</c:if>
-									</c:forEach>
+										<c:forEach var="MemberVOm" items="${MemberService.all}">
+	                             			<c:if test="${MemberVOm.memberId==messageVO.memberId}">
+												<td>${MemberVOm.nickname}</td>
+	                             			</c:if>
+										</c:forEach>
 									<td>${messageVO.updateTime}</td>
 								</tr>
 							</c:forEach>
-							</table>
-							<form action="<c:url value="/_01_Sight/member/SightReplyServlet.controller" />" method="post">
-								<table>
-									<tr>
-										<td>
-											<input type="hidden" name="referenceNo" value="${sightVO.sightId}">
-											<input type="hidden" name="type" value="type_id01">
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<textarea rows="5" cols="40" name="reply" style="color:black">${param.reply}</textarea>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span>${error.reply}</span>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<input type="submit" value="確定送出" style="color:black">
-										</td>
-									</tr>
-								</table>
-							</form>	
-							</div><!-- tab 留言 end-->
-						</div>
-						</div>
+						</table>
+						<form action="<c:url value="/_01_Sight/member/SightReplyServlet.controller" />" method="post">
+						<table>
+							<tr>
+								<td>
+									<input type="hidden" name="referenceNo" value="${sightVO.sightId}">
+									<input type="hidden" name="type" value="type_id01">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<textarea id="replyTextarea" name="reply" placeholder="請留言">${param.reply}</textarea>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span>${error.reply}</span>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="submit" value="確定送出" style="color:black">
+								</td>
+							</tr>
+						</table>
+						</form>	
+					</div><!-- tab 留言 end-->
+				</div><!-- tabs 留言 end-->
+			</div><!-- tabss 留言 end-->
 		</div><!-- rightside end -->
-
 		<!-- 	 	google map -->
 		<div id="map"></div>
 		<script>
@@ -233,8 +217,8 @@ text-align: center;
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU9JCqlrRPTLXt7fvy9ERvO2EU1QPcO_0&signed_in=true&callback=initMap"></script>
 		<!-- 		google map end -->
 		<div id="pageBottom">
-		<input type="button" onclick="history.back()" value="上一頁" class="bottomInner" /> 
-		<a href="<c:url value="/_01_Sight/SightIndex.jsp" />" class="bottomInner">回景點首頁</a>
+			<input type="button" onclick="history.back()" value="上一頁" class="bottomInner" /> 
+			<a href="<c:url value="/_01_Sight/SightIndex.jsp" />" class="bottomInner">回景點首頁</a>
 		</div>
 	</article>
 	<footer>

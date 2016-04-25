@@ -42,15 +42,22 @@ pageContext.setAttribute("regions", codeVO);
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article class="center-block">
-		<h1 class="h1">${showJournalVO.journalName}
-		<input type="hidden"  id="referenceType" value="${showJournalVO.journalId}">	
-			<c:if test="${flag}"> <!-- 		判斷收藏景點鈕是否出現 寫在ShowJournalDetailServlet -->
+		<h1 style="color: red;">${showJournalVO.journalName}
+		</h1>
+		<h1 class="h1">
+			<input type="hidden"  id="referenceType" value="${showJournalVO.journalId}">	
+			<c:if test="${flag&&showJournalVO.memberId!=user.memberId}"> <!-- 		判斷收藏景點鈕是否出現 寫在ShowJournalDetailServlet -->		
 				<input type="button" value="收藏遊記" id='collect'>
  			</c:if>
 		</h1>
 		<div id="divJournal" class="pull-left">
 		<form action="<c:url value="/_02_TripAndJournal/member/ModifyJournal.controller?crud=Update&journalId=${showJournalVO.journalId}"/>" method="post">
-			<input type="submit" name="modifyJournal" value="修改遊記">
+			<c:choose>		
+				<c:when test="${empty user}"></c:when>
+				<c:when test="${user.memberId==showJournalVO.memberId}">
+					<input type="submit" name="modifyJournal" value="修改遊記">
+				</c:when>
+			</c:choose>
 			<div id="divMember">
 				<table id="member" class="table table-bordered">
 				<tr>
@@ -111,7 +118,8 @@ pageContext.setAttribute("regions", codeVO);
 				</c:forEach>
 			</div><!-- end of divJournalDetail -->
 			</form>
-			<div><!-- 留言 -->
+			<div id="messageDiv"><!-- 留言 -->
+			<h3 class="h3"><span class="glyphicon glyphicon-comment"></span> 留言</h3>
 				<table class="table">
 					<c:forEach var="messageVO" items="${messageVOs}">
 						<tr>
@@ -126,12 +134,12 @@ pageContext.setAttribute("regions", codeVO);
 					</c:forEach>
 				</table>
 				<form action="<c:url value="/_01_Sight/member/SightReplyServlet.controller" />" method="post">
-					<table>
+					<table id="replyTable">
 						<tr><td>
 							<input type="hidden" name="referenceNo" value="${showJournalVO.journalId}">
 							<input type="hidden" name="type" value="type_id03"></td></tr>
 						<tr><td>
-							<textarea rows="5" cols="40" name="reply" style="color:black">${param.reply}</textarea>
+							<textarea class="replyTextarea" name="reply" placeholder="請留言">${param.reply}</textarea>
 						</td></tr>
 						<tr><td>
 							<span>${error.reply}</span></td></tr>

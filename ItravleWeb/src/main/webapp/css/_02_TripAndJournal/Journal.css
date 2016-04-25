@@ -33,3 +33,17 @@ img {
 .fMargin{
 	margin:5px;
 }
+.replyTextarea {
+	max-width:730px;
+ 	max-height:100px;
+ 	width:730px;
+ 	height:100px;
+ 	color:black;
+}
+#replyTable {
+	width: 730px;
+	margin: 0 auto;
+}
+#messageDiv {
+	width:740px;
+}

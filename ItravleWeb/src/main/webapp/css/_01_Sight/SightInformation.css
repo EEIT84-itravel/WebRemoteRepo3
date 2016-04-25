@@ -1,0 +1,47 @@
+@CHARSET "UTF-8";
+
+#map {
+	width: 650px;
+	height: 400px;
+	float: right;
+}
+
+#IntroSight {
+	width: 740px;
+	padding: 10px;
+	margin-right: 10px;
+	float: left;
+}
+
+#tabss {
+	width: 600px;
+}
+
+#pageBottom {
+	clear: both;
+	text-align: center;
+}
+
+#pageBottom .bottomInner {
+	text-align: center;
+}
+
+#collect {
+	font-size: 16px;
+}
+
+p {
+	font-size: 16px;
+}
+
+#tabss {
+	width: 720px;
+}
+
+#replyTextarea {
+	color: black;
+	max-width: 670px;
+ 	max-height: 100px;
+ 	width: 670px;
+ 	height: 100px;
+}

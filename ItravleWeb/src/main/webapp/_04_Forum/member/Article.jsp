@@ -34,29 +34,34 @@
 		<form
 			action="<c:url value="/_04_Forum/member/WritingsServlet.controller"/>"
 			method="post">
-			<div id="forumHead">
-
+			
+			<fieldset id="introDiv">	
+			<div id="forumHead" class="form-horizontal">
 				<input type="hidden" name="crud" value="${param.crud}">
 				<input type="hidden" name="memberId" value="${user.memberId}">
-				<table>
-					<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
-					<tr>
-						<td>文章主題：</td>
-						<td><input type="text" name="forumTopic"
-							value="${param.forumTopic}" size="100" /></td>
-						<td><span class="error">${error.forumTopic}</span></td>
-					</tr>
-					<tr>
-						<td>文章分類：</td>
-						<td><select name="forumTypeId">
+				<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
+				<div style="height: 20px;"></div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">文章主題:</label>
+					<div class="col-sm-9">
+						<input class="form-control" type="text" name="forumTopic" value="${param.forumTopic}"/><span class=errorMsg>${error.forumTopic}</span>				    
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">文章分類：</label>
+					<div class="col-sm-6">
+						<select name="forumTypeId">
 								<c:forEach var="forum_type" items="${list}">
 									<option value="${forum_type.codeId}">${forum_type.codeName}</option>
 								</c:forEach>
-						</select></td>
-					</tr>
-					<tr>
-						<td>文章內容：</td>
-						<td><textarea name="forumContent" rows="4" cols="50"></textarea></td>
+						</select>			    
+					</div>
+				</div>
+		
+				<div class="form-group">
+					<label class="control-label col-sm-2">文章內容：</label>
+						<div class="col-sm-9">
+						<textarea name="forumContent" rows="4" id="jBody" class="textBody form-control" cols="40"></textarea>
 						<script>
 							var toolbar = [
 									//加粗     斜體，     下劃線      穿過線     文本顏色     背景顏色
@@ -74,15 +79,14 @@
 								toolbar : toolbar
 							});
 						</script>
-						<td><span class="error">${error.forumContent}</span></td>
-					</tr>
-					<tr>
-						<td><input type="submit" value="確定發表"
-							onclick="if(confirm('您確定發表新文章嗎?')) return true;else return false"></td>
-					</tr>
-				</table>
+						<span class="errorMsg">${error.forumContent}</span>
+					</div>
+			  	</div>	
+			  				<div id="editor" style="text-align: center"><input type="submit" value="確定發表" class="btn btn-default" class="btn btn-default" 
+							onclick="if(confirm('您確定發表新文章嗎?')) return true;else return false"></div>
+			  		
 			</div>
-			<div id="editor"></div>
+			</fieldset>
 		</form>
 	</article>
 	<footer>

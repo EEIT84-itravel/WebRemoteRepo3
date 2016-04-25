@@ -22,13 +22,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
 </style>
-<%-- <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/> --%>
-<%-- <link rel="stylesheet" type="text/css"	href="<c:url value="/css/_04_Forum/Forum.css"/>" /> --%>
-<%-- <link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/jquery-ui-1.11.4.custom/jquery-ui.min.css" /> --%>
-<%-- <link rel="stylesheet" type="text/css"	href="<c:url value="/css/_04_Forum/datatable.css"/>" /> --%>
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
+<link rel="stylesheet" type="text/css"	href="<c:url value="/css/_04_Forum/Forum.css"/>" />
+<link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/jquery-ui-1.11.4.custom/jquery-ui.min.css" />
 <!-- <link rel="stylesheet" type="text/css"  href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css"/> -->
- <link href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables_themeroller.css" rel="stylesheet">
-
 
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-2.2.1.min.js"></script>
 <script type="text/javascript"	src="<%=request.getContextPath()%>/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
@@ -42,7 +39,8 @@
 </script>
 <title>ITravel討論區</title>
 </head>
-<body>
+<body style="background-image: url('../css/img/go.jpg')">
+<div class="bg">
 	<header>
 		<!-- import共同的 -->
 	</header>
@@ -53,9 +51,8 @@
 	<article class="center-block">
 		<form method="post">
 			<div id="forumHead">
-				<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
-				
-				<table id="forum" border="1">
+				<c:import url="/_04_Forum/ForumHead.jsp"></c:import>			
+				<table id="forum"  class="table">
 					<thead>
 						<tr id="forumTitle">
 							<th>類型</th>
@@ -131,6 +128,7 @@
 			</div>
 		</form>
 	</article>
+	</div>
 	<script type="text/javascript">
 	//DataTable設定
 	var opt = {
