@@ -1,10 +1,9 @@
-function sendRequest3(method, url3, id3,cellphone1) {
+function sendRequest3(method, url3, cellphone1,cellphone2) {
 	var settings3 = new Object();
 	settings3.method  = method;
 	settings3.contentType = "application/x-www-form-urlencoded; charset=UTF-8";
 	settings3.url = url3;
-	settings3.cellphone1 = cellphone1;
-	settings3.data = "cellphone="+id3;
+	settings3.data = "cellphone1="+cellphone1+"&cellphone2="+cellphone2;
 	settings3.async = true;
 	settings3.cache = false;
 	
@@ -21,8 +20,8 @@ function processText3(data) {
 		show3 = data.substring(0, index3);
 		var temp3 = data.substring(index3+1);
 		var array3 = temp3.split(",");
-		$('input[name="cellphone"]').val(array3[0]);
+		$('input[name="cellphone2"]').val(array3[0]);
 	}
-	$("span:eq(7)").text(show3);
+	$("#cellphone").text(show3);
 }
 

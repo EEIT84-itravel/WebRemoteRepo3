@@ -32,6 +32,7 @@ public class CellphoneServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		StringBuilder output = new StringBuilder();
 		String cellphone = request.getParameter("cellphone");
+		System.out.println(cellphone);
 		if(cellphone==null || cellphone.trim().length()==0) {
 			output.append("電話是必要欄位");
 		}
