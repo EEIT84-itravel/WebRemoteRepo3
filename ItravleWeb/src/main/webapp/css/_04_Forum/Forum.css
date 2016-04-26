@@ -22,6 +22,9 @@
 	vertical-align: middle;
 /* 	font-weight: 200; */	
 }
+.test{
+	width: 100px;
+}
 .error{
 	color:red;
 }
@@ -36,4 +39,8 @@
  	max-height:100px;
  	width:500px;
  	height:100px;
+}
+.memberPic{
+	width: 100px;
+	height: 100px;
 }

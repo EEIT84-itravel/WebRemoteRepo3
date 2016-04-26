@@ -95,6 +95,7 @@ textarea { /* Text Area 固定大小*/
 		<input type="hidden" name="journalId" value="${journalVO.journalId}">
 		<input type="hidden" name="visitorNum" value="${journalVO.visitorNum}">
 		<input type="hidden" name="memberId" value="${user.memberId}">		
+		<input type="hidden" name="crud" value="Insert">		
 			<div class="form-group">
 				<h4><label class="control-label col-sm-3">遊記名稱：</label></h4>
 				<div class="col-sm-6">
@@ -174,7 +175,7 @@ textarea { /* Text Area 固定大小*/
 					</c:forEach>
 				</c:if>
 				<div class="form-group"  style="text-align: center;">
-					<input type="submit" value="儲存遊記" id="saveJournal"
+					<input type="submit" value="儲存遊記" id="saveJournal" onclick="if(confirm('您確定發表新遊記嗎?')) return true;else return false"
 						class="btn btn-success btn-lg" />
 		   		 </div>
 				

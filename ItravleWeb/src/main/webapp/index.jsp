@@ -69,8 +69,8 @@
 	<article class="center-block">
 		<!-- 活動輪播 -->
 		<div style="text-align: center;">
-			<h1 style="color: orange">
-				<strong>I-Travel</strong>
+			<h1 style="color: orange;font-family:sans-serif;">
+				<strong>I-Travel首頁</strong>
 			</h1>
 		
 		</div>
@@ -87,11 +87,11 @@
 				<a href="<c:url value="/_03_Event/ShowEvent.controller?eventId=12" />">
 				<img src="<c:url value="/_03_Event/ShowEventPic.controller?eventId=10"/>" style="height: 400px; width: 900px;"></a>
 			</div>
+			<div id="hotSight"><span class="glyphicon glyphicon-fire"></span>&nbsp;熱門景點</div>
 <!-- 熱門景點 -->
-			<div style="height: 10px"></div>
 			<div class="wrap">
-				<div class="box-slider" id="dowebok">
-					<a href="javascript:" class="box-slider-seta-left"></a>
+				<div class="box-slider" id="dowebok">	  
+					<a href="javascript:" class="box-slider-seta-left" ></a>
 					<div class="box-slider-content">
 						<div class="box-slider-move">
 							<div class="item first"><span><img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=1" />"  width="160px" height="160px" onclick="location.href='<c:url value="/_01_Sight/Sight.controller?sightId=1" />'"></span></div>
@@ -112,7 +112,7 @@
 <!-- 熱門景點end -->
 			<div style="height: 10px"></div>
 			<div id="hotTrip" class="pull-left">
-				<h3 class="info">熱門行程<small style="color:red">&nbsp;&nbsp;&nbsp;人氣排行!!</small></h3>
+				<h3 class="info"><span class="glyphicon glyphicon-fire"></span>&nbsp;熱門行程<small style="color:red">&nbsp;&nbsp;&nbsp;人氣排行!!</small></h3>
 				<h5 class="hrL">﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌</h5>
 				<ul>
 					<c:forEach var="tripVO" items="${tripVOs}" begin="0" end="8">
@@ -128,7 +128,7 @@
 			<!-- end hotTrip -->
 
 			<div id="hotJournal" class="pull-left">
-				<h3 class="info">熱門遊記<small style="color:red">&nbsp;&nbsp;&nbsp;人氣排行!!</small></h3>
+				<h3 class="info"><span class="glyphicon glyphicon-fire"></span>&nbsp;熱門遊記<small style="color:red">&nbsp;&nbsp;&nbsp;人氣排行!!</small></h3>
 				<h5 class="hrL">﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌</h5>
 				<ul>
 					<c:forEach var="journalVO" items="${journalVOs}" begin="0" end="8">
@@ -143,7 +143,7 @@
 			<!-- end hotJournal -->
 
 			<div id="event" class="pull-left">
-				<h3 class="info">近期活動</h3>
+				<h3 class="info"><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;近期活動</h3>
 				<h5 class="hrL">﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌</h5>
 				<ul>
 					<c:forEach var="eventVO" items="${eventVO}" begin="0" end="3">

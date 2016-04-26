@@ -46,7 +46,7 @@ public class JournalService {
 	}
 
 	// 查詢遊記中包含特定景點的遊記 傳回JournalVO的List
-	public List<JournalVO> getSightJournal(Integer sightId) {
+	public List<JournalVO> getSightJournal(int sightId) {
 		List<JournalVO> result = new ArrayList<JournalVO>();
 		JournalDetailService journalDetailService = new JournalDetailService();
 		JournalService journalService = new JournalService();

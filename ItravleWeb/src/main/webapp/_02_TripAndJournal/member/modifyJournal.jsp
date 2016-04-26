@@ -73,9 +73,12 @@
 		<legend><mark>遊記基本資訊</mark></legend>
 		<div class="form-horizontal">
 		<form action="<c:url value="/_02_TripAndJournal/member/ModifyJournalIntro.controller"/>" method="post">
-		<input type="hidden" name="journalId" value="${journalVO.journalId}">
-		<input type="hidden" name="visitorNum" value="${journalVO.visitorNum}">
-		<input type="hidden" name="memberId" value="${user.memberId}">		
+		<input type="hidden" name="journalId" value="${modifyVO.journalId}">
+		<input type="hidden" name="visitorNum" value="${modifyVO.visitorNum}">
+		<input type="hidden" name="memberId" value="${user.memberId}">			
+		<input type="hidden" name="post" value="${modifyVO.post}">	
+		<input type="hidden" name="crud" value="Update">	
+			
 			<div class="form-group">
 				<h4><label class="control-label col-sm-3">遊記名稱：</label></h4>
 				<div class="col-sm-6">
@@ -116,7 +119,7 @@
 		<fieldset id="journalDetailDiv">
 		<legend><mark>景點遊記</mark></legend>
 		<div class="form-horizontal">
-		<form	action="<c:url value="/_02_TripAndJournal/member/JournalDetail.controller"/>"	method="post" enctype="multipart/form-data">
+		<form action="<c:url value="/_02_TripAndJournal/member/JournalDetail.controller"/>"	method="post" enctype="multipart/form-data">
 			<div class="form-group">
 				<h4><label class="control-label col-sm-3">選擇遊記主圖：</label></h4>
 				<div class="col-sm-9">
@@ -153,7 +156,7 @@
 					</c:forEach>
 				
 				<div class="form-group"  style="text-align: center;">
-					<input type="submit" value="儲存遊記" id="saveJournal"
+					<input type="submit" value="儲存遊記" id="saveJournal" onclick="if(confirm('您確定修改遊記嗎?')) return true;else return false"
 						class="btn btn-success btn-lg" />
 		   		 </div>			
 		</form>

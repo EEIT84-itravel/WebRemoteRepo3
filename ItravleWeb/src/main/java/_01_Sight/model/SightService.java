@@ -51,11 +51,6 @@ public class SightService {
 		return dao.findByPrimaryKey(sightId);
 	}
 
-	// 景點按瀏覽人次排列(首頁)
-	public List<SightVO> selectByWatchNum() {
-		return dao.selectByWatchNum();
-	}
-
 	// 全部景點(首頁)
 	public List<SightVO> select() {
 		return dao.selectAll();

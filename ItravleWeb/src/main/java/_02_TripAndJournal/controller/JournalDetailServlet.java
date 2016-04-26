@@ -127,10 +127,17 @@ public class JournalDetailServlet extends HttpServlet {
 				error.put("sightJournal", "請輸入您在此景點的遊記");
 			}
 			if (error != null && !error.isEmpty()) {
-				request.getRequestDispatcher(
-						"/_02_TripAndJournal/member/WriteJournal.jsp").forward(
-						request, response);
-				return;
+				if ("Insert".equals(crud)) {
+					request.getRequestDispatcher(
+							"/_02_TripAndJournal/member/WriteJournal.jsp")
+							.forward(request, response);
+					return;
+				} else if ("Update".equals(crud)) {
+					request.getRequestDispatcher(
+							"/_02_TripAndJournal/member/modifyJournal.jsp")
+							.forward(request, response);
+					return;
+				}
 			}
 			journalDetailVO.setSightJournal(sightJournal);
 			jds.insert(journalDetailVO);
@@ -143,9 +150,6 @@ public class JournalDetailServlet extends HttpServlet {
 		JournalPhotoService journalPhotoService = new JournalPhotoService();
 		// 寫入圖片
 		byte[] p = new byte[is.available()];
-		is.read(p);
-		is.close();
-		journalPhotoVO.setJournalPhoto(p);
 
 		String obj1 = journalDetailIds[0];
 		if (obj1 != null && obj1.trim().length() != 0) {
@@ -158,10 +162,19 @@ public class JournalDetailServlet extends HttpServlet {
 		journalPhotoVO.setJournalDetailId(journalDetailId);
 		journalPhotoVO.setCover(true);
 		if ("Update".equals(crud)) {
-			if(journalPhotoId!=0){
-			journalPhotoVO.setJournalPhotoId(journalPhotoId);
-			journalPhotoService.update(journalPhotoVO);
-			}else{
+			if (journalPhotoId != 0) {
+				if (p.length != 0) {
+					is.read(p);
+					is.close();
+					journalPhotoVO.setJournalPhoto(p);
+				} else {
+					JournalPhotoVO journalPhotoVO1 = journalPhotoService.select(journalPhotoId);
+					byte[] bytes = journalPhotoVO1.getJournalPhoto();
+					journalPhotoVO.setJournalPhoto(bytes);
+				}
+				journalPhotoVO.setJournalPhotoId(journalPhotoId);
+				journalPhotoService.update(journalPhotoVO);
+			} else {
 				journalPhotoService.update(journalPhotoVO);
 			}
 		} else if ("Insert".equals(crud)) {

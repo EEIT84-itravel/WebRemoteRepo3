@@ -12,6 +12,8 @@
 <!-- jQuery ui 日期相關-->
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/css/_05_Member/Register.css"/>" />
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <!-- jQuery -->
 <script type="text/javascript"
@@ -83,80 +85,97 @@ color: red;
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article class="center-block">
-	<div id="editAccount">
-	<h3>${user.firstName}的個人資料</h3>
-	<form action="<c:url value="/_05_Member/member/membermodify.controller" />"
-		method="post" enctype="multipart/form-data">
-		<input type="hidden" name="memberId" value="${user.memberId}">
-		<input type="hidden" name="photo" value="${user.photo}">
-		<input type="hidden" name="cellphone1" value="${user.cellphone}"> 
-		<input type="hidden" name="memberAccount" value="${user.memberAccount}">
-		<table id="memberTable">
-			<tr>
-				<td>*姓氏 :</td>
-				<td><input type="text" name="lastName" value="${user.lastName}"></td>
-				<td><span class="error">${error.lastName}</span></td>
-			</tr>
-			<tr>
-				<td>*名字:</td>
-				<td><input type="text" name="firstName"
-					value="${user.firstName}"></td>
-				<td><span class="error">${error.firstName}</span></td>
-			</tr>
-			<tr>
-				<td>*帳號 :</td>
-				<td>${user.memberAccount}</td>
-				<td><span class="error"></span><img></td>
-			</tr>
-			<tr>
-				<td>*密碼 :</td>
-				<td><input type="password" name="password" value="${user.password}"></td>
-				<td><span class="error">${error.password}</span></td>
-			</tr>
-			<tr>
-				<td>*暱稱 :</td>
-				<td><input type="text" name="nickname" value="${user.nickname}"></td>
-				<td><span class="error">${error.nickname}</span></td>
-			</tr>
-			<tr>
-				<td>*信箱 :</td>
-				<td><input type="text" name="email" value="${user.email}"></td>
-				<td><span class="error">${error.email}</span></td>
-			</tr>
-			<tr>
-				<td>*生日 :</td>
-				<td><input type="text" id="birth" name="birth"
-					value="${user.birth}"></td>
-				<td><span class="error">${error.birth}</span></td>
-			</tr>
-			<tr>
-				<td>電話 :</td>
-				<td><input type="text" name="cellphone2"
-					value="${user.cellphone}"></td>
-				<td><span class="error" id="cellphone5">${error.cellphone}</span><img
-					src="<c:url value="/img/ajax-loader.gif"/>" style="display: none" /></td>
-			</tr>
-			<tr>
-				<td>現在使用的大頭貼 :</td>
-				<td><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${user.memberId}" />"
-					width="80" height="60"></td>
-			</tr>
-			<tr>
-				<td>大頭貼 :</td>
-				<td><input type='file' accept='image/*' onchange='openFile(event)' name="photo1"><br>
-					<img id='output' width="160" height="240"></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="修改會員資料"></td>
-				<td></td>
-			</tr>
-		</table>
-	</form>
-	<div>
-		<span id="modifymessage">
+	
+	<div id="regForm" style="margin:0 auto;border:1px dotted #d0d0d0;">
+	
+			<form action="<c:url value="/_05_Member/member/membermodify.controller" />"method="post" enctype="multipart/form-data">
+				<input type="hidden" name="memberId" value="${user.memberId}">
+				<input type="hidden" name="photo" value="${user.photo}">
+				<input type="hidden" name="cellphone1" value="${user.cellphone}"> 
+				<input type="hidden" name="memberAccount" value="${user.memberAccount}">
+				<fieldset id="reg">
+					<legend id="regTitle">${user.firstName}的個人資料<span id="modifymessage">
 		${modify.message}
-		</span>
+		</span></legend>
+					
+					<div class="form-horizontal">
+						<div class="form-group">
+							<label class="control-label col-sm-3">*姓氏 :</label>
+							<div class="col-sm-9">
+								<input class="form-control" type="text" name="lastName" value="${user.lastName}"/><span class="errorMsg">${error.lastName}</span>				    
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3">*名字:</label>
+							<div class="col-sm-9">
+								<input class="form-control" type="text" name="firstName" value="${user.firstName}"/><span class="errorMsg">${error.firstName}</span>				    
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3">*帳號 :</label>
+							<div class="col-sm-9">
+								${user.memberAccount}		    
+							<img>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3">*密碼 :</label>
+							<div class="col-sm-9">
+								<input class="form-control" type="text" name="password" value="${user.password}"/><span class="errorMsg">${error.password}</span>				    
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3">*暱稱 :</label>
+							<div class="col-sm-9">
+								<input class="form-control" type="text" name="nickname" value="${user.nickname}"/><span class="errorMsg">${error.nickname}</span>				    
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3">*信箱 :</label>
+							<div class="col-sm-9">
+								<input class="form-control" type="text" name="email" id="email" value="${user.email}"/><span class="errorMsg">${error.email}</span>				    
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3">*生日 :</label>
+							<div class="col-sm-9">
+								<input class="form-control" type="text" id="birth" name="birth" value="${user.birth}"/><span class="errorMsg">${error.birth}</span>				    
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3">*電話  :</label>
+							<div class="col-sm-9">
+								<input class="form-control" type="text" name="cellphone2" value="${user.cellphone}"/><span class="errorMsg" id="cellphone5">${error.cellphone}</span>				    
+							<img>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3">現在使用的大頭貼 ：</label>
+							<div class="col-sm-9">
+								<img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${user.memberId}" />"
+								width="80" height="60">			    
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3">大頭貼：</label>
+							<div class="col-sm-9">
+								<input class="form-control" type="file" accept='image/*'
+									onchange='openFile(event)' name="photo2" />
+									<img id='output' width="180px" height="180px">			    
+							</div>
+						</div>
+					</div>
+					<div style="height: 20px;"></div>
+					<div style="text-align: center;">
+						<input type="submit" value="修改會員資料" class="btn-info btn-lg" >
+					</div>
+					<div style="height: 20px;"></div>
+				</fieldset>
+			</form>
 		</div>
+	<div id="editAccount">
+	
+	
 	</div>
 	</article>
 </body>

@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+#memberIndex tr td:hover{
+	background-color:#8c8cff;
+	color:  #ffffff;
+         transition-property: background-color;
+  transition-duration: .3s;
+  transition-delay: .05s;
+  border-radius:50px;
+}
+#memberIndex tr td:active {
+    color:#EF8354;
+    background-color:white;
+    font-weight:900;
+    }
+#memberIndex tr td a{
+	text-decoration: none;
+}
+#memberIndex tr{
+	cursor: pointer
+}

@@ -136,38 +136,10 @@ nav {
 				</li>
 				<li class="whiteNav">
 					<c:choose>
-						<c:when test="${empty user}"><a onclick="doAlertMessage()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">會員功能<span class="caret"></span></a></c:when>
-						<c:when test="${not empty user}"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">會員功能<span class="caret"></span></a></c:when>
+						<c:when test="${empty user}"><a onclick="doAlertMessage()">會員專區</a></c:when>
+						<c:when test="${not empty user}"><a href="<c:url value="/_05_Member/member/MemberIndex.jsp" />">會員專區</a></c:when>
 					</c:choose>
-					<ul class="dropdown-menu navbar-nav" role="menu">
-						<li class="whiteNav">
-							<a href="<c:url value="/_05_Member/member/MemberTrip.jsp" />">我的行程</a>
-						</li>
-						<li class="whiteNav">
-							<a href="<c:url value="/_05_Member/member/MemberJournal.jsp" />">我的遊記</a>
-						</li>
-						<li class="whiteNav">
-							<a href="<c:url value="/_05_Member/member/MemberForum.jsp" />">我的討論區</a>
-						</li>
-						<li class="whiteNav">
-							<a href="<c:url value="/_05_Member/member/MemberSight.jsp" />">我的收藏景點</a>
-						</li>
-						<li class="whiteNav">
-							<a href="<c:url value="/_05_Member/member/MemberCollectionTrip.jsp" />">我的收藏行程</a>
-						</li>
-						<li class="whiteNav">
-							<a href="<c:url value="/_05_Member/member/MemberCollectionJournal.jsp" />">我的收藏遊記</a>
-						</li>
-						<li class="whiteNav">
-							<a href="<c:url value="/_05_Member/member/MemberCollectionForum.jsp" />">我的收藏討論區</a>
-						</li>
-						<li class="whiteNav">
-							<a href="<c:url value="/_05_Member/member/MemberCollectionMember.jsp" />">我的追蹤作者</a>
-						</li>
-						<li class="whiteNav">
-							<a href="<c:url value="/_05_Member/member/MemberModify.jsp " />">修改會員資料</a>
-						</li>
-					</ul>
+					
 				</li>
 				<c:if test="${not empty admin}">
 					<li class="whiteNav">
@@ -225,10 +197,12 @@ nav {
 							<button type="submit" class="btn btn-success btn-block">
 								<span class="glyphicon glyphicon-off"></span> 登入
 							</button>
+							<button type="button" class="btn btn-danger btn-default pull-left btn-block" data-dismiss="modal">
+								<span class="glyphicon glyphicon-remove"></span> 取消
+							</button>
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">取消</button>
 					</div>
 				</div>
 			</div>
