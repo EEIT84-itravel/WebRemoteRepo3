@@ -125,7 +125,7 @@ width: 100%;
 				<h2>I-Travel後台:管理景點</h2>
 				<button type="button" class="btn btn-info btn-lg" onclick="doNewSight()">新增景點</button>
 					<%
-						rowsPerPage = 20; //每頁的筆數 
+						rowsPerPage = 14; //每頁的筆數 
 						rowNumber = sightVO.size();
 					%>
 					<%@ include file="/_00_Misc/page1.file"%>

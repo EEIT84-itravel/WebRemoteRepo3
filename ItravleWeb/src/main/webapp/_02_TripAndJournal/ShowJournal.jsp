@@ -23,11 +23,13 @@ pageContext.setAttribute("regions", codeVO);
 <script type="text/javascript">
 	$(function() {
 		$("#collect").bind('click', collect);
+		$("#collectmember").bind('click', collectmember);
 	});
 	function collect() {
 		window.location.href = "../_02_TripAndJournal/member/collectiontrip.controller?referenceType="+ $("#referenceType").val()+"&typeId=type_id03";
-	
-	
+	};
+	function collectmember() {
+		window.location.href = "../_05_Member/member/collectionauthor.controller?friendId="+${showJournalVO.memberId}+"&tripId="+${showJournalVO.journalId}+"&type=journal";
 	};
 </script>
 <!-- jQuery ui -->
@@ -44,12 +46,10 @@ pageContext.setAttribute("regions", codeVO);
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article class="center-block">
-		<h1 style="color: red;">${showJournalVO.journalName}
-		</h1>
-		<h1 class="h1">
+		<h1 class="h1">${showJournalVO.journalName}
 			<input type="hidden"  id="referenceType" value="${showJournalVO.journalId}">	
 			<c:if test="${flag&&showJournalVO.memberId!=user.memberId}"> <!-- 		判斷收藏景點鈕是否出現 寫在ShowJournalDetailServlet -->		
-				<input type="button" value="收藏遊記" id='collect'>
+				<span><input type="button" value="收藏遊記" id='collect'></span>
  			</c:if>
 		</h1>
 		<div id="divJournal" class="pull-left">
@@ -67,14 +67,17 @@ pageContext.setAttribute("regions", codeVO);
 						width="100px" height="100px">
 					<td>
 						<ul style="list-style-type: none;">
-							<li><c:forEach var="MemberVO" items="${MemberService.all}">
+						   <li>
+						   <c:forEach var="MemberVO" items="${MemberService.all}">
 									<c:if test="${MemberVO.memberId==showJournalVO.memberId}">
-										<h3 style="color: green">作者：${MemberVO.nickname}</h3>
-										
-							            <input type="button" value="收藏作者" id='collectmember'><!-- 		判斷收藏作者鈕是否出現 寫在ShowJournalServlet -->
-								       
+										<h3 class="h3">作者：${MemberVO.nickname}
+										<c:if test="${flagmember}"> 
+							        	    <span ><input type="button" value="追蹤作者" id='collectmember'></span><!-- 		判斷收藏作者鈕是否出現 寫在ShowJournalServlet -->
+							    		</c:if>
+							    		</h3>
 									</c:if>
-								</c:forEach></li>
+								</c:forEach>
+							</li>
 							<li>遊玩日期：${showJournalVO.beginTime}~${showJournalVO.endTime}</li>
 							<c:forEach var="region" items="${regions}">
 								<c:if test="${region.codeId==showJournalVO.regionId}">

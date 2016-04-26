@@ -18,6 +18,7 @@ import _02_TripAndJournal.model.JournalVO;
 import _02_TripAndJournal.model.MessageService;
 import _02_TripAndJournal.model.MessageVO;
 import _05_Member.model.CollectionService;
+import _05_Member.model.FriendService;
 import _05_Member.model.MemberVO;
 
 @WebServlet("/_02_TripAndJournal/ShowJournalDetail.controller")
@@ -73,6 +74,15 @@ public class ShowJournalDetailServlet extends HttpServlet {
 			flag = true;
 		}
 		request.setAttribute("flag", flag);
+		//會員已登入且作者未收藏過會顯示作者收藏鈕
+		boolean flagmember = false;
+		FriendService friendservice= new FriendService();
+		if(user != null && user.getMemberId()!=journalVO.getMemberId() && friendservice.isfriend(user.getMemberId(), journalVO.getMemberId())==false){
+			flagmember = true;
+		}
+		System.out.println(flagmember);
+		request.setAttribute("flagmember", flagmember);
+				
 		request.getRequestDispatcher("/_02_TripAndJournal/ShowJournal.jsp").forward(request, response);
 	}
 

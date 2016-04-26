@@ -40,8 +40,17 @@ function confirmDeleteMessage(n,m) {
 function doAlertBtn() {
 	alertify.alert('此功能僅限會員使用，請先登入!!')
 }
-</script>
 
+                     
+</script>
+<script type="text/javascript">
+$(function() {
+	$("#collectmember").bind('click', collectmember);
+});
+function collectmember() {
+	window.location.href = "../_05_Member/member/collectionauthor.controller?friendId="+${forumVO.memberId}+"&tripId="+${forumVO.forumId}+"&type=forum";
+};    
+</script>
 </head>
 <body>
 	<header>
@@ -51,12 +60,15 @@ function doAlertBtn() {
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article class="center-block">	
+	<article class="center-block">
+	<input type="hidden"  id="referenceType" value="${forumVO.forumId}">	
 		<form action="<c:url value="/_04_Forum/member/Reply.controller"/>"
 			method="post">
 			<div id="forumHead">
+
 			<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
 				  <h3 style="color:darkblue">●${forumVO.forumTopic}</h3> <span class="error">${error.forumTopic}</span>
+
 						<c:url value="/_04_Forum/member/FiltUrlServlet.controller"
 							var="forum" scope="request">
 							<c:param name="forumId" value="${forumVO.forumId}" />
@@ -72,6 +84,9 @@ function doAlertBtn() {
 							<c:if test="${flag}"> 
 			                    <input type="button" class="btn btn-default" value="收藏文章" onclick="location.href='<c:url value="/_04_Forum/member/CollectionForum.controller?referenceType=${forumVO.forumId}&typeId=type_id05"/>'">
  		                    </c:if>
+ 		                    <c:if test="${flagmember}"> 
+							<input type="button" value="追蹤作者" id='collectmember' class="btn btn-default"><!-- 		判斷收藏作者鈕是否出現 寫在ShowArticleServlet -->
+							</c:if>
 							<c:choose>		
 								<c:when test="${empty user}"></c:when>
 								<c:when test="${user.memberId==forumVO.memberId}"><a href="${forum}" class="btn btn-default">編輯文章</a></c:when>
@@ -88,11 +103,13 @@ function doAlertBtn() {
 						<td><h4 style="color:green">作者：
 						    <c:forEach var="MemberVO" items="${MemberService.all}">
 								<c:if test="${MemberVO.memberId==forumVO.memberId}">
+
 										${MemberVO.nickname}<br>
                              	</c:if>
 							</c:forEach>
 							最後修改日期：<fmt:formatDate value="${forumVO.forumTime}" timeStyle="short" type="both"/>
 						</h4></td>
+
 					</tr>
 					
 					<tr>

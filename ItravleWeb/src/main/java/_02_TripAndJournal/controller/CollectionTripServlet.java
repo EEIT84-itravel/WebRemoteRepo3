@@ -18,7 +18,7 @@ import _05_Member.model.MemberVO;
 @WebServlet("/_02_TripAndJournal/member/collectiontrip.controller")
 public class CollectionTripServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	//遊記與行程共用會員收藏servlet
+	//遊記與行程與討論區文章共用會員收藏servlet
 	
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -64,6 +64,17 @@ public class CollectionTripServlet extends HttpServlet {
 			String path = request.getContextPath();
 			response.sendRedirect(path
 					+ "/_02_TripAndJournal/ShowJournalDetail.controller?journalId="
+					+ referenceType);
+		}
+		if ("type_id05".equals(typeId)) {// 類型為討論區
+			collectionVO.setMemberId(memberId);
+			collectionVO.setTypeId(typeId);
+			collectionVO.setReferenceType(referenceType);
+			collectionService.collectiontrip(collectionVO);
+			// 根據Model執行結果顯示View
+			String path = request.getContextPath();
+			response.sendRedirect(path
+					+ "/_04_Forum/ShowArticle.controller?forumId="
 					+ referenceType);
 		}
 	}
