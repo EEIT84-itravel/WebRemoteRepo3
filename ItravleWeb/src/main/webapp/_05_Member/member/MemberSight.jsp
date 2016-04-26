@@ -130,7 +130,9 @@ $(function() {
                                	</c:if>
 							</c:forEach>
 <%-- 							<td>${sightVO.score}</td>   --%>
-							<td><a href="<c:url value="/_05_Member/member/delsight.controller?referenceType=${sightVO.sightId}&typeId=type_id01&regionId=region00"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
+							<td><a href="">移出收藏夾</a>&nbsp;&nbsp;</td>
+							<td><button type="button" class="btn-danger btn-lg" onclick="location.href='<c:url value="/_05_Member/member/delsight.controller?referenceType=${sightVO.sightId}&typeId=type_id01&regionId=region00"/>'">移出收藏夾</button></td>
+						
 						</tr>
 					</c:forEach>
 				</c:if>
@@ -151,7 +153,7 @@ $(function() {
                             </c:if>
 							</c:forEach>
 <%-- 						<td>${sightVO1.score}</td> --%>
-						<td><a href="<c:url value="/_05_Member/member/delsight.controller?memberId=${user.memberId}&referenceType=${sightVO1.sightId}&typeId=type_id01&regionId=${param.regionId}"/>">移出收藏夾</a>&nbsp;&nbsp;</td>
+						<td><button type="button" class="btn-danger btn-lg" onclick="location.href='<c:url value="/_05_Member/member/delsight.controller?memberId=${user.memberId}&referenceType=${sightVO1.sightId}&typeId=type_id01&regionId=${param.regionId}"/>'">移出收藏夾</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>

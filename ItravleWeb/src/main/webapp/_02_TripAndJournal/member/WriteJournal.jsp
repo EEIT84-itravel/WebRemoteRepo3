@@ -95,6 +95,7 @@ textarea { /* Text Area 固定大小*/
 		<input type="hidden" name="journalId" value="${journalVO.journalId}">
 		<input type="hidden" name="visitorNum" value="${journalVO.visitorNum}">
 		<input type="hidden" name="memberId" value="${user.memberId}">		
+		<input type="hidden" name="crud" value="Insert">		
 			<div class="form-group">
 				<h4><label class="control-label col-sm-3">遊記名稱：</label></h4>
 				<div class="col-sm-6">

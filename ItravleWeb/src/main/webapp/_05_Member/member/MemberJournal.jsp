@@ -65,10 +65,10 @@ pageContext.setAttribute("journalVO", journalVO);
 					</c:if>		
 				</td>
 					<td>
-					<button type="button" class="btn-info btn" onclick="location.href='<c:url value="/_05_Member/member/changejournalpost.controller?journalId=${journalVO.journalId}"/>'">改變發佈狀態</button>
+					<button type="button" class="btn-info btn btn-lg" onclick="location.href='<c:url value="/_05_Member/member/changejournalpost.controller?journalId=${journalVO.journalId}"/>'">改變發佈狀態</button>
 				</td>			
 				<td>
-					<button type="button" class="btn-warning btn" onclick="location.href='<c:url value="/_02_TripAndJournal/member/ModifyJournal.controller?crud=Update&journalId=${journalVO.journalId}"/>'">修&nbsp;改&nbsp;遊&nbsp;記</button>				
+					<button type="button" class="btn-warning btn btn-lg" onclick="location.href='<c:url value="/_02_TripAndJournal/member/ModifyJournal.controller?crud=Update&journalId=${journalVO.journalId}"/>'">&nbsp;&nbsp;&nbsp;修改遊記&nbsp;&nbsp;&nbsp;</button>				
 				</td>
 				
 			</tr>

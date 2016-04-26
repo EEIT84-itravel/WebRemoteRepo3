@@ -47,7 +47,7 @@ public class WritingsServlet extends HttpServlet {
 		// 新增文章不進行資料轉換
 		int forumId = 0;
 		if ("UpdateArticle".equals(crud) || "Delete".equals(crud)) {
-			if (temp1 != null || temp1.trim().length() != 0) {
+			if (temp1 != null && temp1.trim().length() != 0) {
 				try {
 					forumId = Integer.parseInt(temp1);
 				} catch (NumberFormatException e) {
@@ -57,7 +57,7 @@ public class WritingsServlet extends HttpServlet {
 		}
 		int visitorNum = 0;
 		if ("UpdateArticle".equals(crud)) {
-			if (temp2 != null || temp2.trim().length() != 0) {
+			if (temp2 != null && temp2.trim().length() != 0) {
 				try {
 					visitorNum = Integer.parseInt(temp2);
 				} catch (NumberFormatException e) {
@@ -106,7 +106,6 @@ public class WritingsServlet extends HttpServlet {
 		forumVO.setForumTopic(forumTopic);
 		forumVO.setForumContent(forumContent);
 		forumVO.setForumTime(new Timestamp(new Date().getTime()));
-
 		// 執行方法
 		if ("NewArticle".equals(crud)) {
 			ForumVO result = fs.insert(forumVO);

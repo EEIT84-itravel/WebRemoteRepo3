@@ -19,5 +19,9 @@ public class JournalPhotoService {
 		journalPhotoDAOHibernate = new JournalPhotoDAOHibernate();
 		return journalPhotoDAOHibernate.update(vo);
 	}
+	public JournalPhotoVO select(int journalPhotoId){
+		journalPhotoDAOHibernate = new JournalPhotoDAOHibernate();
+		return journalPhotoDAOHibernate.select(journalPhotoId);
+	}
 
 }

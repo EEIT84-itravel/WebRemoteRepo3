@@ -55,17 +55,8 @@ function doAlertBtn() {
 		<form action="<c:url value="/_04_Forum/member/Reply.controller"/>"
 			method="post">
 			<div id="forumHead">
-				<table  id="forumBody">
-					<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
-
-					<tr class="success">
-						<td><h3 style="color:blue">●${forumVO.forumTopic}</h3> <span class="error">${error.forumTopic}</span></td>
-					</tr>
-
-					<tr class="success">
-						<td>最後修改日期：<fmt:formatDate value="${forumVO.forumTime}" timeStyle="short" type="both"/></td>						
-					</tr>				
-					<tr>
+			<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
+				  <h3 style="color:darkblue">●${forumVO.forumTopic}</h3> <span class="error">${error.forumTopic}</span>
 						<c:url value="/_04_Forum/member/FiltUrlServlet.controller"
 							var="forum" scope="request">
 							<c:param name="forumId" value="${forumVO.forumId}" />
@@ -73,7 +64,8 @@ function doAlertBtn() {
 							<c:param name="crud" value="UpdateArticle" />
 						</c:url>
 						<!-- 用choose判斷，user是否登入，登入才可以進行某些功能，並且自己只能對自己的文章及留言進行刪跟修 -->
-							<td><c:choose>		
+						<div style="margin-bottom: 8px">
+							<c:choose>		
 								<c:when test="${empty user}"><button type="button" class="btn btn-default" >回覆文章</button></c:when>
 								<c:when test="${not empty user}"><input type="button" class="btn btn-default" value="回覆文章"  onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&memberId=${user.memberId}&crud=NewReply"/>'"></c:when>
 							</c:choose>
@@ -88,29 +80,26 @@ function doAlertBtn() {
 								<c:when test="${empty user}"></c:when>
 								<c:when test="${user.memberId==forumVO.memberId}"><a href="javascript:if(confirm('確定要删除此文章嗎?'))location='<c:url value='/_04_Forum/member/WritingsServlet.controller?crud=Delete&forumId=${forumVO.forumId}&memberId=${user.memberId}'/>'" class="btn btn-default">删除文章</a>
 								</c:when>
-							</c:choose></td>
-							
-					</tr>
+							</c:choose>					
+					    </div>
+				<table  id="forumBody">
 					<tr>
-						<td><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${forumVO.memberId}" />" width="100px" height="100px"><br>
-						作者：<c:forEach
-								var="MemberVO" items="${MemberService.all}">
+						<td style="width: 120px;padding:8px;"><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${forumVO.memberId}" />" width="100px" height="100px"></td>
+						<td><h4 style="color:green">作者：
+						    <c:forEach var="MemberVO" items="${MemberService.all}">
 								<c:if test="${MemberVO.memberId==forumVO.memberId}">
-										${MemberVO.nickname}
-                             		</c:if>
-							</c:forEach></td>
+										${MemberVO.nickname}<br>
+                             	</c:if>
+							</c:forEach>
+							最後修改日期：<fmt:formatDate value="${forumVO.forumTime}" timeStyle="short" type="both"/>
+						</h4></td>
 					</tr>
-					<tr class="danger">
-						<td style="color:red">文章內容：${forumVO.forumContent}</td>
-					</tr>
+					
 					<tr>
-						<td><input type="button" onclick="history.back()" value="上一頁" />
-							<a href="/ItravleWeb/_04_Forum/ForumIndex.jsp">回討論區首頁</a></td>
+						<td colspan="2" style="padding:8px;"><h4>${forumVO.forumContent}</h4></td>
 					</tr>
 				</table>
-
-				<table border='1' id="messageBody" class="table">
-
+				<table  id="messageBody" class="table">
 					<c:forEach var="messageVO" items="${messageVO1}">
 						<tr>
 							<c:url value="/_04_Forum/member/FiltUrlServlet.controller"
@@ -121,35 +110,33 @@ function doAlertBtn() {
 								<c:param name="memberId" value="${user.memberId}" />
 								<c:param name="crud" value="UpdateReply" />
 							</c:url>
-							<td>
-							<!-- 用choose判斷，user是否登入，登入才可以進行某些功能，並且自己只能對自己的文章及留言進行刪跟修 -->
-							<c:choose>		
-								<c:when test="${empty user}"><input type="button" value="回覆文章" class="btn btn-default" onclick="location.href='<c:url value="/_05_Member/Login.jsp"/>'"></c:when>
-								<c:when test="${not empty user}"><input type="button" value="回覆文章" class="btn btn-default" onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&memberId=${user.memberId}&crud=NewReply"/>'"></c:when>
-							</c:choose>
-								<c:choose>		
-								<c:when test="${empty user}"></c:when>
-								<c:when test="${user.memberId==messageVO.memberId}"><a href="${reply}" class="btn btn-default">編輯留言</a></c:when>
-							</c:choose>
-							<c:choose>		
-								<c:when test="${empty user}"></c:when>
-								<c:when test="${user.memberId==messageVO.memberId}"><a class="btn btn-default" href="javascript:if(confirm('確定要删除此留言嗎?'))location='<c:url value='/_04_Forum/member/MessageServlet.controller?crud=Delete&messageId=${messageVO.messageId}&referenceNo=${forumVO.forumId}&memberId=${user.memberId}' />'">删除留言</a></c:when>
-							</c:choose></td>
+						
 							
 						</tr>
 						<tr>
-							<td><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${messageVO.memberId}" />" width="100px" height="100px"><br>回文者：<c:forEach var="MemberVO"
-									items="${MemberService.all}">
-									<c:if test="${MemberVO.memberId==messageVO.memberId}">
-										${MemberVO.nickname}
-                             		</c:if>
-								</c:forEach><span class="error">${error.messageTopic}</span></td>
+							<td style="width: 100px;"><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${messageVO.memberId}" />" width="100px" height="100px"></td>
+							<td>回文者：<c:forEach var="MemberVO"	items="${MemberService.all}">
+								<c:if test="${MemberVO.memberId==messageVO.memberId}">
+										${MemberVO.nickname}<br>
+                             	</c:if>
+								</c:forEach>回文時間：<fmt:formatDate value="${messageVO.updateTime}" timeStyle="short" type="both"/><br>
+								<!-- 用choose判斷，user是否登入，登入才可以進行某些功能，並且自己只能對自己的文章及留言進行刪跟修 -->
+								<c:choose>		
+									<c:when test="${empty user}"><input type="button" value="回覆文章" class="btn btn-default" onclick="location.href='<c:url value="/_05_Member/Login.jsp"/>'"></c:when>
+									<c:when test="${not empty user}"><input type="button" value="回覆文章" class="btn btn-default" onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&memberId=${user.memberId}&crud=NewReply"/>'"></c:when>
+								</c:choose>
+									<c:choose>		
+									<c:when test="${empty user}"></c:when>
+									<c:when test="${user.memberId==messageVO.memberId}"><a href="${reply}" class="btn btn-default">編輯留言</a></c:when>
+								</c:choose>
+								<c:choose>		
+									<c:when test="${empty user}"></c:when>
+									<c:when test="${user.memberId==messageVO.memberId}"><a class="btn btn-default" href="javascript:if(confirm('確定要删除此留言嗎?'))location='<c:url value='/_04_Forum/member/MessageServlet.controller?crud=Delete&messageId=${messageVO.messageId}&referenceNo=${forumVO.forumId}&memberId=${user.memberId}' />'">删除留言</a></c:when>
+								</c:choose>
+							</td>
 						</tr>
 						<tr>
-							<td>回文時間：<fmt:formatDate value="${messageVO.updateTime}" timeStyle="short" type="both"/></td>					
-						</tr>
-						<tr>
-							<td>回覆內容：${messageVO.content}<br></td>
+							<td colspan="2" style="padding:8px;">${messageVO.content}<br></td>
 						</tr>
 					</c:forEach>
 				</table>

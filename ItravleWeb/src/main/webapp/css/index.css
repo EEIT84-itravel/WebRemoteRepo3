@@ -8,7 +8,19 @@
 	padding: 10px;
 	background-color: #EAEFB1;
 }
-
+#hotSight{
+	margin-top:10px;
+    width:880px;
+    height:35px;
+    background: #e99801;
+    padding-left:12px;
+    padding-top:3px;
+    padding-bottom:2px;
+    border-top-left-radius:5px 5px;
+    border-top-right-radius:5px 5px;
+    color:white;
+    font-size: 20px;
+}
 #hotJournal {
 	width: 300px;
 	height: 300px;
@@ -28,7 +40,7 @@
 #container{
 	padding:10px;
 	 width: 900px;
-	height: 350px;
+	height: 300px;
 	  margin: auto;	
 }
 #skippr{
@@ -51,8 +63,9 @@ li{
 }
 .wrap { position: relative; width:880px; margin:0 auto;}
 #dowebok { overflow: hidden;}
-.box-slider .box-slider-seta-left { float: left; width: 25px; height: 150px;border-top-left-radius:5px 5px;border-bottom-left-radius:5px 5px; background: url(../img/seta-left.png) no-repeat center center #800040;}
-.box-slider .box-slider-seta-right { float: right; width: 25px; height: 150px;border-top-right-radius:5px 5px;border-bottom-right-radius:5px 5px; background: url(../img/seta-right.png) no-repeat center center #800040;}
+
+.box-slider .box-slider-seta-left { float: left; width: 25px; height: 150px;border-bottom-left-radius:5px 5px; background: url(../img/seta-left.png) no-repeat center center #808080;}
+.box-slider .box-slider-seta-right { float: right; width: 25px; height: 150px;border-bottom-right-radius:5px 5px; background: url(../img/seta-right.png) no-repeat center center #808080;}
 .box-slider .box-slider-content { position: absolute; left: 42px; width: 795px; overflow: hidden;}
 .box-slider .box-slider-move { position: relative; top: 0; left: 0; width: 10000px;}
 .box-slider .item { float: left; width: 160px; margin-left: 5px;cursor: pointer;}

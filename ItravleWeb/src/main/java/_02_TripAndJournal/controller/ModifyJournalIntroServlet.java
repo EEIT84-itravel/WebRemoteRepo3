@@ -1,7 +1,7 @@
 package _02_TripAndJournal.controller;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,19 +31,21 @@ public class ModifyJournalIntroServlet extends HttpServlet {
 		String journalName = request.getParameter("journalName");
 		String regionId = request.getParameter("regionId");
 		String journalIntro = request.getParameter("journalIntro");
+		String crud = request.getParameter("crud");
 		String temp1 = request.getParameter("journalStartDate");
 		String temp2 = request.getParameter("journalEndDate");
 		String temp3 = request.getParameter("journalId");
 		String temp4 = request.getParameter("memberId");
+		String temp5 = request.getParameter("post");
         		
 		//轉換型態
 		java.sql.Date journalStartDate = null;
 		if (temp1 != null && temp1.trim().length() != 0) {
-				journalStartDate = Date.valueOf(temp1);
+				journalStartDate = java.sql.Date.valueOf(temp1);
 		}
 		java.sql.Date journalEndDate = null;
 		if (temp2 != null && temp2.trim().length() != 0) {		
-				journalEndDate = Date.valueOf(temp2);			
+				journalEndDate = java.sql.Date.valueOf(temp2);			
 		}
 		int journalId = 0;
 		if (temp3 != null || temp3.trim().length() != 0) {
@@ -61,6 +63,14 @@ public class ModifyJournalIntroServlet extends HttpServlet {
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			}
+		}
+		boolean post = false;
+		if (temp5 != null || temp5.trim().length() != 0) {
+		  if(temp5.equals("false")){
+			  post = false;
+		  }else{
+			  post = true;
+		  }
 		}
 		//錯誤處理
 		if(journalName==null || journalName.trim().length()==0){
@@ -83,15 +93,22 @@ public class ModifyJournalIntroServlet extends HttpServlet {
 		journalVO.setJournalId(journalId);
 		journalVO.setJournalIntro(journalIntro);
 		journalVO.setJournalName(journalName);
-		journalVO.setModifyTime(new Timestamp(new Date(0).getTime()));
+		journalVO.setModifyTime(new Timestamp(new Date().getTime()));
 		journalVO.setRegionId(regionId);
-		journalVO.setPost(false);
+		journalVO.setPost(post);
 		journalVO.setVisitorNum(0);
 		JournalVO result = js.updateIntro(journalVO);
-		request.setAttribute("journalVO", result);
-		request.getRequestDispatcher("/_02_TripAndJournal/member/WriteJournal.jsp")
-		.forward(request, response);
-return;
+		
+		if("Insert".equals(crud)){
+			request.setAttribute("journalVO", result);
+			request.getRequestDispatcher("/_02_TripAndJournal/member/WriteJournal.jsp").forward(request, response);
+	         return;
+		}else if("Update".equals(crud)){
+			request.setAttribute("modifyVO", result);
+			request.getRequestDispatcher("/_02_TripAndJournal/member/modifyJournal.jsp").forward(request, response);
+	         return;
+		}
+
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

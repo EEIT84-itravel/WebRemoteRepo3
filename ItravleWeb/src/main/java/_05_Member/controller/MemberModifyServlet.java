@@ -42,7 +42,7 @@ public class MemberModifyServlet extends HttpServlet {
 				String email = request.getParameter("email");
 				String birth = request.getParameter("birth");
 				String cellphone = request.getParameter("cellphone2");
-				Part filePart = request.getPart("photo1"); // Retrieves <input type="file" name="file">
+				Part filePart = request.getPart("photo2"); // Retrieves <input type="file" name="file">
 				String fileName = filePart.getSubmittedFileName();
 				InputStream is = filePart.getInputStream();
 				Map<String, String> error = new HashMap<String, String>();
