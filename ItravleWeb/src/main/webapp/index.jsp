@@ -79,13 +79,13 @@
 				<a href="<c:url value="/_03_Event/ShowEvent.controller?eventId=7" />">
 				<img src="<c:url value="/_03_Event/ShowEventPic.controller?eventId=7"/>" style="height: 400px; width: 900px;"></a>
 			    <a href="<c:url value="/_03_Event/ShowEvent.controller?eventId=8" />">
-			    <img src="<c:url value="/_03_Event/ShowEventPic.controller?eventId=8"/>" style="height: 400px; width: 900px;"></a> 
+			    <img src="<c:url value="/_03_Event/ShowEventPic.controller?eventId=14"/>" style="height: 400px; width: 900px;"></a> 
 				<a href="<c:url value="/_03_Event/ShowEvent.controller?eventId=10" />">
-				<img src="<c:url value="/_03_Event/ShowEventPic.controller?eventId=10"/>" style="height: 400px; width: 900px;"></a>
+				<img src="<c:url value="/_03_Event/ShowEventPic.controller?eventId=15"/>" style="height: 400px; width: 900px;"></a>
 				<a href="<c:url value="/_03_Event/ShowEvent.controller?eventId=11" />">
-				<img src="<c:url value="/_03_Event/ShowEventPic.controller?eventId=11"/>" style="height: 400px; width: 900px;"></a>
+				<img src="<c:url value="/_03_Event/ShowEventPic.controller?eventId=8"/>" style="height: 400px; width: 900px;"></a>
 				<a href="<c:url value="/_03_Event/ShowEvent.controller?eventId=12" />">
-				<img src="<c:url value="/_03_Event/ShowEventPic.controller?eventId=12"/>" style="height: 400px; width: 900px;"></a>
+				<img src="<c:url value="/_03_Event/ShowEventPic.controller?eventId=10"/>" style="height: 400px; width: 900px;"></a>
 			</div>
 <!-- 熱門景點 -->
 			<div style="height: 10px"></div>
