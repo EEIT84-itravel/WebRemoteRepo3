@@ -52,7 +52,7 @@ pageContext.setAttribute("regions", codeVO);
 	<input type="hidden"  id="referenceType" value="${tripVO.tripId}">	
 		<h1 class="h1">${tripVO.tripName} <!-- 		判斷收藏景點鈕是否出現 寫在ShowTripServlet -->
  			<c:if test="${flag}"> 
-				<input type="button" value="收藏行程" id='collect'>
+				<input type="button" value="收藏行程" id='collect' class="btn btn-default btn-lg">
  			</c:if>
  		</h1> 
 		<div id="divTrip" class="pull-left">

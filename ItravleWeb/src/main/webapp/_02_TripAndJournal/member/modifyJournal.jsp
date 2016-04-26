@@ -156,7 +156,7 @@
 					</c:forEach>
 				
 				<div class="form-group"  style="text-align: center;">
-					<input type="submit" value="儲存遊記" id="saveJournal"
+					<input type="submit" value="儲存遊記" id="saveJournal" onclick="if(confirm('您確定修改遊記嗎?')) return true;else return false"
 						class="btn btn-success btn-lg" />
 		   		 </div>			
 		</form>

@@ -175,7 +175,7 @@ textarea { /* Text Area 固定大小*/
 					</c:forEach>
 				</c:if>
 				<div class="form-group"  style="text-align: center;">
-					<input type="submit" value="儲存遊記" id="saveJournal"
+					<input type="submit" value="儲存遊記" id="saveJournal" onclick="if(confirm('您確定發表新遊記嗎?')) return true;else return false"
 						class="btn btn-success btn-lg" />
 		   		 </div>
 				
