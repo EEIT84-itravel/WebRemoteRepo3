@@ -20,7 +20,11 @@
 	href="../jquery-ui-1.11.4.custom/jquery-ui.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.css" />
-
+<style type="text/css">
+table {
+font-size: 20px;
+}
+</style>
 <script type="text/javascript" src="../js/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="../jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
@@ -62,7 +66,7 @@
 
 	<article class="center-block" style="width:1000px;">
 		<h2>全部活動</h2>
-			<table border='1' id="event" class="table">
+			<table id="event" class="table">
 				<thead>
 					<tr>
 						<th>活動主題</th>
