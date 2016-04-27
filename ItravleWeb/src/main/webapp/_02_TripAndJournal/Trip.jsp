@@ -30,7 +30,6 @@ pageContext.setAttribute("regions", codeVO);
 	$(function() {
 		$("#collect").bind('click', collect);
 		$("#collectmember").bind('click', collectmember);
-		$("#deletemy").bind('click', deletemy);
 	});
 	function collect() {
 		window.location.href = "../_02_TripAndJournal/member/collectiontrip.controller?referenceType="+ $("#referenceType").val()+"&typeId=type_id02";
@@ -38,9 +37,7 @@ pageContext.setAttribute("regions", codeVO);
 	function collectmember() {
 		window.location.href = "../_05_Member/member/collectionauthor.controller?friendId="+${tripVO.memberId}+"&tripId="+${tripVO.tripId}+"&type=trip";
 	};
-	function deletemy() {
-		window.location.href = "../_05_Member/member/delmytrip.controller?friendId="+${tripVO.memberId}+"&tripId="+${tripVO.tripId};
-	};
+	
 </script>
 </head>
 <body>
@@ -68,7 +65,7 @@ pageContext.setAttribute("regions", codeVO);
 				</c:when>
 			</c:choose>
 			<c:if test="${flagdelete}"> 
- 			<input type="button" value="刪除行程" id='deletemy' class="btn btn-danger btn-lg"><!-- 		判斷刪除自己的東西鈕是否出現 寫在ShowTripServlet -->
+			<a class="btn btn-danger btn-lg" href="javascript:if(confirm('確定要删除此行程嗎?'))location='<c:url value="/_05_Member/member/delmytrip.controller?friendId=${tripVO.memberId}&tripId=${tripVO.tripId} "/>'">删除行程</a>
  		    </c:if>
  		</h1> 
  		
