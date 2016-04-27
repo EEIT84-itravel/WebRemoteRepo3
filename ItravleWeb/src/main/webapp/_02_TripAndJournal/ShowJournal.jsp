@@ -69,7 +69,7 @@ pageContext.setAttribute("regions", codeVO);
 				<table id="member" class="table table-bordered">
 				<tr>
 					<td class="memberPic"><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${showJournalVO.memberId}" />"
-						width="100px" height="100px">
+						width="150px" height="150px">
 					<td>
 						<ul style="list-style-type: none;">
 						   <li>
