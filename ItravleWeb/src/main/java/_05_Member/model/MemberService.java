@@ -24,7 +24,7 @@ public class MemberService {
 				return memberbean;
 			}
 			System.out.println("失敗");
-			return memberbean;
+			return null;
 	 }
 	 System.out.println("false");
 	 return null;

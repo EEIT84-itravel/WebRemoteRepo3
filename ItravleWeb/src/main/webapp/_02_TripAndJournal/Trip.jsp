@@ -30,12 +30,16 @@ pageContext.setAttribute("regions", codeVO);
 	$(function() {
 		$("#collect").bind('click', collect);
 		$("#collectmember").bind('click', collectmember);
+		$("#deletemy").bind('click', deletemy);
 	});
 	function collect() {
 		window.location.href = "../_02_TripAndJournal/member/collectiontrip.controller?referenceType="+ $("#referenceType").val()+"&typeId=type_id02";
 	};	
 	function collectmember() {
 		window.location.href = "../_05_Member/member/collectionauthor.controller?friendId="+${tripVO.memberId}+"&tripId="+${tripVO.tripId}+"&type=trip";
+	};
+	function deletemy() {
+		window.location.href = "../_05_Member/member/delmytrip.controller?friendId="+${tripVO.memberId}+"&tripId="+${tripVO.tripId};
 	};
 </script>
 </head>
@@ -55,6 +59,7 @@ pageContext.setAttribute("regions", codeVO);
  			<c:if test="${flag&&user.memberId!=tripVO.memberId}"> 		
  			<button type="button" id='collect' class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart" style="color:red;"></span>收藏行程</button>
  			</c:if>
+
  			<br>
  			<c:choose>		
 				<c:when test="${empty user}"></c:when>
@@ -62,6 +67,9 @@ pageContext.setAttribute("regions", codeVO);
 					<input type="button"  value="修改行程" onclick="location.href='<c:url value="/_05_Member/member/tripfinddetail.controller?tripId=${tripVO.tripId}"/>'" class="btn btn-warning btn-lg">
 				</c:when>
 			</c:choose>
+			<c:if test="${flagdelete}"> 
+ 			<input type="button" value="刪除行程" id='deletemy' class="btn btn-danger btn-lg"><!-- 		判斷刪除自己的東西鈕是否出現 寫在ShowTripServlet -->
+ 		    </c:if>
  		</h1> 
  		
 		<div id="divTrip" class="pull-left">

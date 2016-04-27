@@ -93,6 +93,12 @@ public class ShowTripServlet extends HttpServlet {
 			flagmember = true;
 		}
 		request.setAttribute("flagmember", flagmember);
+		//會員已登入且是自己的，做刪除行程鈕
+		boolean flagdelete = false;
+		if(user != null && user.getMemberId()==tripVO.getMemberId()){
+			flagdelete = true;
+		}
+		request.setAttribute("flagdelete", flagdelete);
 		// 根據結果選擇veiw
 		request.getRequestDispatcher("/_02_TripAndJournal/Trip.jsp").forward(request, response);
 	}

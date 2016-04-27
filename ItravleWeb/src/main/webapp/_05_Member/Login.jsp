@@ -39,7 +39,7 @@
 							<div class="form-group">
 								<label for="psw"><span
 									class="glyphicon glyphicon-eye-open"></span> 密碼</label> <input
-									type="text" class="form-control" name="password"
+									type="password" class="form-control" name="password"
 									value="${param.password}" placeholder="請輸入密碼">
 									<span class="errorMsg">${error.password}</span>
 							</div>
