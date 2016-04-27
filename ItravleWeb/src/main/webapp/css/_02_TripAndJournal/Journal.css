@@ -2,6 +2,10 @@
 .journalTable{
 	font-size: 20px;
 }
+#output{
+	width: 375px;
+	height: 300px;
+}
 #divMember,#divJournal {
 	width: 790px;
 	margin: 5px;
@@ -15,7 +19,6 @@
 	width:740px;
 }
 img {
-
 	vertical-align:middle;
 }
 #backURL {

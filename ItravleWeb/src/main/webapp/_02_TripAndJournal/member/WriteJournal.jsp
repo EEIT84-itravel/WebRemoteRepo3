@@ -31,7 +31,7 @@ textarea { /* Text Area 固定大小*/
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/css/_00_Misc/main.css"/>" />
 <link rel="stylesheet" type="text/css"
-	href="<c:url value="/css/_02_TripAndJournal/WriteJournal.css"/>" />
+	href="<c:url value="/css/_02_TripAndJournal/ModifyJournal.css"/>" />
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
