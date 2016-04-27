@@ -37,9 +37,6 @@ function confirmDeleteMessage(n,m) {
 	
 	}
 }
-function doAlertBtn() {
-	alertify.alert('此功能僅限會員使用，請先登入!!')
-}
 
                      
 </script>
@@ -78,22 +75,22 @@ function collectmember() {
 						<!-- 用choose判斷，user是否登入，登入才可以進行某些功能，並且自己只能對自己的文章及留言進行刪跟修 -->
 						<div style="margin-bottom: 8px">
 							<c:choose>		
-								<c:when test="${empty user}"><button type="button" class="btn btn-default" >回覆文章</button></c:when>
+								<c:when test="${empty user}"><button type="button" class="btn btn-default" onclick="doAlertNewArt()">回覆文章</button></c:when>
 								<c:when test="${not empty user}"><input type="button" class="btn btn-default" value="回覆文章"  onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&memberId=${user.memberId}&crud=NewReply"/>'"></c:when>
 							</c:choose>
-							<c:if test="${flag}"> 
-			                    <input type="button" class="btn btn-default" value="收藏文章" onclick="location.href='<c:url value="/_04_Forum/member/CollectionForum.controller?referenceType=${forumVO.forumId}&typeId=type_id05"/>'">
+							<c:if test="${flag&&user.memberId!=forumVO.memberId}"> 		
+							<button  class="btn btn-default" onclick="location.href='<c:url value="/_04_Forum/member/CollectionForum.controller?referenceType=${forumVO.forumId}&typeId=type_id05"/>'"><span class="glyphicon glyphicon-heart" style="color:red;">收藏文章</span></button>
  		                    </c:if>
  		                    <c:if test="${flagmember}"> 
 							<input type="button" value="追蹤作者" id='collectmember' class="btn btn-default"><!-- 		判斷收藏作者鈕是否出現 寫在ShowArticleServlet -->
 							</c:if>
 							<c:choose>		
 								<c:when test="${empty user}"></c:when>
-								<c:when test="${user.memberId==forumVO.memberId}"><a href="${forum}" class="btn btn-default">編輯文章</a></c:when>
+								<c:when test="${user.memberId==forumVO.memberId}"><a href="${forum}" class="btn btn-warning">編輯文章</a></c:when>
 							</c:choose>
 							<c:choose>		
 								<c:when test="${empty user}"></c:when>
-								<c:when test="${user.memberId==forumVO.memberId}"><a href="javascript:if(confirm('確定要删除此文章嗎?'))location='<c:url value='/_04_Forum/member/WritingsServlet.controller?crud=Delete&forumId=${forumVO.forumId}&memberId=${user.memberId}'/>'" class="btn btn-default">删除文章</a>
+								<c:when test="${user.memberId==forumVO.memberId}"><a href="javascript:if(confirm('確定要删除此文章嗎?'))location='<c:url value='/_04_Forum/member/WritingsServlet.controller?crud=Delete&forumId=${forumVO.forumId}&memberId=${user.memberId}'/>'" class="btn btn-danger">删除文章</a>
 								</c:when>
 							</c:choose>					
 					    </div>
