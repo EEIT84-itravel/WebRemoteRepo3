@@ -178,6 +178,9 @@ public class JournalDetailServlet extends HttpServlet {
 				journalPhotoService.update(journalPhotoVO);
 			}
 		} else if ("Insert".equals(crud)) {
+			is.read(p);
+			is.close();
+			journalPhotoVO.setJournalPhoto(p);
 			journalPhotoService.insert(journalPhotoVO);
 		}
 		response.sendRedirect(path

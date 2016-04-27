@@ -233,11 +233,11 @@ function delADetail(referenceNo) {
 		<form method="post" action="<c:url value="/_02_TripAndJournal/member/TripDetail2.controller" />">	
 			<h2 class="h2">行程名稱：${tripVO.tripName}</h2>					
 			<div id="days">
-				<p>tripId：${tripVO.tripId}</p>
+<%-- 				<p>tripId：${tripVO.tripId}</p> --%>
 				<input type="hidden" name="tripId" value="${tripVO.tripId}">
 				<p>行程開始日期：<br>${tripVO.tripStartDate}</p>
 <%-- 				<p>本行程共<%=dateDiff%>天</p> --%>				
-				<button id="btnBudget" class="btn btn-info btn-lg">預算一覽</button><br>
+<!-- 				<button id="btnBudget" class="btn btn-info btn-lg">預算一覽</button><br> -->
 				<input type="submit" value="儲存行程" class="btn btn-primary btn-lg">
 			</div> <!-- end div days -->
 			<div id="trip">

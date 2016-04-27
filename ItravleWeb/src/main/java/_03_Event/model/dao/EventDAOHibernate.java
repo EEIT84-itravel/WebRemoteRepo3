@@ -25,7 +25,7 @@ public class EventDAOHibernate {
 		Session session = HibernateUtil_H4_Ver1.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("from EventVO");
+			Query query = session.createQuery("from EventVO order by eventId desc");
 			result = query.list();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {

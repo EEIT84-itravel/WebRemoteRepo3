@@ -24,12 +24,16 @@ pageContext.setAttribute("regions", codeVO);
 	$(function() {
 		$("#collect").bind('click', collect);
 		$("#collectmember").bind('click', collectmember);
+		$("#deletemy").bind('click', deletemy);
 	});
 	function collect() {
 		window.location.href = "../_02_TripAndJournal/member/collectiontrip.controller?referenceType="+ $("#referenceType").val()+"&typeId=type_id03";
 	};
 	function collectmember() {
 		window.location.href = "../_05_Member/member/collectionauthor.controller?friendId="+${showJournalVO.memberId}+"&tripId="+${showJournalVO.journalId}+"&type=journal";
+	};
+	function deletemy() {
+		window.location.href = "../_05_Member/member/delmyjournal.controller?journalId="+${showJournalVO.journalId};
 	};
 </script>
 <!-- jQuery ui -->
@@ -49,7 +53,7 @@ pageContext.setAttribute("regions", codeVO);
 		<h1 class="h1">${showJournalVO.journalName}
 			<input type="hidden"  id="referenceType" value="${showJournalVO.journalId}">	
 			<c:if test="${flag&&showJournalVO.memberId!=user.memberId}"> <!-- 		判斷收藏景點鈕是否出現 寫在ShowJournalDetailServlet -->		
-				<span><input type="button" value="收藏遊記" id='collect' class="btn btn-default btn-lg"></span>
+				<button type="button" id='collect' class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart" style="color:red;"></span>收藏遊記</button>
  			</c:if>
 		</h1>
 		<div id="divJournal" class="pull-left">
@@ -60,6 +64,9 @@ pageContext.setAttribute("regions", codeVO);
 					<input type="submit" name="modifyJournal" value="修改遊記" class="btn btn-warning btn-lg">
 				</c:when>
 			</c:choose>
+			 	<c:if test="${flagdelete}"> 
+ 			        <span><input type="button" value="刪除遊記" id='deletemy' class="btn btn-danger btn-lg"></span><!-- 		判斷刪除鈕是否出現 寫在ShowJournalDetailServlet -->
+		        </c:if>
 			<div id="divMember">
 				<table id="member" class="table table-bordered">
 				<tr>

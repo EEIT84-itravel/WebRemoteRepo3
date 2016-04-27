@@ -7,9 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>I-Travel:Login-Failure</title>
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
-<script type="text/javascript">
-	setTimeout("location.href='<c:url value="/index.jsp"/>'", 3000);
-</script>
 </head>
 <body>
 	<header>
@@ -42,18 +39,20 @@
 							<div class="form-group">
 								<label for="psw"><span
 									class="glyphicon glyphicon-eye-open"></span> 密碼</label> <input
-									type="text" class="form-control" name="password"
+									type="password" class="form-control" name="password"
 									value="${param.password}" placeholder="請輸入密碼">
 									<span class="errorMsg">${error.password}</span>
 							</div>
 							<button type="submit" class="btn btn-success btn-block">
 								<span class="glyphicon glyphicon-off"></span> 登入
 							</button>
+							<button type="button" onclick="location.href='<c:url value="/index.jsp" />'" class="btn btn-danger btn-default pull-left btn-block" data-dismiss="modal">
+								<span class="glyphicon glyphicon-remove"></span> 取消
+							</button>
 						</form>
 					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-danger btn-default pull-left"
-							data-dismiss="modal">取消</button>
+					<div style="height: 30px;">
+						
 					</div>
 				</div>
 	</article>

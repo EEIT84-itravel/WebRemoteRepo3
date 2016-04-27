@@ -15,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <!-- lightbox -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_01_Sight/lightbox.min.css" />" />
+<%-- <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/> --%>
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_01_Sight/SightInformation.css"/>"/>
 <!-- jQuery ui -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
@@ -50,7 +51,8 @@
 			
 			<h2>${sightVO.sightName}	<!-- 判斷收藏景點鈕是否出現 寫在SightServlet -->
 				<c:if test="${flag}">
-					<span><input type="button" value="收藏景點" id='collect'></span>
+				
+				<button type="button" id='collect' class="btn btn-lg btn-default"><span class="glyphicon glyphicon-heart" style="color:red;"></span>收藏景點</button>
 				</c:if>
 			</h2>
 			<p>　　${sightVO.intro}</p>

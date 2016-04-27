@@ -48,7 +48,7 @@ public class ModifyJournalIntroServlet extends HttpServlet {
 				journalEndDate = java.sql.Date.valueOf(temp2);			
 		}
 		int journalId = 0;
-		if (temp3 != null || temp3.trim().length() != 0) {
+		if (temp3 != null && temp3.trim().length() != 0) {
 			try {
 				journalId = Integer.parseInt(temp3);
 			} catch (NumberFormatException e) {
@@ -57,7 +57,7 @@ public class ModifyJournalIntroServlet extends HttpServlet {
 		}
 		
 		int memberId = 0;
-		if (temp4 != null || temp4.trim().length() != 0) {
+		if (temp4 != null && temp4.trim().length() != 0) {
 			try {
 				memberId = Integer.parseInt(temp4);
 			} catch (NumberFormatException e) {
@@ -65,12 +65,14 @@ public class ModifyJournalIntroServlet extends HttpServlet {
 			}
 		}
 		boolean post = false;
-		if (temp5 != null || temp5.trim().length() != 0) {
+		if("Update".equals(crud)){
+		if (temp5 != null && temp5.trim().length() != 0) {
 		  if(temp5.equals("false")){
 			  post = false;
 		  }else{
 			  post = true;
 		  }
+		}
 		}
 		//錯誤處理
 		if(journalName==null || journalName.trim().length()==0){

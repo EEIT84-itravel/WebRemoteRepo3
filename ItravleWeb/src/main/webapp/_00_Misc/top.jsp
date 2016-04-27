@@ -103,6 +103,10 @@ nav {
 	function doArticleMessage() {
 		alertify.alert('發表文章請先登入！')
 	}
+	function doAlertNewArt() {
+		alertify.alert('回覆文章請先登入!!')
+	}
+
 </script>
 </head>
 <body>
