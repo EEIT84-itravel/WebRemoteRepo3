@@ -59,8 +59,6 @@ function collectmember() {
 	</nav>
 	<article class="center-block">
 	<input type="hidden"  id="referenceType" value="${forumVO.forumId}">	
-		<form action="<c:url value="/_04_Forum/member/Reply.controller"/>"
-			method="post">
 			<div id="forumHead">
 
 			<c:import url="/_04_Forum/ForumHead.jsp"></c:import>
@@ -124,8 +122,6 @@ function collectmember() {
 								<c:param name="memberId" value="${user.memberId}" />
 								<c:param name="crud" value="UpdateReply" />
 							</c:url>
-						
-							
 						</tr>
 						<tr>
 							<td style="width: 100px;"><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${messageVO.memberId}" />" width="100px" height="100px"></td>
@@ -155,7 +151,6 @@ function collectmember() {
 					</c:forEach>
 				</table>
 			</div>
-		</form>
 				<div id="backURL" style="text-align: center;margin:0 auto;"><h4 class="h4"><a href="<c:url value="/_04_Forum/ForumIndex.jsp" />">回討論區首頁</a></h4></div>
 		
 	</article>

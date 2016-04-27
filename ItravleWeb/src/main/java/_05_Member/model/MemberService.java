@@ -17,7 +17,7 @@ public class MemberService {
 		 }else{
 			 memberbean = null;
 		 }
-		if (bean != null &&bean.size()>0) {
+		if (bean != null &&!bean.isEmpty()) {
 			String pass = memberbean.getPassword();
 			if (pass.equals(password)) {
 				System.out.println("Success");

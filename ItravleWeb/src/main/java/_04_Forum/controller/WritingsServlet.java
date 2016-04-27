@@ -2,8 +2,10 @@ package _04_Forum.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import _04_Forum.model.ForumService;
 import _04_Forum.model.ForumVO;
+import _05_Member.model.CollectionService;
 import _05_Member.model.MemberVO;
 
 @WebServlet("/_04_Forum/member/WritingsServlet.controller")
@@ -39,7 +42,7 @@ public class WritingsServlet extends HttpServlet {
 		String forumContent = request.getParameter("forumContent");
 		String temp1 = request.getParameter("forumId");
 		String temp2 = request.getParameter("visit");
-		MemberVO memberVO =(MemberVO)session.getAttribute("user");
+		MemberVO memberVO = (MemberVO) session.getAttribute("user");
 		int memberId = memberVO.getMemberId();
 		String crud = request.getParameter("crud");
 		System.out.println(crud);
@@ -65,26 +68,34 @@ public class WritingsServlet extends HttpServlet {
 				}
 			}
 		}
-		 if ("Delete".equals(crud)) {
-				if (fs.selectOne(forumId).getMemberId() == memberId) {
-					forumVO.setForumId(forumId);
-					boolean result = fs.delete(forumVO);
-					if (result == false) {
-						error.put("forumTopic", "刪除失敗");
-						response.sendRedirect(path + "/_04_Forum/LookArticle.jsp");
-						return;
-					} else {
-						response.sendRedirect(path + "/_04_Forum/ForumIndex.jsp");
-						return;
+		if ("Delete".equals(crud)) {
+			if (fs.selectOne(forumId).getMemberId() == memberId) {
+				forumVO.setForumId(forumId);
+				boolean result = fs.delete(forumVO);
+				if (result == false) {
+					error.put("forumTopic", "刪除失敗");
+					response.sendRedirect(path + "/_04_Forum/LookArticle.jsp");
+					return;
+				} else {
+					// 刪除相關收藏
+					CollectionService collectionService = new CollectionService();
+					List<Integer> forumCollectionId = new ArrayList<>();
+					forumCollectionId = collectionService.selectByReferenceTypeAndTypeId(forumId,"type_id05");
+					if (forumCollectionId != null&& !forumCollectionId.isEmpty()) {
+						for (int i = 0; i < forumCollectionId.size(); i++) {collectionService.delSightCollection(forumCollectionId.get(i));
+						}
 					}
-				}else{
-					error.put("fContent", "非本人不可刪除");
-					response.sendRedirect(path
-							+ "/_04_Forum/ShowArticle.controller?forumId="
-							+ forumId);
+					response.sendRedirect(path + "/_04_Forum/ForumIndex.jsp");
 					return;
 				}
+			} else {
+				error.put("fContent", "非本人不可刪除");
+				response.sendRedirect(path
+						+ "/_04_Forum/ShowArticle.controller?forumId="
+						+ forumId);
+				return;
 			}
+		}
 
 		// 驗證資料
 		if (forumTopic == null || forumTopic.trim().length() == 0) {
@@ -132,7 +143,7 @@ public class WritingsServlet extends HttpServlet {
 			}
 			response.sendRedirect(path
 					+ "/_04_Forum/ShowArticle.controller?forumId=" + forumId);
-		} 
+		}
 	}
 
 	protected void doPost(HttpServletRequest request,
