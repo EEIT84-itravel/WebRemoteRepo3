@@ -11,7 +11,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>I-Travel:登出頁面</title>
-<link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/css/_00_Misc/main.css"/>" />
+<script type="text/javascript">
+	setTimeout("location.href='<c:url value="/index.jsp"/>'", 1000);
+</script>
+
 </head>
 <body>
 	<header>
@@ -22,10 +27,10 @@
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-	<article>
-		您已經登出
-		<P />
-		<a href="../index.jsp">回首頁</a>
+	<article class="center-block">
+		<div style="text-align: center;">
+			<h2>您已經登出</h2>
+		</div>
 	</article>
 	<footer>
 		<!-- import共同的 -->
