@@ -108,7 +108,6 @@ $(function() {
 					<th>景點所在縣市</th>
 					<th>景點類型</th>
 <!-- 					<th>景點評分</th> -->
-					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -130,7 +129,6 @@ $(function() {
                                	</c:if>
 							</c:forEach>
 <%-- 							<td>${sightVO.score}</td>   --%>
-							<td><a href="">移出收藏夾</a>&nbsp;&nbsp;</td>
 							<td><button type="button" class="btn-danger btn-lg" onclick="location.href='<c:url value="/_05_Member/member/delsight.controller?referenceType=${sightVO.sightId}&typeId=type_id01&regionId=region00"/>'">移出收藏夾</button></td>
 						
 						</tr>
