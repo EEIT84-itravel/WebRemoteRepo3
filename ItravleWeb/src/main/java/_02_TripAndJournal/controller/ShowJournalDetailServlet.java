@@ -80,9 +80,13 @@ public class ShowJournalDetailServlet extends HttpServlet {
 		if(user != null && user.getMemberId()!=journalVO.getMemberId() && friendservice.isfriend(user.getMemberId(), journalVO.getMemberId())==false){
 			flagmember = true;
 		}
-		System.out.println(flagmember);
 		request.setAttribute("flagmember", flagmember);
-				
+		//會員刪除自己的遊記鈕	
+		boolean flagdelete = false;
+		if(user != null && user.getMemberId()==journalVO.getMemberId()){
+			flagdelete = true;
+		}
+		request.setAttribute("flagdelete", flagdelete);
 		request.getRequestDispatcher("/_02_TripAndJournal/ShowJournal.jsp").forward(request, response);
 	}
 

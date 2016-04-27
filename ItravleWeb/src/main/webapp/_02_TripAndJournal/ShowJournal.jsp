@@ -24,12 +24,16 @@ pageContext.setAttribute("regions", codeVO);
 	$(function() {
 		$("#collect").bind('click', collect);
 		$("#collectmember").bind('click', collectmember);
+		$("#deletemy").bind('click', deletemy);
 	});
 	function collect() {
 		window.location.href = "../_02_TripAndJournal/member/collectiontrip.controller?referenceType="+ $("#referenceType").val()+"&typeId=type_id03";
 	};
 	function collectmember() {
 		window.location.href = "../_05_Member/member/collectionauthor.controller?friendId="+${showJournalVO.memberId}+"&tripId="+${showJournalVO.journalId}+"&type=journal";
+	};
+	function deletemy() {
+		window.location.href = "../_05_Member/member/delmyjournal.controller?journalId="+${showJournalVO.journalId};
 	};
 </script>
 <!-- jQuery ui -->
@@ -60,6 +64,9 @@ pageContext.setAttribute("regions", codeVO);
 					<input type="submit" name="modifyJournal" value="修改遊記" class="btn btn-warning btn-lg">
 				</c:when>
 			</c:choose>
+			 	<c:if test="${flagdelete}"> 
+ 			        <span><input type="button" value="刪除遊記" id='deletemy' class="btn btn-danger btn-lg"></span><!-- 		判斷刪除鈕是否出現 寫在ShowJournalDetailServlet -->
+		        </c:if>
 			<div id="divMember">
 				<table id="member" class="table table-bordered">
 				<tr>
