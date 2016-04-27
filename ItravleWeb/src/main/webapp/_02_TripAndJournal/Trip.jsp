@@ -30,12 +30,16 @@ pageContext.setAttribute("regions", codeVO);
 	$(function() {
 		$("#collect").bind('click', collect);
 		$("#collectmember").bind('click', collectmember);
+		$("#deletemy").bind('click', deletemy);
 	});
 	function collect() {
 		window.location.href = "../_02_TripAndJournal/member/collectiontrip.controller?referenceType="+ $("#referenceType").val()+"&typeId=type_id02";
 	};	
 	function collectmember() {
 		window.location.href = "../_05_Member/member/collectionauthor.controller?friendId="+${tripVO.memberId}+"&tripId="+${tripVO.tripId}+"&type=trip";
+	};
+	function deletemy() {
+		window.location.href = "../_05_Member/member/delmytrip.controller?friendId="+${tripVO.memberId}+"&tripId="+${tripVO.tripId};
 	};
 </script>
 </head>
@@ -49,12 +53,24 @@ pageContext.setAttribute("regions", codeVO);
 		<jsp:include page="/_00_Misc/top.jsp" />		
 	</nav>
 	<article class="center-block">
+	
 	<input type="hidden"  id="referenceType" value="${tripVO.tripId}">	
 		<h1 class="h1">${tripVO.tripName} <!-- 		判斷收藏景點鈕是否出現 寫在ShowTripServlet -->
- 			<c:if test="${flag}"> 
-				<input type="button" value="收藏行程" id='collect' class="btn btn-default btn-lg">
+ 			<c:if test="${flag&&user.memberId!=tripVO.memberId}"> 		
+ 			<button type="button" id='collect' class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart" style="color:red;">收藏行程</span></button>
  			</c:if>
+ 			<br>
+ 			<c:choose>		
+				<c:when test="${empty user}"></c:when>
+				<c:when test="${user.memberId==tripVO.memberId}">
+					<input type="button"  value="修改行程" onclick="location.href='<c:url value="/_05_Member/member/tripfinddetail.controller?tripId=${tripVO.tripId}"/>'" class="btn btn-warning btn-lg">
+				</c:when>
+			</c:choose>
+			<c:if test="${flagdelete}"> 
+ 			<input type="button" value="刪除行程" id='deletemy' class="btn btn-danger btn-lg"><!-- 		判斷刪除自己的東西鈕是否出現 寫在ShowTripServlet -->
+ 		    </c:if>
  		</h1> 
+ 		
 		<div id="divTrip" class="pull-left">
 			<div id="divTripTop">
 				<h5 class="h5">起始日期: ${tripVO.tripStartDate}</h5>

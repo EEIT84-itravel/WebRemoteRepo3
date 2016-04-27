@@ -37,7 +37,7 @@ font-size: 20px;
 		<div class="event">
 			<table class="table eventTable">
 				<tr>
-					<td>${eventVO.eventTopic}</td>
+					<td><h1>${eventVO.eventTopic}</h1></td>
 				</tr>
 				<tr>
 					<td>${eventVO.eventStartDate}起，至${eventVO.eventEndDate}</td>

@@ -23,8 +23,6 @@
 		<div style="text-align: center;">
 			<h3>Welcome ${user.firstName}</h3>
 			<h3>您已成功註冊</h3>
-
-
 		</div>
 	</article>
 

@@ -51,7 +51,8 @@
 			
 			<h2>${sightVO.sightName}	<!-- 判斷收藏景點鈕是否出現 寫在SightServlet -->
 				<c:if test="${flag}">
-					<span><input type="button" value="收藏景點" id='collect'></span>
+				
+				<button type="button" id='collect' class="btn btn-lg btn-default"><span class="glyphicon glyphicon-heart" style="color:red;">收藏景點</span></button>
 				</c:if>
 			</h2>
 			<p>　　${sightVO.intro}</p>
