@@ -121,7 +121,6 @@ function doAlert() {
 						</tr>
 						<tr><td>
 						<div id="btnMore">
-						
 							<input type="button" value="看更多" onclick="location.href='<c:url value="/_02_TripAndJournal/ShowJournalDetail.controller?journalId=${row.journalId}"/>'" class="btn btn-primary">
 						</div>
 						</td></tr>
