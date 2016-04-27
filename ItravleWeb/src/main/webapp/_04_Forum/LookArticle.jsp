@@ -159,6 +159,8 @@ function collectmember() {
 				</table>
 			</div>
 		</form>
+				<div id="backURL" style="text-align: center;margin:0 auto;"><h4 class="h4"><a href="<c:url value="/_04_Forum/ForumIndex.jsp" />">回討論區首頁</a></h4></div>
+		
 	</article>
 	<footer>
 		<!-- import共同的 -->

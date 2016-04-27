@@ -90,7 +90,7 @@ function doAlert() {
 						<table>
 						<tr>
 							<td>
-								<img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${row.journalId}" />" class="img-thumbnail" width="280" height="210">
+								<img  src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${row.journalId}" />" onclick="location.href='<c:url value="/_02_TripAndJournal/ShowJournalDetail.controller?journalId=${row.journalId}"/>'" class="img-thumbnail" width="280" height="210">
 							</td>
 						</tr>
 						<tr>
@@ -188,7 +188,7 @@ function doAlert() {
 						method="post">
 						<div class="modal-header" >
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">從行程匯入遊記</h4>
+							<h3 class="modal-title">從行程匯入遊記</h3>
 						</div>
 						<div class="modal-body">			
 								<select name="tripId" >					  
@@ -198,7 +198,7 @@ function doAlert() {
 								</select>	
 						</div>
 						<div class="modal-footer">
-							<button type="submit" >開始寫遊記吧!</button>
+							<button type="submit" class="btn-primary btn-lg btn">開始寫遊記吧!</button>
 						</div>
 					</form>
 				</div>
