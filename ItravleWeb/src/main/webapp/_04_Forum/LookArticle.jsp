@@ -79,7 +79,7 @@ function collectmember() {
 								<c:when test="${not empty user}"><input type="button" class="btn btn-default" value="回覆文章"  onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&memberId=${user.memberId}&crud=NewReply"/>'"></c:when>
 							</c:choose>
 							<c:if test="${flag&&user.memberId!=forumVO.memberId}"> 		
-							<button  class="btn btn-default" onclick="location.href='<c:url value="/_04_Forum/member/CollectionForum.controller?referenceType=${forumVO.forumId}&typeId=type_id05"/>'"><span class="glyphicon glyphicon-heart" style="color:red;">收藏文章</span></button>
+							<button  class="btn btn-default" onclick="location.href='<c:url value="/_04_Forum/member/CollectionForum.controller?referenceType=${forumVO.forumId}&typeId=type_id05"/>'"><span class="glyphicon glyphicon-heart" style="color:red;"></span>收藏文章</button>
  		                    </c:if>
  		                    <c:if test="${flagmember}"> 
 							<input type="button" value="追蹤作者" id='collectmember' class="btn btn-default"><!-- 		判斷收藏作者鈕是否出現 寫在ShowArticleServlet -->

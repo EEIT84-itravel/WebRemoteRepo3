@@ -49,7 +49,7 @@ pageContext.setAttribute("regions", codeVO);
 		<h1 class="h1">${showJournalVO.journalName}
 			<input type="hidden"  id="referenceType" value="${showJournalVO.journalId}">	
 			<c:if test="${flag&&showJournalVO.memberId!=user.memberId}"> <!-- 		判斷收藏景點鈕是否出現 寫在ShowJournalDetailServlet -->		
-				<button type="button" id='collect' class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart" style="color:red;">收藏遊記</span></button>
+				<button type="button" id='collect' class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart" style="color:red;"></span>收藏遊記</button>
  			</c:if>
 		</h1>
 		<div id="divJournal" class="pull-left">
