@@ -37,9 +37,6 @@ function confirmDeleteMessage(n,m) {
 	
 	}
 }
-function doAlertBtn() {
-	alertify.alert('此功能僅限會員使用，請先登入!!')
-}
 
                      
 </script>
@@ -78,7 +75,7 @@ function collectmember() {
 						<!-- 用choose判斷，user是否登入，登入才可以進行某些功能，並且自己只能對自己的文章及留言進行刪跟修 -->
 						<div style="margin-bottom: 8px">
 							<c:choose>		
-								<c:when test="${empty user}"><button type="button" class="btn btn-default" >回覆文章</button></c:when>
+								<c:when test="${empty user}"><button type="button" class="btn btn-default" onclick="doAlertNewArt()">回覆文章</button></c:when>
 								<c:when test="${not empty user}"><input type="button" class="btn btn-default" value="回覆文章"  onclick="location.href='<c:url value="/_04_Forum/member/Reply.jsp?referenceNo=${forumVO.forumId}&memberId=${user.memberId}&crud=NewReply"/>'"></c:when>
 							</c:choose>
 							<c:if test="${flag}"> 
