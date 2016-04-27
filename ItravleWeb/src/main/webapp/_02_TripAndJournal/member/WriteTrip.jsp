@@ -238,7 +238,7 @@ function delADetail(referenceNo) {
 				<p>行程開始日期：<br>${tripVO.tripStartDate}</p>
 <%-- 				<p>本行程共<%=dateDiff%>天</p> --%>				
 <!-- 				<button id="btnBudget" class="btn btn-info btn-lg">預算一覽</button><br> -->
-				<input type="submit" value="儲存行程" class="btn btn-primary btn-lg">
+				<input type="submit" value="儲存行程" class="btn btn-primary btn-lg" onclick="if(confirm('您確定儲存此篇行程嗎?')) return true;else return false">
 			</div> <!-- end div days -->
 			<div id="trip">
 				<div id="tripBut">					
