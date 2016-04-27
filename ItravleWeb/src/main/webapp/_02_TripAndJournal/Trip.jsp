@@ -77,7 +77,7 @@ pageContext.setAttribute("regions", codeVO);
 				<c:if test="${MemberVO.memberId==tripVO.memberId}">
 					<h5 class="h5">作者:${MemberVO.nickname}
 						<c:if test="${flagmember}"> 
-							<span><input type="button" value="追蹤作者" id='collectmember'></span><!-- 判斷收藏作者鈕是否出現 寫在ShowTripServlet -->
+							<span><input type="button" value="追蹤作者" id='collectmember' class="btn btn-default "></span><!-- 判斷收藏作者鈕是否出現 寫在ShowTripServlet -->
 						</c:if>
 					</h5>
 				</c:if>

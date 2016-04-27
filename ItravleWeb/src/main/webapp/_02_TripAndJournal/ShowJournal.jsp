@@ -77,7 +77,7 @@ pageContext.setAttribute("regions", codeVO);
 									<c:if test="${MemberVO.memberId==showJournalVO.memberId}">
 										<h3 class="h3">作者：${MemberVO.nickname}
 										<c:if test="${flagmember}"> 
-							        	    <span ><input type="button" value="追蹤作者" id='collectmember'></span><!-- 		判斷收藏作者鈕是否出現 寫在ShowJournalServlet -->
+							        	    <span ><input type="button" value="追蹤作者" id='collectmember' class="btn-default btn "></span><!-- 		判斷收藏作者鈕是否出現 寫在ShowJournalServlet -->
 							    		</c:if>
 							    		</h3>
 									</c:if>

@@ -140,7 +140,7 @@ nav {
 				</li>
 				<li class="whiteNav">
 					<c:choose>
-						<c:when test="${empty user}"><a onclick="doAlertMessage()">會員專區</a></c:when>
+						<c:when test="${empty user}"><a onclick="doAlertMessage()" style="cursor: pointer">會員專區</a></c:when>
 						<c:when test="${not empty user}"><a href="<c:url value="/_05_Member/member/MemberIndex.jsp" />">會員專區</a></c:when>
 					</c:choose>
 					

@@ -26,7 +26,7 @@
 	MemberVO memberVO = (MemberVO) session.getAttribute("user");
 	int memberId = memberVO.getMemberId();
 	List<TripVO> tripVO = tripService.selectFromMember(memberId);
-	pageContext.setAttribute("tripVO", tripVO);
+	pageContext.setAttribute("tripVOs", tripVO);
 	}
 %>
 <jsp:useBean id="MemberService" scope="page" class="_05_Member.model.MemberService" />
@@ -40,7 +40,10 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_02_TripAndJournal/JournalIndex.css"/>"/>
 <script type="text/javascript">
 function doAlert() {
-	alertify.alert('此功能僅限會員使用，請先登入!!')
+	alertify.alert('此功能僅限會員使用，請先登入!!');
+}
+function doAlertTwo() {
+	alertify.alert('您尚未建立任何行程!!');
 }
 </script>
 </head>
@@ -63,7 +66,12 @@ function doAlert() {
 <%-- 		</c:choose> --%>
 		<c:choose>
 			<c:when test="${empty user}"><button type="button" class="btn btn-info btn-lg" onclick="doAlert()">寫遊記</button></c:when>
-			<c:when test="${not empty user}"><button type="submit"  class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalJournal">寫遊記</button></c:when>
+			<c:otherwise>
+			  	<c:choose>
+					<c:when test="${empty tripVOs}"><button type="button" class="btn btn-info btn-lg" onclick="doAlertTwo()">寫遊記</button></c:when>
+					<c:otherwise><button type="submit"  class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalJournal">寫遊記</button></c:otherwise>
+				</c:choose>
+			</c:otherwise>
 		</c:choose>
 
 		</div>
@@ -191,13 +199,13 @@ function doAlert() {
 						</div>
 						<div class="modal-body">			
 								<select name="tripId" >					  
-									<c:forEach var="tripVO" items="${tripVO}" >							  
+									<c:forEach var="tripVO" items="${tripVOs}" >							  
 										<option value="${tripVO.tripId}" >${tripVO.tripName}</option>						   
 									</c:forEach>					
 								</select>	
 						</div>
-						<div class="modal-footer">
-							<button type="submit" class="btn-primary btn-lg btn">開始寫遊記吧!</button>
+						<div class="modal-footer">				
+								<button type="submit" class="btn-primary btn-lg btn">開始寫遊記吧!</button>
 						</div>
 					</form>
 				</div>

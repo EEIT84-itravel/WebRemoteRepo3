@@ -40,7 +40,7 @@ font-size: 20px;
 					<td><h1>${eventVO.eventTopic}</h1></td>
 				</tr>
 				<tr>
-					<td>${eventVO.eventStartDate}起，至${eventVO.eventEndDate}</td>
+					<td><span style="color:red">${eventVO.eventStartDate}</span>起，至<span style="color:red">${eventVO.eventEndDate}</span></td>
 				</tr>
 				<tr>
 				<tr class="sightId">
