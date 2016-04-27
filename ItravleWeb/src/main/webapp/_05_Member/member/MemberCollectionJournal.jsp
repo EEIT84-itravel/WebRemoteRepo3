@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="_00_Misc.model.*"%>
 <%@ page import="_02_TripAndJournal.model.*"%>
 <%@ page import="_05_Member.model.*"%>
@@ -69,7 +70,7 @@ pageContext.setAttribute("journalVO", journalVO);
 				</td>
 				<td><a href="<c:url value="/_02_TripAndJournal/ShowJournalDetail.controller?journalId=${journalVO.journalId}" />">${journalVO.journalName}</a></td>
 				<td>${journalVO.beginTime}</td>
-				<td>${journalVO.modifyTime}</td>
+				<td><fmt:formatDate value="${journalVO.modifyTime}" timeStyle="short" type="both" /></td>
 				<td>${journalVO.visitorNum}</td>				
 				<td><button type="button" class="btn-danger btn-lg" onclick="location.href='<c:url value="/_05_Member/member/deljournal.controller?memberId=${user.memberId}&referenceType=${journalVO.journalId}&typeId=type_id03"/>'">移出收藏夾</button></td>
 			

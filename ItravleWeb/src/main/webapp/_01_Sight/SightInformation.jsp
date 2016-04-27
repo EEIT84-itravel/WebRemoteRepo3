@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="_00_Misc.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="_01_Sight.model.*"%>
@@ -163,7 +164,8 @@
 												<td>${MemberVOm.nickname}</td>
 	                             			</c:if>
 										</c:forEach>
-									<td>${messageVO.updateTime}</td>
+										
+									<td><fmt:formatDate value="${messageVO.updateTime}" timeStyle="short" type="both" /></td>
 								</tr>
 							</c:forEach>
 						</table>

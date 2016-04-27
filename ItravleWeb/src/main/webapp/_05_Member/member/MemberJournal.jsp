@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="codeSvc" scope="page"
 	class="_00_Misc.model.CodeService" />
 <%@ page import="_00_Misc.model.*"%>
@@ -53,8 +54,8 @@ pageContext.setAttribute("journalVO", journalVO);
 			<tr class="journalTr">
 				<td><img src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?journalId=${journalVO.journalId}" />" width="160" height="120" class="img-rounded"></td>
 				<td><a href="<c:url value="/_02_TripAndJournal/ShowJournalDetail.controller?journalId=${journalVO.journalId}" />">${journalVO.journalName}</a></td>
-				<td>${journalVO.beginTime}</td>
-				<td>${journalVO.modifyTime}</td>
+				<td>${journalVO.beginTime}</td>			
+				<td><fmt:formatDate value="${journalVO.modifyTime}" timeStyle="short" type="both" /></td>
 				<td>${journalVO.visitorNum}</td>
 				<td>
 			        <c:if test="${journalVO.post==false}">

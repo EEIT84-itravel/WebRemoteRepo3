@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 外接程式碼 -->
 <%@ page import="_01_Sight.model.*"%>
 <%@ page import="_03_Event.model.*"%>
@@ -169,7 +170,7 @@ width: 100%;
 									<td>${sightVO.phone}</td>
 									<td>${sightVO.addr}</td>
 									<td>${sightVO.modifier}</td>
-									<td>${sightVO.modifyTime}</td>
+									<td><fmt:formatDate value="${sightVO.modifyTime}" timeStyle="short" type="both" /></td>
 									<td>
 									<c:if test="${sightVO.del==true}">否</c:if>
 									<c:if test="${sightVO.del==false}">是</c:if>
@@ -229,7 +230,7 @@ width: 100%;
 										<td>${MemberVO.nickname}</td>
 									</c:if>
 								</c:forEach>
-								<td>${memberVO.modiftyTime}</td>
+								<td><fmt:formatDate value="${memberVO.modiftyTime}" timeStyle="short" type="both" /></td>
 								<td>
 									<FORM ACTION="<c:url value="/_06_BackEnd/backend/modifyAdmin.controller" />">
 										<select name="admin" style="color: black">

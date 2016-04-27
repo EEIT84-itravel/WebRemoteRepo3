@@ -1,6 +1,7 @@
 <%@page import="_00_Misc.model.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="_01_Sight.model.*"%>
 <%@ page import="java.util.*"%>
 <%
@@ -187,7 +188,7 @@ $(document).ready(function() {
 						</c:if>
 					</c:forEach>
 					${sightVO.watchNum}人瀏覽,<%=i%>人收藏<br>
-					最後更新時間:${sightVO.modifyTime}
+					最後更新時間:<fmt:formatDate value="${sightVO.modifyTime}" timeStyle="short" type="both" />
 					</td>
 				</tr>
 				<tr>

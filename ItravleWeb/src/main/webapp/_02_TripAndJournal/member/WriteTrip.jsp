@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="_00_Misc.model.*"%>
 <%@ page import="_01_Sight.model.*"%>
 <%@ page import="_02_TripAndJournal.model.*"%>
@@ -265,12 +266,13 @@ function delADetail(referenceNo) {
 											<h3>${sightVO2.sightName}</h3>
                              			</c:if>
 									</c:forEach>					
-									<label>預算：</label><input type="number" name="sightBudget" value="${tripDetailVO.sightBudget}" />元<br>
+									<fmt:formatNumber value="${tripDetailVO.sightBudget}" var="sightBudgetFmt" type="number" groupingUsed="false"/>  
+									       <label>預算：</label><input type="number" name="sightBudget" value="${sightBudgetFmt}" />元<br>
 									<label>筆記：</label><textarea class="noteTextarea" name="notes">${tripDetailVO.notes}</textarea>
 								</td>
 								<td>
 								<c:url value="/_02_TripAndJournal/member/DelTripDetail.controller" var="path" scope="page">
-									<c:param name="tripOrder" value="${tripDetailVO.tripOrder}" />									
+								<c:param name="tripOrder" value="${tripDetailVO.tripOrder}" />									
 								</c:url>
 								<input type="button" value="刪除" onclick="delADetail(${tripDetailVO.referenceNo})"></td>
 							</tr>

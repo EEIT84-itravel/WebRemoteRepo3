@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="_00_Misc.model.*"%>
 <%@ page import="_02_TripAndJournal.model.*"%>
 <%@ page import="java.util.*"%>
@@ -109,7 +110,7 @@ function doAlert() {
 										</c:if>
 									</c:forEach>
 								有${row.watchNum}人瀏覽,<%=i%>人收藏<br>
-								最後更新時間:${row.modifyTime}<br>
+								最後更新時間:<fmt:formatDate value="${row.modifyTime}" timeStyle="short" type="both" /><br>
 							</td>
 						</tr>
 						<tr><td>

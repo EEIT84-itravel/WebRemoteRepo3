@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="_00_Misc.model.*"%>
 <%@ page import="_02_TripAndJournal.model.*"%>
 <%@ page import="_05_Member.model.*"%>
@@ -54,7 +55,7 @@ pageContext.setAttribute("tripVO", tripVO);
 					</td>
 					<td><a href="<c:url value="/_02_TripAndJournal/ShowTrip.controller?tripId=${tripVO.tripId}" />" >${tripVO.tripName}</a></td>
 					<td>${tripVO.tripStartDate}</td>
-					<td>${tripVO.modifyTime}</td>
+					<td><fmt:formatDate value="${tripVO.modifyTime}" timeStyle="short" type="both" /></td>
 					<td>${tripVO.watchNum}</td>
 					<td><button type="button" class="btn-danger btn-lg" onclick="location.href='<c:url value="/_05_Member/member/deltrip.controller?memberId=${user.memberId}&referenceType=${tripVO.tripId}&typeId=type_id02"/>'">移出收藏夾</button></td>
 				

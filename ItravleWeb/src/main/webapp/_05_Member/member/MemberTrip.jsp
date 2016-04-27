@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="TripDetailService" scope="page" class="_02_TripAndJournal.model.TripDetailService" />
 <%@ page import="_00_Misc.model.*"%>
 <%@ page import="_02_TripAndJournal.model.*"%>
@@ -55,8 +56,8 @@ pageContext.setAttribute("tripVO", tripVO);
 					</c:forEach>
 				</td>
 				<td><a href="<c:url value="/_02_TripAndJournal/ShowTrip.controller?tripId=${tripVO.tripId}" />" >${tripVO.tripName}</a></td>
-				<td>${tripVO.tripStartDate}</td>
-				<td>${tripVO.modifyTime}</td>
+				<td>${tripVO.tripStartDate}</td>			
+				<td><fmt:formatDate value="${tripVO.modifyTime}" timeStyle="short" type="both" /></td>
 				<td>${tripVO.watchNum}</td>
 				<td>
 			        <c:if test="${tripVO.post==false}">

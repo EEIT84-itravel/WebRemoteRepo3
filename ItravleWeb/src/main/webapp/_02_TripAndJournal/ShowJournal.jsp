@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="MemberService" scope="page" class="_05_Member.model.MemberService" />
 <jsp:useBean id="SightService" scope="page" class="_01_Sight.model.SightService" />
 <%@page import="_00_Misc.model.*"%>
@@ -142,7 +143,7 @@ pageContext.setAttribute("regions", codeVO);
 											<td>${MemberVOm.nickname}</td>
                              			</c:if>
 								</c:forEach>
-							<td>${messageVO.updateTime}</td>
+							<td><fmt:formatDate value="${messageVO.updateTime}" timeStyle="short" type="both" /></td>
 						</tr>
 					</c:forEach>
 				</table>

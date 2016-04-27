@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="sightSvc" scope="page" class="_01_Sight.model.SightService" />
 <jsp:useBean id="MemberService" scope="page" class="_05_Member.model.MemberService" />
 <%@page import="_00_Misc.model.*"%>
@@ -105,7 +106,7 @@ pageContext.setAttribute("regions", codeVO);
 									<h4 class="text-left h4"><strong><a href="<c:url value="/_01_Sight/Sight.controller?sightId=${sightVO2.sightId}"/>">${sightVO2.sightName}</a></strong></h4>
 	                            </c:if>
 							</c:forEach>
-							預算：${tripDetailVOs.sightBudget}元<br>
+							預算：<fmt:formatNumber value="${tripDetailVOs.sightBudget}" type="currency" minFractionDigits="0"></fmt:formatNumber>元<br>
 							</td>							
 						</tr>
 						<tr>
@@ -139,7 +140,7 @@ pageContext.setAttribute("regions", codeVO);
 											<td>${MemberVOm.nickname}</td>
                              			</c:if>
 								</c:forEach>
-							<td>${messageVO.updateTime}</td>
+							<td><fmt:formatDate value="${messageVO.updateTime}" timeStyle="short" type="both" /></td>
 						</tr>
 					</c:forEach>
 				</table>

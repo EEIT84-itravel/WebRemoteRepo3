@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="codeSvc" scope="page"
 	class="_00_Misc.model.CodeService" />
 <jsp:useBean id="MessageService" scope="page"
@@ -59,7 +60,7 @@ pageContext.setAttribute("forumVO", forumVO);
                              		</c:if>
 										</c:forEach>
 							<td><a href="<c:url value="/_04_Forum/ShowArticle.controller?forumId=${forumVO.forumId}"/>">${forumVO.forumTopic}</a>&nbsp;&nbsp;</td>
-							<td>${forumVO.forumTime}</td>
+							<td><fmt:formatDate value="${forumVO.forumTime}" timeStyle="short" type="both" /></td>
 							<td>${forumVO.visitorNum}</td>
 							<%int i = 0;%>
 									<c:forEach var="MessageVO" items="${MessageService.allNum}"
