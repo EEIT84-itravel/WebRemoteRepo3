@@ -296,8 +296,6 @@ width: 100%;
 			</div><!-- tabs-3 end tag -->
 		</div><!-- tabs end tag -->
 	</article>
-	<footer>
-		<!-- import共同的 -->
-	</footer>
+
 </body>
 </html>

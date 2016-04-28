@@ -87,13 +87,10 @@ function doAlertTwo() {
 				</select>
 				<input type="submit" value="確定">
 			</form>
-			<%  rowsPerPage = 8;  //每頁的筆數 
-				rowNumber=journalVOs.size(); 
-			%>
-			<%@ include file="/_00_Misc/page1.file" %>
+		
 			</div>
 			<c:if test="${empty selectJournalVOs}"><!-- 第一次進入首頁時由上方載入 -->
-				<c:forEach var="row" items="${journalVOs}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+				<c:forEach var="row" items="${journalVOs}">
 					<c:if test="${row.post==true}"><!-- 狀態是"已發布" -->
 					<div id="journalDiv">
 						<table>
@@ -139,7 +136,7 @@ function doAlertTwo() {
 					</c:forEach>
 					</c:if>
 				<c:if test="${not empty selectJournalVOs}"><!-- select後由servlet載入 -->
-				<c:forEach var="row" items="${selectJournalVOs}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+				<c:forEach var="row" items="${selectJournalVOs}">
 					<c:if test="${row.post==true}"><!-- 狀態是"已發布" -->
 					<div id="journalDiv">
 						<table>
@@ -185,8 +182,7 @@ function doAlertTwo() {
 					</c:forEach>
 					</c:if>
 					<h3>${error.noneSearch}</h3><!--  查無景點的錯誤訊息 -->
-				<div id="divChangePage">
-			<%@ include file="/_00_Misc/page2.file" %>
+				<div id="divChangePage">		
 			</div>
 		<div class="modal fade" id="myModalJournal" role="dialog">
 			<div class="modal-dialog modal-lg">
@@ -215,7 +211,7 @@ function doAlertTwo() {
 		</c:if>
 	</article>
 	<footer>
-		<!-- import共同的 -->
+		<jsp:include page="/_00_Misc/footer.jsp" />
 	</footer>
 
 </body>

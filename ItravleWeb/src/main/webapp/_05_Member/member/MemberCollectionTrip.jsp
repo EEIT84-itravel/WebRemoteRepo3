@@ -65,5 +65,8 @@ pageContext.setAttribute("tripVO", tripVO);
 			</tbody>
 		</table>
 	</article>
+	<footer>
+		<div> <jsp:include page="/_00_Misc/footer.jsp" /></div>
+	</footer>
 </body>
 </html>

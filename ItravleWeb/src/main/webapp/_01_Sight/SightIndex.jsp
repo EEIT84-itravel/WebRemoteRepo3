@@ -274,7 +274,7 @@ $(document).ready(function() {
 		</div><!-- end of 景點欄位 -->
 	</article>
 	<footer>
-		<!-- import共同的 -->
+		<div> <jsp:include page="/_00_Misc/footer.jsp" /></div>
 	</footer>
 </body>
 </html>
