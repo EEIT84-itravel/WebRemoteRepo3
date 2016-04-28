@@ -296,6 +296,5 @@ width: 100%;
 			</div><!-- tabs-3 end tag -->
 		</div><!-- tabs end tag -->
 	</article>
-
 </body>
 </html>
