@@ -273,8 +273,5 @@ $(document).ready(function() {
 		<h3>${error.noneSearch}</h3><!--  查無景點的錯誤訊息 -->
 		</div><!-- end of 景點欄位 -->
 	</article>
-	<footer>
-		<div> <jsp:include page="/_00_Misc/footer.jsp" /></div>
-	</footer>
 </body>
 </html>

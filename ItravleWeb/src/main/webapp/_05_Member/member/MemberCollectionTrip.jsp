@@ -51,7 +51,11 @@ pageContext.setAttribute("tripVO", tripVO);
 			<c:forEach var="tripVO" items="${tripVO}">
 				<tr class="tripTr">
 					<td>
-						<img src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?tripId=${tripVO.tripId}" />" width="160" height="120" class="img-rounded">
+						<c:forEach var="TripDetailVO" items="${TripDetailService.mainPics}">
+                    	<c:if test="${TripDetailVO.tripId==tripVO.tripId}">
+							<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${TripDetailVO.referenceNo}" />" width="160" height="120" class="img-rounded">
+                        </c:if>
+					</c:forEach>
 					</td>
 					<td><a href="<c:url value="/_02_TripAndJournal/ShowTrip.controller?tripId=${tripVO.tripId}" />" >${tripVO.tripName}</a></td>
 					<td>${tripVO.tripStartDate}</td>
