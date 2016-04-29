@@ -105,8 +105,7 @@ public class MessageServlet extends HttpServlet {
 				error.put("messageContent", "新增失敗");
 				response.sendRedirect(path + "/_04_Forum/member/Reply.jsp");
 				return;
-			} else {
-				HttpSession session = request.getSession();
+			} else {				
 				request.setAttribute("messageVO", result);
 			}
 			response.sendRedirect(path

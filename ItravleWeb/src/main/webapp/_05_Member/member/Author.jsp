@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="_00_Misc.model.*"%>
 <%@ page import="_02_TripAndJournal.model.*"%>
 <%@ page import="_05_Member.model.*"%>
 <%@ page import="java.util.*"%>
-<%
-	
-%>
+<jsp:useBean id="TripDetailService" scope="page" class="_02_TripAndJournal.model.TripDetailService" />
 <!DOCTYPE html >
 <html>
 <head>
@@ -43,13 +42,15 @@
 					<c:if test="${tripVO.post==true}">
 						<tr>
 							<td>
-								<img
-								src="<c:url value="/_02_TripAndJournal/ShowJournalMainPic.controller?tripId=${tripVO.tripId}" />"
-								width="160" height="120" class="img-rounded">
+							<c:forEach var="TripDetailVO" items="${TripDetailService.mainPics}">
+                    			<c:if test="${TripDetailVO.tripId==tripVO.tripId}">
+									<img src="<c:url value="/_01_Sight/ShowSightMainPic.controller?sightId=${TripDetailVO.referenceNo}" />" width="160" height="120" class="img-rounded">
+                        		</c:if>
+							</c:forEach>
 							</td>
 							<td><a href="<c:url value="/_02_TripAndJournal/ShowTrip.controller?tripId=${tripVO.tripId}" />" >${tripVO.tripName}</a></td>
 							<td>${tripVO.tripStartDate}</td>
-							<td>${tripVO.modifyTime}</td>
+							<td><fmt:formatDate value="${tripVO.modifyTime}" timeStyle="short" type="both" /></td>							
 							<td>${tripVO.watchNum}</td>
 						</tr>
 					</c:if>
@@ -80,7 +81,7 @@
 							</td>
 							<td><a href="<c:url value="/_02_TripAndJournal/ShowJournalDetail.controller?journalId=${journalVO.journalId}" />">${journalVO.journalName}</a></td>
 							<td>${journalVO.beginTime}</td>
-							<td>${journalVO.modifyTime}</td>
+							<td><fmt:formatDate value="${journalVO.modifyTime}" timeStyle="short" type="both" /></td>							
 							<td>${journalVO.visitorNum}</td>
 						</tr>
 						</c:if>

@@ -62,6 +62,9 @@ public class SightReplyServlet extends HttpServlet {
 			MemberVO user = (MemberVO) session.getAttribute("user");
 			messageVO.setMemberId(user.getMemberId());// 由session抓取現在登入者
 			messageVO.setContent(content);// 內容
+			java.util.Date now=new java.util.Date();
+			java.sql.Timestamp time= new java.sql.Timestamp(now.getTime());
+			messageVO.setUpdateTime(time);
 			messageVO.setReferenceNo(referenceNo);// 參照編號(此為景點ID)
 			MessageVO result = messageService.insert(messageVO);
 			if (result != null) {
@@ -100,6 +103,9 @@ public class SightReplyServlet extends HttpServlet {
 			MemberVO user = (MemberVO) session.getAttribute("user");
 			messageVO.setMemberId(user.getMemberId());// 由session抓取現在登入者
 			messageVO.setContent(content);// 內容
+			java.util.Date now=new java.util.Date();
+			java.sql.Timestamp time= new java.sql.Timestamp(now.getTime());
+			messageVO.setUpdateTime(time);
 			messageVO.setReferenceNo(referenceNo);// 參照編號(此為景點ID)
 			MessageVO result = messageService.insert(messageVO);
 			if (result != null) {
