@@ -92,7 +92,7 @@ function collectmember() {
 								</c:when>
 							</c:choose>					
 					    </div>
-				<table  id="forumBody">
+				<table  id="forumBody"  class="table">
 					<tr>
 						<td style="width: 120px;padding:8px;"><img src="<c:url value="/_05_Member/ShowMemberPhoto.controller?memberId=${forumVO.memberId}" />" width="100px" height="100px"></td>
 						<td><h4 style="color:green">作者：
@@ -107,7 +107,7 @@ function collectmember() {
 
 					</tr>
 					
-					<tr>
+					<tr style="height: 200px;">
 						<td colspan="2" style="padding:8px;"><h4>${forumVO.forumContent}</h4></td>
 					</tr>
 				</table>
@@ -137,15 +137,15 @@ function collectmember() {
 								</c:choose>
 									<c:choose>		
 									<c:when test="${empty user}"></c:when>
-									<c:when test="${user.memberId==messageVO.memberId}"><a href="${reply}" class="btn btn-default">編輯留言</a></c:when>
+									<c:when test="${user.memberId==messageVO.memberId}"><a href="${reply}" class="btn btn-warning">編輯留言</a></c:when>
 								</c:choose>
 								<c:choose>		
 									<c:when test="${empty user}"></c:when>
-									<c:when test="${user.memberId==messageVO.memberId}"><a class="btn btn-default" href="javascript:if(confirm('確定要删除此留言嗎?'))location='<c:url value='/_04_Forum/member/MessageServlet.controller?crud=Delete&messageId=${messageVO.messageId}&referenceNo=${forumVO.forumId}&memberId=${user.memberId}' />'">删除留言</a></c:when>
+									<c:when test="${user.memberId==messageVO.memberId}"><a class="btn btn-danger" href="javascript:if(confirm('確定要删除此留言嗎?'))location='<c:url value='/_04_Forum/member/MessageServlet.controller?crud=Delete&messageId=${messageVO.messageId}&referenceNo=${forumVO.forumId}&memberId=${user.memberId}' />'">删除留言</a></c:when>
 								</c:choose>
 							</td>
 						</tr>
-						<tr>
+						<tr  style="height: 200px;">
 							<td colspan="2" style="padding:8px;">${messageVO.content}<br></td>
 						</tr>
 					</c:forEach>
@@ -155,7 +155,7 @@ function collectmember() {
 		
 	</article>
 	<footer>
-		<!-- import共同的 -->
+		<div> <jsp:include page="/_00_Misc/footer.jsp" /></div>
 	</footer>
 
 </body>

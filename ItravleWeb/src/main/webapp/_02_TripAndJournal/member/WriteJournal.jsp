@@ -184,7 +184,7 @@ textarea { /* Text Area 固定大小*/
 		</fieldset>
 	</article>
 	<footer>
-		<!-- import共同的 -->
+	<div> <jsp:include page="/_00_Misc/footer.jsp" /></div>
 	</footer>
 </body>
 </html>

@@ -273,8 +273,5 @@ $(document).ready(function() {
 		<h3>${error.noneSearch}</h3><!--  查無景點的錯誤訊息 -->
 		</div><!-- end of 景點欄位 -->
 	</article>
-	<footer>
-		<!-- import共同的 -->
-	</footer>
 </body>
 </html>

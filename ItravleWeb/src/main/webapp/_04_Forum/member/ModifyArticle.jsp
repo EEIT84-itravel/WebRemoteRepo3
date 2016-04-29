@@ -94,7 +94,7 @@
 		</form>
 	</article>
 	<footer>
-		<!-- import共同的 -->
+		<div> <jsp:include page="/_00_Misc/footer.jsp" /></div>
 	</footer>
 </body>
 </html>

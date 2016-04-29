@@ -6,7 +6,7 @@
 	margin: auto;
 }
 
-#forumBody{
+#forumBody,#messageBody{
 	border:1px solid #C9C9C9;
 }
 #forum {

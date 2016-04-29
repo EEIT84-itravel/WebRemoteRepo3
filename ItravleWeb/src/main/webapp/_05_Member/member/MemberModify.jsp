@@ -173,10 +173,10 @@ color: red;
 				</fieldset>
 			</form>
 		</div>
-	<div id="editAccount">
-	
-	
-	</div>
+	<div id="editAccount"></div>
 	</article>
+	<footer>
+		<div> <jsp:include page="/_00_Misc/footer.jsp" /></div>
+	</footer>
 </body>
 </html>

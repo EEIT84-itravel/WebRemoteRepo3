@@ -65,9 +65,10 @@
 		<!-- import共同的 -->
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
-
+		<div style="height: 900px;">
 	<article class="center-block">
 		<!-- 活動輪播 -->
+
 		<div style="text-align: center;">
 			<h1 style="color: orange;font-family:sans-serif;">
 				<strong>I-Travel首頁</strong>
@@ -156,12 +157,16 @@
 					onclick="location.href='<c:url value="/_03_Event/AllEvent.jsp"/>'"
 					class="btn btn-primary pull-right">
 			</div>
+			</div>
 			<!-- end event -->
 	        <div style="height: 20px"></div>
-		</div>
+	  
+	
+		     
 	</article>
+	</div>
 	<footer>
-		<!-- import共同的 -->
+	<div> <jsp:include page="/_00_Misc/footer.jsp" /></div>
 	</footer>
 </body>
 </html>

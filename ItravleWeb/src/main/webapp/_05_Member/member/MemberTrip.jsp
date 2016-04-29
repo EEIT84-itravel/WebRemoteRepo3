@@ -22,7 +22,10 @@ pageContext.setAttribute("tripVO", tripVO);
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_05_Member/Member.css"/>" />
 <title>ITravel-${user.nickname}的行程</title>
 </head>
-	<header>
+	
+	
+<body>
+<header>
 		<!-- import共同的 -->
 	</header>	
 	<nav class="navbar navbar-inverse" role="navigation">
@@ -81,8 +84,10 @@ pageContext.setAttribute("tripVO", tripVO);
 		</tbody>
 	</table>
 	</article>
-<body>
-
-
+	<footer>
+		<div>
+			<jsp:include page="/_00_Misc/footer.jsp" /></div>
+	</footer>
 </body>
+    
 </html>

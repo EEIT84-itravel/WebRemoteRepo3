@@ -65,13 +65,10 @@ function doAlert() {
 				</select>
 				<input type="submit" value="確定">
 			</form>
-			<%  rowsPerPage = 8;  //每頁的筆數 
-				rowNumber=tripVOs.size(); 
-			%>
-			<%@ include file="/_00_Misc/page1.file" %>
+
 			</div>
 			<c:if test="${empty selectTripVOs}"><!-- 第一次進入首頁時由上方載入 -->
-				<c:forEach var="row" items="${tripVOs}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+				<c:forEach var="row" items="${tripVOs}">
 					<c:if test="${row.post==true}"><!-- 狀態是"已發布" -->
 						<div id="tripDiv">
 						<table>
@@ -124,7 +121,7 @@ function doAlert() {
 					</c:forEach>
 				</c:if><!-- end of index直接篩選 -->
 				<c:if test="${not empty selectTripVOs}">
-					<c:forEach var="row" items="${selectTripVOs}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+					<c:forEach var="row" items="${selectTripVOs}">
 					<c:if test="${row.post==true}">
 						<div id="tripDiv">
 						<table>
@@ -178,11 +175,10 @@ function doAlert() {
 				</c:if><!-- end of select後行程 -->
 			<h3>${error.noneSearch}</h3><!--  查無行程的錯誤訊息 -->
 			<div id="divChangePage">
-			<%@ include file="/_00_Misc/page2.file" %>
 			</div>	
 	</article>
 	<footer>
-		<!-- import共同的 -->
+		<div> <jsp:include page="/_00_Misc/footer.jsp" /></div>
 	</footer>
 </body>
 </html>
