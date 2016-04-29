@@ -87,6 +87,9 @@ public class NewJournalServlet extends HttpServlet {
 		 int memberId = memberVO.getMemberId();
 		 journalVO.setMemberId(memberId);
 		journalVO.setJournalName(journalName);
+		java.util.Date now=new java.util.Date();
+		java.sql.Timestamp time= new java.sql.Timestamp(now.getTime());
+		journalVO.setModifyTime(time);
 		journalVO.setBeginTime(beginTime);
 		journalVO.setEndTime(endTime);
 		journalVO.setRegionId(regionId);
