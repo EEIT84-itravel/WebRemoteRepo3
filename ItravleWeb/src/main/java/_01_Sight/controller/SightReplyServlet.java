@@ -1,6 +1,7 @@
 package _01_Sight.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.hibernate.property.Getter;
 
 import _02_TripAndJournal.model.MessageService;
 import _02_TripAndJournal.model.MessageVO;
@@ -59,6 +62,9 @@ public class SightReplyServlet extends HttpServlet {
 			MemberVO user = (MemberVO) session.getAttribute("user");
 			messageVO.setMemberId(user.getMemberId());// 由session抓取現在登入者
 			messageVO.setContent(content);// 內容
+			java.util.Date now=new java.util.Date();
+			java.sql.Timestamp time= new java.sql.Timestamp(now.getTime());
+			messageVO.setUpdateTime(time);
 			messageVO.setReferenceNo(referenceNo);// 參照編號(此為景點ID)
 			MessageVO result = messageService.insert(messageVO);
 			if (result != null) {
@@ -97,6 +103,9 @@ public class SightReplyServlet extends HttpServlet {
 			MemberVO user = (MemberVO) session.getAttribute("user");
 			messageVO.setMemberId(user.getMemberId());// 由session抓取現在登入者
 			messageVO.setContent(content);// 內容
+			java.util.Date now=new java.util.Date();
+			java.sql.Timestamp time= new java.sql.Timestamp(now.getTime());
+			messageVO.setUpdateTime(time);
 			messageVO.setReferenceNo(referenceNo);// 參照編號(此為景點ID)
 			MessageVO result = messageService.insert(messageVO);
 			if (result != null) {
@@ -137,6 +146,9 @@ public class SightReplyServlet extends HttpServlet {
 			messageVO.setMemberId(user.getMemberId());// 由session抓取現在登入者
 			messageVO.setContent(content);// 內容
 			messageVO.setReferenceNo(referenceNo);// 參照編號(此為景點ID)
+			java.util.Date now=new java.util.Date();
+			java.sql.Timestamp time= new java.sql.Timestamp(now.getTime());
+			messageVO.setUpdateTime(time);
 			MessageVO result = messageService.insert(messageVO);
 			if (result != null) {
 				String path = request.getContextPath();

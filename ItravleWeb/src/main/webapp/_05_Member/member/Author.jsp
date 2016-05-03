@@ -6,7 +6,10 @@
 <%@ page import="_02_TripAndJournal.model.*"%>
 <%@ page import="_05_Member.model.*"%>
 <%@ page import="java.util.*"%>
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/EEIT84-itravel/WebRemoteRepo3.git
 <jsp:useBean id="TripDetailService" scope="page" class="_02_TripAndJournal.model.TripDetailService" />
 <!DOCTYPE html >
 <html>
