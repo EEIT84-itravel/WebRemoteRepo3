@@ -14,7 +14,7 @@
 <%
 	ForumService forumService = new ForumService();
  	List<ForumVO> forumVO = forumService.select();
- 	pageContext.setAttribute("forumVO", forumVO);
+ 	pageContext.setAttribute("forumVOs", forumVO);
 %>
 <!DOCTYPE html >
 <html>
@@ -24,18 +24,36 @@
 </style>
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/_00_Misc/main.css"/>"/>
 <link rel="stylesheet" type="text/css"	href="<c:url value="/css/_04_Forum/Forum.css"/>" />
-<link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/jquery-ui-1.11.4.custom/jquery-ui.min.css" />
-<!-- <link rel="stylesheet" type="text/css"  href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css"/> -->
+<link rel="stylesheet" type="text/css"	href="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.css"/>" />
 
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-2.2.1.min.js"></script>
-<script type="text/javascript"	src="<%=request.getContextPath()%>/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
-<script type="text/javascript"	src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<c:url value="/js/jquery-2.2.1.min.js"/>"></script>
+<script type="text/javascript"	src="<c:url value="/jquery-ui-1.11.4.custom/jquery-ui.min.js"/>"></script>
+
 <script type="text/javascript">
-
-	var str = document.getElementById("topic");
-
-
+	//DataTable設定
+	var opt = {
+		"iDisplayLength" : 15,
+		"sDom" : '<"top"fp><"bottom"><"clear">',
+		"oLanguage" : {
+			"sProcessing" : "處理中...",
+			"sLengthMenu" : "顯示 _MENU_ 項結果",
+			"sZeroRecords" : "沒有匹配結果",
+			"sInfo" : "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+			"sInfoEmpty" : "顯示第 0 至 0 項結果，共 0 項",
+			"sInfoFiltered" : "(從 _MAX_ 項結果過濾)",
+			"sSearch" : "關鍵字搜尋:",
+			"oPaginate" : {
+				"sFirst" : "首頁",
+				"sPrevious" : "上一頁",
+				"sNext" : "下一頁",
+				"sLast" : "最末頁"
+			}
+		}
+	};
+	//datatable
+	$(document).ready(function() {
+		$("#forum").DataTable(opt);		
+	})
 </script>
 <title>ITravel討論區</title>
 </head>
@@ -49,9 +67,8 @@
 		<jsp:include page="/_00_Misc/top.jsp" />
 	</nav>
 	<article class="center-block">
-		<form method="post">
 			<div id="forumHead">
-				<c:import url="/_04_Forum/ForumHead.jsp"></c:import>			
+			<c:import url="/_04_Forum/ForumHead.jsp"></c:import>		
 				<table id="forum"  class="table">
 					<thead>
 						<tr id="forumTitle">
@@ -65,8 +82,8 @@
 					</thead>
 					<tbody>
 					<!-- 如果一開始沒選任何分類標籤則顯示這個，反之顯示下面的forumVO1 -->
-						<c:if test="${empty forumVO1}">
-							<c:forEach var="forumVO" items="${forumVO}">
+						<c:if test="${empty forumVO1s}">
+							<c:forEach var="forumVO" items="${forumVOs}" begin="0" end="14">
 								<tr>
 									<td><c:forEach var="CodeVO" items="${CodeService.all}">
 											<c:if test="${CodeVO.codeId==forumVO.forumTypeId}">
@@ -96,7 +113,8 @@
 								</tr>
 							</c:forEach>
 						</c:if>
-						<c:forEach var="forumVO1" items="${forumVO1}">
+						<c:if test="${not empty forumVO1s}">
+						<c:forEach var="forumVO1" items="${forumVO1s}" begin="0" end="14">
 							<tr>
 								<td><c:forEach var="CodeVO" items="${CodeService.all}">
 										<c:if test="${CodeVO.codeId==forumVO1.forumTypeId}">
@@ -123,38 +141,13 @@
 								<td><fmt:formatDate value="${forumVO1.forumTime}" timeStyle="short" type="both"/></td>
 							</tr>
 						</c:forEach>
+					</c:if>
 					</tbody>
 				</table>
 			</div>
-		</form>
 	</article>
 
-	<script type="text/javascript">
-	//DataTable設定
-	var opt = {
-		"iDisplayLength" : 15,
-		"sDom" : '<"top"fp><"bottom"><"clear">',
-		"oLanguage" : {
-			"sProcessing" : "處理中...",
-			"sLengthMenu" : "顯示 _MENU_ 項結果",
-			"sZeroRecords" : "沒有匹配結果",
-			"sInfo" : "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
-			"sInfoEmpty" : "顯示第 0 至 0 項結果，共 0 項",
-			"sInfoFiltered" : "(從 _MAX_ 項結果過濾)",
-			"sSearch" : "關鍵字搜尋:",
-			"oPaginate" : {
-				"sFirst" : "首頁",
-				"sPrevious" : "上一頁",
-				"sNext" : "下一頁",
-				"sLast" : "最末頁"
-			}
-		}
-	};
-	//datatable
-	$(document).ready(function() {
-		$("#forum").DataTable(opt);		
-	})
-</script>
+	
 	<footer>
 		<div> <jsp:include page="/_00_Misc/footer.jsp" /></div>
 	</footer>

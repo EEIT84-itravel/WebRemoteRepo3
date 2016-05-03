@@ -32,7 +32,7 @@ public class FiltTypeServlet extends HttpServlet {
 		}
 		
 		if(forum01 != null){
-			request.setAttribute("forumVO1", forum01);
+			request.setAttribute("forumVO1s", forum01);
 			request.getRequestDispatcher("/_04_Forum/ForumIndex.jsp").forward(request, response);
 			return;
 		}		

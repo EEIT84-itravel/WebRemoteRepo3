@@ -377,8 +377,6 @@ function delADetail(referenceNo) {
 			<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>儲存成功</p>
 		</div>	<!-- end div divUpdateSuccess -->
 	</article>
-	<footer>
-	<div> <jsp:include page="/_00_Misc/footer.jsp" /></div>
-	</footer>
+
 </body>
 </html>
